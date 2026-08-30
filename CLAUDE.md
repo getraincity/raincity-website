@@ -147,10 +147,8 @@ marketing.
   sees a constructed string, so look classes up from a lookup table rather than
   interpolating them.
 
-## Not under version control
+## Version control
 
-This project is not currently a git repository. A `.gitignore` is already
-written and covers `node_modules/`, `.next/`, `*.tsbuildinfo` and the usual
-build output. If a repo is initialized later, the loose screenshot PNGs in the
-project root (~20MB of section captures from the `shot-*.mjs` scripts) should
-be ignored or moved before the first commit.
+Git-tracked locally, not yet connected to a GitHub remote. `.gitignore`
+covers `node_modules/`, `.next/`, `*.tsbuildinfo`, the usual build output, and
+the loose screenshot PNGs the `shot-*.mjs` scripts write to the project root.
