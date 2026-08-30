@@ -24,7 +24,7 @@ export function Stats() {
     <section className="bg-fog py-section-sm" aria-label="RainCity by the numbers">
       <div className="mx-auto max-w-site px-edge">
         <Reveal>
-          <SectionLabel>{aboutPage.statsLabel}</SectionLabel>
+          <SectionLabel bar="blue">{aboutPage.statsLabel}</SectionLabel>
         </Reveal>
 
         <Stagger
