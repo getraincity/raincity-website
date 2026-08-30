@@ -15,9 +15,9 @@ import { Reveal, Stagger } from "@/components/ui/Motion";
  * This is the teaser, not the catalogue. It runs the landscape crop and pulls
  * the grid in to `max-w-cards` — cards at the full site width would be
  * enormous, and narrowing the track keeps the card a card while giving the
- * section symmetrical margins. `/services` runs the same cards at full width
- * in the portrait crop, which is what makes the page the reader lands on feel
- * like the destination rather than the same grid again.
+ * section symmetrical margins. The `/services` catalogue runs the identical
+ * geometry, so a reader following the button below lands on the same
+ * furniture; change the crop or the track here and change it there too.
  *
  * The short last row is centred rather than left hanging; the arithmetic lives
  * in `lib/cardGrid.ts`, shared with that catalogue. See the comment block

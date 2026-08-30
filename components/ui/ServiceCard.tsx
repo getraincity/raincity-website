@@ -13,9 +13,10 @@ import { StaggerItem } from "@/components/ui/Motion";
  * and focus.
  *
  * One component, two callers: the homepage teaser grid and the /services
- * catalogue. They differ only in how tall the photograph is cut and what the
- * browser should be told about its rendered width — everything the card is
- * made of is spec, and spec belongs in one file.
+ * catalogue. Both now run it at the same 3:2 crop and the same rendered width,
+ * so the two grids are the same furniture — everything the card is made of is
+ * spec, and spec belongs in one file. `ratio` stays a prop rather than being
+ * hardcoded because the crop is a layout decision, not a property of the card.
  *
  * Renders as a `StaggerItem` list item, so both callers get the grid's
  * one-after-another entry from the `Stagger` they wrap it in.
@@ -27,7 +28,7 @@ export function ServiceCard({
   className,
 }: {
   service: Service;
-  /** Photo crop. The teaser runs landscape; the catalogue runs portrait. */
+  /** Photo crop. Both current callers run the 3:2 landscape cut. */
   ratio?: PhotoRatio;
   sizes: string;
   className?: string;

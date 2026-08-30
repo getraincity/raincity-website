@@ -8,37 +8,65 @@ import { RevealOnLoad } from "@/components/ui/Motion";
 /**
  * Service page banner.
  *
- * Deliberately not the full-bleed-photo-under-a-scrim banner /about and
- * /services share, and there are two reasons, one of them practical.
+ * The same component grammar as the /about and /services banners: a
+ * full-bleed photograph, the shared navy scrim, breadcrumb, heading,
+ * paragraph, CTAs. A page banner is a system component, and three routes at
+ * this level of the site should not each invent one. This version carries two
+ * CTAs where those carry one, which is what the service inventory asks for.
  *
- * The practical one: those two banners run photographs chosen for a 16:9
- * full-bleed crop at 2000px and up. The service photographs are not that —
- * they are the registry's portrait service frames, and the smallest of them
- * (commercial cleaning, 600x400) would be scaled two and a half times to fill
- * a 1440px band. Held in a column instead, it renders at about its own size.
+ * The heading is the service name and nothing else. `detail.heading` — the
+ * longer marketing line, "Windows Worth Looking Through" and its ten
+ * counterparts — is deliberately not printed here: at display-xl over a
+ * photograph the short noun phrase is the thing a reader is checking they
+ * landed on, and the sell is the paragraph's job. The field is left in
+ * content.ts rather than deleted; it is real approved copy and the decision
+ * not to show it is this component's, not the content's.
  *
- * The design one: this is the only photograph on the page and it is the
- * subject of it. Dropping it behind eighty-five per cent navy so type can sit
- * on top would be spending the one frame the reader came to see on a texture.
- * So the navy is the ground and the photograph sits on it, undimmed.
- *
- * The corner notch is the same 28px cut the service card carries. A reader
- * arrives here by clicking that card, and finding the same detail at banner
- * scale is what makes the page read as the destination of the card rather
- * than a different template that happens to be about the same thing.
- *
- * Two CTAs, per the content inventory, and both are fixed across all eleven
- * pages: the quote anchor, and the phone. The phone one is a real tel: link
- * on a navy ground, so it takes the inverted tertiary outline rather than
- * competing with the amber beside it.
+ * `focal` is set per service rather than read from the registry. The registry
+ * value frames each photo for the card's 4:5 portrait crop; this band is much
+ * wider and shorter, and the two want different vertical anchors. See the
+ * table below.
  */
+
+/**
+ * object-position for the banner crop, by service.
+ *
+ * A wide band takes a horizontal slice of a landscape source, so the vertical
+ * figure is the one that matters — it decides which slice. Anything not named
+ * here falls through to the registry focal, which is the correct default for
+ * a frame whose subject is already centred.
+ */
+const heroFocal: Record<string, string> = {
+  // Cleaner and pane sit right of centre; the band would otherwise crop to
+  // the empty bay on the left.
+  "window-cleaning": "62% 42%",
+};
+
 export function ServiceHero({ service }: { service: Service }) {
   return (
     <section
       className="on-navy relative isolate overflow-hidden bg-navy"
       aria-labelledby="service-hero-heading"
     >
-      <div className="mx-auto w-full max-w-site px-edge py-section">
+      <div className="absolute inset-0 -z-20">
+        <Photo
+          name={service.photo}
+          fill
+          priority
+          focal={heroFocal[service.slug]}
+          sizes="100vw"
+        />
+      </div>
+
+      {/* The scrim /about and /services use, unchanged. Bottom-up on phones,
+          where the type sits over the middle of the frame; left-to-right from
+          lg, which keeps the right of the photograph clear of copy. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/85 to-navy/45 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
+      />
+
+      <div className="relative mx-auto w-full max-w-site px-edge py-section">
         {/* Breadcrumb. Mirrors the BreadcrumbList in the page's JSON-LD, so
             the trail a crawler is told about is the one a reader can see. */}
         <RevealOnLoad>
@@ -73,46 +101,29 @@ export function ServiceHero({ service }: { service: Service }) {
           </nav>
         </RevealOnLoad>
 
-        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-x-gap-x">
-          <div className="max-w-prose lg:col-span-6 lg:max-w-none">
-            <RevealOnLoad
-              as="h1"
-              id="service-hero-heading"
-              className="display-xl text-white"
-              delay={0.06}
-            >
-              {service.detail.heading}
-            </RevealOnLoad>
-
-            <RevealOnLoad as="p" className="body-l mt-6 text-fog" delay={0.14}>
-              {service.detail.intro}
-            </RevealOnLoad>
-
-            <RevealOnLoad
-              className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
-              delay={0.22}
-            >
-              <Button href="#quote">{servicePage.hero.quoteCta}</Button>
-              <Button href={business.phoneHref} variant="tertiary-invert">
-                <Phone />
-                {servicePage.hero.callCta}
-              </Button>
-            </RevealOnLoad>
-          </div>
-
-          {/* RainCity Blue sits behind the notch the photo is cut away from,
-              exactly as it does on the card. */}
+        <div className="mt-6 max-w-prose lg:w-7/12 lg:max-w-none">
           <RevealOnLoad
-            className="relative bg-rc-blue lg:col-span-5 lg:col-start-8"
-            delay={0.3}
+            as="h1"
+            id="service-hero-heading"
+            className="display-xl text-white"
+            delay={0.06}
           >
-            <Photo
-              name={service.photo}
-              ratio="7:5"
-              priority
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="card-corner-cut"
-            />
+            {service.title}
+          </RevealOnLoad>
+
+          <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.14}>
+            {service.detail.intro}
+          </RevealOnLoad>
+
+          <RevealOnLoad
+            className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+            delay={0.22}
+          >
+            <Button href="#quote">{servicePage.hero.quoteCta}</Button>
+            <Button href={business.phoneHref} variant="tertiary-invert">
+              <Phone />
+              {servicePage.hero.callCta}
+            </Button>
           </RevealOnLoad>
         </div>
       </div>

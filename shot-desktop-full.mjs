@@ -1,16 +1,40 @@
 /**
- * Full-page desktop (1440x900) captures of /about and /services.
+ * Full-page desktop (1440x900) captures of the review pages.
  * Same setup as shot-about.mjs / shot-services.mjs, narrowed to one width
  * and writing the review filenames requested for the desktop pass.
- *   node shot-desktop-full.mjs [origin]
+ *
+ *   node shot-desktop-full.mjs [origin] [--only=<substring>]
+ *
+ * `--only` filters the target list by path, so a single page can be
+ * recaptured without rewriting the other two.
  */
 import { chromium } from "playwright";
 
-const origin = process.argv[2] ?? "http://localhost:3000";
-const targets = [
+const args = process.argv.slice(2);
+const origin = args.find((a) => !a.startsWith("--")) ?? "http://localhost:3000";
+const onlyArg = args.find((a) => a.startsWith("--only="));
+const only = onlyArg ? onlyArg.slice("--only=".length) : null;
+
+const allTargets = [
   { path: "/about", out: "about-desktop-full.png" },
   { path: "/services", out: "services-desktop-full.png" },
+  // The service-page template, captured on the pilot service. One slug is
+  // enough here: the other ten are the same template with different copy,
+  // and shot-service.mjs is the script that walks a set of them.
+  {
+    path: "/services/window-cleaning",
+    out: "window-cleaning-desktop-full.png",
+  },
 ];
+
+const targets = only
+  ? allTargets.filter((t) => t.path.includes(only))
+  : allTargets;
+
+if (!targets.length) {
+  console.error(`No target matches --only=${only}`);
+  process.exit(1);
+}
 
 const browser = await chromium.launch();
 

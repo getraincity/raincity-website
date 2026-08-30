@@ -85,11 +85,18 @@ export async function generateMetadata({
  * Header, Footer and QuoteForm are the homepage's own components, imported
  * rather than reimplemented, exactly as /about and /services import them.
  *
- * One SectionEdge, signature use #3: the white overview meeting the navy
- * process band is precisely the transition the homepage and /about cut, and
- * the only navy-on-white boundary this page makes. The navy band closing back
- * into Fog is left square, which is what both of those pages do with their
- * outgoing edge too.
+ * One SectionEdge, signature use #3, and it sits where the page's only
+ * light-into-dark boundary now is: the Fog process band meeting the
+ * navy-scrimmed closing photograph. It used to cut between the overview and
+ * the process band, which was the white-into-navy transition at the time;
+ * the overview now closes on its own RainCity Blue band and the process band
+ * is Fog, so there is no boundary left there to cut. The closing band running
+ * on into the quote form is left square, which is what /about and /services
+ * do with their outgoing edge too.
+ *
+ * The count is the point: the cut is allowed in exactly four places sitewide
+ * and one instance per page is the budget. Moving it was the alternative to
+ * spending a second one.
  */
 export default async function ServiceDetailPage({
   params,
@@ -115,8 +122,8 @@ export default async function ServiceDetailPage({
       <main id="main">
         <ServiceHero service={service} />
         <ServiceOverview service={service} />
-        <SectionEdge from="bg-white" to="bg-navy" />
         <ServiceProcess />
+        <SectionEdge from="bg-fog" to="bg-navy" />
         <ServiceClosing service={service} />
         <QuoteForm />
       </main>

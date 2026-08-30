@@ -18,6 +18,7 @@ const ratioClass: Record<PhotoRatio, string> = {
 export function Photo({
   name,
   ratio,
+  focal,
   fill = false,
   sizes = "100vw",
   priority = false,
@@ -27,6 +28,16 @@ export function Photo({
   name: PhotoKey;
   /** Override the registry's intended ratio for a particular slot. */
   ratio?: PhotoRatio;
+  /**
+   * Override the registry's object-position for a particular slot.
+   *
+   * The registry focal is tuned for the crop the photo was catalogued at —
+   * for the service frames, the card's 4:5 portrait. A full-bleed banner is a
+   * far wider, shorter window onto the same file and can strand the subject,
+   * so a slot that crops differently states its own. The registry value stays
+   * the default so nothing has to opt in.
+   */
+  focal?: string;
   /**
    * Fill the parent instead of holding a ratio. Use for background imagery.
    * A ratio class plus `h-full` would derive width from height and burst the
@@ -62,7 +73,7 @@ export function Photo({
         // lazy, which is next/image's default for anything not priority.
         placeholder="blur"
         blurDataURL={tonePlaceholder(photo.tone)}
-        style={{ objectPosition: photo.focal ?? "50% 50%" }}
+        style={{ objectPosition: focal ?? photo.focal ?? "50% 50%" }}
         className={cn("object-cover", imgClassName)}
       />
     </div>
