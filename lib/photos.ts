@@ -103,6 +103,26 @@ export const photos = {
     note: "Our Process figure on /about. Source is 2530x1948 (1.3:1) against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
   },
 
+  servicesHero: {
+    src: "/our-services-hero-background.png",
+    alt: "A RainCity technician on a tiled Greater Vancouver roof running a pressure-washing wand across a row of solar panels under a clear blue sky.",
+    credit: "RainCity Property Maintenance",
+    tone: "#9ec3e2",
+    ratio: "16:9",
+    focal: "54% 30%",
+    note: "Services page hero banner, rendered with `fill` so this ratio is nominal only. Focal holds the technician and roofline in the upper-centre of the frame, leaving the sky (left of the subject) as the quiet ground the heading sits over.",
+  },
+
+  servicesOffer: {
+    src: "/what-we-offer-section-background.png",
+    alt: "A cleaner in rubber gloves carefully wiping down a blackout curtain beside a sunlit window.",
+    credit: "RainCity Property Maintenance",
+    tone: "#5b6570",
+    ratio: "7:5",
+    focal: "50% 40%",
+    note: "What We Offer figure on /services. Source is 2530x1948 (1.3:1) against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
+  },
+
   rooftops: {
     src: unsplash("photo-1762359365240-8c96c225165a", 2000),
     alt: "Residential rooftops and evergreens under a low, overcast Pacific Northwest sky.",

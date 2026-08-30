@@ -21,10 +21,9 @@ import { RevealOnLoad } from "@/components/ui/Motion";
  * stays out of the page's structured data for the same reason /about keeps it
  * out of theirs.
  *
- * `rooftops` rather than a crew shot: this page is a catalogue of work done to
- * buildings, and the frame is the Greater Vancouver roofline under the
- * overcast that creates most of it. It is the LCP element here, hence
- * `priority`.
+ * `servicesHero` rather than a crew shot: this page is a catalogue of work
+ * done to buildings, and the frame is a technician mid-job on a Greater
+ * Vancouver roofline. It is the LCP element here, hence `priority`.
  */
 export function ServicesHero() {
   const tenure = aboutPage.stats[0];
@@ -35,7 +34,7 @@ export function ServicesHero() {
       aria-labelledby="services-hero-heading"
     >
       <div className="absolute inset-0 -z-20">
-        <Photo name="rooftops" fill priority sizes="100vw" />
+        <Photo name="servicesHero" fill priority sizes="100vw" />
       </div>
 
       {/* Bottom-up on phones, where the type sits over the middle of the

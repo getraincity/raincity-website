@@ -3,6 +3,7 @@ import { Photo } from "@/components/ui/Photo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { cn } from "@/lib/cn";
 
 /**
  * What We Offer — the value proposition, then the three principles.
@@ -11,10 +12,10 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * copy left. The two pages share the split and alternate the hand, so neither
  * reads as a re-run of the other.
  *
- * The photograph is the crew re-roofing, not one of the service frames. Every
- * service photograph in the registry appears in the catalogue directly below
- * this section, and printing one of them twice on the same page would make
- * the page look shorter than it is.
+ * The photograph is a cleaner at work indoors, not one of the service frames.
+ * Every service photograph in the registry appears in the catalogue directly
+ * below this section, and printing one of them twice on the same page would
+ * make the page look shorter than it is.
  *
  * --- The principles ------------------------------------------------------
  *
@@ -28,7 +29,16 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * exact shape this design system rules out — the strip carries its structure
  * in the rule and the dividers instead, and no glyph has to stand in for
  * "Transparent Practices".
+ *
+ * Each column also carries a faint background wash — amber for the award
+ * claim, RainCity Blue for the trust claim, navy for the third — at the same
+ * base opacities `WhyChooseUs` already validated for steel body copy (see the
+ * contrast note there). Dividers move from the flat `line` border to `steel`
+ * at the token sheet's documented 20% divider opacity, since a solid line
+ * reads harder once it is sitting on top of a tint.
  */
+const principleTint = ["bg-amber/7", "bg-rc-blue/6", "bg-navy/6"];
+
 export function WhatWeOffer() {
   return (
     <section className="bg-white py-section" aria-labelledby="offer-heading">
@@ -39,7 +49,7 @@ export function WhatWeOffer() {
               hung from the top of it leaves a hole under the frame. */}
           <Reveal className="lg:col-span-5 lg:self-center">
             <Photo
-              name="aboutCrew"
+              name="servicesOffer"
               ratio="7:5"
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
@@ -71,11 +81,13 @@ export function WhatWeOffer() {
             <StaggerItem
               as="li"
               key={principle.title}
-              className={
+              className={cn(
+                "py-7",
+                principleTint[i],
                 i === 0
-                  ? "py-7 md:pr-8 md:last:pr-0"
-                  : "border-t border-t-line py-7 md:border-t-0 md:border-l md:border-l-line md:pr-8 md:pl-8 md:last:pr-0"
-              }
+                  ? "md:pr-8 md:last:pr-0"
+                  : "border-t border-t-steel/20 md:border-t-0 md:border-l md:border-l-steel/20 md:pr-8 md:pl-8 md:last:pr-0",
+              )}
             >
               <h3 className="display-s text-navy">{principle.title}</h3>
               <p className="body-s mt-2 text-steel">{principle.support}</p>

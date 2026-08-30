@@ -851,7 +851,7 @@ export const servicesPage = {
 
   intro: {
     label: "What We Offer",
-    headline: "Professional Property Maintenance Services",
+    headline: "Property Care Services",
     body: "At RainCity Property Maintenance, we offer a complete range of exterior cleaning and property care services designed to maintain and protect your space. Our team focuses on delivering reliable solutions, combining practical experience with a detail-oriented approach to ensure consistent, high-quality results.",
     principles: [
       {
