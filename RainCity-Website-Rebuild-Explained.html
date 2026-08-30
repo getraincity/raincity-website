@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Website Rebuild, Explained &mdash; RainCity Property Maintenance</title>
+<meta name="description" content="A plain-English guide to the RainCity Property Maintenance website rebuild.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1A5FA8;
+  --navy:#0C2740;
+  --pacific:#3D8FD4;
+  --amber:#F5A314;
+  --fog:#EEF2F6;
+  --steel:#5D6E7E;
+  --border:#DDE4EB;
+  --muted:#9AA9B6;
+  --white:#ffffff;
+  --display:'Chivo','Arial Black',Impact,system-ui,sans-serif;
+  --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --pad:clamp(20px,5vw,64px);
+  --cut:clamp(28px,5vw,64px);
+  --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--navy);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;margin:0}
+h1{font-weight:800;font-size:clamp(30px,5.4vw,52px);line-height:.98;letter-spacing:-.02em}
+h2{font-weight:700;font-size:clamp(24px,3.4vw,34px);line-height:1.05;letter-spacing:-.01em}
+h3{font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+/* ---------- Header bar ---------- */
+.topbar{background:var(--navy);padding:16px 0}
+.topbar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mark{
+  width:34px;height:34px;flex:none;background:var(--blue);
+  clip-path:polygon(0 0,100% 0,100% 100%,0 79%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:800;font-size:14px;color:#fff;
+  padding-bottom:6px;letter-spacing:-.02em;
+}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;color:#fff;letter-spacing:.02em;text-transform:uppercase}
+.brand span{color:var(--pacific)}
+.topbar .meta{margin-left:auto;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Hero (squeegee edge) ---------- */
+.hero-wrap{background:var(--pacific);clip-path:polygon(0 0,100% 0,100% 100%,0 calc(100% - var(--cut)))}
+.hero{
+  background:var(--navy);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 3px),0 calc(100% - var(--cut) - 3px));
+  padding-top:clamp(40px,7vw,72px);
+  padding-bottom:calc(var(--cut) + clamp(40px,7vw,72px));
+}
+.hero h1{color:#fff;max-width:15ch}
+.hero .lede{color:#C7D5E2;font-size:clamp(17px,2.2vw,19px);max-width:56ch;margin-top:20px}
+.label{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.label i{display:block;width:28px;height:3px;background:var(--amber);flex:none}
+.label span{font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--pacific)}
+.section .label span{color:var(--blue)}
+
+/* ---------- Sections ---------- */
+.section{padding:clamp(48px,8vw,88px) 0}
+.section.alt{background:var(--fog)}
+.section h2{margin-bottom:20px;max-width:20ch}
+.intro{font-size:clamp(17px,2.1vw,19px);max-width:62ch}
+
+/* Callout */
+.callout{
+  background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);
+  padding:20px 24px;margin:28px 0 0;
+}
+.callout .k{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:8px}
+
+/* Cards */
+.cards{display:grid;gap:16px;margin-top:32px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--white);border:1px solid var(--border);padding:22px}
+.card h3{margin-bottom:10px;color:var(--navy)}
+.card p{font-size:15px;line-height:1.6;color:var(--steel)}
+.card .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;background:var(--amber);color:var(--navy);
+  font-family:var(--display);font-weight:800;font-size:15px;margin-bottom:14px;
+}
+.card .tick{color:var(--blue);font-weight:700;font-size:22px;line-height:1;display:block;margin-bottom:12px}
+
+/* Comparison */
+.cmp{margin-top:32px;border:1px solid var(--border);background:var(--white)}
+.cmp-head,.cmp-row{display:grid;grid-template-columns:.8fr 1.3fr 1.3fr}
+.cmp-head>*{padding:14px 18px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--navy);color:#fff}
+.cmp-head .b{background:var(--blue)}
+.cmp-row>*{padding:16px 18px;border-top:1px solid var(--border);font-size:15px;line-height:1.55;color:var(--steel)}
+.cmp-row .l{font-weight:600;color:var(--navy)}
+.cmp-row .b{background:#F7FAFD;color:var(--navy)}
+
+/* FAQ */
+.faq{margin-top:32px;border-top:1px solid var(--border)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;background:none;border:0;margin:0;text-align:left;cursor:pointer;
+  font-family:var(--display);font-weight:700;font-size:clamp(16px,2.1vw,19px);
+  text-transform:uppercase;letter-spacing:-.005em;color:var(--navy);
+  padding:22px 52px 22px 0;position:relative;line-height:1.25;
+}
+.faq-q:hover{color:var(--blue)}
+.faq-q:focus-visible{outline:3px solid var(--pacific);outline-offset:2px}
+.faq-q .ico{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;border:2px solid var(--blue);
+}
+.faq-q .ico::before,.faq-q .ico::after{
+  content:"";position:absolute;background:var(--blue);left:50%;top:50%;
+  transition:transform .2s ease,opacity .2s ease,background-color .2s ease;
+}
+.faq-q .ico::before{width:12px;height:2px;transform:translate(-50%,-50%)}
+.faq-q .ico::after{width:2px;height:12px;transform:translate(-50%,-50%)}
+.faq-q[aria-expanded="true"] .ico{background:var(--blue)}
+.faq-q[aria-expanded="true"] .ico::before{background:#fff}
+.faq-q[aria-expanded="true"] .ico::after{transform:translate(-50%,-50%) scaleY(0);opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .28s ease}
+.faq-a .inner{padding:0 0 24px;max-width:64ch;color:var(--steel);font-size:16px}
+.faq-a .inner p{margin-bottom:12px}
+
+/* Closing (squeegee edge) */
+.close-wrap{background:var(--amber);clip-path:polygon(0 var(--cut),100% 0,100% 100%,0 100%)}
+.close{
+  background:var(--navy);
+  clip-path:polygon(0 calc(var(--cut) + 3px),100% 3px,100% 100%,0 100%);
+  padding-top:calc(var(--cut) + clamp(44px,7vw,80px));
+  padding-bottom:clamp(44px,7vw,72px);
+  color:#fff;
+}
+.close h2{color:#fff;max-width:22ch}
+.close .lede{color:#C7D5E2;max-width:60ch;font-size:clamp(17px,2.1vw,19px);margin-top:18px}
+.contact{
+  margin-top:36px;border:2px solid rgba(255,255,255,.22);padding:24px;
+  display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.contact .k{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--pacific);display:block;margin-bottom:6px}
+.contact .v{font-family:var(--display);font-weight:700;font-size:18px;color:#fff}
+footer{background:var(--navy);padding:0 0 28px;color:var(--muted);font-size:13px}
+footer .line{border-top:1px solid rgba(255,255,255,.14);padding-top:20px}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .cmp-head{display:none}
+  .cmp{border-top:0}
+  .cmp-row{grid-template-columns:1fr;border-top:1px solid var(--border);padding:14px 0}
+  .cmp-row>*{border-top:0;padding:4px 18px}
+  .cmp-row .l{font-size:16px}
+  .cmp-row .a::before{content:"Today: ";font-weight:600;color:var(--navy)}
+  .cmp-row .b::before{content:"After the rebuild: ";font-weight:600;color:var(--blue)}
+  .cmp-row .b{background:transparent}
+  .topbar .meta{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+@media print{
+  .faq-a{max-height:none !important}
+  .faq-q .ico{display:none}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section{padding:28px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="mark">RC</div>
+    <div class="brand">RainCity <span>Property Maintenance</span></div>
+    <div class="meta">Website Rebuild &mdash; Client Briefing</div>
+  </div>
+</div>
+
+<div class="hero-wrap">
+  <header class="hero">
+    <div class="wrap">
+      <div class="label"><i></i><span>Plain English, no jargon</span></div>
+      <h1>Your website rebuild, explained</h1>
+      <p class="lede">A short, straightforward guide to what we&rsquo;re doing to your website, where it will live, and why it stays completely in your hands &mdash; no matter who works on it in the future.</p>
+    </div>
+  </header>
+</div>
+
+<!-- 1. WHAT'S CHANGING -->
+<section class="section">
+  <div class="wrap">
+    <div class="label"><i></i><span>01 &mdash; What&rsquo;s changing</span></div>
+    <h2>Same website. New engine underneath.</h2>
+    <p class="intro">Your site is being rebuilt using newer technology, but it is still <strong>your</strong> site. Same blue colours, same logo, same services, same words on the page. Visitors won&rsquo;t notice anything is different &mdash; except that it opens faster.</p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="tick">&#10003;</span>
+        <h3>The same look</h3>
+        <p>Same blues, same logo, same layout, same photos. Nothing about the design is being reinvented without your say-so.</p>
+      </div>
+      <div class="card">
+        <span class="tick">&#10003;</span>
+        <h3>The same content</h3>
+        <p>Every page, every service description and every phone number carries straight across. Your existing wording is reused, not rewritten.</p>
+      </div>
+      <div class="card">
+        <span class="tick">&#10003;</span>
+        <h3>Faster, and it breaks less</h3>
+        <p>Pages will load noticeably quicker, especially on phones. And there is far less to go wrong, because there are far fewer moving parts.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="k">The simplest way to picture it</span>
+      <p>Think of your website as a house. We are keeping the rooms, the paint colour and the furniture exactly where they are. We are only replacing the old wiring and plumbing behind the walls, because the old wiring is slow and keeps needing repairs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. WHERE IT LIVES -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="label"><i></i><span>02 &mdash; Where your website will live</span></div>
+    <h2>Moving from Hostinger to Vercel</h2>
+    <p class="intro">Every website has to sit on a computer somewhere that keeps it switched on and available. That is called hosting. Today yours sits on Hostinger; after the rebuild it will sit on <strong>Vercel</strong>.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>What Vercel is</h3>
+        <p>A hosting service built specifically for modern websites like the one we are making. It is the same service large, well-known companies use to keep their sites online.</p>
+      </div>
+      <div class="card">
+        <h3>Why it is faster</h3>
+        <p>Your site is kept ready on computers in many locations at once, so every visitor is served from one near them. Traditional shared hosting serves everyone from a single spot.</p>
+      </div>
+      <div class="card">
+        <h3>Why it is safer</h3>
+        <p>WordPress runs on plugins &mdash; small add-on programs written by lots of different people. Out-of-date plugins are the most common way WordPress sites get hacked. Your new site has none at all.</p>
+      </div>
+    </div>
+
+    <div class="cmp">
+      <div class="cmp-head">
+        <div>&nbsp;</div>
+        <div class="a">Today</div>
+        <div class="b">After the rebuild</div>
+      </div>
+      <div class="cmp-row">
+        <div class="l">Speed</div>
+        <div class="a">Shares one machine with many other websites, so it slows down when they get busy.</div>
+        <div class="b">Pages are prepared in advance and served from nearby, so they appear almost instantly.</div>
+      </div>
+      <div class="cmp-row">
+        <div class="l">Upkeep</div>
+        <div class="a">Plugins and WordPress itself need regular updating, or things quietly break.</div>
+        <div class="b">Nothing to update, nothing to conflict with each other, nothing to go out of date.</div>
+      </div>
+      <div class="cmp-row">
+        <div class="l">Security</div>
+        <div class="a">Most break-ins happen through an out-of-date plugin or the admin login page.</div>
+        <div class="b">There is no plugin and no public login page on the site to break into.</div>
+      </div>
+      <div class="cmp-row">
+        <div class="l">Making a change</div>
+        <div class="a">Edits go live straight away &mdash; including mistakes.</div>
+        <div class="b">Every change is saved with a dated history, so anything can be undone in seconds.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. THE DEVELOPER QUESTION -->
+<section class="section">
+  <div class="wrap">
+    <div class="label"><i></i><span>03 &mdash; The important one</span></div>
+    <h2>What if something happens to your developer?</h2>
+    <p class="intro">This is exactly the right question to ask, and the honest answer is short: <strong>you keep everything.</strong> The website, its code and its accounts are yours, and any qualified web developer could pick it up and carry on. Here is why.</p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="num">1</span>
+        <h3>Built with standard technology</h3>
+        <p>Your site is built with Next.js &mdash; one of the most widely used website technologies in the world, used by companies like Nike, Netflix and TikTok. It is a common, well-documented tool, not a custom system only one person understands.</p>
+      </div>
+      <div class="card">
+        <span class="num">2</span>
+        <h3>The code is stored safely</h3>
+        <p>The complete website is kept in GitHub &mdash; think of it as a secure vault for the code, holding a dated record of every change ever made. It is never sitting only on one person&rsquo;s computer.</p>
+      </div>
+      <div class="card">
+        <span class="num">3</span>
+        <h3>The accounts are in your name</h3>
+        <p>The hosting and the code vault are owned by you, under your email. You can add or remove anyone at any time &mdash; including me. You cannot be locked out of your own website.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="k">Put bluntly</span>
+      <p>If I disappeared tomorrow, you would hand a new developer two logins and they could be working on your website the same day. There is nothing to figure out from scratch, nothing to buy back, and nothing that only I hold a copy of.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FAQ -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="label"><i></i><span>04 &mdash; Simple FAQ</span></div>
+    <h2>Questions people usually ask</h2>
+    <p class="intro">Click a question to see the answer.</p>
+
+    <div class="faq">
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="a1" id="q1">
+          Is this technology used by more people than WordPress?
+          <span class="ico" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="a1" role="region" aria-labelledby="q1">
+          <div class="inner">
+            <p>WordPress sits on more websites overall. It has been around for twenty years and it is the easy default for blogs and hobby sites &mdash; a website builder that runs on plugins, which is what makes it flexible but also fragile.</p>
+            <p>Next.js is a different category: a modern professional framework that large companies choose when speed and reliability actually matter. Among newly built business websites, it is one of the most common choices in the world.</p>
+            <p>Neither one is obscure. One is the old default; the other is today&rsquo;s professional standard.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="a2" id="q2">
+          Will I be able to manage and keep an eye on my site?
+          <span class="ico" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="a2" role="region" aria-labelledby="q2">
+          <div class="inner">
+            <p>Yes. You will have your own login to the hosting account, where you can confirm the site is live, see how many people are visiting, and see a dated list of every update that has been made.</p>
+            <p>For everyday changes &mdash; a new price, a new photo, updated hours, a new service &mdash; you simply send the request by email or text and it is normally live the same day. You do not need to learn any software to make that happen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="a3" id="q3">
+          Is this reversible? Is anything at risk?
+          <span class="ico" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="a3" role="region" aria-labelledby="q3">
+          <div class="inner">
+            <p>Nothing is deleted. Your current website stays exactly where it is, online and untouched, while the new one is built. It only goes live once you have seen it and given the go-ahead.</p>
+            <p>Your existing content is being reused, not replaced &mdash; the same text, the same photos, the same services. Nothing is quietly swapped for something new.</p>
+            <p>And if you ever wanted to go back, moving a website between hosts is a small settings change, not a rebuild.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. CLOSING -->
+<div class="close-wrap">
+  <section class="close">
+    <div class="wrap">
+      <div class="label"><i></i><span>In short</span></div>
+      <h2>The same business you built &mdash; on a website that keeps up with it.</h2>
+      <p class="lede">Nothing you rely on is being taken away. You end up with the same website, faster and sturdier, owned entirely by you, with no lock-in and nothing hidden. If anything here is unclear, just ask &mdash; there is no such thing as a silly question about your own website.</p>
+
+      <div class="contact">
+        <div>
+          <span class="k">Prepared by</span>
+          <span class="v">Growth Nexus</span>
+        </div>
+        <div>
+          <span class="k">Email</span>
+          <span class="v">info@getgrowthnexus.com</span>
+        </div>
+        <div>
+          <span class="k">Phone</span>
+          <span class="v">+92 327-112-9295</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="line">Prepared for RainCity Property Maintenance &middot; Website rebuild briefing</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var qs = document.querySelectorAll('.faq-q');
+  function shut(btn){
+    btn.setAttribute('aria-expanded','false');
+    document.getElementById(btn.getAttribute('aria-controls')).style.maxHeight = null;
+  }
+  function show(btn){
+    var p = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.setAttribute('aria-expanded','true');
+    p.style.maxHeight = p.scrollHeight + 'px';
+  }
+  for (var i = 0; i < qs.length; i++){
+    qs[i].addEventListener('click', function(){
+      var wasOpen = this.getAttribute('aria-expanded') === 'true';
+      for (var j = 0; j < qs.length; j++){ shut(qs[j]); }
+      if (!wasOpen){ show(this); }
+    });
+  }
+  window.addEventListener('resize', function(){
+    for (var k = 0; k < qs.length; k++){
+      if (qs[k].getAttribute('aria-expanded') === 'true'){
+        var p = document.getElementById(qs[k].getAttribute('aria-controls'));
+        p.style.maxHeight = p.scrollHeight + 'px';
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

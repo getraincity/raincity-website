@@ -1,0 +1,12 @@
+import { chromium } from "playwright";
+const out=process.argv[2], width=Number(process.argv[3]), h=Number(process.argv[4]??900);
+const b = await chromium.launch();
+const p = await b.newPage({ viewport:{width,height:h}, deviceScaleFactor:2 });
+await p.goto("http://localhost:3000",{waitUntil:"networkidle"});
+await p.addStyleTag({content:`html{scroll-behavior:auto !important}[data-feedback-ui]{display:none !important}`});
+await p.evaluate(async()=>{for(let y=0;y<document.body.scrollHeight;y+=600){scrollTo(0,y);await new Promise(r=>setTimeout(r,150));}});
+await p.waitForFunction(()=>[...document.images].every(i=>i.complete&&i.naturalWidth>0));
+await p.evaluate(()=>{const s=document.querySelector('#services-heading').closest('section');scrollTo(0,s.getBoundingClientRect().top+scrollY);});
+await p.waitForTimeout(800);
+await p.screenshot({path:out});
+await b.close(); console.log(out);

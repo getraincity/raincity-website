@@ -1,0 +1,425 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   RainCity Property Maintenance - Design System v1.0 (LOCKED 2026-08-28)
+   Every colour, face, size and measurement on this site is declared here.
+   Default Tailwind palettes / type scales / radii are removed on purpose so
+   that anything outside the system fails to compile rather than shipping.
+   ========================================================================== */
+
+@theme {
+  /* --- Colour ------------------------------------------------------------
+     Namespace reset: no Tailwind default palette. No pure black, by spec. */
+  --color-*: initial;
+
+  --color-rc-blue: #1a5fa8;   /* Primary. Logo mark, rules, links, labels, focus. */
+  --color-navy: #0c2740;      /* Dark base. Headlines, header, footer, overlays.  */
+  --color-pacific: #3d8fd4;   /* Highlight. Hover, active nav, icons on navy.     */
+  /* CTA accent: quote buttons, badge, handle. One decorative exception, the
+     Why Choose Us index, washes alternate rows at 7% — low enough not to
+     compete with a solid amber button, but it is the only place on the site
+     amber means something other than "act here". Keep it that way. */
+  --color-amber: #f5a314;
+  --color-fog: #eef2f6;       /* Cool light surface. Bands, form fields, cards.   */
+  --color-mist: #d8e9f6;      /* Pacific at 20% over white. Light surfaces that   */
+                              /* must still read as blue against navy — fog goes  */
+                              /* white at that contrast, this does not.           */
+  --color-steel: #5d6e7e;     /* Body copy, captions, dividers, disabled.         */
+
+  --color-line: #dde4eb;      /* Support: borders                                 */
+  --color-muted: #9aa9b6;     /* Support: muted meta                              */
+  --color-amber-ink: #b8760a; /* Support: amber-toned text on white               */
+  --color-blue-ink: #2f7cbd;  /* Support: blue small text on white                */
+
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-inherit: inherit;
+
+  /* --- Typeface system (two faces, no alternates) ------------------------ */
+  --font-*: initial;
+  --font-display: var(--font-chivo), "Arial Black", system-ui, sans-serif;
+  --font-body: var(--font-plex), system-ui, -apple-system, sans-serif;
+
+  /* --- Type scale -------------------------------------------------------- */
+  --text-*: initial;
+
+  --text-display-xl: clamp(40px, 7vw, 76px);
+  --text-display-xl--line-height: 0.94;
+  --text-display-xl--letter-spacing: -0.025em;
+
+  --text-display-l: clamp(30px, 5vw, 52px);
+  --text-display-l--line-height: 0.98;
+  --text-display-l--letter-spacing: -0.02em;
+
+  --text-display-m: clamp(24px, 3.4vw, 34px);
+  --text-display-m--line-height: 1.05;
+  --text-display-m--letter-spacing: -0.01em;
+
+  --text-display-s: 20px;
+  --text-display-s--line-height: 1.15;
+  --text-display-s--letter-spacing: -0.005em;
+
+  --text-overline: 13px;
+  --text-overline--line-height: 1.4;
+  --text-overline--letter-spacing: 0.18em;
+
+  --text-body-l: 19px;
+  --text-body-l--line-height: 1.6;
+
+  --text-body: 17px;
+  --text-body--line-height: 1.65;
+
+  --text-body-s: 15px;
+  --text-body-s--line-height: 1.6;
+
+  --text-meta: 13px;
+  --text-meta--line-height: 1.5;
+  --text-meta--letter-spacing: 0.1em;
+
+  /* CTA label: Chivo 700 15px upper, per the component spec. */
+  --text-cta: 15px;
+  --text-cta--line-height: 1;
+  --text-cta--letter-spacing: 0.02em;
+
+  /* --- Geometry ----------------------------------------------------------
+     Squared signage system: no border radius on any panel, card, field or
+     button. The namespace is reset so an off-system radius fails to compile.
+     One exception is declared, and only one; it is named below so that it
+     is visible in the system rather than hidden inside a component. */
+  --radius-*: initial;
+  /* The single exception, and it stays single: the testimonial carousel's
+     position dots. A 8px dot is a mark, not a softened box. Nothing with an
+     edge — card, plate, field, button — takes a radius on this site. */
+  --radius-full: calc(infinity * 1px);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --container-*: initial;
+  --container-site: 1440px;
+  --container-prose: 680px;
+  /* Centred section headings: wide enough to hold "Our Professional Property
+     Maintenance Services" on two lines at desktop, narrowing with the
+     viewport so the break stays sensible rather than fixed. */
+  --container-heading: clamp(320px, 80vw, 880px);
+  /* Takes ~8.5% off the service card. Expressed as a percentage rather than
+     a pixel cap: a fixed max-width only bites above itself, so at 1280 — a
+     very ordinary laptop — the cards would have come out unchanged. Applied
+     from lg only, where the three-column grid lives; narrowing a full-width
+     card on a phone would just add margins. */
+  --container-cards: 91.7%;
+
+  /* Footer tagline measure. The About column runs ~416px at 1440, which sets
+     the strapline as two long lines that read as a paragraph rather than a
+     strapline. Capped narrower so it breaks onto three, each clause landing
+     on its own line. 280px sits in the middle of the band that produces that
+     break (250-350px), so the three lines hold at every width the column
+     takes — it is under the narrowest column the grid ever gives this block,
+     so it never crops the measure on a phone. */
+  --container-tagline: 280px;
+
+  /* --- Named measurements ------------------------------------------------
+     Spacing runs on the 4px base (space-1..10 = p-1..p-8 / p-24 / p-32).
+     Everything below is a component constant from the spec, named so that
+     no arbitrary value is ever written downstream. */
+  --spacing-edge: clamp(20px, 5vw, 64px);      /* grid edge padding          */
+  --spacing-section: clamp(56px, 9vw, 128px);  /* section padding            */
+  --spacing-section-sm: clamp(56px, 7vw, 96px);
+  --spacing-cta: 52px;                          /* CTA height, desktop       */
+  --spacing-cta-min: 44px;                      /* CTA height, mobile min    */
+  --spacing-cta-y: 17px;
+  --spacing-cta-x: 26px;
+  --spacing-card: 20px;                         /* service card padding      */
+  --spacing-block: clamp(32px, 4.5vw, 64px);    /* heading block -> content  */
+  --spacing-gap-x: clamp(16px, 1.8vw, 28px);    /* grid column gap           */
+  --spacing-gap-y: clamp(28px, 3.2vw, 48px);    /* grid row gap              */
+  --spacing-field-y: 14px;                      /* form field padding        */
+  --spacing-hairline: 3px;                      /* squeegee hairline         */
+  --spacing-label-bar: 28px;                    /* section label amber bar   */
+  --spacing-logo: 34px;                         /* logo mark cut             */
+
+  /* Addition to v1.0: the hero's floor. With the photograph promoted to a
+     full-bleed background the stacked mobile layout no longer sets the
+     section's height, so it is named here rather than left to the content. */
+  --spacing-hero: clamp(540px, 72vh, 720px);
+
+  /* --- Signature: the Squeegee Edge -------------------------------------- */
+  --rc-angle: 12deg;
+  --rc-tan: 0.2126; /* tan(12deg) - horizontal run per unit of height */
+
+  /* Section transitions run the 12deg cut across only this fraction of the
+     width. At full width a 12deg diagonal costs ~306px of vertical space on a
+     1440px screen; scoping it keeps the angle exact and the wedge controlled.
+     Reduced from 0.3 to 0.18: at 0.3 the wedge stood 92px tall on a 1440px
+     screen, reading as a band rather than a detail. The strip is sized by
+     aspect-ratio, so this stays exactly 12deg and scales with the viewport. */
+  --rc-edge-span: 0.18;
+
+  /* Service card corner notch. */
+  --spacing-corner: 28px;
+
+  /* Testimonial carousel slide widths. Each is set so a slice of the next
+     card stays visible at the right edge, which is what tells the reader the
+     row scrolls — cheaper and steadier than a gradient fade or a hint. */
+  --spacing-slide: 84%;      /* below 640: one card, plus the peek    */
+  --spacing-slide-sm: 44%;   /* 640 and up: two cards, plus the peek  */
+  --spacing-slide-lg: 30%;   /* 1024 and up: three cards, plus a peek */
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-steel);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible focus on every interactive element, never removed. */
+  :focus-visible {
+    outline: var(--spacing-hairline) solid var(--color-pacific);
+    outline-offset: 2px;
+  }
+
+  /* Amber focus where the surface is already navy or blue. */
+  .on-navy :focus-visible {
+    outline-color: var(--color-amber);
+  }
+
+  ::selection {
+    background-color: var(--color-amber);
+    color: var(--color-navy);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Scroll and load reveals. Framer Motion writes its start state to an
+     inline style, which is server-rendered, so this has to be !important to
+     outrank it. Without the rule the reveals would stay at opacity 0 for
+     precisely the people who asked for less movement. */
+  [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   Type scale utilities - one class per row of the scale table
+   ========================================================================== */
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-display-xl);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+@utility display-l {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-display-l);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+@utility display-m {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-m);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+@utility display-s {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-s);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+
+/* Named `eyebrow`, not `overline`. Tailwind ships its own `overline` utility
+   (text-decoration-line: overline) and emits it after this file's utilities,
+   so a same-name class lost on source order and drew a blue rule above every
+   section label on the site. A `text-decoration-line: none` reset in here
+   could not win that cascade; the name had to stop colliding. The scale row
+   is still "overline" in the spec and `--text-overline` keeps that name. */
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-overline);
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@utility body-l {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-body-l);
+  line-height: 1.6;
+}
+
+@utility body-base {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: 1.65;
+}
+
+@utility body-s {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-body-s);
+  line-height: 1.6;
+}
+
+/* The spec's component notes call these slots "mono"; IBM Plex Mono is
+   excluded from the site system, so they resolve to the `meta` token. */
+@utility meta {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-meta);
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Signature: the Squeegee Edge - a 12deg cut with a 3px hairline.
+   Container-query height units keep the angle exact at any box size.
+   ========================================================================== */
+
+/* For vertical cuts, whose run is derived from the box height. Safe only on
+   boxes with a definite height (absolutely positioned plates). */
+@utility squeegee-box {
+  container-type: size;
+}
+
+/* For horizontal cuts, whose drop is derived from the box width. Inline-size
+   containment leaves height free, so this is safe on content-sized boxes. */
+@utility squeegee-box-w {
+  container-type: inline-size;
+}
+
+/* Cut rises to the right: bottom-right corner pulled in. */
+@utility squeegee-cut-r {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - (100cqh * var(--rc-tan))) 100%,
+    0 100%
+  );
+}
+
+/* Cut falls to the right: top-right corner pulled in. */
+@utility squeegee-cut-r-down {
+  clip-path: polygon(
+    0 0,
+    calc(100% - (100cqh * var(--rc-tan))) 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Reveals content to the right of the blade: top-left corner pulled in. */
+@utility squeegee-cut-l {
+  clip-path: polygon(calc(100cqh * var(--rc-tan)) 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Band transition: the block leads with a 12deg top edge. Pair with
+   `squeegee-box-w` — the drop is a function of the box width. */
+@utility squeegee-band-top {
+  clip-path: polygon(0 calc(100cqw * var(--rc-tan)), 100% 0, 100% 100%, 0 100%);
+}
+
+/* Scoped section transition. The strip's aspect ratio is derived from the
+   angle and the span, so the edge measures exactly 12deg at any width. */
+@utility squeegee-edge {
+  width: 100%;
+  aspect-ratio: calc(1 / (var(--rc-edge-span) * var(--rc-tan)));
+}
+
+/* The outgoing colour, as a clean triangle in the trailing corner.
+   The previous polygon opened with `0 0, 100% 0`, a zero-area run along the
+   whole top edge — no area, but the rasteriser still painted it as a navy
+   hairline across the full width of the section. Starting the path at the
+   corner removes that artefact entirely. */
+@utility squeegee-edge-fill {
+  clip-path: polygon(
+    calc(100% - (var(--rc-edge-span) * 100%)) 0,
+    100% 0,
+    100% 100%
+  );
+}
+
+/* Service card: a corner notched out of the photo to reveal RainCity Blue. */
+@utility card-corner-cut {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--spacing-corner)),
+    calc(100% - var(--spacing-corner)) 100%,
+    0 100%
+  );
+}
+
+/* The testimonial carousel carries its own arrows and dots, so the native
+   scrollbar under the cards is redundant furniture. Scrolling itself is
+   untouched: wheel, trackpad, touch and keyboard all still work. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Release the cut — used at breakpoints where the angle would crowd type. */
+@utility squeegee-none {
+  clip-path: none;
+}
+
+/* The mirrored transition: the top edge rises to the right. */
+@utility squeegee-band-top-up {
+  clip-path: polygon(0 0, 100% calc(100cqw * var(--rc-tan)), 100% 100%, 0 100%);
+}

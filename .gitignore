@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+build/
+.DS_Store
+*.pem
+npm-debug.log*
+.env*.local
+next-env.d.ts
+.vercel
+*.tsbuildinfo
+
+# Section-capture screenshots from the shot-*.mjs scripts, written to the
+# project root. Not build output or source — local review artifacts only.
+/*.png
