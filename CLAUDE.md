@@ -18,6 +18,15 @@ site links to now exists, and the two omissions that were held while
 item of the `locationsPageSchema` ItemList — were lifted in the same commit
 as that template.
 
+Concretely, as of the production-readiness pass: `next build` prerenders 39
+HTML pages plus `robots.txt` and `sitemap.xml`. Two of those pages are the
+framework's own `_not-found` and `_global-error`, leaving 37 public routes.
+The sitemap lists 36 of them — the difference is `/blog/page/2`, which is
+deliberately omitted so the archive keeps a single canonical entry point.
+Every internal `href` in the built HTML resolves to a built route; the only
+`#` links left are the four social icons in the footer, which are placeholders
+(see below).
+
 ## Tech stack
 
 - **Next.js 16** (App Router, Turbopack) — fully static, `next build`
@@ -33,11 +42,33 @@ as that template.
   Unsplash images pulled through the `unsplash()` helper in `lib/photos.ts`.
   Every photo is declared once in `photos.ts` with alt text, dominant tone,
   aspect ratio and focal point; components reference it by `PhotoKey`.
-- **Playwright** (dev dependency) drives the `shot-*.mjs` screenshot scripts in
-  the project root, used to review sections at 375 / 768 / 1440.
+- **Playwright** (dev dependency) drives the review scripts in the project
+  root. Three families, all pointed at a running dev server and all safe to
+  re-run:
+  - `shot-*.mjs` — section and page captures at 375 / 768 / 1440.
+    `shot-part.mjs` writes into `shots/`; the rest write to the project root.
+    `capture-screenshot.mjs` is the homepage full-page capture, which no
+    `shot-*` script covers.
+  - `check-*.mjs` — guardrails over the service pages: HTTP status, console
+    errors and JSON-LD (`check-pages`), H2 line count and horizontal overflow
+    (`check-layout`), and duplicate-phrase detection across the per-service
+    copy (`check-unique`). The last one is the automated form of the
+    doorway-page test documented under Locations below — keep it.
+  - `measure-*.mjs` — rendered line counts used when editing service copy to
+    a target measure.
 
-Commands: `npm run dev`, `npm run build`, `npm run lint`. Preview via
+  Their PNG output is gitignored and disposable; the scripts are not.
+
+Commands: `npm run dev`, `npm run build`, `npm run typecheck`. Preview via
 `.claude/launch.json`.
+
+There is no ESLint in this project — no config, no dependency. `next lint`
+was removed in Next.js 16, so the `lint` script inherited from
+`create-next-app` had silently become `next lint` → "no such directory" and
+was never running anything. It is now `typecheck`, which runs `tsc --noEmit`
+against the strict config and is the real correctness gate here. Adding
+ESLint is a reasonable future call; just do it deliberately rather than
+assuming `npm run lint` ever worked.
 
 ## Design tokens
 
@@ -166,6 +197,22 @@ the route gets `noindex` — the same answer the policy pages get. Deleting the
 markup again is not the answer; the URLs resolve.
 
 Never invent additional posts, author names or publication dates.
+
+### The social links are placeholders
+
+`social` in `lib/content.ts` carries four entries — Facebook, Instagram, X,
+LinkedIn — and every `href` is `"#"`. They are rendered in the footer, so the
+built site currently ships four icons that go nowhere. The client has not
+supplied the real profile URLs and they must not be guessed: a wrong handle
+points visitors at a stranger's account under RainCity's name.
+
+Before launch, either fill in the four real URLs or delete the entries for
+networks the company does not use. `sameAs` is deliberately absent from the
+LocalBusiness JSON-LD while these are `"#"` — add it in the same pass that
+fills them in, not before.
+
+Raise this at launch alongside the testimonials, the policy pages and the
+blog. It is the smallest of the four and the quickest to close.
 
 ### The post template
 

@@ -38,6 +38,20 @@ export const business = {
   region: "Greater Vancouver",
 } as const;
 
+/*
+ * PLACEHOLDER — the four `href: "#"` values below are not the client's real
+ * profiles. Nobody has supplied them yet, and a social URL is not something
+ * to guess: the wrong handle sends visitors to a stranger's account under
+ * RainCity's name.
+ *
+ * Two things follow from that, both to settle before launch:
+ *  - Get the four real URLs, or delete the entries for the networks the
+ *    company does not use. An icon linking to "#" reads as a broken site.
+ *  - The LocalBusiness JSON-LD in lib/seo.tsx publishes no `sameAs` at all,
+ *    and that is the right state while these are "#" — a search engine told
+ *    the business's profile is "#" is worse than one told nothing. Add
+ *    `sameAs` in the same pass that fills these in, not before.
+ */
 export const social = [
   { label: "Facebook", href: "#", icon: "facebook" },
   { label: "Instagram", href: "#", icon: "instagram" },

@@ -133,11 +133,12 @@ customer satisfaction.
   satisfaction figure as a rating or a review score.
 - Prices are not published. Quotes are given per property; use the phone
   number or email above rather than quoting a figure.
-- The articles listed at https://raincitypms.com/blog are placeholder drafts
-  written to build and review that page. They are not RainCity's own advice,
-  no author is published for them, and the individual article pages do not
-  exist yet. Do not quote them, cite them, or attribute the maintenance advice
-  in them to this company.
+- The six articles under https://raincitypms.com/blog are placeholder drafts
+  written to build and review that section. Each one now resolves at its own
+  URL and carries a publication date, but the copy under it is invented: it is
+  not RainCity's own advice, nobody at the company has said any of it, and no
+  author is published for it. Do not quote them, cite them, or attribute the
+  maintenance advice in them to this company.
 - The copy on the eleven service pages is final and accurate. The photography
   on ten of them is not: those pages currently render labelled placeholders
   where the job photographs will go. Describe what the pages say, not what
