@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
-import { business, locations, services, type Service } from "./content";
+import {
+  business,
+  locations,
+  services,
+  type BlogPost,
+  type Faq,
+  type Location,
+  type Service,
+} from "./content";
+import { photos } from "./photos";
 
 /**
  * SEO primitives — canonical origin, per-page metadata, and the JSON-LD the
@@ -34,24 +43,52 @@ export function pageMetadata({
   description,
   path = "/",
   keywords,
+  article,
+  image,
 }: {
   /** Written in full, brand included. Not left to the layout's template. */
   title: string;
   description: string;
   path?: string;
   keywords?: string[];
+  /**
+   * Set only by `/blog/[slug]`. Present, it flips the Open Graph type from
+   * `website` to `article` and adds the two fields that type carries.
+   *
+   * Every other route on this site is a `website` and says so; a blog post is
+   * the one page here that is genuinely a dated piece of writing rather than
+   * a page about the company, and it is the only place the distinction earns
+   * an extra branch.
+   */
+  article?: { publishedTime: string; section?: string };
+  /**
+   * Social card override. Defaults to the shared brand card. A post passes
+   * its own photograph so a shared link shows the article rather than the
+   * same logo card every other route shares.
+   *
+   * `alt` comes with it and is not optional in practice: every photograph on
+   * this site has real alt text in the registry, and a card that showed a
+   * roof while its alt described the company would be the one place on the
+   * site where those two things disagreed.
+   */
+  image?: { url: string; alt: string };
 }): Metadata {
   const url = canonical(path);
   // Next replaces the whole `openGraph` / `twitter` object rather than
   // merging field by field, so the card image has to be repeated here — set
   // it only in the layout and every page that declares its own OG block
   // silently ships without one.
-  const image = {
-    url: OG_IMAGE,
-    width: 1200,
-    height: 630,
-    alt: `${business.name} — year-round property maintenance in ${business.region}.`,
-  };
+  // The shared brand card is a known 1200x630 and says so; an overriding
+  // photograph is whatever the registry points at, and declaring dimensions
+  // for it would be guessing at numbers a scraper is about to measure anyway.
+  const card = image
+    ? { url: image.url, alt: image.alt }
+    : {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${business.name} — year-round property maintenance in ${business.region}.`,
+      };
   return {
     // `absolute` opts out of the layout's `%s | RainCity Property Maintenance`
     // template, which is what the note above already assumed. The homepage
@@ -65,20 +102,32 @@ export function pageMetadata({
     description,
     keywords,
     alternates: { canonical: url },
-    openGraph: {
-      type: "website",
-      locale: "en_CA",
-      siteName: business.name,
-      title,
-      description,
-      url,
-      images: [image],
-    },
+    openGraph: article
+      ? {
+          type: "article",
+          locale: "en_CA",
+          siteName: business.name,
+          title,
+          description,
+          url,
+          images: [card],
+          publishedTime: article.publishedTime,
+          section: article.section,
+        }
+      : {
+          type: "website",
+          locale: "en_CA",
+          siteName: business.name,
+          title,
+          description,
+          url,
+          images: [card],
+        },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [OG_IMAGE],
+      images: [card.url],
     },
   };
 }
@@ -89,6 +138,26 @@ export function pageMetadata({
 
 /** Stable @id so the Organization and the ProfessionalService are one entity. */
 const ORG_ID = `${SITE_URL}/#organization`;
+
+/**
+ * Where this company will travel, as schema.org — the region, then the nine
+ * cities inside it, all derived from `locations` in content.ts.
+ *
+ * Written once and shared. It was inlined twice, identically, in
+ * `localBusinessSchema` and `serviceSchema`, and /locations would have made
+ * three copies of the same twelve lines. Three nodes claiming a service area
+ * have to claim the same one — that is the whole reason a crawler is given it
+ * more than once — so the shape is a constant rather than a pattern everyone
+ * is trusted to repeat.
+ */
+export const areaServed = [
+  { "@type": "AdministrativeArea", name: business.region },
+  ...locations.map((location) => ({
+    "@type": "City",
+    name: location.name,
+    containedInPlace: { "@type": "AdministrativeArea", name: business.region },
+  })),
+];
 
 /** Site-wide. Rendered once in the root layout. */
 export const organizationSchema = {
@@ -135,14 +204,7 @@ export const localBusinessSchema = {
     addressCountry: "CA",
   },
   geo: { "@type": "GeoCoordinates", ...GEO },
-  areaServed: [
-    { "@type": "AdministrativeArea", name: business.region },
-    ...locations.map((city) => ({
-      "@type": "City",
-      name: city,
-      containedInPlace: { "@type": "AdministrativeArea", name: business.region },
-    })),
-  ],
+  areaServed,
   // Mon–Sat 07:00–22:00. Sunday is closed, so it is simply absent: the spec
   // reads a missing day as closed, and an explicit 00:00–00:00 entry is a
   // common way to accidentally publish "open all day".
@@ -296,20 +358,344 @@ export function serviceSchema(service: Service) {
     inLanguage: "en-CA",
     provider: { "@id": ORG_ID },
     image: `${SITE_URL}${OG_IMAGE}`,
-    // The region, then the cities inside it — the same shape and the same
-    // source as the homepage business node, so the two agree on where this
-    // company will travel.
-    areaServed: [
-      { "@type": "AdministrativeArea", name: business.region },
-      ...locations.map((city) => ({
+    // The region, then the cities inside it — literally the same object the
+    // homepage business node and /locations publish, so the three cannot
+    // disagree about where this company will travel.
+    areaServed,
+  };
+}
+
+/**
+ * The questions on a service page, as FAQPage.
+ *
+ * Published as a separate node rather than folded into the Service above:
+ * the two describe different things — one the work, one the page's own
+ * question-and-answer content — and `mainEntity` on a Service is not where a
+ * crawler looks for either.
+ *
+ * This one carries real copy, which is the whole reason it exists. The
+ * testimonials elsewhere on the site are placeholder text and are marked up
+ * as nothing at all (see the note on `localBusinessSchema`); these answers
+ * were written for this service and are true of it, so they go out as
+ * structured data. Anything less than that is not eligible to be here.
+ *
+ * Worth knowing when reading a Search Console report against it: since 2023
+ * Google has limited FAQ *rich results* to government and health sites, so
+ * this will not draw an accordion into the SERP for a cleaning company. It is
+ * still valid, still parsed, and still the machine-readable form of the
+ * answers — which is what the AI systems reading `llms.txt` want too.
+ *
+ * Callers must check `service.detail.faqs` first; ten of the eleven services
+ * have none yet, and an FAQPage with an empty `mainEntity` is a page claiming
+ * to be an FAQ and then not being one.
+ */
+export function faqSchema(service: Service) {
+  const url = canonical(`/services/${service.slug}`);
+  return faqPage(url, `${url}#service`, service.detail.faqs ?? []);
+}
+
+/**
+ * The shared body of the two FAQPage nodes this site publishes.
+ *
+ * Extracted when `/locations/[slug]` landed with its own per-community
+ * question set, for the same reason `areaServed` above is a constant rather
+ * than a pattern: two nodes claiming to be FAQPages have to be built the same
+ * way, and a second hand-written copy is a second thing to keep in step with
+ * whatever Google decides an FAQPage is next.
+ *
+ * `aboutId` is the node on the page the questions are about — the Service on
+ * a service page, the city-scoped Service on a community page — so a crawler
+ * reads the answers as attached to something rather than floating on a URL.
+ */
+function faqPage(url: string, aboutId: string, faqs: readonly Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${url}#faq`,
+    url,
+    inLanguage: "en-CA",
+    isPartOf: { "@id": `${SITE_URL}/#business` },
+    about: { "@id": aboutId },
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+/**
+ * /locations/[slug]. The service this company provides, scoped to one city.
+ *
+ * The obvious move was a `ProfessionalService` or `LocalBusiness` node per
+ * community, and it is the wrong one. This site publishes exactly one
+ * business entity — `localBusinessSchema`, at `#business`, with the New
+ * Westminster locality and the coordinates of the base — and nine more of
+ * them, one per city page, would assert nine RainCity locations that do not
+ * exist. There is no storefront in Anmore to describe, no address to give it
+ * and no separate phone number; a per-city LocalBusiness would be a
+ * fabricated premises, which is the same class of thing as a fabricated
+ * review. The company node stays singular and this page describes the
+ * *service*, offered *there*.
+ *
+ * So: one Service per community, provided by the Organization the layout
+ * already publishes, with `areaServed` narrowed from the region to this one
+ * City. The catalogue hangs off it because that is the page's actual claim —
+ * all eleven services are available in this community, which is what the grid
+ * on the page shows and what `areaServed` on every service page already
+ * implies. Each offer carries the city rather than the region, so the
+ * narrowing holds all the way down.
+ *
+ * `description` is the route's own meta description rather than a slice of
+ * the local copy: it is the one sentence written to describe the page as a
+ * whole, and it is what the same crawler is already reading in the head.
+ *
+ * No `offers` and no `aggregateRating`, for the fourth time in this file.
+ * Prices are quoted per property and none are published; the ratings question
+ * is settled in the note on `localBusinessSchema`.
+ */
+export function locationSchema(location: Location) {
+  const url = canonical(`/locations/${location.slug}`);
+  const city = {
+    "@type": "City",
+    name: location.name,
+    containedInPlace: { "@type": "AdministrativeArea", name: business.region },
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service-area`,
+    name: `Property maintenance in ${location.name}`,
+    serviceType: "Property maintenance and exterior cleaning",
+    description: location.detail.metaDescription,
+    url,
+    mainEntityOfPage: url,
+    inLanguage: "en-CA",
+    provider: { "@id": ORG_ID },
+    areaServed: city,
+    image: `${SITE_URL}${OG_IMAGE}`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `Property maintenance services in ${location.name}`,
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          // The same `@id` the service's own page publishes, so the offer and
+          // that page are read as one node rather than as ninety-nine
+          // Services with eleven names between them.
+          "@id": `${canonical(`/services/${service.slug}`)}#service`,
+          "@type": "Service",
+          name: service.title,
+          serviceType: service.title,
+          url: canonical(`/services/${service.slug}`),
+          provider: { "@id": ORG_ID },
+          areaServed: city,
+        },
+      })),
+    },
+  };
+}
+
+/**
+ * The questions on a community page, as FAQPage.
+ *
+ * Same shape and same rule as the service version above: these answers were
+ * written for this community and are true of it, so they are eligible to go
+ * out as structured data. Read that alongside the note on `LocationDetail` in
+ * content.ts — nothing in any of the forty-five answers is an operational
+ * commitment nobody made, and the ones that describe method restate what a
+ * service page already says.
+ *
+ * Callers must check `detail.faqs` first, exactly as the service pages do.
+ * All nine communities carry a set; the guard is for the tenth.
+ */
+export function locationFaqSchema(location: Location) {
+  const url = canonical(`/locations/${location.slug}`);
+  return faqPage(url, `${url}#service-area`, location.detail.faqs ?? []);
+}
+
+/**
+ * /locations. CollectionPage, for the same reason /services is one: the
+ * subject of the page is a set of other things.
+ *
+ * Two things it deliberately does and does not do.
+ *
+ * It publishes `areaServed` — the same constant the business node and every
+ * service page carry — because that is the one assertion this page exists to
+ * make, and a service-area page whose markup says nothing about the service
+ * area would be a strange thing to ship. The list is not re-derived here;
+ * pointing all three at one object is what guarantees they agree.
+ *
+ * The ItemList entries carry `url` as of the day `/locations/[slug]` landed.
+ * They deliberately did not before: a URL in structured data is a
+ * machine-readable claim that the page is real, canonical content, and while
+ * all nine of these 404ed it was the same claim app/sitemap.ts was refusing
+ * to make. The service list went the same way, without `url` until its
+ * template shipped and with it from that commit on. Both changes landed here
+ * alongside the sitemap entries, which is where they belonged.
+ *
+ * The item stays a `City` with a `url` on it rather than borrowing the `@id`
+ * of the Service that page publishes. The two are not the same thing — one
+ * is a place, the other is what this company does there — and collapsing
+ * them would give a crawler a City that has an offer catalogue.
+ */
+export const locationsPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${canonical("/locations")}#webpage`,
+  url: canonical("/locations"),
+  name: `Service Areas | ${business.name}`,
+  description: `The ${locations.length} communities ${business.name} travels to across ${business.region}, from its ${business.base} base.`,
+  inLanguage: "en-CA",
+  isPartOf: { "@id": `${SITE_URL}/#business` },
+  about: { "@id": ORG_ID },
+  areaServed,
+  mainEntity: {
+    "@type": "ItemList",
+    name: `${business.region} communities served`,
+    numberOfItems: locations.length,
+    // Alphabetical, which is a sequence and not a ranking. The nearest
+    // community is not the best one and the page does not say it is.
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    itemListElement: locations.map((location, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
         "@type": "City",
-        name: city,
+        name: location.name,
+        url: canonical(`/locations/${location.slug}`),
         containedInPlace: {
           "@type": "AdministrativeArea",
           name: business.region,
         },
-      })),
-    ],
+      },
+    })),
+  },
+};
+
+/**
+ * /contact. ContactPage is the narrower WebPage subtype, exactly as
+ * AboutPage is used for /about above and for the same reason: `mainEntity`
+ * points at the Organization node the layout already publishes, so the page
+ * is described as being *about* reaching that entity rather than restating
+ * its phone, email and address a second time for a crawler to reconcile.
+ */
+export const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": `${canonical("/contact")}#webpage`,
+  url: canonical("/contact"),
+  name: `Contact ${business.name}`,
+  description: `Call, email or request a free quote from ${business.name} — mobile property maintenance and exterior cleaning based in ${business.base}, serving ${business.region}.`,
+  inLanguage: "en-CA",
+  isPartOf: { "@id": `${SITE_URL}/#business` },
+  mainEntity: { "@id": ORG_ID },
+};
+
+/**
+ * /blog, and each of its paginated pages.
+ *
+ * Two types on one node: CollectionPage, for the same reason /services and
+ * /locations are one — the subject of the page is a set of other things — and
+ * Blog, which is what that particular set is. Multi-typing says both without
+ * publishing two nodes for a crawler to reconcile.
+ *
+ * What is still deliberately absent is the list of posts. `blogPost`, or an
+ * ItemList of BlogPosting nodes, is what this would carry on a finished blog.
+ * Half the reason it did not is now gone — the posts resolve, and each one
+ * publishes its own BlogPosting from `blogPostingSchema` below. The other
+ * half has not moved: the copy is placeholder, and an index that also
+ * enumerates six invented articles would state the same untrue thing a second
+ * time, in the one part of a page that is read as a claim rather than as
+ * copy.
+ *
+ * There is no crawl cost to leaving it out. The cards on the page link every
+ * post and the sitemap lists every post, so nothing here is undiscoverable —
+ * this is a duplicate assertion, not a route.
+ *
+ * Add the list when the copy is real. That is now the only condition left.
+ *
+ * Page two and beyond get their own node at their own URL rather than
+ * pointing back at /blog: each is a different set of posts, and
+ * `pageMetadata` already canonicalises each page to itself.
+ */
+export function blogPageSchema(page = 1) {
+  const url = canonical(page <= 1 ? "/blog" : `/blog/page/${page}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": ["CollectionPage", "Blog"],
+    "@id": `${url}#webpage`,
+    url,
+    name: `Blog | ${business.name}`,
+    description: `Seasonal timing, maintenance that pays for itself, and notes from the work — exterior cleaning and property maintenance in ${business.base} and across ${business.region}.`,
+    inLanguage: "en-CA",
+    isPartOf: { "@id": `${SITE_URL}/#business` },
+    about: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+  };
+}
+
+/**
+ * /blog/[slug]. One BlogPosting per article.
+ *
+ * Held back until the template landed, on the rule this file applies
+ * everywhere: a URL in structured data is a machine-readable claim that the
+ * page is real, canonical content, and until the route resolved that claim
+ * would have been false. It resolves now. The same change lifted the sitemap
+ * entries, and the two belong together.
+ *
+ * Read this alongside the PLACEHOLDER note on `blogPosts` in content.ts. The
+ * markup is only as true as the copy under it, and this copy is invented — so
+ * what goes out here is the smallest set of assertions that describes the
+ * page rather than the fullest one available. Everything below is a fact
+ * about the document; nothing is a fact about the world.
+ *
+ * `author` is the organisation, not a person, and that is not a placeholder
+ * standing in for a byline. There is no `author` field on `BlogPost` and no
+ * byline anywhere on the site, because a real name on copy somebody did not
+ * write is the one fabrication this build has refused throughout. An
+ * Organization author says only that this company published this page, which
+ * is true of every page on this domain. Add a Person here on the day there is
+ * a person to name, in the same commit that adds the field and the byline.
+ *
+ * `dateModified` is deliberately equal to `datePublished`. Nothing tracks
+ * revisions to a post, and a modified date that silently means "published"
+ * is a freshness signal nobody earned.
+ *
+ * `wordCount` and `articleBody` are absent for the same reason: both would be
+ * derived from placeholder prose, and neither is what a search engine is
+ * short of when the body copy is already on the page it is reading.
+ */
+export function blogPostingSchema(post: BlogPost) {
+  const url = canonical(`/blog/${post.slug}`);
+  const photo = photos[post.photo];
+  // Relative registry paths become absolute; the Unsplash entries are already
+  // absolute and are passed through. Structured data has no page to resolve a
+  // relative URL against.
+  const image = photo.src.startsWith("http")
+    ? photo.src
+    : `${SITE_URL}${photo.src}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    headline: post.title,
+    description: post.excerpt,
+    url,
+    mainEntityOfPage: url,
+    inLanguage: "en-CA",
+    datePublished: post.date,
+    dateModified: post.date,
+    articleSection: post.category,
+    image,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    isPartOf: { "@id": `${canonical("/blog")}#webpage` },
   };
 }
 

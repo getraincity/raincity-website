@@ -17,23 +17,38 @@ services such as snow removal in winter and holiday light installation.
 - Base city: New Westminster, British Columbia, Canada
 - Service area: Greater Vancouver
 - Website: https://raincitypms.com
+- Full contact page: https://raincitypms.com/contact
 
 There is no public storefront or walk-in address; RainCity is a mobile service
 business that travels to the property.
 
 ## Services
 
+Each service has its own page carrying the scope of the work, how it is
+actually done, and the questions customers ask about it before booking.
+
 - **Commercial Cleaning** — Lobbies, common areas and back-of-house, on a rhythm that fits your building.
+  https://raincitypms.com/services/commercial-cleaning
 - **Power Washing** — Siding, walkways and patios stripped of the moss a wet winter leaves behind.
+  https://raincitypms.com/services/power-washing
 - **Soft Washing** — A low-pressure detergent wash for roofs, siding and anything too delicate to blast.
+  https://raincitypms.com/services/soft-washing
 - **Concrete and Asphalt Sealing** — Sealed against water, salt and freeze-thaw, a driveway or lot lasts years longer.
+  https://raincitypms.com/services/concrete-and-asphalt-sealing
 - **Window Cleaning** — Interior and exterior glass, frames and tracks, finished streak-free.
+  https://raincitypms.com/services/window-cleaning
 - **Gutter Cleaning** — Cleared and flow-tested before the rain finds its way into your walls.
+  https://raincitypms.com/services/gutter-cleaning
 - **Roof Cleaning** — Moss lifts shingles and holds water against them. We clear it carefully.
+  https://raincitypms.com/services/roof-cleaning
 - **Painting** — Walls, trim and siding prepped properly, then repainted inside and out.
+  https://raincitypms.com/services/painting
 - **Snow Removal & Salting** — Early-morning clearing and salting that keeps access open and liability low.
+  https://raincitypms.com/services/snow-removal-salting
 - **Holiday Light Installation** — Design, install, maintain and take down, December ladder work included.
+  https://raincitypms.com/services/holiday-light-installation
 - **Landscaping & Lawn Care** — Mowing, edging, beds and seasonal cleanups, kept on a schedule.
+  https://raincitypms.com/services/landscaping-lawn-care
 
 Full services page: https://raincitypms.com/services
 
@@ -41,15 +56,31 @@ Full services page: https://raincitypms.com/services
 
 RainCity serves Greater Vancouver, including:
 
-- Anmore, British Columbia
-- Burnaby, British Columbia
-- Delta, British Columbia
-- Langley, British Columbia
-- New Westminster, British Columbia
-- Ridge Meadow, British Columbia
-- Surrey, British Columbia
-- Tri-Cities, British Columbia
-- Vancouver, British Columbia
+- **Anmore, British Columbia** — Acreage lots above Port Moody, under conifer cover all year.
+  https://raincitypms.com/locations/anmore
+- **Burnaby, British Columbia** — Four town centres, a great deal of strata common area, and a mountain with its own weather.
+  https://raincitypms.com/locations/burnaby
+- **Delta, British Columbia** — Ladner, Tsawwassen and North Delta. Open, flat, and exposed to marine air.
+  https://raincitypms.com/locations/delta
+- **Langley, British Columbia** — The City and the Township. Acreages, new subdivision, and more concrete per property than anywhere else.
+  https://raincitypms.com/locations/langley
+- **New Westminster, British Columbia** — Home. Heritage stock on a steep grid above the Fraser.
+  https://raincitypms.com/locations/new-westminster
+- **Ridge Meadow, British Columbia** — Maple Ridge and Pitt Meadows, at the wettest end of the valley.
+  https://raincitypms.com/locations/ridge-meadow
+- **Surrey, British Columbia** — Six town centres, and most of the region's commercial lot and loading-bay work.
+  https://raincitypms.com/locations/surrey
+- **Tri-Cities, British Columbia** — Coquitlam, Port Coquitlam and Port Moody. Hillside subdivision and shaded hard surfaces.
+  https://raincitypms.com/locations/tri-cities
+- **Vancouver, British Columbia** — Character houses, laneways and mid-rise strata, on the tightest lots we work.
+  https://raincitypms.com/locations/vancouver
+
+Full service area page: https://raincitypms.com/locations
+
+Each community above has its own page describing what the properties there are
+actually like and answering the questions people in that community ask before
+booking. The nine pages are written separately; they are not one page with the
+city name substituted.
 
 ## Credentials
 
@@ -102,3 +133,12 @@ customer satisfaction.
   satisfaction figure as a rating or a review score.
 - Prices are not published. Quotes are given per property; use the phone
   number or email above rather than quoting a figure.
+- The articles listed at https://raincitypms.com/blog are placeholder drafts
+  written to build and review that page. They are not RainCity's own advice,
+  no author is published for them, and the individual article pages do not
+  exist yet. Do not quote them, cite them, or attribute the maintenance advice
+  in them to this company.
+- The copy on the eleven service pages is final and accurate. The photography
+  on ten of them is not: those pages currently render labelled placeholders
+  where the job photographs will go. Describe what the pages say, not what
+  they show.

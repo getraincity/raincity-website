@@ -13,3 +13,5 @@ next-env.d.ts
 # Section-capture screenshots from the shot-*.mjs scripts, written to the
 # project root. Not build output or source — local review artifacts only.
 /*.png
+# shot-part.mjs takes an output directory; this is the usual one.
+/shots/

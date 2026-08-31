@@ -14,18 +14,27 @@ import { Reveal } from "@/components/ui/Motion";
  * grammar the /about and /services banners use, so the page ends on the same
  * note it opens on.
  *
- * Right-weighted, where the banner at the top of this page is left-weighted
- * and the scrim runs the other way. That is the whole reason it is not
- * centred: a second centred block would have been a third variation on the
- * page's own hero, and the mirrored one reads as a bookend — the reader
- * leaves the page on the opposite side from where they entered it. It also
- * puts the copy on the side of the frame that is quiet.
+ * Centred, and compact. It was right-weighted — a mirror of the page's
+ * left-weighted banner — which was a defensible bookend and a poor closing
+ * ask: four short elements stacked in half the width, with the other half of
+ * a wide screen carrying nothing, over a section 600px tall. A last ask is
+ * the one block on the page with no second thing to sit beside, and centring
+ * it is what says so. Everything on the axis, the scrim symmetrical with it.
  *
- * `rooftops` rather than the service photograph. That frame is already the
- * banner of this page, and running it twice would make the page look short of
- * pictures. This one — Greater Vancouver roofs under the overcast that
- * creates the work — is the one photograph that is equally true of all eleven
- * services, which is what a shared closing band needs.
+ * Height is the other half of that. At `py-section` the padding alone was
+ * 256px against 347px of content, so the band read as a section that happened
+ * to end the page rather than as its close. 48/56/64 by breakpoint puts the
+ * frame at roughly a fifth of the content it frames, which is a banner's
+ * proportion — still more than double the largest gap inside the block, so
+ * nothing is crowded against the edge.
+ *
+ * The photograph comes from `detail.closingPhoto`. All eleven services now
+ * declare one, so the `rooftops` fallback below is unreached — it is kept
+ * because it is what a twelfth service should land on before its own frame
+ * exists, and because Greater Vancouver roofs under the overcast that creates
+ * the work is the one image equally true of every service here. None of the
+ * eleven reuses the service photograph from the banner at the top of its own
+ * page: running that twice would make the page look short of pictures.
  *
  * The mark is kept from the original and stays at its real size, linked home:
  * a signature at the end of the page. The source template ghosted it as a
@@ -43,41 +52,57 @@ export function ServiceClosing({ service }: { service: Service }) {
       aria-labelledby="service-closing-heading"
     >
       <div className="absolute inset-0 -z-20">
-        <Photo name="rooftops" fill sizes="100vw" />
+        <Photo
+          name={service.detail.closingPhoto ?? "rooftops"}
+          fill
+          sizes="100vw"
+        />
       </div>
 
-      {/* The banners' scrim, mirrored. Bottom-up on phones, where the type
-          sits over the middle of the frame; right-to-left from lg, which is
-          the reverse of the hero at the top of this page and keeps the left
-          of the roofline clear of copy. */}
+      {/* The banners' scrim, made symmetrical to match the column it covers.
+          Heaviest through the middle band where the type sits, easing at top
+          and bottom so the roofline is still legible as a photograph rather
+          than as a texture. The directional version this replaced was built
+          to keep one half of the frame clear for copy; with the copy on the
+          axis there is no half to keep clear.
+
+          Weights went up when the photograph changed. `rooftops` was a dark
+          overcast roofline and carried the type on 70/90/70; the glass frame
+          that replaced it on this page is pale and cool, and at those numbers
+          the logo and the outlined button — which sit nearest the lighter top
+          and bottom of the ramp — came down to about 5.4:1. 80/92/80 puts
+          them back over 7:1 while still leaving the panels and their
+          reflections readable as a photograph. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/85 to-navy/45 lg:bg-linear-to-l lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
+        className="absolute inset-0 -z-10 bg-linear-to-b from-navy/80 via-navy/92 to-navy/80"
       />
 
-      <div className="relative mx-auto w-full max-w-site px-edge py-section">
-        <div className="grid grid-cols-1 lg:grid-cols-12">
-          <Reveal className="max-w-prose lg:col-span-6 lg:col-start-7 lg:max-w-none">
-            <Logo tone="light" />
+      {/* text-center rather than a flex column: the mark is already an
+          inline-flex link and the other three are blocks, so one property
+          centres all four and the buttons keep their full-width stack on a
+          phone. */}
+      <div className="relative mx-auto w-full max-w-site px-edge py-12 sm:py-14 lg:py-16">
+        <Reveal className="mx-auto max-w-prose text-center">
+          <Logo tone="light" />
 
-            <h2
-              id="service-closing-heading"
-              className="display-l mt-8 text-white"
-            >
-              {service.detail.closing}
-            </h2>
+          <h2
+            id="service-closing-heading"
+            className="display-l mt-6 text-white"
+          >
+            {service.detail.closing}
+          </h2>
 
-            <p className="body-l mt-5 text-fog">{servicePage.closing.body}</p>
+          <p className="body-l mt-4 text-fog">{servicePage.closing.body}</p>
 
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-              <Button href="#quote">{servicePage.closing.cta}</Button>
-              <Button href={business.phoneHref} variant="tertiary-invert">
-                <Phone />
-                {business.phone}
-              </Button>
-            </div>
-          </Reveal>
-        </div>
+          <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
+            <Button href="#quote">{servicePage.closing.cta}</Button>
+            <Button href={business.phoneHref} variant="tertiary-invert">
+              <Phone />
+              {business.phone}
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

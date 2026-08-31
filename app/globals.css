@@ -380,6 +380,17 @@
   aspect-ratio: calc(1 / (var(--rc-edge-span) * var(--rc-tan)));
 }
 
+/* A shallower cut, for a transition that has to read as a strip rather than
+   as a band. The span is the only thing that changes: the angle stays exactly
+   12deg, and because the wedge is sized from the same variable, its width
+   comes down in step with its height rather than staying oversized on a
+   thinner strip. 0.08 puts the strip at ~25px on a 1440 screen and ~6px on a
+   phone, which is the register of the site's other hairlines and bars.
+   Compose it with `squeegee-edge`; it sets the variable, not the geometry. */
+@utility squeegee-edge-slim {
+  --rc-edge-span: 0.08;
+}
+
 /* The outgoing colour, as a clean triangle in the trailing corner.
    The previous polygon opened with `0 0, 100% 0`, a zero-area run along the
    whole top edge — no area, but the rasteriser still painted it as a navy
@@ -390,6 +401,42 @@
     calc(100% - (var(--rc-edge-span) * 100%)) 0,
     100% 0,
     100% 100%
+  );
+}
+
+/* Collapsible panel. A one-track grid animating between zero and the height
+   of its own content, which is the only pure-CSS height transition that never
+   has to measure anything: `0fr` and `1fr` interpolate, `auto` does not. Put
+   these on the grid container and `overflow-hidden` on the single child.
+
+   Written as named utilities rather than `grid-rows-[0fr]` / `grid-rows-[1fr]`
+   because Tailwind does not emit those — the arbitrary value is rejected and
+   the class silently resolves to nothing, which looks like a working panel on
+   first render and a dead toggle afterwards. Naming the two states also says
+   what they are for, which `[0fr]` did not.
+
+   `prefers-reduced-motion` is handled by the global transition-duration rule
+   above, so a reduced-motion user gets the same open and closed states with
+   no travel between them. */
+@utility collapse-closed {
+  grid-template-rows: 0fr;
+}
+
+@utility collapse-open {
+  grid-template-rows: 1fr;
+}
+
+/* Photography placeholder — the treatment raincity-tokens.md names for a slot
+   whose real photograph has not landed yet: a 12deg hatch in the two light
+   greys, so an empty frame reads as "photo to come" rather than as a design
+   decision someone made. The two hex values are the spec's own and are
+   deliberately not tokens: nothing but a placeholder may use them, and every
+   one of these disappears the day the photo arrives. */
+@utility photo-placeholder {
+  background-image: repeating-linear-gradient(
+    135deg,
+    #e4eaf0 0 9px,
+    #eef2f6 9px 18px
   );
 }
 

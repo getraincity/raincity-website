@@ -1,4 +1,4 @@
-import { business, locations } from "@/lib/content";
+import { business } from "@/lib/content";
 import { JsonLd, localBusinessSchema, pageMetadata } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
 import { Hero } from "@/components/home/Hero";
@@ -18,6 +18,14 @@ export const metadata = pageMetadata({
   title: `Property Maintenance & Exterior Cleaning in ${business.region} | ${business.shortName}`,
   description: `${business.name} provides year-round pressure washing, window and gutter cleaning, roof and driveway care, snow removal and landscaping for homes, stratas and businesses in ${business.base} and across ${business.region}. Call ${business.phone} for a free quote.`,
   path: "/",
+  // Region and service-plus-city terms. The nine-city
+  // `property maintenance ${city} BC` set used to be spread in here too and
+  // moved to /locations the day that route landed: that page is now the one
+  // whose whole subject is the service area, and the note on /services —
+  // three pages should not bid against each other for one query — applies to
+  // the fourth as soon as it exists. The handful of city names left below are
+  // paired with a specific service, which is a different query from the bare
+  // city one and is the homepage's to hold.
   keywords: [
     "property maintenance Greater Vancouver",
     "exterior cleaning New Westminster",
@@ -27,7 +35,6 @@ export const metadata = pageMetadata({
     "window cleaning Coquitlam",
     "snow removal Greater Vancouver",
     "strata property maintenance BC",
-    ...locations.map((city) => `property maintenance ${city} BC`),
   ],
 });
 

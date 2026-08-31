@@ -1,5 +1,11 @@
 import Image from "next/image";
-import { photos, tonePlaceholder, type PhotoKey, type PhotoRatio } from "@/lib/photos";
+import {
+  photos,
+  tonePlaceholder,
+  type Photo as PhotoRecord,
+  type PhotoKey,
+  type PhotoRatio,
+} from "@/lib/photos";
 import { cn } from "@/lib/cn";
 
 const ratioClass: Record<PhotoRatio, string> = {
@@ -49,17 +55,41 @@ export function Photo({
   className?: string;
   imgClassName?: string;
 }) {
-  const photo = photos[name];
+  // Widened to the declared type on purpose. `photos` is `as const`, so
+  // indexing it with a PhotoKey yields a union of the twenty-odd literal
+  // entry types, and a field only some entries declare — `placeholder` — is
+  // not readable off that union. The registry satisfies `Photo`, so this is
+  // the shape the component is entitled to read.
+  const photo: PhotoRecord = photos[name];
   const r = ratio ?? photo.ratio;
+  const box = cn(
+    "relative overflow-hidden bg-fog",
+    fill ? "h-full w-full" : ratioClass[r],
+    className,
+  );
+
+  // No photograph in this slot yet. The design system's placeholder stands in
+  // — the hatch, the shot name along the bottom edge, the intended ratio
+  // tagged in the corner — so the gap is legible as work outstanding and the
+  // layout is reviewable at the size the real frame will occupy. Hidden from
+  // assistive technology entirely: `alt` describes a photograph that is not
+  // on the page, and announcing it would be a straightforward lie.
+  if (photo.placeholder) {
+    return (
+      <div className={box} aria-hidden="true">
+        <span className="photo-placeholder absolute inset-0" />
+        <span className="meta absolute top-0 right-0 bg-navy px-2 py-1 text-white">
+          {r}
+        </span>
+        <span className="meta absolute inset-x-0 bottom-0 px-4 pb-3 text-steel">
+          {photo.placeholder}
+        </span>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden bg-fog",
-        fill ? "h-full w-full" : ratioClass[r],
-        className,
-      )}
-    >
+    <div className={box}>
       <Image
         src={photo.src}
         alt={photo.alt}

@@ -3,6 +3,7 @@ import { business, services } from "@/lib/content";
 import {
   JsonLd,
   breadcrumbSchema,
+  faqSchema,
   pageMetadata,
   serviceSchema,
 } from "@/lib/seo";
@@ -13,6 +14,7 @@ import { ServiceHero } from "@/components/service/ServiceHero";
 import { ServiceOverview } from "@/components/service/ServiceOverview";
 import { ServiceProcess } from "@/components/service/ServiceProcess";
 import { ServiceClosing } from "@/components/service/ServiceClosing";
+import { ServiceFaq } from "@/components/service/ServiceFaq";
 import { SectionEdge } from "@/components/ui/SectionEdge";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
@@ -75,6 +77,11 @@ export async function generateMetadata({
  * by the sitewide QuoteForm module. Without it, five buttons on each of
  * eleven pages would scroll nowhere.
  *
+ * The FAQ comes after the form, not before it. All eleven services carry a
+ * written set, so it renders on every page; the check below and the matching
+ * one inside ServiceFaq are what keep the markup and the FAQPage node from
+ * ever disagreeing about whether a route has one.
+ *
  * The split between what changes and what does not is the whole design. The
  * banner heading, the overview, the scope list, the mid-page CTA label and
  * the closing headline come from that service's `detail` block; the "Our
@@ -118,14 +125,28 @@ export default async function ServiceDetailPage({
           { name: service.title, path: `/services/${service.slug}` },
         ])}
       />
+      {/* Only where there are questions to publish. The section below is
+          governed by the same check, so the markup and the page can never
+          disagree about whether this route has an FAQ on it. */}
+      {service.detail.faqs?.length ? (
+        <JsonLd schema={faqSchema(service)} />
+      ) : null}
       <Header />
       <main id="main">
         <ServiceHero service={service} />
         <ServiceOverview service={service} />
         <ServiceProcess />
-        <SectionEdge from="bg-fog" to="bg-navy" />
+        {/* Slim, and amber rather than Fog. At the default span the strip
+            stood 55px on a wide screen and read as a band of its own between
+            two sections; at `slim` it is ~25px, the register of the site's
+            other bars. The wedge takes the CTA accent because at that height
+            a near-white triangle was simply the Fog section failing to end
+            cleanly — as amber it is a mark pointing into the last ask, and
+            it is the only amber above the buttons it points at. */}
+        <SectionEdge from="bg-amber" to="bg-navy" size="slim" />
         <ServiceClosing service={service} />
         <QuoteForm />
+        <ServiceFaq service={service} />
       </main>
       <Footer />
       <ScrollToTop />
