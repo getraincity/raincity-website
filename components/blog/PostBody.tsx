@@ -18,10 +18,14 @@ import { Reveal } from "@/components/ui/Motion";
  *
  * ## The two measures
  *
- * Sections run on the wide track (`lg:max-w-heading`, up to 880px) and every
- * text element inside them sits in a `PostColumn`. The only things that use
- * the full width are photographs, so a picture opens out either side of the
- * reading column without a negative margin anywhere.
+ * Sections run on the wide track (`lg:max-w-heading`, up to 880px) and
+ * everything inside them — text and photographs alike — sits in a
+ * `PostColumn`. Photographs used to be the exception, taking the full 880px
+ * so they opened out either side of the reading column; against a 663px
+ * measure that read as a picture escaping the article rather than belonging
+ * to it, so they were brought back onto the column. Nothing uses the wide
+ * track today. It stays as the hook for a deliberately full-width frame, and
+ * costs nothing while no child exceeds the column.
  *
  * Read the note in PostColumn before adding an element here. The short of it
  * is that `max-w-prose` on this site means `65ch` of the element's own font,
@@ -231,16 +235,20 @@ function Block({ block }: { block: BlogBlock }) {
 
     case "photo":
       return (
-        // The one block that takes the full width of the wide track. 3:2 —
-        // wider than a card, shorter than the 16:10 header frame above it, so
-        // an in-body picture reads as a supporting image rather than as a
-        // second hero.
+        // 16:10, on the reading column, the same frame the header photo
+        // takes. This block used to be 3:2 on the full 880px track, which was
+        // the tallest picture in the article — the comment here claimed 3:2
+        // was "shorter than the 16:10 header frame", and at a shared width it
+        // is the other way round (880/1.5 = 587px against 880/1.6 = 550px).
+        // One repeated frame is what makes a picture read as supporting.
         <figure className="mt-10 first:mt-0">
-          <Photo
-            name={block.photo}
-            ratio="3:2"
-            sizes="(min-width: 1024px) 880px, 100vw"
-          />
+          <PostColumn>
+            <Photo
+              name={block.photo}
+              ratio="16:10"
+              sizes="(min-width: 1024px) 680px, 100vw"
+            />
+          </PostColumn>
           {/* The caption is required by the type. An image dropped into an
               article without one is decoration, and the alt text is not a
               substitute: alt describes the frame for somebody who cannot see

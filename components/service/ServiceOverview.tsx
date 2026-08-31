@@ -191,7 +191,7 @@ export function ServiceOverview({ service }: { service: Service }) {
                   {/* Without a photograph the tile falls back to a short blue
                       rule, so the slot above the title is never simply empty.
                       Unreached today — every tile on every service declares a
-                      photo, though seventy of the seventy-seven are still
+                      photo, though eight of the seventy-seven are still
                       placeholders waiting on the real frames. */}
                   {item.photo ? null : (
                     <span

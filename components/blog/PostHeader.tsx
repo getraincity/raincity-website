@@ -33,26 +33,33 @@ import { RevealOnLoad } from "@/components/ui/Motion";
  *
  * ## The two measures
  *
- * Text sits in `PostColumn` — read the note in that file before adding to
- * this one, because `max-w-prose` does not mean what it looks like it means
- * on this site. Photographs sit on `lg:max-w-heading` (up to 880px), centred
- * on the same axis, so a picture opens out either side of the column and the
- * reading line never gets wider than it should be. Below `lg` the wider track
- * is not applied at all — `--container-heading` is a clamp on `80vw` and
- * would come out *narrower* than the reading column on a tablet, which would
- * silently invert the two.
+ * ## One measure, not two
  *
- * `--container-heading` is named for centred section headings, which is not
- * what it is doing here. It is a measure, it is the only one on the system
- * between 680 and 1440, and adding a token to the locked spec for a second
- * copy of a number already in it would be worse than the reuse.
+ * Everything on this page — text and photographs alike — sits in
+ * `PostColumn`. Read the note in that file before adding to this one, because
+ * `max-w-prose` does not mean what it looks like it means on this site.
+ *
+ * Photographs used to run on a wider track (`lg:max-w-heading`, up to 880px)
+ * so a picture opened out either side of the reading column. On the numbers
+ * that put a 880x550 frame against a 663px column: a third wider than the
+ * text on both counts, and tall enough to push the opening paragraphs off a
+ * laptop screen. It read as a picture that had escaped the article rather
+ * than one belonging to it, so both frames now hold the reading measure and
+ * the article has one straight left edge from the breadcrumb to the last
+ * line. At 663px the 16:10 frame is 414px tall — a picture, not a second
+ * hero.
+ *
+ * The wide track is kept on the wrapper below. Nothing uses it today; it is
+ * the hook to hang a deliberately full-width frame on if one is ever wanted,
+ * and it costs nothing while no child exceeds the column.
  *
  * The featured frame is cropped 16:10 rather than to the registry's 4:5.
  * Every post photograph is a service-card portrait, and 16:10 is exactly the
  * crop the `feature` PostCard already puts them through on /blog — so the
  * frame a reader clicks and the frame that opens are the same frame, and the
  * registry's focal points are already tuned against it. No `focal` override
- * is passed for that reason.
+ * is passed for that reason. `PostBody` crops its in-body photographs to the
+ * same 16:10 so every picture in an article is one repeated frame.
  *
  * LCP element for the route, hence `priority`.
  */
@@ -142,12 +149,14 @@ export function PostHeader({ post }: { post: BlogPost }) {
           </RevealOnLoad>
 
           <RevealOnLoad className="mt-10 sm:mt-12" delay={0.28}>
-            <Photo
-              name={post.photo}
-              ratio="16:10"
-              priority
-              sizes="(min-width: 1024px) 880px, 100vw"
-            />
+            <PostColumn>
+              <Photo
+                name={post.photo}
+                ratio="16:10"
+                priority
+                sizes="(min-width: 1024px) 680px, 100vw"
+              />
+            </PostColumn>
           </RevealOnLoad>
         </div>
       </div>

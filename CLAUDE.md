@@ -42,6 +42,8 @@ Every internal `href` in the built HTML resolves to a built route; the only
   Unsplash images pulled through the `unsplash()` helper in `lib/photos.ts`.
   Every photo is declared once in `photos.ts` with alt text, dominant tone,
   aspect ratio and focal point; components reference it by `PhotoKey`.
+  Originals live in `assets/`, which is tracked but never served — the files
+  under `public/` are the converted, sized copies.
 - **Playwright** (dev dependency) drives the review scripts in the project
   root. Three families, all pointed at a running dev server and all safe to
   re-run:
@@ -197,6 +199,43 @@ the route gets `noindex` — the same answer the policy pages get. Deleting the
 markup again is not the answer; the URLs resolve.
 
 Never invent additional posts, author names or publication dates.
+
+### Where the service photography actually comes from
+
+Three of the eleven service pages carry the client's own photographs: Window
+Cleaning, Commercial Cleaning and Power Washing. Their source PNGs sit in
+`assets/<service>-pictures-with-title-refrence/`, supplied at 2560x1600 for
+the six scope tiles and 3200x1290 for the closing band, and are converted to
+webp at **1600x1000** and **1920x774** under `public/services/<service>/`.
+Match those numbers if more arrive — the whole set shares them.
+
+The other eight pages are illustrated with Unsplash frames, one chosen per
+slot against the shot brief that used to be that slot's `placeholder` string.
+Two things follow, and both matter more than they look:
+
+- **The brief is preserved in every `note`, along with what the chosen frame
+  does and does not show.** Some are close. Several carry only half of what
+  the tile beside them claims — a condition shot where the tile describes a
+  method, a finished surface where it describes the work. A few are frank
+  stand-ins. The notes say which is which, in those words. Do not read a
+  filled slot as a settled one without reading its note.
+- **`credit` is `"Unsplash"`, not a photographer's name.** The licence does
+  not require attribution and the names were not verifiable from the search
+  pages, so none was invented. Look them up per photo if the client wants
+  credits. Note that `credit` is rendered — the Services nav dropdown prints
+  it under the preview image — though only ever for a service's own card
+  photo, never for these tile frames.
+
+**Eight slots are still `placeholder`,** and they are all the same kind of
+thing: process documentation that stock does not contain. A timestamped
+service log on a tailgate, two sealer test squares on one slab, a layout
+sketch held against a frontage, labelled light coils going into a bin, a
+caulk bead being tooled, an oil spot being degreased, tied debris bags on a
+drive, a mid-season light repair in the rain. No search finds these. They get
+taken on a job or they get made.
+
+The registry's own header comment carries the same account at the point of
+use. Keep the two in step.
 
 ### The social links are placeholders
 
