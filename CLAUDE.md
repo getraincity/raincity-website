@@ -203,11 +203,17 @@ Never invent additional posts, author names or publication dates.
 ### Where the service photography actually comes from
 
 Three of the eleven service pages carry the client's own photographs: Window
-Cleaning, Commercial Cleaning and Power Washing. Their source PNGs sit in
-`assets/<service>-pictures-with-title-refrence/`, supplied at 2560x1600 for
+Cleaning, Commercial Cleaning and Power Washing. Their source PNGs sit flat
+in `assets/`, named for the shot rather than for the slot they fill — the
+same way the Window Cleaning originals have always been filed there, and the
+reason `assets/` has no subdirectories. They are supplied at 2560x1600 for
 the six scope tiles and 3200x1290 for the closing band, and are converted to
 webp at **1600x1000** and **1920x774** under `public/services/<service>/`.
 Match those numbers if more arrive — the whole set shares them.
+
+Nothing reads `assets/` at build time; it is the archive the served files
+were made from. The mapping from a source name to the slot it became lives
+in the `src` path on that slot's registry entry, not in the filename.
 
 The other eight pages are illustrated with Unsplash frames, one chosen per
 slot against the shot brief that used to be that slot's `placeholder` string.
