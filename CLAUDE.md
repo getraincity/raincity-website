@@ -38,8 +38,13 @@ Every internal `href` in the built HTML resolves to a built route; the only
 - **Icons are hand-rolled** in `components/ui/Icon.tsx`. There is no
   icon library dependency — do not add `lucide-react` or any other; match the
   existing inline-SVG pattern instead.
-- **Photography** — a mix of client-supplied images in `public/services/` and
-  Unsplash images pulled through the `unsplash()` helper in `lib/photos.ts`.
+- **Photography** — **every image is served from `public/`. Nothing is
+  fetched from a third-party host at runtime**, and `next.config.ts`
+  deliberately declares no `remotePatterns` so it stays that way. Photos were
+  previously hot-linked from Unsplash through an `unsplash()` helper; that
+  helper is gone, along with the image preconnect that used to sit in
+  `app/layout.tsx`. Re-adding a remote host means a page can go blank because
+  somebody else's CDN changed — treat it as a decision, not a detail.
   Every photo is declared once in `photos.ts` with alt text, dominant tone,
   aspect ratio and focal point; components reference it by `PhotoKey`.
   Originals live in `assets/`, which is tracked but never served — the files
@@ -215,8 +220,11 @@ Nothing reads `assets/` at build time; it is the archive the served files
 were made from. The mapping from a source name to the slot it became lives
 in the `src` path on that slot's registry entry, not in the filename.
 
-The other eight pages are illustrated with Unsplash frames, one chosen per
-slot against the shot brief that used to be that slot's `placeholder` string.
+The other eight pages are illustrated with frames that came from Unsplash,
+one chosen per slot against the shot brief that used to be that slot's
+`placeholder` string. They are downloaded, not hot-linked: the original sits
+in `assets/` and the served webp at the path the registry declares, exactly
+like the supplied sets.
 Two things follow, and both matter more than they look:
 
 - **The brief is preserved in every `note`, along with what the chosen frame

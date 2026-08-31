@@ -4,16 +4,22 @@
  * Replacing stock with RainCity's own job photography is a one-file edit:
  * swap `src` (and `credit`) for each slot and everything downstream updates.
  *
- * Sourced from Unsplash. Several of the eleven services have no genuine
- * "crew performing the work" photograph available, so those slots use the
- * subject or the finished result instead of a staged substitute — see the
- * `note` field on each.
+ * Every `src` is a local path under `public/`. Nothing is fetched from a
+ * third-party host at runtime, which is why `next.config.ts` declares no
+ * remote image patterns — adding one back would mean a page could go blank
+ * because somebody else's CDN changed.
+ *
+ * Where a frame came from is recorded in `credit`, and the originals every
+ * served file was made from are archived flat in `assets/`. Several of the
+ * eleven services have no genuine "crew performing the work" photograph
+ * available, so those slots use the subject or the finished result instead
+ * of a staged substitute — see the `note` field on each.
  */
 
 export type PhotoRatio = "16:9" | "16:10" | "7:5" | "4:5" | "3:2" | "1:1";
 
 export type Photo = {
-  /** Full source URL. */
+  /** Path under `public/`. Always local — see the note at the top. */
   src: string;
   /** Descriptive alt text. Never decorative — every photo carries meaning. */
   alt: string;
@@ -40,9 +46,6 @@ export type Photo = {
   placeholder?: string;
 };
 
-const unsplash = (id: string, width = 2000) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=80`;
-
 /** A flat-tone placeholder in the photo's dominant colour, for blur-up. */
 export function tonePlaceholder(tone: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8" fill="${tone}"/></svg>`;
@@ -51,7 +54,7 @@ export function tonePlaceholder(tone: string): string {
 
 export const photos = {
   hero: {
-    src: unsplash("photo-1776142380514-2c264a38f263", 2560),
+    src: "/hero.webp",
     alt: "Suburban homes set among tall evergreens under low coastal fog — the kind of Greater Vancouver property RainCity maintains year-round.",
     credit: "Anastasiia",
     tone: "#262626",
@@ -76,7 +79,7 @@ export const photos = {
     // 2400 rather than the 1600 this was catalogued at: it is the /blog
     // banner, and a full-bleed background is the widest any frame on this
     // site is asked to render.
-    src: unsplash("photo-1641199788912-9a7385a35c82", 2400),
+    src: "/truck.webp",
     alt: "A white panel van of the kind RainCity works out of, parked at the kerb outside a brick building.",
     credit: "Mathias Reding",
     tone: "#c0c0c0",
@@ -140,7 +143,7 @@ export const photos = {
   // --- Contact page ---------------------------------------------------------
 
   contactHero: {
-    src: unsplash("photo-1768333220836-26309aacd3db", 2560),
+    src: "/contact-hero.webp",
     alt: "A foggy residential street on a Greater Vancouver hillside, evergreens rising above the rooflines and cloud settled low over the trees beyond.",
     credit: "Ali Kazal",
     tone: "#a9b0ac",
@@ -150,7 +153,7 @@ export const photos = {
   },
 
   rooftops: {
-    src: unsplash("photo-1762359365240-8c96c225165a", 2000),
+    src: "/rooftops.webp",
     alt: "Residential rooftops and evergreens under a low, overcast Pacific Northwest sky.",
     credit: "T",
     tone: "#a6a6a6",
@@ -165,7 +168,7 @@ export const photos = {
   // are not the same property, and the section says so.
 
   roofClean: {
-    src: unsplash("photo-1590365876016-da05ac533e83", 1600),
+    src: "/roof-clean.webp",
     alt: "An asphalt-shingle roof after cleaning, free of moss and debris.",
     credit: "Yucel M",
     tone: "#595959",
@@ -174,7 +177,7 @@ export const photos = {
   },
 
   roofMossy: {
-    src: unsplash("photo-1564783679669-f5391270417b", 1600),
+    src: "/roof-mossy.webp",
     alt: "A tile roof carpeted in moss before cleaning, the tiles barely visible beneath it.",
     credit: "Nick Kane",
     tone: "#7a6a55",
@@ -184,7 +187,7 @@ export const photos = {
   },
 
   mossyConcrete: {
-    src: unsplash("photo-1604420379461-7c7613cd5815", 1600),
+    src: "/mossy-concrete.webp",
     alt: "Concrete steps overgrown with moss and algae before pressure washing.",
     credit: "Vianney Cahen",
     tone: "#26260c",
@@ -213,7 +216,7 @@ export const photos = {
   },
 
   softWashing: {
-    src: unsplash("photo-1721620780493-e905708eba0b", 2000),
+    src: "/soft-washing.webp",
     alt: "Soft washing: an operative running a water-fed pole with a soft brush head down the exterior of a brick house, water sheeting off the surface.",
     credit: "Joshua Bowers",
     tone: "#8d8378",
@@ -270,7 +273,7 @@ export const photos = {
   },
 
   painting: {
-    src: unsplash("photo-1613844044163-1ad2f2d0b152", 2000),
+    src: "/painting.webp",
     alt: "Painting: a decorator on a stepladder cutting in around a window on the white rendered exterior of a house.",
     credit: "Flow Clark",
     tone: "#dfe6ec",
@@ -592,7 +595,7 @@ export const photos = {
   // --- Soft Washing --------------------------------------------------------
 
   softRoofs: {
-    src: unsplash("photo-1694532297471-a6e2bb054c03", 1600),
+    src: "/services/soft-washing/shingle-and-tile-roofs.webp",
     alt: "Soft washing: a roof slope carrying an unbroken layer of moss from ridge to eaves, the tiles beneath it barely showing through, with dark forest behind.",
     credit: "Unsplash",
     tone: "#858c35",
@@ -602,7 +605,7 @@ export const photos = {
   },
 
   softStucco: {
-    src: unsplash("photo-1707897283710-4beef9a1b066", 1600),
+    src: "/services/soft-washing/stucco-and-painted-siding.webp",
     alt: "Soft washing: an operator holding a lance at waist height and laying a wide, soft fan of solution across the elevation of a house.",
     credit: "Unsplash",
     tone: "#708f9e",
@@ -612,7 +615,7 @@ export const photos = {
   },
 
   softCedar: {
-    src: unsplash("photo-1780556656004-9e28fd125ae0", 1600),
+    src: "/services/soft-washing/cedar-fascia-soffits.webp",
     alt: "Soft washing: courses of cedar shingles in warm red-brown, the grain and the saw marks still clear across every butt.",
     credit: "Unsplash",
     tone: "#bc8268",
@@ -622,7 +625,7 @@ export const photos = {
   },
 
   softFences: {
-    src: unsplash("photo-1759728246839-4be04fe380c1", 1600),
+    src: "/services/soft-washing/fences-and-structures.webp",
     alt: "Soft washing: a weathered timber picket fence gone silver-grey along its run, dark foliage massed behind it.",
     credit: "Unsplash",
     tone: "#393b38",
@@ -632,7 +635,7 @@ export const photos = {
   },
 
   softAlgae: {
-    src: unsplash("photo-1778746466848-2228d64e5452", 1600),
+    src: "/services/soft-washing/algae-lichen-treatment.webp",
     alt: "Soft washing: green algae running in vertical streaks down a cream-painted wall, the paint blistered and lifting where the growth is heaviest.",
     credit: "Unsplash",
     tone: "#9c9c73",
@@ -642,7 +645,7 @@ export const photos = {
   },
 
   softPlanting: {
-    src: unsplash("photo-1782545647795-457772efdcda", 1600),
+    src: "/services/soft-washing/planting-protection.webp",
     alt: "Soft washing: a worker running a hose over the clipped shrubs planted along the foot of a building wall.",
     credit: "Unsplash",
     tone: "#9ba29f",
@@ -652,7 +655,7 @@ export const photos = {
   },
 
   softClosing: {
-    src: unsplash("photo-1767890034867-06027e836ed0", 2000),
+    src: "/services/soft-washing/clean-the-surface-can-take.webp",
     alt: "The corner of a house against a clear sky, the siding running even in colour into the soffit above with no streaking anywhere along the run.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.
@@ -665,7 +668,7 @@ export const photos = {
   // --- Concrete and Asphalt Sealing ----------------------------------------
 
   sealingDriveways: {
-    src: unsplash("photo-1571835594556-4d68a01d2cd6", 1600),
+    src: "/services/concrete-and-asphalt-sealing/residential-driveways.webp",
     alt: "Concrete and asphalt sealing: an operator drawing a squeegee across asphalt, the sealed surface behind the head dark and wet against the paler surface still to be covered.",
     credit: "Unsplash",
     tone: "#69625d",
@@ -675,7 +678,7 @@ export const photos = {
   },
 
   sealingLots: {
-    src: unsplash("photo-1602030550482-aa2d15a59c2b", 1600),
+    src: "/services/concrete-and-asphalt-sealing/parking-lots.webp",
     alt: "Concrete and asphalt sealing: a wide asphalt run curving away between mown grass and trees, the surface even and dark from edge to edge.",
     credit: "Unsplash",
     tone: "#737762",
@@ -685,7 +688,7 @@ export const photos = {
   },
 
   sealingWalkways: {
-    src: unsplash("photo-1712239122344-309ed117a144", 1600),
+    src: "/services/concrete-and-asphalt-sealing/walkways-and-patios.webp",
     alt: "Concrete and asphalt sealing: a sealed walkway running through parkland, the surface unbroken and the edges holding a clean line against the grass either side.",
     credit: "Unsplash",
     tone: "#6f6b70",
@@ -695,7 +698,7 @@ export const photos = {
   },
 
   sealingCracks: {
-    src: unsplash("photo-1773118330236-d812832b5b71", 1600),
+    src: "/services/concrete-and-asphalt-sealing/crack-filling.webp",
     alt: "Concrete and asphalt sealing: an operator laying a bead of hot-pour sealant along a joint with a torch applicator, the finished bead running black across the slab behind their boots.",
     credit: "Unsplash",
     tone: "#78767a",
@@ -725,7 +728,7 @@ export const photos = {
   },
 
   sealingClosing: {
-    src: unsplash("photo-1653162114127-ab75bfcf60af", 2000),
+    src: "/services/concrete-and-asphalt-sealing/sealed-before-the-freeze.webp",
     alt: "Rain standing in separate beads across a dark sealed surface rather than soaking into it, each drop holding its own shape.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.
@@ -738,7 +741,7 @@ export const photos = {
   // --- Gutter Cleaning -----------------------------------------------------
 
   gutterRuns: {
-    src: unsplash("photo-1575286074520-b8a7a85a8959", 1600),
+    src: "/services/gutter-cleaning/runs-cleared-by-hand.webp",
     alt: "Gutter cleaning: fallen maple leaves lying packed along the floor of a gutter run below the edge of a tiled roof.",
     credit: "Unsplash",
     tone: "#7a6961",
@@ -748,7 +751,7 @@ export const photos = {
   },
 
   gutterDownspouts: {
-    src: unsplash("photo-1776577013784-bb83b748e116", 1600),
+    src: "/services/gutter-cleaning/downspouts-flushed.webp",
     alt: "Gutter cleaning: water running clear out of the elbow at the foot of a downspout and falling away onto the ground below.",
     credit: "Unsplash",
     tone: "#1a1915",
@@ -768,7 +771,7 @@ export const photos = {
   },
 
   gutterFlowTest: {
-    src: unsplash("photo-1600093652298-e57ee8aba769", 1600),
+    src: "/services/gutter-cleaning/flow-test.webp",
     alt: "Gutter cleaning: water running the length of a dark green gutter in heavy rain, the channel carrying it along rather than holding it.",
     credit: "Unsplash",
     tone: "#133b43",
@@ -778,7 +781,7 @@ export const photos = {
   },
 
   gutterFascia: {
-    src: unsplash("photo-1686327714181-43435553b59f", 1600),
+    src: "/services/gutter-cleaning/fascia-and-brackets.webp",
     alt: "Gutter cleaning: a close view of a gutter bracket and the joint where the channel meets the fascia board under the roof edge.",
     credit: "Unsplash",
     tone: "#736652",
@@ -788,7 +791,7 @@ export const photos = {
   },
 
   gutterGuards: {
-    src: unsplash("photo-1473187789971-f805152368d2", 1600),
+    src: "/services/gutter-cleaning/gutter-guards.webp",
     alt: "Gutter cleaning: dry leaves caught in a drift on top of a mesh gutter guard, held above the channel running underneath.",
     credit: "Unsplash",
     tone: "#a9968b",
@@ -798,7 +801,7 @@ export const photos = {
   },
 
   gutterClosing: {
-    src: unsplash("photo-1779755376652-22ca6eba86b8", 2000),
+    src: "/services/gutter-cleaning/water-where-it-belongs.webp",
     alt: "A roofline under a grey sky, the gutter running level along the fascia and the downpipe taking water away at the corner.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.
@@ -811,7 +814,7 @@ export const photos = {
   // --- Roof Cleaning -------------------------------------------------------
 
   roofSurfaces: {
-    src: unsplash("photo-1633759593085-1eaeb724fc88", 1600),
+    src: "/services/roof-cleaning/shingle-tile-metal.webp",
     alt: "Roof cleaning: a worker standing on an asphalt shingle slope working a hand tool across the courses, the siding and window of the upper storey behind him.",
     credit: "Unsplash",
     tone: "#9098a1",
@@ -821,7 +824,7 @@ export const photos = {
   },
 
   roofMoss: {
-    src: unsplash("photo-1764062507231-37fbe104dc6c", 1600),
+    src: "/services/roof-cleaning/moss-and-lichen.webp",
     alt: "Roof cleaning: cushions of moss spreading across the courses of a dark shingle roof, thickest along the lower edge above the gutter.",
     credit: "Unsplash",
     tone: "#565a62",
@@ -831,7 +834,7 @@ export const photos = {
   },
 
   roofValleys: {
-    src: unsplash("photo-1580642866497-dde93c97492b", 1600),
+    src: "/services/roof-cleaning/valleys-and-vents.webp",
     alt: "Roof cleaning: two dormers set into a tiled slope, the channels where their cheeks meet the main roof running clear down to the eaves.",
     credit: "Unsplash",
     tone: "#626569",
@@ -841,7 +844,7 @@ export const photos = {
   },
 
   roofGutters: {
-    src: unsplash("photo-1744044155829-610dded4cead", 1600),
+    src: "/services/roof-cleaning/gutters-after-the-roof.webp",
     alt: "Roof cleaning: clumps of moss sitting along a roof edge directly above an open gutter run, the length of the channel visible against a clear sky.",
     credit: "Unsplash",
     tone: "#35526e",
@@ -851,7 +854,7 @@ export const photos = {
   },
 
   roofFlashing: {
-    src: unsplash("photo-1617459973560-33aea09d1c22", 1600),
+    src: "/services/roof-cleaning/flashing-and-vents.webp",
     alt: "Roof cleaning: a skylight and a vent pipe set into a terracotta tiled slope, the tiles cut and closed around both upstands.",
     credit: "Unsplash",
     tone: "#8e4726",
@@ -861,7 +864,7 @@ export const photos = {
   },
 
   roofTreatment: {
-    src: unsplash("photo-1674485169641-bcb2bf6f1df9", 1600),
+    src: "/services/roof-cleaning/preventative-treatment.webp",
     alt: "Roof cleaning: an operator in a white coverall laying an even spray across a roof surface from a hand lance, the treated area wet and pale behind the pass.",
     credit: "Unsplash",
     tone: "#88989e",
@@ -871,7 +874,7 @@ export const photos = {
   },
 
   roofClosing: {
-    src: unsplash("photo-1755114203680-d39d95efa82c", 2000),
+    src: "/services/roof-cleaning/a-roof-with-years-left.webp",
     alt: "A suburban house seen from above, its grey shingle roof even in colour across every course from ridge to eaves.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.
@@ -884,7 +887,7 @@ export const photos = {
   // --- Painting ------------------------------------------------------------
 
   paintInterior: {
-    src: unsplash("photo-1679018179962-06922435f6bc", 1600),
+    src: "/services/painting/interior-walls-trim.webp",
     alt: "Painting: a brush drawn along the boundary between a pale new coat and the colour underneath, the wet edge left clean and straight across the wall.",
     credit: "Unsplash",
     tone: "#acbbaa",
@@ -894,7 +897,7 @@ export const photos = {
   },
 
   paintExterior: {
-    src: unsplash("photo-1774977737078-7ccc2ac697e6", 1600),
+    src: "/services/painting/exterior-siding-fascia.webp",
     alt: "Painting: a decorator on a stepladder reaching up to lay colour along the upper wall of a red building, working past the window heads and shutters.",
     credit: "Unsplash",
     tone: "#604739",
@@ -904,7 +907,7 @@ export const photos = {
   },
 
   paintPrep: {
-    src: unsplash("photo-1603024994284-6b602508ab9b", 1600),
+    src: "/services/painting/washing-scraping-sanding.webp",
     alt: "Painting: a hand working a scraper along a painted timber edge, lifting the old finish away in flakes and leaving bare wood behind the blade.",
     credit: "Unsplash",
     tone: "#744d39",
@@ -924,7 +927,7 @@ export const photos = {
   },
 
   paintPriming: {
-    src: unsplash("photo-1693985120993-e9b203ce7631", 1600),
+    src: "/services/painting/spot-and-full-priming.webp",
     alt: "Painting: a roller laying a pale coat across a wall, the covered band standing out against the older finish still showing to one side.",
     credit: "Unsplash",
     tone: "#c3c2bc",
@@ -934,7 +937,7 @@ export const photos = {
   },
 
   paintProtection: {
-    src: unsplash("photo-1786295866816-89841e942221", 1600),
+    src: "/services/painting/masking-and-tidy.webp",
     alt: "Painting: a decorator on a ladder taping sheeting over a window below the eaves, the covered opening squared off against the siding around it.",
     credit: "Unsplash",
     tone: "#5b7176",
@@ -944,7 +947,7 @@ export const photos = {
   },
 
   paintClosing: {
-    src: unsplash("photo-1691039923170-c275e01cce89", 2000),
+    src: "/services/painting/a-finish-that-holds.webp",
     alt: "A painted timber house under a bright sky, the body colour running clean to the white window trim and gable boards with every line held straight.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.
@@ -957,7 +960,7 @@ export const photos = {
   // --- Snow Removal & Salting ----------------------------------------------
 
   snowDriveways: {
-    src: unsplash("photo-1674049406206-83d38bd15c8a", 1600),
+    src: "/services/snow-removal-salting/driveways-and-entrances.webp",
     alt: "Snow removal: an operator walking a snow blower up a driveway, the cleared strip running back to the garage between banks of snow thrown clear on both sides.",
     credit: "Unsplash",
     tone: "#b9b6b3",
@@ -967,7 +970,7 @@ export const photos = {
   },
 
   snowLots: {
-    src: unsplash("photo-1676903826883-cbbd7703f2f4", 1600),
+    src: "/services/snow-removal-salting/strata-and-commercial-lots.webp",
     alt: "Snow removal: a plough truck with its blade angled and down, pushing a windrow of snow along a road with a car waiting behind it.",
     credit: "Unsplash",
     tone: "#757a81",
@@ -977,7 +980,7 @@ export const photos = {
   },
 
   snowForecast: {
-    src: unsplash("photo-1637852846765-f6a2081394b7", 1600),
+    src: "/services/snow-removal-salting/forecast-and-triggers.webp",
     alt: "Snow removal: a loader working under its own lights at first light, a pile of cleared snow stacked at the edge of an open lot against a deep blue sky.",
     credit: "Unsplash",
     tone: "#324262",
@@ -987,7 +990,7 @@ export const photos = {
   },
 
   snowSalting: {
-    src: unsplash("photo-1769438934318-e98df9b194b4", 1600),
+    src: "/services/snow-removal-salting/salting-and-de-icing.webp",
     alt: "Snow removal: a compact tractor with a broom on the front and a hopper spreader on the back working a city footway through falling snow.",
     credit: "Unsplash",
     tone: "#616865",
@@ -997,7 +1000,7 @@ export const photos = {
   },
 
   snowIce: {
-    src: unsplash("photo-1767731732585-7a7fd7ddea20", 1600),
+    src: "/services/snow-removal-salting/ice-at-doors-and-steps.webp",
     alt: "Snow removal: an outdoor flight of steps under unbroken snow, the metal handrail running down beside treads whose edges have disappeared.",
     credit: "Unsplash",
     tone: "#867f74",
@@ -1017,7 +1020,7 @@ export const photos = {
   },
 
   snowClosing: {
-    src: unsplash("photo-1779509598229-19bf5fd9179c", 2000),
+    src: "/services/snow-removal-salting/open-before-the-first-arrival.webp",
     alt: "A suburban street from above after a snowfall, every driveway and path cleared to the surface while the lawns and roofs either side are still under snow.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal. Source is natively 16:9.
@@ -1030,7 +1033,7 @@ export const photos = {
   // --- Holiday Light Installation ------------------------------------------
 
   lightsRooflines: {
-    src: unsplash("photo-1470938017644-581bd9737a31", 1600),
+    src: "/services/holiday-light-installation/rooflines-and-eaves.webp",
     alt: "Holiday light installation: a run of large coloured bulbs clipped along the eave and gable of a house at dusk, the spacing even the whole length of the line.",
     credit: "Unsplash",
     tone: "#424a56",
@@ -1040,7 +1043,7 @@ export const photos = {
   },
 
   lightsPorches: {
-    src: unsplash("photo-1606946184955-a8cb11e66336", 1600),
+    src: "/services/holiday-light-installation/porches-and-railings.webp",
     alt: "Holiday light installation: a covered porch lit along its eave and down the posts, with a wreath at the door and seating set out below.",
     credit: "Unsplash",
     tone: "#5e4638",
@@ -1050,7 +1053,7 @@ export const photos = {
   },
 
   lightsTrees: {
-    src: unsplash("photo-1704754477944-cb1243537062", 1600),
+    src: "/services/holiday-light-installation/trees-and-garden.webp",
     alt: "Holiday light installation: a small conifer lit in a snow-covered garden with a further run of lights picked out along the fence line behind it.",
     credit: "Unsplash",
     tone: "#5a6278",
@@ -1090,7 +1093,7 @@ export const photos = {
   },
 
   lightsClosing: {
-    src: unsplash("photo-1664289342468-fa99588e60b8", 2000),
+    src: "/services/holiday-light-installation/lit-from-the-street.webp",
     alt: "A large house seen from the street at night with its eaves, gables, porch and garden all lit in warm white, the whole frontage reading as one scheme.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.
@@ -1103,7 +1106,7 @@ export const photos = {
   // --- Landscaping & Lawn Care ---------------------------------------------
 
   lawnMowing: {
-    src: unsplash("photo-1734303023491-db8037a21f09", 1600),
+    src: "/services/landscaping-lawn-care/mowing-and-edging.webp",
     alt: "Landscaping and lawn care: two groundskeepers working a lawn together, one riding a mower along a cut stripe while the other trims the edge of the planted bed beside it.",
     credit: "Unsplash",
     tone: "#566a56",
@@ -1113,7 +1116,7 @@ export const photos = {
   },
 
   lawnBeds: {
-    src: unsplash("photo-1786550028419-2f6696405f60", 1600),
+    src: "/services/landscaping-lawn-care/beds-and-mulch.webp",
     alt: "Landscaping and lawn care: a planted bed dressed with bark mulch and held by a low stone edge, petunias and silver foliage set through it.",
     credit: "Unsplash",
     tone: "#655043",
@@ -1123,7 +1126,7 @@ export const photos = {
   },
 
   lawnPruning: {
-    src: unsplash("photo-1734079692079-172d8243ebd3", 1600),
+    src: "/services/landscaping-lawn-care/hedge-and-shrub-pruning.webp",
     alt: "Landscaping and lawn care: a hedge trimmer held level against the face of a hedge, the operator in a green jacket and gloves working just behind the blade.",
     credit: "Unsplash",
     tone: "#40442e",
@@ -1133,7 +1136,7 @@ export const photos = {
   },
 
   lawnCleanups: {
-    src: unsplash("photo-1683316924890-6a8c5ab10d29", 1600),
+    src: "/services/landscaping-lawn-care/seasonal-cleanups.webp",
     alt: "Landscaping and lawn care: a groundskeeper in a hi-vis vest working a line trimmer through a flowering border, cut growth lying where it has fallen.",
     credit: "Unsplash",
     tone: "#6e7a44",
@@ -1143,7 +1146,7 @@ export const photos = {
   },
 
   lawnLeaves: {
-    src: unsplash("photo-1742093798436-bea70f40f187", 1600),
+    src: "/services/landscaping-lawn-care/leaf-clearing.webp",
     alt: "Landscaping and lawn care: an operator working a leaf blower under a golden autumn tree, fallen leaves lying thick across the grass and path in front of him.",
     credit: "Unsplash",
     tone: "#c58f50",
@@ -1153,7 +1156,7 @@ export const photos = {
   },
 
   lawnSchedule: {
-    src: unsplash("photo-1783753445341-6e8571478579", 1600),
+    src: "/services/landscaping-lawn-care/on-a-schedule.webp",
     alt: "Landscaping and lawn care: a groundskeeper in a hi-vis vest working beside a clipped hedge at the foot of a building, the hedge squared off along the wall behind him.",
     credit: "Unsplash",
     tone: "#828277",
@@ -1163,7 +1166,7 @@ export const photos = {
   },
 
   lawnClosing: {
-    src: unsplash("photo-1738193830098-2d92352a1856", 2000),
+    src: "/services/landscaping-lawn-care/grounds-that-stay-looked-after.webp",
     alt: "A house frontage with the lawn cut evenly to a low retaining wall, clipped shrubs set along the planting and every edge closed off.",
     credit: "Unsplash",
     // Rendered with `fill`, so this is nominal.

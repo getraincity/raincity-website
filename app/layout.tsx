@@ -86,12 +86,10 @@ export default function RootLayout({
   return (
     <html lang="en-CA" className={`${chivo.variable} ${plex.variable}`}>
       <head>
-        {/* Every photograph on the page is served from Unsplash, including
-            the hero, which is the LCP element. Opening the connection during
-            the HTML parse saves the DNS + TLS round trips that would
-            otherwise sit in front of the largest paint. */}
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/* No image preconnect. Every photograph, the LCP hero included, is
+            now served from this origin, so the connection the browser needs
+            is the one it already has — a preconnect to a host nothing is
+            fetched from costs a socket and saves nothing. */}
         <JsonLd schema={organizationSchema} />
       </head>
       <body>
