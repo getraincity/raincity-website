@@ -93,15 +93,19 @@ export function CoverageMap() {
                 the map stopped above Surrey and Delta and showed a screen of
                 Mount Seymour instead; 384 brings the south bank back in. */}
             <div className="h-96 grow border-2 border-navy bg-fog">
-              <iframe
-                title={`Map of ${business.region}, the region ${business.name} works across`}
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                  MAP_QUERY,
-                )}&z=10&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block size-full border-0"
-              />
+              {process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ? (
+                <iframe
+                  title={`Map of ${business.region}, the region ${business.name} works across`}
+                  src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${encodeURIComponent(MAP_QUERY)}&zoom=10`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="block size-full border-0"
+                />
+              ) : (
+                <div className="flex size-full items-center justify-center">
+                  <p className="meta text-steel">{business.region} service area</p>
+                </div>
+              )}
             </div>
             <p className="meta mt-4 text-steel">{locationsPage.map.caption}</p>
           </Reveal>

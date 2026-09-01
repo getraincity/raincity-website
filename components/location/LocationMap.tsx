@@ -94,15 +94,19 @@ export function LocationMap({ location }: { location: Location }) {
                 the system carries no radius and no shadow, so a bordered
                 plate is what a framed thing looks like here. */}
             <div className="h-96 grow border-2 border-navy bg-fog">
-              <iframe
-                title={`Map of ${location.name}, ${business.region} — one of the communities ${business.name} works in`}
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                  detail.mapQuery,
-                )}&z=${detail.mapZoom}&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block size-full border-0"
-              />
+              {process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ? (
+                <iframe
+                  title={`Map of ${location.name}, ${business.region} — one of the communities ${business.name} works in`}
+                  src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${encodeURIComponent(detail.mapQuery)}&zoom=${detail.mapZoom}`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="block size-full border-0"
+                />
+              ) : (
+                <div className="flex size-full items-center justify-center">
+                  <p className="meta text-steel">{location.name}</p>
+                </div>
+              )}
             </div>
             <p className="meta mt-4 text-steel">{detail.mapCaption}</p>
           </Reveal>

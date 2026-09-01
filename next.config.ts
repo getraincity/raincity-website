@@ -60,8 +60,9 @@ const nextConfig: NextConfig = {
               "font-src 'self'",
               // Three distinct iframe locations: QuoteForm, CoverageMap,
               // and one LocationMap per community page (11 total).
-              // A single frame-src entry covers all of them.
-              "frame-src https://maps.google.com",
+              // Maps Embed API serves from www.google.com; maps.google.com
+              // retained so any cached pages don't break during the rollout.
+              "frame-src https://www.google.com https://maps.google.com",
               "connect-src 'self'",
               "object-src 'none'",
               "base-uri 'self'",

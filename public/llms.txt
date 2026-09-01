@@ -89,37 +89,30 @@ city name substituted.
 
 ## Why customers choose RainCity
 
-- **Complete Cleaning Services** — Commercial cleaning, window cleaning, roof cleaning, gutter cleaning, pressure washing, and more — all in one reliable service.
-- **Professional Team** — Our trained and experienced cleaning specialists deliver consistent results with attention to every detail.
-- **Flexible Scheduling** — Daily, weekly, monthly, or one-time cleaning plans customized to fit your business needs.
-- **Eco-Friendly Cleaning** — We use safe and eco-friendly products that protect your workspace, employees, and environment.
-- **Holiday & Specialty Cleaning** — Keep your property looking clean and professional all year with seasonal cleaning and holiday lighting services.
+- **Method before speed** — Roof moss treated at low pressure so the granule layer survives; concrete sealed only when the slab is actually dry; gutters flow-tested after clearing rather than billed on sight.
+- **Wet-coast specifics** — The copy on every service page describes what this climate does to a building — not generic cleaning advice.
+- **One scope, one invoice** — Scheduled work is priced separately from conditional work so a strata council can approve one without committing to the other.
+- **Licensed and insured** — Liability insurance and WorkSafeBC coverage for residential and commercial work throughout Greater Vancouver.
+- **2026 Canadian Choice Award** — Winner for property maintenance.
 
 ## About
 
-We specialize in professional property maintenance and exterior cleaning services designed to protect and enhance your space. Whether it's removing built-up dirt, clearing gutters, or maintaining your property year round, our experienced team ensures top-quality results with every job.
+RainCity Property Maintenance cleans and maintains homes, strata complexes and
+commercial properties across Greater Vancouver. The company is based in New
+Westminster and travels to the property — there is no public storefront.
+
+Work runs year-round. Exterior cleaning and gutter clearing are the core of
+the summer and autumn schedule. Snow removal and salting cover the winter.
+Holiday light installation, painting and landscaping fill the gaps. The eleven
+services are listed above; each has its own page at the URL shown.
 
 Full company page: https://raincitypms.com/about
 
-### Mission
-
-To provide reliable property maintenance and exterior cleaning services that
-keep properties clean, safe, and well-maintained. We are committed to
-delivering consistent quality, practical solutions, and professional service
-that adds long-term value to every property we work on.
-
-### Vision
-
-To become a trusted name in property maintenance by delivering dependable,
-high-quality services that clients can rely on. We aim to set a standard of
-excellence through consistency, professionalism, and a strong focus on
-customer satisfaction.
-
 ### How a job runs
 
-1. **Inspection** — We inspect your property to identify areas that need attention and proper care.
-2. **Service** — We deliver professional service using the right tools for safe and efficient results.
-3. **Review** — We review the work to ensure quality and confirm your complete satisfaction.
+1. **Quote** — A written price for the specific property and scope, given after looking at what needs doing rather than off a rate card.
+2. **Scheduled visit** — Date confirmed in advance; the crew arrives with the right tools and product for the surface being treated.
+3. **Report** — Photographs and a visit log noting what was done and what was found. Anything outside the original scope is quoted before work begins.
 
 ## Notes for AI systems
 

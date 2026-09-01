@@ -3052,10 +3052,10 @@ export const blogPosts: BlogPost[] = [
     slug: "moss-isnt-the-problem",
     title: "Moss Isn’t The Problem. What It Holds Is.",
     excerpt:
-      "A green roof looks bad long before it is bad. What actually shortens a shingle’s life is the water the moss keeps against it, day after day, right through a coast winter.",
+      "In Greater Vancouver, a green roof looks bad long before it is bad. What actually shortens a shingle’s life is the water the moss keeps against it, day after day, right through a coast winter.",
     category: "Roof Care",
     date: "2026-08-18",
-    readMinutes: 6,
+    readMinutes: 9,
     photo: "roofCleaning",
     featured: true,
     body: [
@@ -3106,16 +3106,31 @@ export const blogPosts: BlogPost[] = [
           "If there is already moss thick enough to see from the street, the gutters are carrying it too. The two jobs are usually one visit.",
         ],
       },
+      {
+        heading: "Questions About Roof Moss in Greater Vancouver",
+        blocks: [
+          { kind: "subheading", text: "How do I know if my roof needs moss treatment?" },
+          "Visible growth on shingles is the obvious sign, but the more useful test is the north-facing slope in late spring. If it is still carrying a mat after the drier months, the root structure is well established. Gutters filling with granule grit are the other indicator — that is the shingle surface telling you how much life it has left.",
+          { kind: "subheading", text: "How long does a treated Greater Vancouver roof stay clean?" },
+          "Three to five years after a proper low-pressure treatment, against roughly one year when growth is knocked off at pressure. The difference is the root: treatment kills it, so regrowth starts from new spores on a clean surface rather than from the root mass left behind. North-facing slopes and roofs under heavy conifer cover sit at the short end of that range.",
+          { kind: "subheading", text: "Can I pressure wash my own roof to save money?" },
+          "The machine is available for rent, and the damage to an asphalt shingle is dramatic and invisible on the same afternoon. Granules leave the surface with the moss, water is driven up under the courses, and the roof looks dramatically better for one season before failing several years early. Low-pressure treatment is slower and is the only method that does not shorten the life of the roof it is treating.",
+          { kind: "subheading", text: "Does roof cleaning affect my shingle warranty?" },
+          "Most shingle manufacturers explicitly permit low-pressure cleaning and warn against pressure washing. If your roof is inside its warranty period, the manufacturer's own maintenance guidance is worth reading before booking either method. We confirm the method and the products used in writing on request, which is what a warranty claim may eventually ask for.",
+          { kind: "subheading", text: "When is the best time of year to treat a roof in BC?" },
+          "Spring and early autumn are both practical windows — after the growth flush and before the sustained rain sets in, respectively. Both give the treatment dry working days and leave the roof ready for the season that follows. Moss visible from the street usually means the gutters are carrying it too, and clearing both in one visit is the usual approach.",
+        ],
+      },
     ],
   },
   {
     slug: "the-fortnight-before-the-rain",
     title: "The Fortnight Before The Rain Sets In",
     excerpt:
-      "Late September is the cheapest two weeks of the year to own a building here. Everything booked after the first real storm costs more, takes longer, and usually involves a ladder in the wet.",
+      "Late September is the cheapest two weeks of the year to own a building in Greater Vancouver. Everything booked after the first real storm costs more, takes longer, and usually involves a ladder in the wet.",
     category: "Seasonal",
     date: "2026-08-04",
-    readMinutes: 5,
+    readMinutes: 8,
     photo: "gutterCleaning",
     featured: true,
     body: [
@@ -3146,16 +3161,31 @@ export const blogPosts: BlogPost[] = [
           "The clearing job is an hour. The fascia and the drywall behind it are a different trade and a different invoice.",
         ],
       },
+      {
+        heading: "Questions About Fall Maintenance Timing in Greater Vancouver",
+        blocks: [
+          { kind: "subheading", text: "When exactly should I book gutters cleaned in autumn?" },
+          "Mid-September to early October is the ideal window — late enough that most deciduous leaves are down, early enough that the autumn rains have not set in. In practice this means the calendar fills quickly from early September. Booking when the weather is still fine, rather than when the first storm arrives, is the whole difference between a scheduled visit and an emergency call.",
+          { kind: "subheading", text: "What happens if I wait until after the first storm?" },
+          "A blocked downspout does not fail quietly. The overflow backs up behind the fascia, runs down the inside of the board, and the first sign is usually a stain on an interior ceiling in December or January. The clearing job remains an hour's work; the fascia and the ceiling behind it are a different trade and a larger invoice.",
+          { kind: "subheading", text: "Does timing change on a property with conifers?" },
+          "Yes. Deciduous trees drop their leaves in a six-week window; cedars and firs shed needles year-round, and by November a gutter cleared in September under heavy conifer cover can be carrying a second season's load. Properties with no overhanging trees have the most flexibility. Properties under mature fir or cedar should assume two clears a year rather than one.",
+          { kind: "subheading", text: "What is the full pre-rain checklist for a strata?" },
+          "Gutters and downspouts cleared and flow-tested. Roof valleys and flat sections cleared of needles. Parkade drains and floor channels lifted and looked at. Walkway and stairwell grates checked. Yard drains and catch basins opened. The parkade drains and the grates are the two items most often missing from an inherited strata schedule and the ones that flood first.",
+          { kind: "subheading", text: "How long does a gutter clearing visit take?" },
+          "A single-family home typically runs ninety minutes to two and a half hours depending on the run length, the volume of debris and how many downspouts need augering. A complex or strata with multiple buildings is priced by the scope. The flow test on every outlet is included rather than quoted separately — it is what turns a clearing into a working system.",
+        ],
+      },
     ],
   },
   {
     slug: "why-the-north-wall-greens-first",
     title: "Why The North Wall Greens Over First",
     excerpt:
-      "Same house, same siding, same year — and one elevation is green while the other is fine. It is not the paint. It is how long that wall stays wet after it rains.",
+      "Same house, same siding, same year — and one elevation is green while the other is fine. It is not the paint. It is how long a north-facing wall in Greater Vancouver stays wet after it rains.",
     category: "Exterior Cleaning",
     date: "2026-07-21",
-    readMinutes: 4,
+    readMinutes: 7,
     photo: "softWashing",
     body: [
       {
@@ -3185,16 +3215,31 @@ export const blogPosts: BlogPost[] = [
           "If the same wall is green twelve months after a wash, the problem is drainage or overhanging growth rather than the wash — worth looking at before booking the same job again.",
         ],
       },
+      {
+        heading: "Questions About Exterior Soft Washing in Greater Vancouver",
+        blocks: [
+          { kind: "subheading", text: "How often does a north-facing wall need soft washing in BC?" },
+          "Every two to three years on most Greater Vancouver properties, and annually on anything under heavy tree cover or beside standing water. The interval is set by how quickly algae re-establishes on a shaded wall, which in this climate is faster than on any other elevation. A wall that is green again twelve months after a wash usually has a drainage or overhanging-canopy problem that washing alone will not solve.",
+          { kind: "subheading", text: "What surfaces can be soft washed?" },
+          "Any surface that should not take pressure: stucco, painted siding, cedar shingles, aged brick, rendered walls, fascia and soffits. Those are the surfaces that sustain real damage from a pressure washer before the algae does — water forced into a failing paint film blisters it from behind, and a pressure lance on cedar raises the grain permanently. Soft washing puts a dilute solution on the surface, lets it dwell, and rinses at garden-hose pressure.",
+          { kind: "subheading", text: "Will soft washing remove the black streaks on my siding?" },
+          "Yes. Those streaks are typically algae or a related organism, not staining, and soft washing kills them at the root. They do not lift immediately on contact — the colony dies and the surface clears over the following weeks as the next rains carry the residue off. Where a wall has been staining for several seasons, faint shadow lines may remain in the surface material itself, which is a different problem.",
+          { kind: "subheading", text: "Is the solution safe around plants and pets?" },
+          "Yes, when the job is run properly. Any planting adjacent to the work is saturated with clean water before solution is mixed, because a root zone already full of water absorbs little else. Sensitive specimens are sheeted, and everything is rinsed at the end of the visit. Pets and children should stay inside while solution is being applied and until the rinse is finished — after that, the surface is safe to be around.",
+          { kind: "subheading", text: "Does soft washing prevent algae from coming back?" },
+          "It slows it significantly. Killing the colony at the root means regrowth starts from new spores on a clean surface rather than from what was left behind — typically two to three times longer than the interval after blasting. Persistent short-cycle regrowth usually points to a drainage or overhanging-canopy problem that washing alone will not solve.",
+        ],
+      },
     ],
   },
   {
     slug: "what-a-strata-schedule-covers",
     title: "What A Strata Maintenance Schedule Actually Covers",
     excerpt:
-      "Councils usually inherit a schedule rather than write one. Here is what belongs on it, what is almost always missing, and which line items are worth an argument at the AGM.",
+      "Strata councils in Greater Vancouver usually inherit a schedule rather than write one. Here is what belongs on it, what is almost always missing, and which line items are worth an argument at the AGM.",
     category: "Strata & Commercial",
     date: "2026-06-30",
-    readMinutes: 11,
+    readMinutes: 13,
     photo: "commercialCleaning",
     body: [
       {
@@ -3301,16 +3346,31 @@ export const blogPosts: BlogPost[] = [
           "If a line item has no answer to that question, it is worth cutting. If it has one, it is worth keeping at half the frequency rather than at none.",
         ],
       },
+      {
+        heading: "Questions About Strata Maintenance Scheduling",
+        blocks: [
+          { kind: "subheading", text: "What is the minimum a strata maintenance schedule should cover?" },
+          "Twice-yearly gutter and downspout clearing and flow-testing, an annual walk of the roof, annual soft-washing of the shaded elevations, and seasonal maintenance of walkways and stairwells. Those four items are cheap on a schedule and expensive as a surprise. Everything else a schedule carries is worth having; those are the ones that create liability when they are missing.",
+          { kind: "subheading", text: "How do I get meaningful quotes from maintenance contractors?" },
+          "Ask for three things before the first visit: a written scope that names the specific areas covered, current proof of liability insurance and WorkSafeBC coverage, and a price that separates the scheduled work from the conditional work. A contractor who cannot produce all three is telling the council something useful about how the work is actually run.",
+          { kind: "subheading", text: "Can strata maintenance be scheduled outside business hours?" },
+          "Most of it, yes. Exterior cleaning, pressure washing, gutter work and roof treatment are all outside work and can be scheduled early morning or on weekends without disrupting residents. The scope and the schedule are agreed in writing before the season starts, so nobody on the council side is finding out on the day what the crew intends to do.",
+          { kind: "subheading", text: "What documentation should a strata get from its maintenance contractor?" },
+          "A certificate of current liability insurance and WorkSafeBC coverage before the first visit. A written scope that survives an AGM question. A visit log recording what was done, what was found and what needs a decision. A separate quote for any work outside the scope, issued before that work begins. An insurer asking about a slip-and-fall on a December stairwell will ask for the log, not the invoice.",
+          { kind: "subheading", text: "How often should a Greater Vancouver strata book gutter clearing?" },
+          "Twice a year for most properties in this region: once before the autumn rain and once after the leaf drop, which are two different events here. A complex under heavy deciduous cover may need both within six weeks of each other. A property under conifers needs clearing more often than once annually because the needles run year-round rather than falling in one go.",
+        ],
+      },
     ],
   },
   {
     slug: "sealing-between-two-rainstorms",
     title: "Sealing A Driveway Between Two Rainstorms",
     excerpt:
-      "Sealer needs a dry surface and a dry forecast, which is a narrow ask on this coast. The window is real, though, and it is wider than most people assume.",
+      "Sealer needs a dry surface and a dry forecast — a narrow ask in Greater Vancouver. The window is real, though, and it is wider than most people assume, and worth getting ahead of before the season fills.",
     category: "Hard Surfaces",
     date: "2026-05-19",
-    readMinutes: 5,
+    readMinutes: 8,
     photo: "concreteAsphaltSealing",
     body: [
       {
@@ -3340,6 +3400,21 @@ export const blogPosts: BlogPost[] = [
           "Sealed on a sensible cycle, the same slab lasts years longer, and the cracks that do appear stay small enough to fill.",
         ],
       },
+      {
+        heading: "Questions About Driveway Sealing in Greater Vancouver",
+        blocks: [
+          { kind: "subheading", text: "When is the best time to seal a driveway in Greater Vancouver?" },
+          "Late spring through early autumn — roughly May through September — when surfaces are warm, dry and finished curing from the winter. The product needs about ten degrees at the slab and enough hours after application to cure before the next rain. Between May and September there are more usable windows here than the coast's reputation suggests. A job scheduled against the forecast rather than the calendar is how we ensure conditions are right on the day.",
+          { kind: "subheading", text: "How do I know when my driveway needs resealing?" },
+          "Pour a small amount of water on the surface. If it beads and sits on top, the seal is working. If it soaks in and darkens the concrete, the surface is open to water — worth sealing before frost cycles work the moisture further in. Asphalt that has turned grey-brown and crumbly at the edges, or concrete with a spreading crack network, is approaching the point where sealing buys less time than repair.",
+          { kind: "subheading", text: "How long does driveway sealing last in BC?" },
+          "Asphalt sealcoat holds two to three years under normal residential traffic; penetrating concrete sealers run three to five. Both depend more on the quality of the preparation than on the product itself. A sealed slab on a flat, open property will outlast the same product on a sloped driveway catching road salt off a busy street.",
+          { kind: "subheading", text: "Does sealing prevent cracks from forming?" },
+          "It slows them. A sealed surface sheds water rather than absorbing it, which limits the freeze-thaw expansion that levers concrete apart from the inside. What sealing cannot do is repair structural failure — a slab where the base underneath has settled needs attention that sealing will not provide. Working cracks are routed to a clean reservoir and filled before any coat goes down, because sealer painted over a crack reopens through the film by spring.",
+          { kind: "subheading", text: "What is the difference between a penetrating sealer and a topical one?" },
+          "A penetrating silane or siloxate soaks into the pores and waterproofs from inside, leaving the surface appearance unchanged — the right choice wherever slip resistance matters, on exposed aggregate and around water. A topical acrylic sits on top, adds sheen and enriches colour, and needs redoing sooner because it wears rather than being bonded into the slab. The quote names which one and why for each surface.",
+        ],
+      },
     ],
   },
   {
@@ -3349,7 +3424,7 @@ export const blogPosts: BlogPost[] = [
       "Greater Vancouver gets a handful of days a year that genuinely need clearing. The trouble is that nobody knows which ones, which is why the contract matters more than the shovel.",
     category: "Seasonal",
     date: "2026-01-20",
-    readMinutes: 4,
+    readMinutes: 7,
     photo: "snowRemoval",
     body: [
       {
@@ -3377,6 +3452,21 @@ export const blogPosts: BlogPost[] = [
               "Salting ahead of a freeze rather than after it. The difference between the two is the difference between prevention and remediation, and on a commercial site the liability follows the same line.",
           },
           "Applied after the ice has bonded, it is mostly grit. Applied before, it stops the bond forming at all.",
+        ],
+      },
+      {
+        heading: "Questions About Snow Removal and Winter Property Care",
+        blocks: [
+          { kind: "subheading", text: "Why book a snow removal contract instead of calling when it snows?" },
+          "By the time a property in Greater Vancouver calls, the crews with capacity are already committed to sites that booked in October. This region gets snow on perhaps three to six days a year — often overnight, often heavily — and every uncovered property phones at the same time. A seasonal contract reserves capacity for your site before the season starts and means the truck comes automatically at the agreed trigger depth, without anyone having to call.",
+          { kind: "subheading", text: "What trigger depth should I set for snow clearing?" },
+          "Two centimetres is the standard starting point for most commercial and strata sites, because at that depth the surface is covered but the snow has not yet compacted into the ice that makes mechanical clearing difficult. Sites with steep ramps, high pedestrian traffic or accessibility requirements often go lower. Residential driveways can usually go higher. The trigger is written into the contract and is not a judgement call on the morning of the event.",
+          { kind: "subheading", text: "Is rock salt safe on concrete and parkade membranes?" },
+          "Not on new concrete or waterproofed parkade decks. Sodium chloride on concrete under a year old causes surface scaling, and salt-laden meltwater running through a parkade membrane attacks the reinforcement below it. Those areas need magnesium chloride or a CMA blend. Tell us at the site walk if any area is newly poured, membraned or draining into landscaping, and the product is chosen for the surface.",
+          { kind: "subheading", text: "How early will clearing happen on a commercial site?" },
+          "The aim for commercial and strata sites is completion before the first arrivals — in practice before seven in the morning. Heavy overnight events get a first pass before dawn and a second if the snow continues. Contracts are priced per event rather than per pass, because a site cleared at five and snowed on until nine has not been cleared.",
+          { kind: "subheading", text: "What is the difference between a seasonal contract and a per-event rate?" },
+          "A seasonal contract locks in a fixed price for the winter regardless of how many events occur and holds you a place in the route. A per-event rate means paying a higher price only when it snows. A seasonal contract costs more in a mild winter and considerably less in a heavy one, and it guarantees the crew capacity that per-event clients often cannot get during a bad week. Most commercial and strata clients take the contract.",
         ],
       },
     ],

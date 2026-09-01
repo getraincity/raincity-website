@@ -261,15 +261,21 @@ export function QuoteForm() {
                 once the grid stretches this cell to the form's height. No
                 calc() — the system bans arbitrary values downstream. */}
             <div className="mt-5 h-80 grow border-2 border-navy bg-fog">
-              <iframe
-                title={`Map of ${business.region}, the area RainCity serves`}
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                  `${business.base}, BC, Canada`,
-                )}&z=10&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block size-full border-0"
-              />
+              {process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ? (
+                <iframe
+                  title={`Map of ${business.region}, the area RainCity serves`}
+                  src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${encodeURIComponent(`${business.base}, BC, Canada`)}&zoom=10`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="block size-full border-0"
+                />
+              ) : (
+                <div className="flex size-full items-center justify-center">
+                  <p className="meta text-steel">
+                    Based in {business.base}, serving {business.region}
+                  </p>
+                </div>
+              )}
             </div>
           </Reveal>
         </div>

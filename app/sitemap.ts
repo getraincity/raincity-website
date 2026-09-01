@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: canonical("/"),
-      lastModified: new Date("2026-08-29"),
+      lastModified: new Date("2026-09-01"),
       changeFrequency: "monthly",
       priority: 1,
     },
