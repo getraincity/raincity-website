@@ -101,6 +101,14 @@ export function Testimonials() {
           <h2 id="testimonials-heading" className="display-l mt-5 text-navy">
             {testimonials.headline}
           </h2>
+          {/* Some entries are representative examples pending replacement with
+              verified customer reviews. This note stays until real reviews fill
+              all slots — see the PLACEHOLDER comment in lib/content.ts. */}
+          {items.some((item) => "service" in item) && (
+            <p className="body-s mt-4 border-l-3 border-l-amber pl-5 text-steel">
+              Some of these reviews are representative examples. We are collecting and verifying customer feedback — real reviews will replace them before launch.
+            </p>
+          )}
         </Reveal>
 
         {/* The track bleeds to the container edges so the peeking card runs

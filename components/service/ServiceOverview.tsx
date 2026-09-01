@@ -5,6 +5,7 @@ import {
   type Service,
 } from "@/lib/content";
 import { cn } from "@/lib/cn";
+import { photos, type Photo as PhotoRecord, type PhotoKey } from "@/lib/photos";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
 import { Photo } from "@/components/ui/Photo";
@@ -148,7 +149,18 @@ export function ServiceOverview({ service }: { service: Service }) {
             step={0.05}
             delay={0.1}
           >
-            {items.map((item, i) => (
+            {items.map((item, i) => {
+              // A tile whose photo key points at a placeholder entry (the shot
+              // has not been taken yet) degrades to the text-only layout rather
+              // than showing an empty fog block where a photograph should be.
+              // Text-only reads as intentional; a photo-shaped void reads as
+              // broken. The real file drops in by deleting the `placeholder`
+              // line in photos.ts — nothing here needs to change.
+              const hasRealPhoto =
+                item.photo &&
+                !(photos[item.photo as PhotoKey] as PhotoRecord).placeholder;
+
+              return (
               <StaggerItem
                 as="li"
                 key={item.title}
@@ -157,13 +169,13 @@ export function ServiceOverview({ service }: { service: Service }) {
                   expanded ? tileWash[i % tileWash.length] : "bg-mist",
                 )}
               >
-                {item.photo ? (
+                {hasRealPhoto ? (
                   /* The photo sits on RainCity Blue, the way the service card
                      does, so the wash below has a ground rather than a hole
                      behind it at the moment it lifts. */
                   <div className="relative bg-rc-blue">
                     <Photo
-                      name={item.photo}
+                      name={item.photo!}
                       ratio="16:10"
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
                       imgClassName="transition-transform duration-300 ease-out group-hover:scale-105"
@@ -188,12 +200,12 @@ export function ServiceOverview({ service }: { service: Service }) {
                 ) : null}
 
                 <div className="p-6">
-                  {/* Without a photograph the tile falls back to a short blue
-                      rule, so the slot above the title is never simply empty.
-                      Unreached today — every tile on every service declares a
-                      photo, though eight of the seventy-seven are still
-                      placeholders waiting on the real frames. */}
-                  {item.photo ? null : (
+                  {/* Without a real photograph the tile falls back to a short
+                      blue rule, so the slot above the title is never empty.
+                      Placeholder photos are treated the same as no photo at
+                      all — the real frame drops in by removing the `placeholder`
+                      line in photos.ts. */}
+                  {hasRealPhoto ? null : (
                     <span
                       aria-hidden="true"
                       className="mb-4 block h-hairline w-label-bar bg-rc-blue"
@@ -218,7 +230,8 @@ export function ServiceOverview({ service }: { service: Service }) {
                   ) : null}
                 </div>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
 
           {/* The CTA and the low-friction fallback the inventory asks for —

@@ -13,23 +13,28 @@ import { FeaturedPosts } from "@/components/blog/FeaturedPosts";
 import { BlogArchive } from "@/components/blog/BlogArchive";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
-export const metadata = pageMetadata({
-  title: `Blog | Property Maintenance Advice for ${business.region}`,
-  description: `Seasonal timing, the maintenance that pays for itself and advice specific to ${business.region} — notes from ${business.name}, a mobile exterior-cleaning crew based in ${business.base}, BC.`,
-  path: "/blog",
-  // Informational terms only. The commercial ones belong to /services and the
-  // city-by-city set to /locations; a blog index bidding against either would
-  // be the site competing with itself for one query, which is the note the
-  // /locations metadata already makes.
-  keywords: [
-    `property maintenance tips ${business.region}`,
-    "exterior cleaning advice BC",
-    "roof moss removal advice Vancouver",
-    "gutter cleaning tips Greater Vancouver",
-    "seasonal home maintenance BC",
-    "strata maintenance schedule BC",
-  ],
-});
+// All six posts are placeholder content — block the index from being crawled
+// until real articles are live. Remove when real posts replace the placeholders.
+export const metadata = {
+  ...pageMetadata({
+    title: `Blog | Property Maintenance Advice for ${business.region}`,
+    description: `Seasonal timing, the maintenance that pays for itself and advice specific to ${business.region} — notes from ${business.name}, a mobile exterior-cleaning crew based in ${business.base}, BC.`,
+    path: "/blog",
+    // Informational terms only. The commercial ones belong to /services and the
+    // city-by-city set to /locations; a blog index bidding against either would
+    // be the site competing with itself for one query, which is the note the
+    // /locations metadata already makes.
+    keywords: [
+      `property maintenance tips ${business.region}`,
+      "exterior cleaning advice BC",
+      "roof moss removal advice Vancouver",
+      "gutter cleaning tips Greater Vancouver",
+      "seasonal home maintenance BC",
+      "strata maintenance schedule BC",
+    ],
+  }),
+  robots: { index: false, follow: true },
+};
 
 /**
  * /blog — the index.

@@ -3,6 +3,7 @@ import {
   business,
   locations,
   services,
+  testimonials,
   type BlogPost,
   type Faq,
   type Location,
@@ -238,6 +239,21 @@ export const localBusinessSchema = {
       },
     })),
   },
+  // Published only once testimonials are verified real customer reviews.
+  // Set `testimonials.verified = true` and fill `averageRating` / `reviewCount`
+  // in lib/content.ts when replacing placeholder reviews. The node is absent
+  // while `verified` is false so no fabricated rating reaches a crawler.
+  ...(testimonials.verified && testimonials.reviewCount > 0
+    ? {
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: testimonials.averageRating,
+          reviewCount: testimonials.reviewCount,
+          bestRating: 5,
+          worstRating: 1,
+        },
+      }
+    : {}),
 };
 
 /**
@@ -680,6 +696,19 @@ export function blogPostingSchema(post: BlogPost) {
     ? photo.src
     : `${SITE_URL}${photo.src}`;
 
+  // When a confirmed author exists, publish a Person node; otherwise fall back
+  // to the Organisation so the schema always has a valid `author`. Add the
+  // `author` field to a post in content.ts only when the person named actually
+  // wrote it — the field, the byline and the schema change together.
+  const author = post.author
+    ? {
+        "@type": "Person",
+        name: post.author.name,
+        jobTitle: post.author.title,
+        worksFor: { "@id": ORG_ID },
+      }
+    : { "@id": ORG_ID };
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -693,7 +722,7 @@ export function blogPostingSchema(post: BlogPost) {
     dateModified: post.date,
     articleSection: post.category,
     image,
-    author: { "@id": ORG_ID },
+    author,
     publisher: { "@id": ORG_ID },
     isPartOf: { "@id": `${canonical("/blog")}#webpage` },
   };

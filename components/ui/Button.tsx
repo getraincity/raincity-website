@@ -39,6 +39,11 @@ const base = cn(
   "inline-flex items-center justify-center gap-2 text-center",
   "font-display font-bold uppercase text-cta",
   "transition-colors duration-200",
+  // cursor-pointer is absent from the UA stylesheet for <button>; set it here
+  // so that every CTA — whether rendered as button, anchor or Link — shows the
+  // hand cursor. disabled: overrides to not-allowed so the loading state is
+  // visually legible.
+  "cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
 );
 
 type Props = {

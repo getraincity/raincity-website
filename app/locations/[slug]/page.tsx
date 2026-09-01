@@ -53,27 +53,34 @@ export async function generateMetadata({
   const location = find(slug);
   if (!location) return {};
 
-  return pageMetadata({
-    // "Property Maintenance in City, BC | Company" — the city and the service
-    // first, because those are the two halves of the query this page is
-    // written for, and the brand last because nobody is searching for it yet.
-    title: `Property Maintenance in ${location.name}, BC | ${business.name}`,
-    description: location.detail.metaDescription,
-    path: `/locations/${location.slug}`,
-    // City crossed with the service categories, and nothing regional. The
-    // hub at /locations owns the "Greater Vancouver" terms and it already
-    // carries a city-by-city set generated from this same array — these nine
-    // pages exist so that each city's own query has one page to land on
-    // rather than nine pages bidding against each other and their own index.
-    keywords: [
-      `property maintenance ${location.name} BC`,
-      `exterior cleaning ${location.name}`,
-      `pressure washing ${location.name} BC`,
-      `gutter cleaning ${location.name}`,
-      `window cleaning ${location.name} BC`,
-      `strata property maintenance ${location.name}`,
-    ],
-  });
+  return {
+    ...pageMetadata({
+      // "Property Maintenance in City, BC | Company" — the city and the service
+      // first, because those are the two halves of the query this page is
+      // written for, and the brand last because nobody is searching for it yet.
+      title: `Property Maintenance in ${location.name}, BC | ${business.name}`,
+      description: location.detail.metaDescription,
+      path: `/locations/${location.slug}`,
+      // City crossed with the service categories, and nothing regional. The
+      // hub at /locations owns the "Greater Vancouver" terms and it already
+      // carries a city-by-city set generated from this same array — these nine
+      // pages exist so that each city's own query has one page to land on
+      // rather than nine pages bidding against each other and their own index.
+      keywords: [
+        `property maintenance ${location.name} BC`,
+        `exterior cleaning ${location.name}`,
+        `pressure washing ${location.name} BC`,
+        `gutter cleaning ${location.name}`,
+        `window cleaning ${location.name} BC`,
+        `strata property maintenance ${location.name}`,
+      ],
+    }),
+    // The per-community copy (intro, FAQ, local notes) was written for the
+    // build and has not been confirmed by anyone at RainCity. Block indexing
+    // until the client reviews each community's detail block in lib/content.ts.
+    // Remove after client sign-off.
+    robots: { index: false, follow: true },
+  };
 }
 
 /**

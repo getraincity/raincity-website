@@ -4,12 +4,16 @@ import { LegalPageTemplate } from "@/components/legal/LegalPageTemplate";
 
 const page = legalPages.privacy;
 
-export const metadata = pageMetadata({
-  title: page.metaTitle,
-  description: page.metaDescription,
-  path: `/${page.slug}`,
-  keywords: [...page.keywords],
-});
+// Needs legal review before the noindex is removed (see CLAUDE.md).
+export const metadata = {
+  ...pageMetadata({
+    title: page.metaTitle,
+    description: page.metaDescription,
+    path: `/${page.slug}`,
+    keywords: [...page.keywords],
+  }),
+  robots: { index: false, follow: true },
+};
 
 /**
  * /privacy-policy. The route decides which policy this is and nothing else — the

@@ -26,6 +26,13 @@ export function Projects() {
             {projects.headline}
           </h2>
           <p className="body-l mt-6 text-steel">{projects.body}</p>
+          {/* Shown above the photographs so the illustrative nature is clear
+              before a visitor starts scanning the pairs, not only after. */}
+          {projects.illustrative && (
+            <p className="body-s mt-4 border-l-3 border-l-amber pl-5 text-steel">
+              {projects.disclaimer}
+            </p>
+          )}
         </Reveal>
 
         <Stagger className="mt-12 flex flex-col gap-12" step={0.08}>
@@ -53,11 +60,6 @@ export function Projects() {
           ))}
         </Stagger>
 
-        {projects.illustrative && (
-          <p className="body-s mt-10 max-w-prose border-l-3 border-l-amber pl-5 text-steel">
-            {projects.disclaimer}
-          </p>
-        )}
       </div>
     </section>
   );

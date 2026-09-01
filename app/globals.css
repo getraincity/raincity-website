@@ -196,6 +196,13 @@
     text-wrap: pretty;
   }
 
+  /* Every <button> shows a pointer cursor. The browser UA stylesheet only
+     applies this to <a> elements; <button> elements get the arrow by default,
+     which reads as inert — the wrong signal for any interactive control. */
+  button {
+    cursor: pointer;
+  }
+
   /* Visible focus on every interactive element, never removed. */
   :focus-visible {
     outline: var(--spacing-hairline) solid var(--color-pacific);

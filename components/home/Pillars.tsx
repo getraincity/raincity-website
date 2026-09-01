@@ -15,7 +15,7 @@ export function Pillars() {
   return (
     <section className="on-navy relative isolate" aria-labelledby="pillars-heading">
       <div className="absolute inset-0 -z-10">
-        <Photo name="rooftops" fill sizes="100vw" />
+        <Photo name="servicesHero" fill sizes="100vw" />
         <div className="absolute inset-0 bg-navy/85" aria-hidden="true" />
       </div>
 

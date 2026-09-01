@@ -48,22 +48,30 @@ export function Awards() {
               ))}
             </ul>
 
-            <div className="mt-8 flex items-center gap-5">
-              <p className="meta text-steel">Follow</p>
-              <ul className="-mx-2 flex items-center">
-                {social.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      aria-label={s.label}
-                      className="inline-flex size-11 items-center justify-center text-rc-blue transition-colors hover:text-navy"
-                    >
-                      <SocialIcon name={s.icon} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Only render the Follow row when at least one profile URL is
+                real. Placeholder "#" links scroll to page top and look like
+                active destinations — better to hide the row entirely until
+                the client supplies the actual profile URLs. */}
+            {social.some((s) => s.href !== "#") && (
+              <div className="mt-8 flex items-center gap-5">
+                <p className="meta text-steel">Follow</p>
+                <ul className="-mx-2 flex items-center">
+                  {social.map((s) =>
+                    s.href !== "#" ? (
+                      <li key={s.label}>
+                        <a
+                          href={s.href}
+                          aria-label={s.label}
+                          className="inline-flex size-11 items-center justify-center text-rc-blue transition-colors hover:text-navy"
+                        >
+                          <SocialIcon name={s.icon} />
+                        </a>
+                      </li>
+                    ) : null
+                  )}
+                </ul>
+              </div>
+            )}
           </Reveal>
 
           {/* The anchor. 2px navy outline marks it as the primary credential;

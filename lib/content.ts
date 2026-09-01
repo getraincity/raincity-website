@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Site content — copy comes from the homepage content inventory.
  *
  * Service blurbs have been differentiated: the source inventory reuses the
@@ -2042,7 +2042,7 @@ export const nav: NavItem[] = [
       href: `/locations/${l.slug}`,
     })),
   },
-  { label: "Blogs", href: "/blog" },
+  { label: "Blog", href: "/blog" },
 ];
 
 // --- Section content -------------------------------------------------------
@@ -2167,6 +2167,21 @@ export const pillars = {
 export const testimonials = {
   label: "Testimonials",
   headline: "Real Feedback from Our Customers",
+  /**
+   * Set to true once all reviews are verified real customer reviews and the
+   * placeholder entries have been replaced. When true, `localBusinessSchema`
+   * in lib/seo.tsx publishes an `aggregateRating` node using the values below.
+   * Do not set true while any placeholder entries remain — the schema would
+   * publish a fabricated rating signal.
+   */
+  verified: false,
+  /**
+   * Filled in when `verified` is true. Set both together: the average is
+   * meaningless without the count it was drawn from, and the count is
+   * unverifiable without the average it produces.
+   */
+  averageRating: 0,
+  reviewCount: 0,
   items: [
     {
       quote:
@@ -2318,13 +2333,11 @@ export const footer = {
     { label: "About Us", href: "/about" },
     { label: "Services", href: "/services" },
     { label: "Locations", href: "/locations" },
-    { label: "Our Blogs", href: "/blog" },
+    { label: "Blog", href: "/blog" },
   ],
   additionalLinks: [
-    { label: "Disclaimer", href: "/disclaimer" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms & Conditions", href: "/terms" },
-    { label: "Refund Policy", href: "/refund-policy" },
     // Was `#quote`, an anchor to the sitewide form, before /contact existed.
     { label: "Get In Touch", href: "/contact" },
   ],
@@ -2999,6 +3012,15 @@ export type BlogPost = {
   /** Two sentences for the card. Written to stand alone in a search result. */
   excerpt: string;
   /**
+   * Named author. Add when a real person at RainCity is confirmed as the
+   * writer — do not invent a name for placeholder content. When set, a byline
+   * appears in PostHeader and `blogPostingSchema` publishes a `Person` node
+   * instead of the `Organization` fallback. Add the field here, the byline
+   * component, and the schema in one pass; do not publish a Person name for
+   * content the named person did not write.
+   */
+  author?: { name: string; title: string };
+  /**
    * The tag printed on the card. Free text rather than a union, because the
    * set will change as the blog does and a union would make adding a post a
    * two-file edit. Keep the list short — six posts across six categories is a
@@ -3115,6 +3137,12 @@ export const blogPosts: BlogPost[] = [
         heading: "What it costs to miss it",
         blocks: [
           "A blocked downspout does not overflow neatly. It backs up behind the fascia, runs down the inside of the board, and the first anyone knows about it is a stain on a ceiling in January.",
+          {
+            kind: "photo",
+            photo: "gutterDownspouts",
+            caption:
+              "The elbow is where most blockages form — it collects what the run above it carries down, and clears last in a flush from the top.",
+          },
           "The clearing job is an hour. The fascia and the drywall behind it are a different trade and a different invoice.",
         ],
       },
@@ -3148,6 +3176,12 @@ export const blogPosts: BlogPost[] = [
         heading: "How often it actually needs doing",
         blocks: [
           "Most north elevations here want a wash every two to three years. Under heavy tree cover, every year.",
+          {
+            kind: "photo",
+            photo: "softAlgae",
+            caption:
+              "Algae growth on an exterior surface mid-treatment. The colour lifts as the solution works into the root structure; the weather carries the remainder off over the following weeks.",
+          },
           "If the same wall is green twelve months after a wash, the problem is drainage or overhanging growth rather than the wash — worth looking at before booking the same job again.",
         ],
       },
@@ -3297,6 +3331,12 @@ export const blogPosts: BlogPost[] = [
         heading: "Why it is worth the scheduling trouble",
         blocks: [
           "Water, road salt and freeze-thaw are what break a driveway or a lot, and all three work through the surface rather than on it.",
+          {
+            kind: "photo",
+            photo: "sealingDriveways",
+            caption:
+              "A residential driveway after sealing. The sheen comes off after curing; what remains is the surface barrier that slows water ingress through the winter.",
+          },
           "Sealed on a sensible cycle, the same slab lasts years longer, and the cracks that do appear stay small enough to fill.",
         ],
       },
@@ -3330,6 +3370,12 @@ export const blogPosts: BlogPost[] = [
         heading: "Salt, and when it stops working",
         blocks: [
           "Rock salt does very little far below freezing, and this region spends most of its cold snaps within a few degrees of it — which is why salting works here, and why timing it ahead of the freeze matters more than the quantity.",
+          {
+            kind: "photo",
+            photo: "snowSalting",
+            caption:
+              "Salting ahead of a freeze rather than after it. The difference between the two is the difference between prevention and remediation, and on a commercial site the liability follows the same line.",
+          },
           "Applied after the ice has bonded, it is mostly grit. Applied before, it stops the bond forming at all.",
         ],
       },
@@ -3426,9 +3472,28 @@ export const blogPage = {
 // --- Policy pages ----------------------------------------------------------
 
 /**
+ * These two policy pages cover the same legal ground as the reference pages
+ * reviewed during the September 2026 rebuild, rewritten in RainCity's own
+ * words. They still need sign-off from two separate people before launch:
+ *
+ *  1. A lawyer or paralegal — specifically for the limitation-of-liability
+ *     clause, the PIPA/PIPEDA rights section and the governing-law clause.
+ *  2. The client — to confirm every operational number (24-hour cancellation
+ *     window, 50% late-fee, net-30 invoicing, 7-day issue window, retention
+ *     periods) reflects what the business actually does.
+ *
+ * Both pages are currently noindex. Remove the robots override in their
+ * respective page.tsx files after both sign-offs are obtained.
+ *
+ * Known gaps to address before launch:
+ *  - No named privacy officer (PIPA expects one to be designated).
+ *  - Accepted payment methods are referred to but not listed.
+ *  - No business registration number or incorporation details.
+ */
+
+/**
  * ===========================================================================
- * PLACEHOLDER LEGAL TEXT — must be reviewed by a licensed lawyer/paralegal
- * before publishing. Not legal advice.
+ * NEEDS LEGAL REVIEW — not yet reviewed by a licensed lawyer/paralegal.
  * ===========================================================================
  *
  * Every string in `legalPages` below was written to read as standard,
@@ -3530,7 +3595,7 @@ export type LegalPage = {
 };
 
 /**
- * The four policy pages, in one shape.
+ * The two policy pages, in one shape.
  *
  * They share a template rather than a layout file: `LegalPageTemplate` takes
  * one of these objects and renders the whole route. Nothing about a policy
@@ -3538,32 +3603,29 @@ export type LegalPage = {
  * section type the others do not have, it belongs in `LegalSection` as an
  * optional field rather than in a fork of the template.
  *
+ * Disclaimer and Refund Policy were removed in September 2026. Their routes
+ * permanently redirect: /disclaimer → /, /refund-policy → /terms.
+ * The workmanship guarantee that lived in the Refund Policy is now in the
+ * Terms & Conditions ("Our Workmanship Guarantee" section).
+ *
  * Section numbering is the one place these pages break the site's rule
  * against numbered markers. It is earned for the same reason `servicePage`'s
  * process steps are: a clause number is how a legal document is cited, and
  * "see section 4" has to resolve to something a reader can find.
  */
 export const legalPages = {
-  /**
-   * PLACEHOLDER LEGAL TEXT — must be reviewed by a licensed lawyer/paralegal
-   * before publishing. Not legal advice.
-   *
-   * The cancellation window, the 50% late-cancellation charge, the 30-day
-   * quote validity, net-30 invoicing and the liability cap are all defaults
-   * written to be plausible. Every one needs the client's confirmation.
-   */
   terms: {
     slug: "terms",
     crumb: "Terms & Conditions",
     heading: "Terms & Conditions",
     intro:
-      "The terms that govern quotes, bookings and work carried out by RainCity Property Maintenance.",
-    lastUpdated: "August 31, 2026",
-    updatedISO: "2026-08-31",
+      "The terms that govern quotes, bookings, payment, and work carried out by RainCity Property Maintenance.",
+    lastUpdated: "September 1, 2026",
+    updatedISO: "2026-09-01",
     metaTitle:
       "Terms & Conditions | RainCity Property Maintenance, New Westminster BC",
     metaDescription:
-      "The terms governing quotes, scheduling, cancellation, payment and liability for RainCity Property Maintenance work across Greater Vancouver, under BC law.",
+      "The terms governing quotes, scheduling, cancellation, payment, our workmanship guarantee and liability for RainCity Property Maintenance work across Greater Vancouver, under BC law.",
     keywords: [
       "RainCity terms and conditions",
       "property maintenance terms of service BC",
@@ -3652,9 +3714,28 @@ export const legalPages = {
         ],
       },
       {
+        id: "guarantee",
+        title: "Our Workmanship Guarantee",
+        icon: "shieldCheck",
+        body: [
+          "Every job we do is guaranteed. If the work carried out does not meet the standard set out in your quote, we come back and put it right at no charge.",
+        ],
+        callout: {
+          title: "Redo first, refund second",
+          body: "This is a workmanship guarantee. The first remedy is always a return visit at no cost to you. A refund is offered where a return visit is not practical, where the same issue is not resolved after a reasonable further attempt, or where you would prefer not to have us on site again.",
+        },
+        list: [
+          "Report any issue within 7 days of the job finishing — the sooner we look, the more clearly we can assess the work as we left it",
+          "Give us the property address, the date of work, a description of the issue and, where possible, a photograph",
+          "We acknowledge requests within one business day and arrange a return visit, normally within five business days",
+          "Where a refund is the appropriate remedy, it is issued to the original payment method within 10 business days of being agreed",
+          "The guarantee covers our workmanship, not re-soiling from weather or use, regrowth over time, pre-existing damage, or surfaces already at the end of their service life",
+        ],
+      },
+      {
         id: "liability",
         title: "Liability and Limitations",
-        icon: "shieldCheck",
+        icon: "alertTriangle",
         body: [
           "RainCity is licensed and carries liability insurance. A certificate is available on request and is sent directly to a strata council or property manager where one is required.",
           "We take responsibility for damage caused by our negligence in the course of carrying out work. We are not responsible for pre-existing damage, for wear that our work reveals rather than causes, or for the failure of a component already at or beyond the end of its service life.",
@@ -3683,28 +3764,22 @@ export const legalPages = {
   },
 
   /**
-   * PLACEHOLDER LEGAL TEXT — must be reviewed by a licensed lawyer/paralegal
-   * before publishing. Not legal advice.
-   *
-   * This is the page with the most specific factual claims, and they are the
-   * ones most likely to drift: the collected fields are read off the live
-   * quote form, but the retention periods, the 30-day response commitment and
-   * the description of third-party handling are written defaults. The form
-   * has no backend yet, so “how a submission reaches us” describes the
-   * intended path rather than an implemented one.
+   * Privacy Policy — the form endpoint is now live (Resend via /api/contact),
+   * so the third-parties section names the actual provider. Needs legal review
+   * before publishing; noindex is set on the route until that happens.
    */
   privacy: {
     slug: "privacy-policy",
     crumb: "Privacy Policy",
     heading: "Privacy Policy",
     intro:
-      "What we collect when you contact us, how it is used, how long it is kept, and how to ask us to delete it.",
-    lastUpdated: "August 31, 2026",
-    updatedISO: "2026-08-31",
+      "What we collect when you contact us, how it is used, how long it is kept, and how to request access or deletion.",
+    lastUpdated: "September 1, 2026",
+    updatedISO: "2026-09-01",
     metaTitle:
       "Privacy Policy | RainCity Property Maintenance, New Westminster BC",
     metaDescription:
-      "How RainCity Property Maintenance collects, uses, stores and deletes what you give us when requesting a quote — and your rights under BC privacy law.",
+      "How RainCity Property Maintenance collects, uses, stores and deletes the information you give us when requesting a quote — and your rights under BC privacy law.",
     keywords: [
       "RainCity privacy policy",
       "property maintenance privacy policy BC",
@@ -3713,11 +3788,20 @@ export const legalPages = {
     ],
     sections: [
       {
+        id: "introduction",
+        title: "About This Policy",
+        icon: "info",
+        body: [
+          "RainCity Property Maintenance is committed to protecting the personal information of the people we work with and work for. This policy explains what we collect, how we use it, and what rights you have over it.",
+          "By using this website or contacting us about a job, you consent to the collection and use of your information as described here. We collect only what is necessary, and we handle it with care.",
+        ],
+      },
+      {
         id: "what-we-collect",
         title: "Information We Collect",
         icon: "clipboardList",
         body: [
-          "We collect only what we need in order to quote and carry out work. Most of it comes directly from you, through the quote form on this website or in the course of a phone call or an email.",
+          "We collect only what we need in order to quote and carry out work. Most of it comes directly from you, through the quote form on this website or in the course of a phone call or email.",
           "The quote form asks for the following:",
         ],
         list: [
@@ -3725,11 +3809,11 @@ export const legalPages = {
           "Your phone number",
           "Your email address",
           "The service you are enquiring about",
-          "Your preferred date, if you give one",
-          "Anything you choose to add in the additional information field",
+          "Your preferred date, if you provide one",
+          "Any details you add in the additional information field",
         ],
         after: [
-          "We also hold what you tell us while a job is being arranged or discussed — the property address, access details, site notes and the history of work we have carried out for you. No payment card details are collected through this website.",
+          "While a job is being arranged, we also hold the property address, access details, site notes and the history of work we have carried out for you. No payment card details are collected or stored through this website.",
         ],
       },
       {
@@ -3737,17 +3821,17 @@ export const legalPages = {
         title: "How We Use Your Information",
         icon: "route",
         body: [
-          "Your information is used to answer you and to run the job. Specifically:",
+          "Your information is used to respond to you and to run the job. Specifically:",
         ],
         list: [
           "To prepare and send you a quote",
           "To contact you about scheduling, access and arrival times",
-          "To carry out the work and to invoice for it",
-          "To follow up on a completed job, including any issue you raise under our satisfaction guarantee",
-          "To keep the records a licensed and insured business is required to keep",
+          "To carry out the work and issue an invoice",
+          "To follow up on a completed job, including any issue raised under our workmanship guarantee",
+          "To maintain the records that a licensed and insured business is required to keep",
         ],
         after: [
-          "We do not use your information for automated decision-making or profiling, and we do not send marketing email unless you have asked us to.",
+          "We do not use your information for automated decision-making or profiling, and we do not send marketing messages unless you have specifically asked us to.",
         ],
       },
       {
@@ -3755,12 +3839,13 @@ export const legalPages = {
         title: "Service Providers and Third Parties",
         icon: "share",
         body: [
-          "Running a website and a business email account necessarily involves third parties. Where one of them handles your information, it does so on our instruction and only for the purpose we engaged it for.",
+          "Operating a website and business email account involves third-party providers. Where a provider handles your information on our behalf, it does so only for the specific purpose we engaged it for.",
         ],
         list: [
-          "Website hosting and form delivery — the provider that hosts this site and passes quote-form submissions to our inbox",
-          "Email — the provider carrying our business email, through which quote requests and correspondence arrive",
-          "Maps — the contact and quote sections embed a Google map of the area we serve. Loading it sends your IP address to Google and may set cookies under Google’s own privacy policy",
+          "Quote form delivery — submissions are routed to our inbox through Resend (resend.com), a transactional email service",
+          "Website hosting — the provider that serves this site stores the files and logs standard server access data",
+          "Business email — the provider carrying our email account, through which correspondence arrives",
+          "Maps — the quote and contact sections embed a Google map of the area we serve. Loading it sends your IP address to Google and may set cookies under Google’s own privacy policy",
         ],
         callout: {
           title: "We do not sell your information",
@@ -3772,8 +3857,8 @@ export const legalPages = {
         title: "Cookies and Analytics",
         icon: "cookie",
         body: [
-          "This website sets no advertising or tracking cookies of its own, and runs no third-party analytics package.",
-          "Cookies may still be set by the embedded Google map described above, and your browser will store the ordinary technical data any site needs to display. Browser settings can block or delete cookies; doing so may stop the map from loading, but the rest of the site works normally.",
+          "This website sets no advertising or tracking cookies of its own and runs no third-party analytics package.",
+          "Cookies may still be placed by the embedded Google map described above. Browser settings can block or delete cookies; doing so may prevent the map from loading, but the rest of the site works normally.",
         ],
       },
       {
@@ -3781,11 +3866,11 @@ export const legalPages = {
         title: "How Long We Keep It",
         icon: "archive",
         body: [
-          "Personal information is kept only as long as it is needed for the purpose it was collected for, or as long as we are required to keep it.",
+          "Personal information is kept only as long as it is needed for the purpose it was collected for, or as long as we are required to retain it.",
         ],
         callout: {
           title: "Retention at a glance",
-          body: "Quote requests that do not become bookings are deleted after 12 months. Records relating to completed work — invoices, site notes and correspondence — are kept for seven years, the period Canadian business and tax records are ordinarily required to be retained for.",
+          body: "Quote requests that do not become bookings are deleted after 12 months. Records relating to completed work — invoices, site notes and correspondence — are kept for seven years, the period ordinarily required for Canadian business and tax records.",
         },
       },
       {
@@ -3793,8 +3878,17 @@ export const legalPages = {
         title: "How We Protect It",
         icon: "lock",
         body: [
-          "Access to customer information is limited to the people who need it to quote, schedule, carry out or invoice a job. Accounts are password-protected and this website is served over an encrypted connection.",
+          "Access to customer information is limited to those who need it to quote, schedule, carry out or invoice a job. Accounts are protected by passwords, and this website is served over an encrypted connection.",
           "No method of transmission or storage is completely secure, and we cannot guarantee absolute security. If a breach affecting your personal information creates a real risk of significant harm, we will notify you and the appropriate authorities as Canadian privacy law requires.",
+        ],
+      },
+      {
+        id: "children",
+        title: "Children’s Privacy",
+        icon: "users",
+        body: [
+          "Our services are directed at property owners, strata councils and commercial property managers — adults who can enter into a service agreement. We do not knowingly collect personal information from anyone under the age of 18.",
+          "If you believe we have inadvertently received information from a minor, please contact us using the details below and we will delete it promptly.",
         ],
       },
       {
@@ -3806,262 +3900,36 @@ export const legalPages = {
         ],
         list: [
           "To ask what personal information we hold and how it has been used",
-          "To ask us to correct anything inaccurate or incomplete",
-          "To ask us to delete information we no longer have a legal or business reason to keep",
+          "To request a correction of anything inaccurate or incomplete",
+          "To request deletion of information we no longer have a legal or business reason to keep",
           "To withdraw consent to further contact, subject to records we are required to retain",
-          "To complain to the Office of the Information and Privacy Commissioner for British Columbia if you are not satisfied with how we handled a request",
+          "To complain to the Office of the Information and Privacy Commissioner for British Columbia if you are not satisfied with our response",
         ],
         after: [
           "We respond to requests within 30 days, and there is no charge for a reasonable one.",
         ],
       },
       {
-        id: "privacy-contact",
+        id: "contact",
         title: "Contacting Us About Privacy",
         icon: "mail",
         body: [
-          "Privacy questions, access requests and deletion requests can be sent by email or phone using the details in the footer, or through the contact page. Marking the request “Privacy” gets it to the right person faster.",
+          "Privacy questions, access requests and deletion requests can be sent to info@raincitypms.com or by phone using the number in the footer. Marking the subject line ‘Privacy Request’ gets it to the right person faster.",
+        ],
+      },
+      {
+        id: "changes",
+        title: "Changes to This Policy",
+        icon: "fileText",
+        body: [
+          "We may update this policy from time to time. When we do, the revised version is published here and the date at the top of the page is updated. We encourage you to review it periodically if you are a returning customer.",
+          "Continued use of this website or our services after an update constitutes acceptance of the revised policy.",
         ],
       },
     ],
     outro: {
       heading: "Questions about this policy?",
-      body: "Ask us what we hold, or tell us to delete it. Either way you will get a straight answer from a person, not a ticket number.",
-      cta: "Get In Touch",
-    },
-  },
-
-  /**
-   * PLACEHOLDER LEGAL TEXT — must be reviewed by a licensed lawyer/paralegal
-   * before publishing. Not legal advice.
-   *
-   * The before-and-after clause deliberately restates `projects.disclaimer`
-   * in policy language. If genuine RainCity job pairs replace the illustrative
-   * ones on the homepage, that clause has to be revisited here too — it is
-   * the one piece of copy on these four pages that another section of the
-   * site can contradict.
-   */
-  disclaimer: {
-    slug: "disclaimer",
-    crumb: "Disclaimer",
-    heading: "Disclaimer",
-    intro:
-      "What this website is for, what our stated scope of work promises, and what it does not.",
-    lastUpdated: "August 31, 2026",
-    updatedISO: "2026-08-31",
-    metaTitle: "Disclaimer | RainCity Property Maintenance, New Westminster BC",
-    metaDescription:
-      "The limits of the information on this site and of our stated service scope — warranties, results by property condition, photography, links and liability.",
-    keywords: [
-      "RainCity disclaimer",
-      "property maintenance disclaimer BC",
-      "exterior cleaning results disclaimer",
-      "website disclaimer Greater Vancouver",
-    ],
-    sections: [
-      {
-        id: "general",
-        title: "General Information Only",
-        icon: "info",
-        body: [
-          "The content of this website is general information about RainCity Property Maintenance and the services we offer across Greater Vancouver. It is published in good faith and kept as accurate as we can make it, but it is general in nature and is not tailored to any particular property.",
-          "Nothing on this site is a quote, an offer or a binding commitment. A price for your property is given only in a written quote issued after we have assessed the site.",
-        ],
-      },
-      {
-        id: "warranty",
-        title: "No Warranty Beyond Stated Scope",
-        icon: "shieldCheck",
-        body: [
-          "We warrant that work will be carried out with reasonable skill and care, and to the specification set out in your written quote.",
-        ],
-        callout: {
-          title: "The limit of what is warranted",
-          body: "Beyond that stated scope, and to the fullest extent permitted by law, we make no warranties of any kind, express or implied, including implied warranties of merchantability or fitness for a particular purpose. Cleaning and maintenance do not extend the service life of a surface that has already failed, and we do not warrant the condition of any material we clean, seal, treat or paint over.",
-        },
-      },
-      {
-        id: "results",
-        title: "Results Vary by Property",
-        icon: "target",
-        body: [
-          "The outcome of any exterior cleaning or maintenance job depends on the age, material and condition of the surface it is carried out on, and on what has been done to that surface before.",
-        ],
-        list: [
-          "Staining that has etched into glass, concrete or masonry may now be part of the surface, and will not come out at any pressure",
-          "Growth on a wet, shaded property returns; the interval before it does varies by exposure, aspect and surrounding planting",
-          "A coating applied over a substrate that is already failing will fail with it, whatever the preparation",
-          "Where we can see that a result is not achievable, we say so before the work is booked rather than after",
-        ],
-      },
-      {
-        id: "photography",
-        title: "Photographs and Before-and-After Images",
-        icon: "camera",
-        body: [
-          "Photographs on this site show the conditions we work in and the standard we finish to. Where an image is illustrative rather than a photograph of a RainCity job, the section it appears in says so.",
-        ],
-        callout: {
-          title: "Before-and-after pairs",
-          body: "Before-and-after images are matched by material so the comparison is fair, but they are not a guarantee of the result on your property. No image on this site should be read as a representation of how a particular surface will look after we have worked on it.",
-        },
-      },
-      {
-        id: "external-links",
-        title: "External Links",
-        icon: "externalLink",
-        body: [
-          "This website may link to third-party websites, and it embeds a Google map of the area we serve. Those sites and services are not under our control.",
-          "We do not endorse, monitor or accept responsibility for the content, accuracy, availability or privacy practices of any third-party site, and following an external link is at your own discretion. A link is not a recommendation, and its presence implies no association between that operator and RainCity.",
-        ],
-      },
-      {
-        id: "not-advice",
-        title: "Not Professional Advice",
-        icon: "scale",
-        body: [
-          "Information on this site about roofing, drainage, structures, coatings, materials or property condition is offered from a maintenance contractor’s practical experience. It is not engineering, building-inspection, legal, insurance or financial advice, and it is not a substitute for advice from a qualified professional in the relevant field.",
-          "Where we notice something during a job that appears to need a trade or a professional we are not, we point it out and recommend you have it assessed. That observation is a courtesy, not an inspection.",
-        ],
-      },
-      {
-        id: "liability-limit",
-        title: "Limitation of Liability",
-        icon: "alertTriangle",
-        body: [
-          "To the fullest extent permitted by the law of British Columbia, RainCity accepts no liability for loss or damage arising from reliance on information published on this website.",
-          "Liability for work we carry out is governed by our Terms & Conditions rather than by this page. Nothing here limits liability that cannot lawfully be limited, including liability for death or personal injury caused by negligence.",
-        ],
-      },
-    ],
-    outro: {
-      heading: "Questions about this disclaimer?",
-      body: "If something on the site reads as a promise and you want to know whether it is one, ask. We will tell you plainly what is and is not covered.",
-      cta: "Get In Touch",
-    },
-  },
-
-  /**
-   * PLACEHOLDER LEGAL TEXT — must be reviewed by a licensed lawyer/paralegal
-   * before publishing. Not legal advice.
-   *
-   * This page has a second constraint on top of the legal review: it has to
-   * stay consistent with the satisfaction guarantee the rest of the site
-   * already claims — the badge in `awards`, the “Satisfaction guaranteed on
-   * every job” trust point in `servicePage`, and “Every job guaranteed” on
-   * the painting service. It is written as a workmanship guarantee with redo
-   * as the first remedy, which is what those claims can honestly mean; it must
-   * not be narrowed in review to something that contradicts them without the
-   * badge and trust points being revisited at the same time.
-   *
-   * The 7-day reporting window, the five-business-day assessment and the
-   * 10-business-day refund are written defaults awaiting the client’s
-   * confirmation.
-   */
-  refund: {
-    slug: "refund-policy",
-    crumb: "Refund Policy",
-    heading: "Refund Policy",
-    intro:
-      "What our satisfaction guarantee covers, how to report a problem, and how we put it right.",
-    lastUpdated: "August 31, 2026",
-    updatedISO: "2026-08-31",
-    metaTitle:
-      "Refund Policy | RainCity Property Maintenance, New Westminster BC",
-    metaDescription:
-      "RainCity’s satisfaction guarantee in full — what qualifies for a free return visit or a refund, the window to report an issue, and how a request is handled.",
-    keywords: [
-      "RainCity refund policy",
-      "satisfaction guarantee property maintenance",
-      "exterior cleaning refund BC",
-      "service guarantee Greater Vancouver",
-    ],
-    sections: [
-      {
-        id: "guarantee",
-        title: "Our Satisfaction Guarantee",
-        icon: "shieldCheck",
-        body: [
-          "Every job we do is guaranteed. If the work carried out does not meet the standard set out in your quote, we come back and put it right at no charge. That is what the guarantee elsewhere on this site means, and this page sets out how it works in practice.",
-        ],
-        callout: {
-          title: "Redo first, refund second",
-          body: "This is a workmanship guarantee, so the first remedy is always a return visit at no cost to you. A refund is offered where a return visit is not practical, where the same issue is not resolved after a reasonable further attempt, or where you would simply rather have your money back than have us on site again.",
-        },
-      },
-      {
-        id: "qualifies",
-        title: "What Qualifies",
-        icon: "check",
-        body: ["A return visit or a refund is available where:"],
-        list: [
-          "Work described in your written quote was not carried out, or was not completed",
-          "The result falls short of the standard that quote specified",
-          "An area inside the agreed scope was missed",
-          "Work was carried out to the wrong surface, area or specification",
-          "Damage was caused by our negligence while carrying out the work",
-        ],
-      },
-      {
-        id: "reporting",
-        title: "Reporting an Issue",
-        icon: "clock",
-        body: [
-          "Tell us as soon as you notice something. Exterior work is exposed to weather from the moment we leave, and the sooner we look at it the more clearly we can separate our workmanship from the weather since.",
-        ],
-        callout: {
-          title: "Report within 7 days",
-          body: "Please raise any issue with completed work within 7 days of the job finishing. We will still look at anything reported after that, but a claim under this policy is assessed on the condition of the work as we left it, and beyond a week that becomes hard to establish fairly for either of us.",
-        },
-      },
-      {
-        id: "how-to-request",
-        title: "How to Request a Redo",
-        icon: "mail",
-        body: [
-          "There is no form to fill in. Call or email and tell us what is wrong.",
-        ],
-        list: [
-          "Give the property address and the date the work was carried out",
-          "Describe the issue and, where you can, send a photograph of it",
-          "Tell us whether you would prefer a return visit or a refund",
-        ],
-        after: ["Requests are acknowledged within one business day."],
-      },
-      {
-        id: "what-happens",
-        title: "What Happens Next",
-        icon: "route",
-        body: [
-          "We arrange a time to come and look at the work, usually within five business days and sooner where something is urgent.",
-        ],
-        list: [
-          "Where the issue falls within the guarantee, the return visit is scheduled at no charge and at a time that suits you",
-          "Where a refund is the right remedy, it is issued to the original payment method within 10 business days of being agreed",
-          "Where a partial refund is appropriate — one element of a larger job — we set out in writing how the figure was reached",
-          "Where we do not think the issue falls within the guarantee, we tell you why in writing rather than simply declining",
-        ],
-      },
-      {
-        id: "not-covered",
-        title: "What Is Not Covered",
-        icon: "alertTriangle",
-        body: [
-          "The guarantee covers our workmanship. It does not cover the following, which are outside our control:",
-        ],
-        list: [
-          "Re-soiling from ordinary use, weather, traffic, wildlife or nearby construction after the work was completed",
-          "Regrowth of moss, algae or lichen over time, which is a function of exposure rather than of how the treatment was carried out",
-          "Pre-existing damage, staining already etched permanently into a surface, or failure of a material at the end of its service life",
-          "Work excluded from the quote, or that you declined at the time of quoting",
-          "Damage caused by third parties, or at the property, after we left the site",
-          "Deposits on cancelled bookings, which are dealt with under our Terms & Conditions",
-        ],
-      },
-    ],
-    outro: {
-      heading: "Questions about this policy?",
-      body: "If something we did is not right, say so and we will come back. That is the whole policy; the rest of this page is just the detail.",
+      body: "Ask us what we hold, or tell us to delete it. You will get a straight answer from a person, not a ticket number.",
       cta: "Get In Touch",
     },
   },

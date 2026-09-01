@@ -45,14 +45,20 @@ export async function generateMetadata({
   const page = Number((await params).page);
   if (!isPage(page)) return {};
 
-  return pageMetadata({
-    // The page number goes in the title, so two archive pages are not two
-    // identical results in a SERP. Each canonicalises to itself, which is
-    // what `pageMetadata` does with `path`.
-    title: `Blog, Page ${page} | Property Maintenance Advice for ${business.region}`,
-    description: `Page ${page} of the ${business.name} archive — seasonal timing, maintenance advice and notes from the work across ${business.region}.`,
-    path: `/blog/page/${page}`,
-  });
+  return {
+    ...pageMetadata({
+      // The page number goes in the title, so two archive pages are not two
+      // identical results in a SERP. Each canonicalises to itself, which is
+      // what `pageMetadata` does with `path`.
+      title: `Blog, Page ${page} | Property Maintenance Advice for ${business.region}`,
+      description: `Page ${page} of the ${business.name} archive — seasonal timing, maintenance advice and notes from the work across ${business.region}.`,
+      path: `/blog/page/${page}`,
+    }),
+    // All posts are placeholder content. Block this paginated entry point as
+    // well until real articles replace the placeholders (same rationale as
+    // the hub and individual post routes).
+    robots: { index: false, follow: true },
+  };
 }
 
 /**

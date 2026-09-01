@@ -52,10 +52,27 @@ export function Header() {
   }, []);
 
   // Lock the page behind the mobile drawer.
+  //
+  // Plain `overflow: hidden` does not prevent background scrolling on iOS
+  // Safari when momentum scrolling is active — the page continues to drift
+  // behind the drawer. The position-fixed approach locks the scroll position
+  // as a CSS top offset, then restores the original Y on close so the page
+  // does not jump. This is the same technique body-scroll-lock uses internally
+  // and is the accepted fix for iOS without a dependency.
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) return;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
     return () => {
-      document.body.style.overflow = "";
+      body.style.overflow = "";
+      body.style.position = "";
+      body.style.top = "";
+      body.style.width = "";
+      window.scrollTo(0, scrollY);
     };
   }, [mobileOpen]);
 
@@ -95,22 +112,37 @@ export function Header() {
           </a>
 
           {/* Negative margin lets each target run wider than the icon without
-              adding height to the strip. */}
+              adding height to the strip. Social links are rendered as inactive
+              spans when their href is still the "#" placeholder — prevents the
+              misleading scroll-to-top click and signals that the link is not
+              yet live. Replace with real profile URLs in lib/content.ts. */}
           <ul className="-mr-1.5 ml-auto flex items-center">
-            {social.map((s) => (
-              <li key={s.label}>
-                <a
-                  href={s.href}
-                  aria-label={s.label}
-                  className="group inline-flex size-8 items-center justify-center text-white/75 transition-colors duration-200 hover:bg-white/15 hover:text-amber sm:size-9"
-                >
-                  <SocialIcon
-                    name={s.icon}
-                    className="size-4 transition-transform duration-200 group-hover:-translate-y-px group-hover:scale-110 sm:size-4.5"
-                  />
-                </a>
-              </li>
-            ))}
+            {social.map((s) =>
+              s.href !== "#" ? (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    aria-label={s.label}
+                    className="group inline-flex size-8 items-center justify-center text-white/75 transition-colors duration-200 hover:bg-white/15 hover:text-amber sm:size-9"
+                  >
+                    <SocialIcon
+                      name={s.icon}
+                      className="size-4 transition-transform duration-200 group-hover:-translate-y-px group-hover:scale-110 sm:size-4.5"
+                    />
+                  </a>
+                </li>
+              ) : (
+                <li key={s.label}>
+                  <span
+                    aria-label={`${s.label} — profile link coming soon`}
+                    role="img"
+                    className="inline-flex size-8 cursor-default items-center justify-center text-white/30 sm:size-9"
+                  >
+                    <SocialIcon name={s.icon} className="size-4 sm:size-4.5" />
+                  </span>
+                </li>
+              )
+            )}
           </ul>
         </div>
       </div>
@@ -151,7 +183,7 @@ export function Header() {
                 bar past the viewport. The wrapper sidesteps that entirely. */}
             <span className="hidden sm:block">
               <Button href="#quote" size="compact" className="group">
-                Get A Quote
+                Get a Free Quote
                 <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
               </Button>
             </span>
@@ -251,9 +283,11 @@ function DesktopNavItem({
                     ratio="16:10"
                     sizes="380px"
                   />
-                  <p className="meta mt-3 text-muted">
-                    {photos[preview ?? item.children[0].photo!].credit}
-                  </p>
+                  {/* Credit text is intentionally omitted from the nav preview.
+                      The Unsplash licence does not require attribution, and the
+                      photographer names were not verifiable from the search
+                      pages — so none was recorded. The `credit` field in the
+                      registry is a data note, not a caption. */}
                 </div>
               </div>
             ) : (
@@ -386,7 +420,7 @@ function MobileNav({ onClose }: { onClose: () => void }) {
         </ul>
 
         <div className="mt-8 flex flex-col gap-4">
-          <Button href="#quote">Get A Quote</Button>
+          <Button href="#quote">Get a Free Quote</Button>
           <Button href={business.phoneHref} variant="tertiary-invert">
             Call {business.phone}
           </Button>

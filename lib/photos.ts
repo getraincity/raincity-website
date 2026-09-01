@@ -88,6 +88,31 @@ export const photos = {
     note: "Stands in for the branded truck in a strata driveway. Swap for a signage shot once the fleet is wrapped. Carried full-bleed as the /blog banner — the one real frame in this registry with no other slot, and a van at the kerb suits a page of notes from the crew better than another photograph of a service does. The source is square and smaller than the other banner frames, so the slot holds it high; a frame shot for that banner should replace it. The alt text was tightened when this ran at full column width on an earlier /about layout: at that size 'a residential street' was visibly not what the frame shows.",
   },
 
+  /**
+   * Branded fleet — the slot for RainCity's wrapped service vehicle.
+   *
+   * Placeholder until the vehicle wrap is complete and the photograph is shot.
+   * When ready: shoot the truck in a recognisable Greater Vancouver setting
+   * (a strata driveway or a residential street), convert to 1920×774 webp,
+   * save at /fleet.webp, and delete the `placeholder` line below. The /blog
+   * hero and the About page can then both reference this key.
+   *
+   * Shot brief: van in three-quarter view, full signage visible, weather-wet
+   * street optional — the company works in the rain and a dry-day photo of a
+   * cleaning truck is a missed story. Background should read "Greater Vancouver"
+   * (a strata driveway, a heritage-house frontage or a commercial car park),
+   * not a generic kerb or a parking lot anywhere.
+   */
+  fleet: {
+    src: "/fleet.webp",
+    alt: "RainCity Property Maintenance's branded service vehicle, ready for a day of work in Greater Vancouver.",
+    credit: "RainCity Property Maintenance",
+    tone: "#1A5FA8",
+    ratio: "16:9",
+    focal: "50% 50%",
+    placeholder: "Branded RainCity fleet vehicle in three-quarter view, full signage visible, Greater Vancouver setting",
+  },
+
   // --- About page ----------------------------------------------------------
 
   aboutHero: {

@@ -63,7 +63,7 @@ export function ServiceHero({ service }: { service: Service }) {
           lg, which keeps the right of the photograph clear of copy. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/85 to-navy/45 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/65 to-navy/15 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
       />
 
       <div className="relative mx-auto w-full max-w-site px-edge py-section">

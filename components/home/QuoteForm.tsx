@@ -7,6 +7,35 @@ import { Check } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Motion";
 
+/**
+ * Inline spinner used during form submission. Matches the amber/navy colour
+ * vocabulary of the primary CTA without pulling in an icon library.
+ */
+function Spinner() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="size-4 animate-spin"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+      />
+    </svg>
+  );
+}
+
 type Errors = Partial<Record<"name" | "phone" | "email" | "service", string>>;
 
 /**
@@ -23,15 +52,19 @@ type Errors = Partial<Record<"name" | "phone" | "email" | "service", string>>;
  * and a region and no street address, so the embed is New Westminster at a
  * metro-wide zoom rather than a pin dropped on an address that is not on file.
  *
- * TODO: no backend. Validation and the success state are real; nothing is
- * sent. Wire `submit` to a server action, form endpoint or CRM to go live.
+ * Without NEXT_PUBLIC_FORM_ENDPOINT the form falls back to a pre-filled
+ * mailto: link — functional, but set the endpoint before launch (see
+ * .env.local.example for Web3Forms, Formspree, and server-action options).
  */
 export function QuoteForm() {
   const id = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  // True when the form fell back to mailto: — adjusts the success message.
+  const [mailtoFallback, setMailtoFallback] = useState(false);
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -54,7 +87,58 @@ export function QuoteForm() {
     if (!service) next.service = "Choose the service you need.";
 
     setErrors(next);
-    if (Object.keys(next).length === 0) setSent(true);
+    if (Object.keys(next).length > 0) return;
+
+    const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
+    if (!endpoint) {
+      // No backend configured yet — fall back to a pre-filled mailto: link so
+      // the request still reaches the inbox. The email client opens in the
+      // background; the page shows the success state so the visitor knows the
+      // action completed. Set NEXT_PUBLIC_FORM_ENDPOINT (see .env.local.example)
+      // before launch to replace this with a proper submission.
+      const subject = encodeURIComponent(`Quote Request — ${service}`);
+      const preferredDate = String(data.get("date") ?? "").trim();
+      const additionalInfo = String(data.get("info") ?? "").trim();
+      const bodyLines = [
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Email: ${email}`,
+        `Service: ${service}`,
+        ...(preferredDate ? [`Preferred date: ${preferredDate}`] : []),
+        ...(additionalInfo ? [`Additional info:\n${additionalInfo}`] : []),
+      ];
+      window.location.href = `mailto:${business.email}?subject=${subject}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      setMailtoFallback(true);
+      setSent(true);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) {
+        // Surface the actual error message from the server when available,
+        // so the visitor sees a specific reason rather than a generic fallback.
+        const json = await res.json().catch(() => ({}) as Record<string, string>);
+        throw new Error(
+          (json as { error?: string }).error ??
+            "Something went wrong. Please call us directly."
+        );
+      }
+      setSent(true);
+    } catch (err) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please call us directly.";
+      setErrors({ name: msg });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -106,15 +190,28 @@ export function QuoteForm() {
                   Thanks — we&rsquo;ll be in touch within one business day. For
                   anything urgent, call {business.phone}.
                 </p>
+                {mailtoFallback && (
+                  <p className="body-s mt-2 text-steel">
+                    Your email client should have opened with your request. If
+                    it did not, email us directly at{" "}
+                    <a
+                      href={business.emailHref}
+                      className="text-rc-blue underline underline-offset-4"
+                    >
+                      {business.email}
+                    </a>
+                    .
+                  </p>
+                )}
               </div>
             </div>
           ) : (
             <form noValidate onSubmit={submit} className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
-              <Field id={`${id}-name`} name="name" label="Full Name" error={errors.name} required />
-              <Field id={`${id}-phone`} name="phone" label="Phone Number" type="tel" error={errors.phone} required />
-              <Field id={`${id}-email`} name="email" label="Email Address" type="email" error={errors.email} required />
+              <Field id={`${id}-name`} name="name" label="Full Name" autoComplete="name" error={errors.name} required />
+              <Field id={`${id}-phone`} name="phone" label="Phone Number" type="tel" autoComplete="tel" error={errors.phone} required />
+              <Field id={`${id}-email`} name="email" label="Email Address" type="email" autoComplete="email" error={errors.email} required />
 
-              <Field id={`${id}-service`} name="service" label="Choose a Service" error={errors.service} required as="select">
+              <Field id={`${id}-service`} name="service" label="Choose a Service" autoComplete="off" error={errors.service} required as="select">
                 <option value="">Select…</option>
                 {quoteForm.serviceOptions.map((option) => (
                   <option key={option} value={option}>
@@ -123,8 +220,10 @@ export function QuoteForm() {
                 ))}
               </Field>
 
-              <Field id={`${id}-date`} name="date" label="Preferred Date" type="date" className="sm:col-span-2" />
-              <Field id={`${id}-info`} name="info" label="Additional Information" as="textarea" rows={3} className="sm:col-span-2" />
+              {/* Preferred date is future-specific; autofill would insert a
+                  past date which is actively misleading here. */}
+              <Field id={`${id}-date`} name="date" label="Preferred Date" type="date" autoComplete="off" className="sm:col-span-2" />
+              <Field id={`${id}-info`} name="info" label="Additional Information" as="textarea" rows={3} autoComplete="off" className="sm:col-span-2" />
 
               {/* Honeypot */}
               <div aria-hidden="true" className="hidden">
@@ -133,7 +232,16 @@ export function QuoteForm() {
               </div>
 
               <div className="mt-1 sm:col-span-2">
-                <Button type="submit">{quoteForm.submit}</Button>
+                <Button type="submit" disabled={submitting} aria-label={submitting ? "Sending your request…" : undefined}>
+                  {submitting ? (
+                    <>
+                      <Spinner />
+                      Sending…
+                    </>
+                  ) : (
+                    quoteForm.submit
+                  )}
+                </Button>
               </div>
             </form>
           )}
@@ -182,6 +290,7 @@ function Field({
   type = "text",
   as = "input",
   rows = 3,
+  autoComplete,
   error,
   required = false,
   className,
@@ -193,6 +302,7 @@ function Field({
   type?: string;
   as?: "input" | "select" | "textarea";
   rows?: number;
+  autoComplete?: string;
   error?: string;
   required?: boolean;
   className?: string;
@@ -203,6 +313,7 @@ function Field({
     id,
     name,
     required,
+    autoComplete,
     "aria-invalid": error ? true : undefined,
     "aria-describedby": error ? errorId : undefined,
     className: cn(control, error && "border-amber-ink"),

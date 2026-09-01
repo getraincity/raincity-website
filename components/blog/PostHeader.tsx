@@ -129,10 +129,12 @@ export function PostHeader({ post }: { post: BlogPost }) {
             </PostColumn>
           </RevealOnLoad>
 
-          {/* Date and read time on a rule, which is what closes the header
-              block and separates it from the photograph below. `dateTime`
-              carries the machine-readable form so the printed one stays
-              short — the same split the post card makes. */}
+          {/* Date, read time, and (when set) author — on a rule that closes
+              the header block and separates it from the photograph below.
+              `dateTime` carries the machine-readable form so the printed one
+              stays short. The author block appears only when `post.author` is
+              set: add the field to a post in content.ts at the same time as
+              confirming the person named actually wrote it. */}
           <RevealOnLoad delay={0.22}>
             <PostColumn className="mt-8 border-t border-line pt-5">
               <p className="meta flex flex-wrap items-center gap-x-6 gap-y-2 text-muted">
@@ -144,6 +146,17 @@ export function PostHeader({ post }: { post: BlogPost }) {
                   <Clock className="shrink-0 text-rc-blue" />
                   {post.readMinutes} {blogPage.card.readTime}
                 </span>
+                {post.author && (
+                  <span className="inline-flex items-center gap-2 text-navy">
+                    <span aria-hidden="true" className="h-3 w-px bg-line" />
+                    <span>
+                      {post.author.name}
+                      <span className="ml-1.5 text-muted">
+                        · {post.author.title}
+                      </span>
+                    </span>
+                  </span>
+                )}
               </p>
             </PostColumn>
           </RevealOnLoad>

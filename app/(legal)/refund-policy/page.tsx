@@ -1,21 +1,8 @@
-import { legalPages } from "@/lib/content";
-import { pageMetadata } from "@/lib/seo";
-import { LegalPageTemplate } from "@/components/legal/LegalPageTemplate";
+import { redirect } from "next/navigation";
 
-const page = legalPages.refund;
-
-export const metadata = pageMetadata({
-  title: page.metaTitle,
-  description: page.metaDescription,
-  path: `/${page.slug}`,
-  keywords: [...page.keywords],
-});
-
-/**
- * /refund-policy. The route decides which policy this is and nothing else — the
- * banner, contents rail, clause body and closing card are all
- * `LegalPageTemplate`, shared with the other three policy pages.
- */
+// This page has been removed. The permanent HTTP redirect in next.config.ts
+// sends /refund-policy → /terms at the network level; this module prevents
+// the TypeScript compiler from complaining about an unresolvable route.
 export default function Page() {
-  return <LegalPageTemplate page={page} />;
+  redirect("/terms");
 }

@@ -68,23 +68,15 @@ export function Photo({
     className,
   );
 
-  // No photograph in this slot yet. The design system's placeholder stands in
-  // — the hatch, the shot name along the bottom edge, the intended ratio
-  // tagged in the corner — so the gap is legible as work outstanding and the
-  // layout is reviewable at the size the real frame will occupy. Hidden from
-  // assistive technology entirely: `alt` describes a photograph that is not
-  // on the page, and announcing it would be a straightforward lie.
+  // No photograph in this slot yet. Rather than showing the diagonal hatch
+  // (which reads as a broken image to visitors), render a clean fog background
+  // that looks intentional. The slot is hidden from assistive technology: `alt`
+  // describes a photograph that is not on the page, and announcing it would be
+  // a lie. The hatch utility is kept in globals.css for local dev use only —
+  // this component no longer renders it in any context.
   if (photo.placeholder) {
     return (
-      <div className={box} aria-hidden="true">
-        <span className="photo-placeholder absolute inset-0" />
-        <span className="meta absolute top-0 right-0 bg-navy px-2 py-1 text-white">
-          {r}
-        </span>
-        <span className="meta absolute inset-x-0 bottom-0 px-4 pb-3 text-steel">
-          {photo.placeholder}
-        </span>
-      </div>
+      <div className={cn(box, "bg-fog")} aria-hidden="true" />
     );
   }
 

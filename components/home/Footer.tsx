@@ -23,22 +23,36 @@ export function Footer() {
             <p className="body-s mt-6 max-w-tagline text-fog">{footer.tagline}</p>
 
             {/* Same target size, colour and hover as the header's social row —
-                one control, one behaviour, wherever it appears. */}
+                one control, one behaviour, wherever it appears. Icons whose
+                href is still "#" render as inactive spans to avoid the
+                misleading scroll-to-top click. */}
             <ul className="-ml-1.5 mt-4 flex items-center">
-              {social.slice(0, 3).map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    aria-label={s.label}
-                    className="group inline-flex size-8 items-center justify-center text-white/75 transition-colors duration-200 hover:bg-white/15 hover:text-amber sm:size-9"
-                  >
-                    <SocialIcon
-                      name={s.icon}
-                      className="size-4 transition-transform duration-200 group-hover:-translate-y-px group-hover:scale-110 sm:size-4.5"
-                    />
-                  </a>
-                </li>
-              ))}
+              {social.map((s) =>
+                s.href !== "#" ? (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      aria-label={s.label}
+                      className="group inline-flex size-8 items-center justify-center text-white/75 transition-colors duration-200 hover:bg-white/15 hover:text-amber sm:size-9"
+                    >
+                      <SocialIcon
+                        name={s.icon}
+                        className="size-4 transition-transform duration-200 group-hover:-translate-y-px group-hover:scale-110 sm:size-4.5"
+                      />
+                    </a>
+                  </li>
+                ) : (
+                  <li key={s.label}>
+                    <span
+                      aria-label={`${s.label} — profile link coming soon`}
+                      role="img"
+                      className="inline-flex size-8 cursor-default items-center justify-center text-white/30 sm:size-9"
+                    >
+                      <SocialIcon name={s.icon} className="size-4 sm:size-4.5" />
+                    </span>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 

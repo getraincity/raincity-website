@@ -46,35 +46,41 @@ export async function generateMetadata({
   const post = findPost(slug);
   if (!post) return {};
 
-  return pageMetadata({
-    // The title first and the brand after it, which is the half of a result
-    // somebody scanning for an answer is actually reading. The category is
-    // in there because a bare post title says nothing about the subject area
-    // to a reader who has never heard of this company.
-    title: `${post.title} | ${post.category} | ${business.shortName}`,
-    // The excerpt, unchanged. It was written as two sentences that stand
-    // alone in a search result — see the field's own note in content.ts — so
-    // writing a second description for the same post would be writing a worse
-    // one and giving the page two summaries to drift apart.
-    description: post.excerpt,
-    path: `/blog/${post.slug}`,
-    // The post's own photograph as the social card, rather than the shared
-    // brand card every other route uses. Six links to six articles that all
-    // preview identically is six links that look like the same page. Alt
-    // comes from the registry with it, so the card and its description are
-    // about the same photograph.
-    image: { url: photos[post.photo].src, alt: photos[post.photo].alt },
-    article: { publishedTime: post.date, section: post.category },
-    // Informational only, and derived from the post rather than from a list
-    // somebody maintains. The commercial terms belong to /services and the
-    // city-by-city set to /locations; the blog index note says the same.
-    keywords: [
-      post.title.toLowerCase(),
-      `${post.category.toLowerCase()} ${business.region}`,
-      `${post.category.toLowerCase()} advice BC`,
-      `property maintenance ${business.region}`,
-    ],
-  });
+  return {
+    ...pageMetadata({
+      // The title first and the brand after it, which is the half of a result
+      // somebody scanning for an answer is actually reading. The category is
+      // in there because a bare post title says nothing about the subject area
+      // to a reader who has never heard of this company.
+      title: `${post.title} | ${post.category} | ${business.shortName}`,
+      // The excerpt, unchanged. It was written as two sentences that stand
+      // alone in a search result — see the field's own note in content.ts — so
+      // writing a second description for the same post would be writing a worse
+      // one and giving the page two summaries to drift apart.
+      description: post.excerpt,
+      path: `/blog/${post.slug}`,
+      // The post's own photograph as the social card, rather than the shared
+      // brand card every other route uses. Six links to six articles that all
+      // preview identically is six links that look like the same page. Alt
+      // comes from the registry with it, so the card and its description are
+      // about the same photograph.
+      image: { url: photos[post.photo].src, alt: photos[post.photo].alt },
+      article: { publishedTime: post.date, section: post.category },
+      // Informational only, and derived from the post rather than from a list
+      // somebody maintains. The commercial terms belong to /services and the
+      // city-by-city set to /locations; the blog index note says the same.
+      keywords: [
+        post.title.toLowerCase(),
+        `${post.category.toLowerCase()} ${business.region}`,
+        `${post.category.toLowerCase()} advice BC`,
+        `property maintenance ${business.region}`,
+      ],
+    }),
+    // All six posts are placeholder content (PLACEHOLDER BLOG CONTENT in
+    // lib/content.ts). Block indexing until copy is replaced and confirmed.
+    // Remove when real posts are live.
+    robots: { index: false, follow: true },
+  };
 }
 
 /**

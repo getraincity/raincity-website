@@ -36,7 +36,12 @@ export function BlogHero() {
       aria-labelledby="blog-hero-heading"
     >
       <div className="absolute inset-0 -z-20">
-        <Photo name="truck" fill priority sizes="100vw" focal="50% 44%" />
+        {/* `truck` was a stock van that didn't match the blog's Pacific
+            Northwest voice and used a source squarer than the banner crop.
+            Replaced with `hero` (the evergreen-and-fog residential frame)
+            until the branded fleet photo exists — see the registry note for
+            the truck slot. Update this once the wrap is shot. */}
+        <Photo name="hero" fill priority sizes="100vw" focal="70% 55%" />
       </div>
 
       {/* Bottom-up on phones, where the type sits over the middle of the
@@ -44,7 +49,7 @@ export function BlogHero() {
           clear of copy. Identical to the other four banners. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/85 to-navy/45 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/65 to-navy/15 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
       />
 
       <div className="relative mx-auto w-full max-w-site px-edge py-section">

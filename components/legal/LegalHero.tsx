@@ -32,14 +32,22 @@ export function LegalHero({ page }: { page: LegalPage }) {
       aria-labelledby="legal-hero-heading"
     >
       <div className="absolute inset-0 -z-20">
-        <Photo name="rooftops" fill priority sizes="100vw" />
+        {/* Terms uses a distinct photograph to reduce the monotony of four
+            identical banners; the others keep rooftops — equally neutral for
+            a legal page and not worth four separate choices. */}
+        <Photo
+          name={page.slug === "terms" ? "contactHero" : "rooftops"}
+          fill
+          priority
+          sizes="100vw"
+        />
       </div>
 
       {/* Bottom-up on phones, where the type sits over the middle of the
           frame; left-to-right from lg, matching the other three banners. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/85 to-navy/45 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/65 to-navy/15 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
       />
 
       <div className="relative mx-auto w-full max-w-site px-edge py-section-sm">

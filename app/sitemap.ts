@@ -138,19 +138,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.6,
     })),
-    // The four policy pages, generated from `legalPages` for the same reason
-    // the services are: a route renamed in one place should not have to be
-    // remembered here.
+    // The two policy pages (Privacy Policy, Terms & Conditions), generated
+    // from `legalPages`. Disclaimer and Refund Policy have been removed and
+    // redirect permanently to / and /terms respectively.
     //
-    // Lowest priority on the site and yearly, which is what they are: pages
-    // that exist so a reader who goes looking finds them, not pages anybody
-    // should land on from a search. They are listed because they resolve and
-    // because the footer links to all four, so a crawler reaches them either
-    // way — omitting them from the sitemap would hide them from us, not from
-    // Google. See the PLACEHOLDER note on `legalPages` in content.ts: the
-    // text is unreviewed, and if it must not be indexed before a lawyer has
-    // seen it, the honest control is `noindex` on those routes, not a gap
-    // here.
+    // Lowest priority on the site and yearly: pages that exist so a reader
+    // who goes looking finds them, not pages that should rank for anything.
+    // Listed because they resolve and the footer links to both. noindex is
+    // set on the routes until legal review is complete — the control is on
+    // the route, not the sitemap.
     ...Object.values(legalPages).map((page) => ({
       url: canonical(`/${page.slug}`),
       lastModified: new Date(page.updatedISO),

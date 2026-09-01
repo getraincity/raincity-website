@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { aboutPage } from "@/lib/content";
+import { aboutPage, business } from "@/lib/content";
 import { Photo } from "@/components/ui/Photo";
 import { Button } from "@/components/ui/Button";
+import { Phone } from "@/components/ui/Icon";
 import { RevealOnLoad } from "@/components/ui/Motion";
 
 /**
@@ -33,7 +34,7 @@ export function AboutHero() {
           clear of copy. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/85 to-navy/45 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/65 to-navy/15 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/75 lg:to-navy/25"
       />
 
       <div className="relative mx-auto w-full max-w-site px-edge py-section">
@@ -74,8 +75,15 @@ export function AboutHero() {
             {aboutPage.hero.body}
           </RevealOnLoad>
 
-          <RevealOnLoad className="mt-8" delay={0.22}>
+          <RevealOnLoad
+            className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+            delay={0.22}
+          >
             <Button href="#quote">{aboutPage.hero.cta}</Button>
+            <Button href={business.phoneHref} variant="tertiary-invert">
+              <Phone />
+              Call Us Now
+            </Button>
           </RevealOnLoad>
         </div>
       </div>

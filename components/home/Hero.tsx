@@ -25,7 +25,7 @@ export function Hero() {
           side is left clear for the subject. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/80 to-navy/25 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/70 lg:to-navy/5"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-navy via-navy/65 to-navy/15 lg:bg-linear-to-r lg:from-navy/95 lg:via-navy/70 lg:to-navy/5"
       />
 
       {/* The cut. Hairline first, the gradient wedge laid 3px over it. */}
