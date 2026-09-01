@@ -3,6 +3,7 @@ import { Chivo, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/content";
 import { JsonLd, OG_IMAGE, SITE_URL, canonical, organizationSchema } from "@/lib/seo";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const chivo = Chivo({
   subsets: ["latin"],
@@ -105,6 +106,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
