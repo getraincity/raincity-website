@@ -75,11 +75,6 @@ export async function generateMetadata({
         `strata property maintenance ${location.name}`,
       ],
     }),
-    // The per-community copy (intro, FAQ, local notes) was written for the
-    // build and has not been confirmed by anyone at RainCity. Block indexing
-    // until the client reviews each community's detail block in lib/content.ts.
-    // Remove after client sign-off.
-    robots: { index: false, follow: true },
   };
 }
 

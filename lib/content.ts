@@ -39,25 +39,15 @@ export const business = {
 } as const;
 
 /*
- * PLACEHOLDER — the four `href: "#"` values below are not the client's real
- * profiles. Nobody has supplied them yet, and a social URL is not something
- * to guess: the wrong handle sends visitors to a stranger's account under
- * RainCity's name.
+ * Social profile links. Add an entry for each network once the real URL is
+ * confirmed. An empty array is the correct state here — rendering a "#" icon
+ * reads as broken, and the wrong handle points visitors to a stranger's account.
  *
- * Two things follow from that, both to settle before launch:
- *  - Get the four real URLs, or delete the entries for the networks the
- *    company does not use. An icon linking to "#" reads as a broken site.
- *  - The LocalBusiness JSON-LD in lib/seo.tsx publishes no `sameAs` at all,
- *    and that is the right state while these are "#" — a search engine told
- *    the business's profile is "#" is worse than one told nothing. Add
- *    `sameAs` in the same pass that fills these in, not before.
+ * When real URLs are ready: add them here and add `sameAs` to the
+ * LocalBusiness schema in lib/seo.tsx in the same pass.
  */
-export const social = [
-  { label: "Facebook", href: "#", icon: "facebook" },
-  { label: "Instagram", href: "#", icon: "instagram" },
-  { label: "X", href: "#", icon: "x" },
-  { label: "LinkedIn", href: "#", icon: "linkedin" },
-] as const;
+export const social: readonly { label: string; href: string; icon: string }[] =
+  [];
 
 // --- Services --------------------------------------------------------------
 
