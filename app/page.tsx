@@ -15,8 +15,15 @@ import { SectionEdge } from "@/components/ui/SectionEdge";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const metadata = pageMetadata({
-  title: `Property Maintenance & Exterior Cleaning in ${business.region} | ${business.shortName}`,
-  description: `${business.name} provides year-round pressure washing, window and gutter cleaning, roof and driveway care, snow removal and landscaping for homes, stratas and businesses in ${business.base} and across ${business.region}. Call ${business.phone} for a free quote.`,
+  // 58 characters. The previous title ran to 72 and lost the region.
+  title: `Exterior Cleaning & Property Maintenance, ${business.region}`,
+  // The description this replaced was 270 characters — a hundred past what a
+  // SERP renders — and the clause that got cut was the phone number at the
+  // end. The number is already a tel: link on the page and the `telephone`
+  // field in the LocalBusiness markup; a meta description is not where it
+  // earns anything, and putting it last guaranteed it was the first thing
+  // dropped.
+  description: `Year-round pressure washing, gutter, roof and window cleaning for homes, stratas and businesses across ${business.region}. Free written quotes.`,
   path: "/",
   // Region and service-plus-city terms. The nine-city
   // `property maintenance ${city} BC` set used to be spread in here too and

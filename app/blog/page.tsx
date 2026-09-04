@@ -1,9 +1,12 @@
 import { business } from "@/lib/content";
+import { pagePosts } from "@/lib/blog";
 import {
   JsonLd,
   blogPageSchema,
   breadcrumbSchema,
+  indexing,
   pageMetadata,
+  searchDirectives,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
@@ -18,7 +21,10 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 export const metadata = {
   ...pageMetadata({
     title: `Blog | Property Maintenance Advice for ${business.region}`,
-    description: `Seasonal timing, the maintenance that pays for itself and advice specific to ${business.region} — notes from ${business.name}, a mobile exterior-cleaning crew based in ${business.base}, BC.`,
+    // 140, down from 202. The route is noindex until the six articles are
+    // real (see `indexing` in lib/seo.tsx), but the description is what a
+    // shared link shows too, and that is not gated on anything.
+    description: `Seasonal timing, the maintenance that pays for itself, and advice specific to ${business.region} — notes from a crew based in ${business.base}.`,
     path: "/blog",
     // Informational terms only. The commercial ones belong to /services and the
     // city-by-city set to /locations; a blog index bidding against either would
@@ -33,7 +39,9 @@ export const metadata = {
       "strata maintenance schedule BC",
     ],
   }),
-  robots: { index: false, follow: true },
+  // Single-source hold. See `indexing` in lib/seo.tsx — flipping the flag
+  // there lifts this noindex and adds the sitemap entries in one edit.
+  ...searchDirectives(indexing.blog),
 };
 
 /**
@@ -66,7 +74,7 @@ export const metadata = {
 export default function BlogPage() {
   return (
     <>
-      <JsonLd schema={blogPageSchema()} />
+      <JsonLd schema={blogPageSchema(1, pagePosts(1))} />
       <JsonLd schema={breadcrumbSchema([{ name: "Blog", path: "/blog" }])} />
       <Header />
       <main id="main">

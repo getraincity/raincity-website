@@ -13,6 +13,8 @@ import { QuoteForm } from "@/components/home/QuoteForm";
 import { ServiceHero } from "@/components/service/ServiceHero";
 import { ServiceOverview } from "@/components/service/ServiceOverview";
 import { ServiceProcess } from "@/components/service/ServiceProcess";
+import { ServiceAreas } from "@/components/service/ServiceAreas";
+import { RelatedServices } from "@/components/service/RelatedServices";
 import { ServiceClosing } from "@/components/service/ServiceClosing";
 import { ServiceFaq } from "@/components/service/ServiceFaq";
 import { SectionEdge } from "@/components/ui/SectionEdge";
@@ -49,9 +51,16 @@ export async function generateMetadata({
   if (!service) return {};
 
   return pageMetadata({
-    // "Service | Company in Region" — the service first, because that is the
-    // half of the title someone is scanning a result page for.
-    title: `${service.title} | ${business.shortName} Property Maintenance, ${business.region}`,
+    // "Service in Region | Brand" — the service first, because that is the
+    // half of the title someone is scanning a result page for, then the
+    // geography, then the brand, which is the only part that can be cut
+    // without losing the query match.
+    //
+    // The previous form spelled out "RainCity Property Maintenance, Greater
+    // Vancouver" and ran to 79 characters on Concrete and Asphalt Sealing —
+    // nineteen past the point a SERP truncates, and what got cut was the
+    // region. The longest title this produces is 59.
+    title: `${service.title} in ${business.region} | ${business.shortName}`,
     description: service.detail.metaDescription,
     path: `/services/${service.slug}`,
     // Eleven pages competing for one term is eleven pages losing to each
@@ -136,6 +145,12 @@ export default async function ServiceDetailPage({
         <ServiceHero service={service} />
         <ServiceOverview service={service} />
         <ServiceProcess />
+        {/* The two cross-link bands, in the slot the community template
+            already uses for `NearbyAreas`: after the process band, before the
+            edge into the close. Both exist because this template linked to
+            nothing — see the header note on `ServiceAreas`. */}
+        <ServiceAreas />
+        <RelatedServices service={service} />
         {/* Slim, and amber rather than Fog. At the default span the strip
             stood 55px on a wide screen and read as a band of its own between
             two sections; at `slim` it is ~25px, the register of the site's

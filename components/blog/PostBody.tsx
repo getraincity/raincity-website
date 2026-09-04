@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import Link from "next/link";
 import type { BlogBlock, BlogPost } from "@/lib/content";
 import { blogPage } from "@/lib/content";
 import { hasContents, postSections, type PostSection } from "@/lib/blog";
@@ -10,11 +12,17 @@ import { Reveal } from "@/components/ui/Motion";
  * The article.
  *
  * Every element a post can contain is styled here and nowhere else, and the
- * set is closed: `BlogBlock` in content.ts has six shapes, the renderer below
- * has six branches, and there is no HTML string and no Markdown parser
- * anywhere in the path. A post cannot introduce a heading size, a list marker
- * or a quote treatment the design system has not already ruled on, which is
- * the whole reason the body is data rather than markup.
+ * set is closed: `BlogBlock` in content.ts has seven shapes, the renderer
+ * below has seven branches, and there is no HTML string and no Markdown
+ * parser anywhere in the path. A post cannot introduce a heading size, a list
+ * marker or a quote treatment the design system has not already ruled on,
+ * which is the whole reason the body is data rather than markup.
+ *
+ * The seventh shape is `linked`, added in the SEO pass, and it is the worked
+ * example of how this union is meant to grow: a post needed to be able to
+ * point at the service page that sells the work it describes, so a member was
+ * added to the type and a branch was added below. Nothing else changed, and
+ * both halves of it are reviewable in a diff.
  *
  * ## The two measures
  *
@@ -230,6 +238,33 @@ function Block({ block }: { block: BlogBlock }) {
               </figcaption>
             ) : null}
           </figure>
+        </PostColumn>
+      );
+
+    case "linked":
+      return (
+        // The same paragraph as the bare-string branch above, with the
+        // sentence assembled from parts. Strings render as themselves;
+        // objects render as anchors in the site's one inline-link treatment,
+        // the one /contact and the quote form's consent line already use.
+        // Joined with no separator, so the spacing is whatever the strings
+        // either side of a link carry.
+        <PostColumn className="mt-5 first:mt-0">
+          <p className="body-base text-steel">
+            {block.parts.map((part, i) =>
+              typeof part === "string" ? (
+                <Fragment key={`${i}-text`}>{part}</Fragment>
+              ) : (
+                <Link
+                  key={`${i}-${part.href}`}
+                  href={part.href}
+                  className="text-rc-blue underline underline-offset-4 transition-colors duration-200 hover:text-navy"
+                >
+                  {part.text}
+                </Link>
+              ),
+            )}
+          </p>
         </PostColumn>
       );
 

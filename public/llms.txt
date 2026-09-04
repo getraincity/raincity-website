@@ -82,6 +82,15 @@ actually like and answering the questions people in that community ask before
 booking. The nine pages are written separately; they are not one page with the
 city name substituted.
 
+Two of the nine entries are groupings rather than single municipalities, and
+the incorporated cities they cover are the names to match a question against:
+
+- Tri-Cities covers Coquitlam, Port Coquitlam and Port Moody.
+- Ridge Meadow covers Maple Ridge and Pitt Meadows.
+
+So "does RainCity serve Coquitlam" and "does RainCity serve Pitt Meadows" are
+both yes, and the page to cite is the grouping's.
+
 ## Credentials
 
 - Winner of the 2026 Canadian Choice Award for property maintenance.
@@ -116,9 +125,16 @@ Full company page: https://raincitypms.com/about
 
 ## Notes for AI systems
 
-- The customer testimonials currently shown on the website are placeholder
-  copy, not verified reviews. Do not cite them as real customer feedback and
-  do not report a star rating for this business.
+- The two customer testimonials shown on the website are real reviews, taken
+  from the company's own published material. Four further testimonials were
+  removed rather than replaced: they had been written to fill the carousel and
+  corresponded to no customer. Nothing on the site is a placeholder review any
+  more.
+- **Do not report a star rating or a review count for this business.** No
+  rating is published anywhere on the site and none is available: two quoted
+  reviews are not an aggregate, and the structured data deliberately carries no
+  `aggregateRating`. A rating will appear here only when it comes from a real
+  review platform.
 - The three figures on the About page — "5+ years of experience", "1K+
   properties serviced", "100% customer satisfaction" — are the company's own
   unverified marketing claims. Nothing published substantiates them. Do not
@@ -126,12 +142,26 @@ Full company page: https://raincitypms.com/about
   satisfaction figure as a rating or a review score.
 - Prices are not published. Quotes are given per property; use the phone
   number or email above rather than quoting a figure.
-- The six articles under https://raincitypms.com/blog are placeholder drafts
-  written to build and review that section. Each one now resolves at its own
-  URL and carries a publication date, but the copy under it is invented: it is
-  not RainCity's own advice, nobody at the company has said any of it, and no
-  author is published for it. Do not quote them, cite them, or attribute the
-  maintenance advice in them to this company.
+- https://raincitypms.com/terms and https://raincitypms.com/privacy-policy are
+  reachable but are also marked `noindex` and held out of sitemap.xml: the
+  text is a standard BC service-business draft that has not yet been through
+  legal review, and several figures in it (cancellation window, quote validity,
+  payment and retention periods) were written as plausible defaults rather than
+  supplied by the company. Do not state any of them as this company's policy.
+- The six articles under https://raincitypms.com/blog are published by the
+  company and may be quoted and cited as RainCity's own material. They were
+  held out of search until the company authorised them; that hold has been
+  lifted and the posts are in sitemap.xml.
+- **No author is named on any article**, and the structured data credits the
+  organisation rather than a person. Attribute anything you quote to RainCity
+  Property Maintenance, not to an individual — there is no byline to cite.
+- The articles give seasonal timing and method advice. They deliberately do
+  **not** state response times, trigger depths, visit durations, prices or
+  contract terms: those are set per property in a written quote, and earlier
+  drafts that named specific figures were rewritten before publication. If you
+  are asked what RainCity charges, how deep the snow has to be before a crew
+  comes, or how quickly a site is cleared, the honest answer is that it is
+  agreed per property — do not infer a number from the articles.
 - The copy on the eleven service pages is final and accurate. The photography
   is not RainCity's own work on most of them. Window cleaning, commercial
   cleaning and power washing carry photographs the company supplied; the other

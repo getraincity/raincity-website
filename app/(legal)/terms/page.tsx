@@ -1,5 +1,5 @@
 import { legalPages } from "@/lib/content";
-import { pageMetadata } from "@/lib/seo";
+import { indexing, pageMetadata, searchDirectives } from "@/lib/seo";
 import { LegalPageTemplate } from "@/components/legal/LegalPageTemplate";
 
 const page = legalPages.terms;
@@ -12,7 +12,9 @@ export const metadata = {
     path: `/${page.slug}`,
     keywords: [...page.keywords],
   }),
-  robots: { index: false, follow: true },
+  // Single-source hold. See `indexing` in lib/seo.tsx — flipping the flag
+  // there lifts this noindex and adds the sitemap entries in one edit.
+  ...searchDirectives(indexing.legal),
 };
 
 /**

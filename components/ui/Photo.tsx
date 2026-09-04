@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   photos,
   tonePlaceholder,
@@ -6,16 +5,33 @@ import {
   type PhotoKey,
   type PhotoRatio,
 } from "@/lib/photos";
-import { cn } from "@/lib/cn";
+import { PhotoFrame, type PhotoFrameData } from "@/components/ui/PhotoFrame";
 
-const ratioClass: Record<PhotoRatio, string> = {
-  "16:9": "aspect-16/9",
-  "16:10": "aspect-16/10",
-  "7:5": "aspect-7/5",
-  "4:5": "aspect-4/5",
-  "3:2": "aspect-3/2",
-  "1:1": "aspect-square",
-};
+/**
+ * Resolve a registry key into the plain fields `PhotoFrame` renders.
+ *
+ * Split out so a *server* component can do the lookup and hand the result
+ * across a client boundary as props — the header's nav preview is the one
+ * place that needs it. Keeping the lookup here means the registry is still
+ * imported in exactly one component file, which is the property that makes
+ * "swap `src` and everything downstream updates" true.
+ */
+export function photoData(name: PhotoKey): PhotoFrameData {
+  // Widened to the declared type on purpose. `photos` is `as const`, so
+  // indexing it with a PhotoKey yields a union of the twenty-odd literal
+  // entry types, and a field only some entries declare — `placeholder` — is
+  // not readable off that union. The registry satisfies `Photo`, so this is
+  // the shape the component is entitled to read.
+  const photo: PhotoRecord = photos[name];
+  return {
+    src: photo.src,
+    alt: photo.alt,
+    ratio: photo.ratio,
+    focal: photo.focal,
+    blurDataURL: tonePlaceholder(photo.tone),
+    placeholder: Boolean(photo.placeholder),
+  };
+}
 
 /**
  * Every photograph on the site renders through here, so ratio, focal point,
@@ -55,49 +71,16 @@ export function Photo({
   className?: string;
   imgClassName?: string;
 }) {
-  // Widened to the declared type on purpose. `photos` is `as const`, so
-  // indexing it with a PhotoKey yields a union of the twenty-odd literal
-  // entry types, and a field only some entries declare — `placeholder` — is
-  // not readable off that union. The registry satisfies `Photo`, so this is
-  // the shape the component is entitled to read.
-  const photo: PhotoRecord = photos[name];
-  const r = ratio ?? photo.ratio;
-  const box = cn(
-    "relative overflow-hidden bg-fog",
-    fill ? "h-full w-full" : ratioClass[r],
-    className,
-  );
-
-  // No photograph in this slot yet. Rather than showing the diagonal hatch
-  // (which reads as a broken image to visitors), render a clean fog background
-  // that looks intentional. The slot is hidden from assistive technology: `alt`
-  // describes a photograph that is not on the page, and announcing it would be
-  // a lie. The hatch utility is kept in globals.css for local dev use only —
-  // this component no longer renders it in any context.
-  if (photo.placeholder) {
-    return (
-      <div className={cn(box, "bg-fog")} aria-hidden="true" />
-    );
-  }
-
   return (
-    <div className={box}>
-      <Image
-        src={photo.src}
-        alt={photo.alt}
-        fill
-        sizes={sizes}
-        priority={priority}
-        fetchPriority={priority ? "high" : undefined}
-        // `priority` alone preloads without a hint, so the browser fetches
-        // the LCP image at the same priority as everything else on the page.
-        // Marking it high moves it to the front of the queue; the rest stay
-        // lazy, which is next/image's default for anything not priority.
-        placeholder="blur"
-        blurDataURL={tonePlaceholder(photo.tone)}
-        style={{ objectPosition: focal ?? photo.focal ?? "50% 50%" }}
-        className={cn("object-cover", imgClassName)}
-      />
-    </div>
+    <PhotoFrame
+      photo={photoData(name)}
+      ratio={ratio}
+      focal={focal}
+      fill={fill}
+      sizes={sizes}
+      priority={priority}
+      className={className}
+      imgClassName={imgClassName}
+    />
   );
 }

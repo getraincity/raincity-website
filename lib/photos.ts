@@ -64,7 +64,7 @@ export const photos = {
   },
 
   aboutCrew: {
-    src: "/about-section-picture.jpg",
+    src: "/about-section-picture.webp",
     alt: "A RainCity crew re-roofing a heritage house on a clear day: one worker on a ladder at the ridge, others laying underlay across the porch roof, stripped shingles bagged on tarps below.",
     credit: "RainCity Property Maintenance",
     tone: "#7fa3bf",
@@ -116,7 +116,7 @@ export const photos = {
   // --- About page ----------------------------------------------------------
 
   aboutHero: {
-    src: "/about-us-hero-background.png",
+    src: "/about-us-hero-background.webp",
     alt: "A single-family Greater Vancouver home with a grey composite roof, tucked among mature evergreens behind a trimmed hedge and paved walkway.",
     credit: "RainCity Property Maintenance",
     tone: "#4f5f3f",
@@ -126,27 +126,27 @@ export const photos = {
   },
 
   aboutWhoWeAre: {
-    src: "/about-us-who-we-are-section-background.png",
+    src: "/about-us-who-we-are-section-background.webp",
     alt: "A RainCity technician silhouetted against a bright sky, running a pressure-washing wand along a rooftop edge.",
     credit: "RainCity Property Maintenance",
     tone: "#a9c8e0",
     ratio: "1:1",
     focal: "46% 50%",
-    note: "Who We Are figure on /about. Source is 2530x1948 (1.3:1); cropped to the card's 1:1, the frame keeps its full height and loses only the outer ~12% of width, so the horizontal focal barely matters — set to hold the technician just left of centre.",
+    note: "Who We Are figure on /about. Served at 1600x1232 (1.3:1), converted from the 2530x1948 original in `assets/`; cropped to the card's 1:1, the frame keeps its full height and loses only the outer ~12% of width, so the horizontal focal barely matters — set to hold the technician just left of centre.",
   },
 
   aboutProcess: {
-    src: "/about-us-our-process-section-background.png",
+    src: "/about-us-our-process-section-background.webp",
     alt: "A smiling RainCity technician in a navy apron holding a spray bottle and a folded microfiber cloth.",
     credit: "RainCity Property Maintenance",
     tone: "#f0eee8",
     ratio: "7:5",
     focal: "50% 40%",
-    note: "Our Process figure on /about. Source is 2530x1948 (1.3:1) against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
+    note: "Our Process figure on /about. Served at 1600x1232 (1.3:1), converted from the 2530x1948 original in `assets/`, against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
   },
 
   servicesHero: {
-    src: "/our-services-hero-background.png",
+    src: "/our-services-hero-background.webp",
     alt: "A RainCity technician on a tiled Greater Vancouver roof running a pressure-washing wand across a row of solar panels under a clear blue sky.",
     credit: "RainCity Property Maintenance",
     tone: "#9ec3e2",
@@ -156,13 +156,13 @@ export const photos = {
   },
 
   servicesOffer: {
-    src: "/what-we-offer-section-background.png",
+    src: "/what-we-offer-section-background.webp",
     alt: "A cleaner in rubber gloves carefully wiping down a blackout curtain beside a sunlit window.",
     credit: "RainCity Property Maintenance",
     tone: "#5b6570",
     ratio: "7:5",
     focal: "50% 40%",
-    note: "What We Offer figure on /services. Source is 2530x1948 (1.3:1) against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
+    note: "What We Offer figure on /services. Served at 1600x1232 (1.3:1), converted from the 2530x1948 original in `assets/`, against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
   },
 
   // --- Contact page ---------------------------------------------------------

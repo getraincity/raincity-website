@@ -15,8 +15,12 @@ import { ServicesCatalogue } from "@/components/services/ServicesCatalogue";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const metadata = pageMetadata({
-  title: `Our Services | Exterior Cleaning & Property Maintenance in ${business.region}`,
-  description: `Pressure and soft washing, window, gutter and roof cleaning, concrete and asphalt sealing, painting, snow removal, holiday lights and landscaping — the full range of ${business.name} services for homes, stratas and businesses across ${business.region}.`,
+  // 52 characters, down from 80. The catalogue does not need to list itself
+  // in its own title; that is what the page below it is for.
+  title: `Our Services | Exterior Cleaning in ${business.region}`,
+  // 139, down from 266. The old one named nine of the eleven services and
+  // was cut after the fourth.
+  description: `Eleven services, one company — pressure and soft washing, windows, gutters, roofs, sealing, painting, snow and lights, across ${business.region}.`,
   path: "/services",
   // Service-led terms, where /about takes the company-led ones and the
   // homepage takes the city-by-city set. The three pages should not be

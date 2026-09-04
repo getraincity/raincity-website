@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { blogPage } from "@/lib/content";
 import { Check, LinkIcon } from "@/components/ui/Icon";
 
 /**
@@ -42,7 +41,26 @@ import { Check, LinkIcon } from "@/components/ui/Icon";
  */
 type State = "idle" | "copied" | "failed";
 
-export function CopyLink({ url }: { url: string }) {
+/**
+ * The button's three labels, handed over by the server component that renders
+ * it. They live in `blogPage.post.share` and used to be imported from
+ * `@/lib/content` right here — which, because `nav` in that module is built
+ * from `services` and `locations`, pulled the entire 260 KB of site copy into
+ * the client bundle for three strings. `PostShare` already has them in hand.
+ */
+export type CopyLinkLabels = {
+  copy: string;
+  copied: string;
+  copyFailed: string;
+};
+
+export function CopyLink({
+  url,
+  labels,
+}: {
+  url: string;
+  labels: CopyLinkLabels;
+}) {
   const [state, setState] = useState<State>("idle");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -66,17 +84,17 @@ export function CopyLink({ url }: { url: string }) {
 
   const label =
     state === "copied"
-      ? blogPage.post.share.copied
+      ? labels.copied
       : state === "failed"
-        ? blogPage.post.share.copyFailed
-        : blogPage.post.share.copy;
+        ? labels.copyFailed
+        : labels.copy;
 
   return (
     <>
       <button
         type="button"
         onClick={copy}
-        aria-label={blogPage.post.share.copy}
+        aria-label={labels.copy}
         className="inline-flex min-h-cta-min items-center gap-2.5 border-2 border-line bg-white px-4 text-navy transition-colors duration-200 hover:border-navy hover:bg-navy hover:text-white"
       >
         {state === "copied" ? (

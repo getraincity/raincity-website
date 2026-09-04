@@ -142,6 +142,20 @@
      section's height, so it is named here rather than left to the content. */
   --spacing-hero: clamp(540px, 72vh, 720px);
 
+  /* --- Motion ------------------------------------------------------------
+     The entire animation vocabulary, in three numbers. Content fades up
+     sixteen pixels over half a second and does nothing else, anywhere on the
+     site. These were the constants inside components/ui/Motion.tsx while an
+     animation library owned the timing; the library is gone and the keyframes
+     are in this file now, so the values belong here with the rest of the
+     system. Changing one of them changes every reveal on the site, which is
+     the point — a second duration or a second curve appearing in one section
+     is how a design loses its composure. */
+  --rc-motion-duration: 0.5s;
+  /* Smooth ease-out. Decelerates into place; no overshoot, ever. */
+  --rc-motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --rc-motion-rise: 16px;
+
   /* --- Signature: the Squeegee Edge -------------------------------------- */
   --rc-angle: 12deg;
   --rc-tan: 0.2126; /* tan(12deg) - horizontal run per unit of height */
@@ -220,6 +234,85 @@
   }
 }
 
+/* ==========================================================================
+   Motion - the whole vocabulary, and all of it lives here
+
+   There is no animation library on this site. components/ui/Motion.tsx renders
+   four wrappers, tags each with `data-motion`, and runs one IntersectionObserver
+   that writes `data-motion-state` when an off-screen element is due to arrive.
+   Everything below that line - the fade, the slide, the curve, the stagger
+   rhythm - is these rules. The header comment in Motion.tsx carries the rest of
+   the reasoning; the two are meant to be read together.
+
+   The rules are deliberately unlayered, so they outrank Tailwind's utilities on
+   the same element exactly as the library's inline styles used to. They animate
+   only `opacity` and `transform`, which are compositor properties: no layout,
+   no paint, no CLS.
+   ========================================================================== */
+
+@keyframes rc-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rc-motion-rise));
+  }
+  to {
+    opacity: 1;
+    /* `none`, not `translateY(0)`, and it pairs with the `backwards` fill on
+       both rules below rather than `forwards`. A resting transform of any kind
+       - the identity matrix included - makes the element a containing block for
+       fixed and absolute descendants and opens a stacking context, and a
+       forwards fill would hold it there for the life of the page. There is
+       nothing to hold: the animation ends on exactly the style the element
+       already had, so letting the fill lapse returns it to a genuinely
+       untransformed resting state. `none` interpolates as the identity, so the
+       movement itself is unchanged. */
+    transform: none;
+  }
+}
+
+/* Reset, per element. `--rc-delay` inherits like any custom property, so
+   without this a reveal nested inside a delayed one would silently adopt its
+   parent's timing. The inline style Motion.tsx writes, when there is a delay
+   to write, overrides this. */
+[data-motion="load"],
+[data-motion="reveal"] {
+  --rc-delay: 0s;
+}
+
+/* One child of a stagger. Its cue is the container's; its delay is its own
+   place in the row. `--rc-i` is written by the observer at the moment the row
+   is armed, and `--rc-step` / `--rc-lead` come inline off the container - so
+   they inherit down to an item at any depth, and a nested container replaces
+   both for its own subtree. */
+[data-motion="item"] {
+  --rc-delay: calc(var(--rc-lead) + var(--rc-i, 0) * var(--rc-step));
+}
+
+/* Above-the-fold banners: no JavaScript at all. The animation starts when the
+   element is first styled, which is the same moment it would first paint, so
+   the banner animates on a cold load without waiting for a bundle. */
+[data-motion="load"] {
+  animation: rc-reveal var(--rc-motion-duration) var(--rc-motion-ease)
+    var(--rc-delay) backwards;
+}
+
+/* The armed state: hidden, waiting to be scrolled to. Written only by the
+   observer, and only onto elements that are already below the fold - the HTML
+   this server sends never contains it, so a page with no working JavaScript is
+   a page with everything on it. */
+[data-motion-state="armed"] {
+  opacity: 0;
+  transform: translateY(var(--rc-motion-rise));
+}
+
+/* Arrival. The backwards fill is what covers the delay: without it an item
+   waiting its turn in a stagger would jump to full opacity the moment the armed
+   state came off and then blink out again when its own delay elapsed. */
+[data-motion-state="in"] {
+  animation: rc-reveal var(--rc-motion-duration) var(--rc-motion-ease)
+    var(--rc-delay) backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -234,13 +327,30 @@
     scroll-behavior: auto !important;
   }
 
-  /* Scroll and load reveals. Framer Motion writes its start state to an
-     inline style, which is server-rendered, so this has to be !important to
-     outrank it. Without the rule the reveals would stay at opacity 0 for
-     precisely the people who asked for less movement. */
+  /* Scroll and load reveals. `!important` because it has to outrank two things
+     at once: the armed state above, which is a rule of equal specificity, and
+     the keyframes, which beat ordinary declarations in the cascade but lose to
+     an important one. Without it the reveals would stay at opacity 0 for
+     precisely the people who asked for less movement.
+
+     Note that Motion.tsx does not read the media query. It arms and observes
+     for everybody; this rule is what makes that inert, and it cannot
+     desynchronise from the server the way a JavaScript branch did. */
   [data-motion] {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* Print. A reveal the reader never scrolled to is still armed when the print
+   stylesheet runs, and would come out of the printer as a blank space where a
+   paragraph should be. Nothing on paper animates, so nothing on paper is
+   allowed to be mid-animation. */
+@media print {
+  [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 

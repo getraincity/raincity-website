@@ -2,7 +2,14 @@ import type { Metadata, Viewport } from "next";
 import { Chivo, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/content";
-import { JsonLd, OG_IMAGE, SITE_URL, canonical, organizationSchema } from "@/lib/seo";
+import {
+  JsonLd,
+  OG_IMAGE,
+  SITE_URL,
+  canonical,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/seo";
 
 const chivo = Chivo({
   subsets: ["latin"],
@@ -90,11 +97,19 @@ export default function RootLayout({
             now served from this origin, so the connection the browser needs
             is the one it already has — a preconnect to a host nothing is
             fetched from costs a socket and saves nothing. */}
+        {/* The company, then the site it publishes. Every page-level node
+            below the root points its `isPartOf` at the second of these, so
+            both belong here rather than on any one route. */}
         <JsonLd schema={organizationSchema} />
+        <JsonLd schema={websiteSchema} />
       </head>
       <body>
-        {/* Reveals start at opacity 0 in the server HTML. If the JavaScript
-            that animates them never runs, this puts them back. */}
+        {/* Belt and suspenders, not a fix for a real gap: the server HTML is
+            already visible without JavaScript, because only the
+            IntersectionObserver in Motion.tsx ever writes the armed
+            (opacity: 0) state, and that observer cannot run without JS in the
+            first place. This rule only matters if something upstream changes
+            that guarantee — it costs one style tag to keep it true. */}
         <noscript>
           <style>{`[data-motion]{opacity:1!important;transform:none!important}`}</style>
         </noscript>

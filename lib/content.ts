@@ -166,9 +166,11 @@ export type ServiceDetail = {
       equally true of all eleven services. Set it where a service has a frame
       of its own that says something the shared one cannot. */
   closingPhoto?: PhotoKey;
-  /** Meta description. Written, not derived: 150-160 characters is a
+  /** Meta description. Written, not derived: 150-158 characters is a
       constraint on the sentence, and a paragraph reused from the page body
-      gets cut mid-clause in the result. */
+      gets cut mid-clause in the result. All eleven were trimmed to that
+      ceiling in the SEO pass — they had drifted to 162-171, which reads as
+      "about right" and is in fact past where Google stops rendering. */
   metaDescription: string;
   /** The questions this service actually gets asked. Optional in the type
       because the section and its JSON-LD are both written to return nothing
@@ -264,7 +266,7 @@ export const services: Service[] = [
       closing: "Ready for a Building That Looks Managed?",
       closingPhoto: "commercialClosing",
       metaDescription:
-        "Commercial cleaning in New Westminster and across Greater Vancouver. Offices, retail and strata common areas cleaned to a written scope, on the cycle your building needs.",
+      "Commercial cleaning across Greater Vancouver. Offices, retail and strata common areas cleaned to a written scope, on the cycle your building needs.",
       faqs: [
         {
           question: "Can you clean outside our operating hours?",
@@ -366,7 +368,7 @@ export const services: Service[] = [
       closing: "Ready to Find the Colour Underneath?",
       closingPhoto: "powerClosing",
       metaDescription:
-        "Pressure washing across Greater Vancouver for driveways, patios, siding and parkades. Pressure and tip matched to the surface, tested first, finished even edge to edge.",
+      "Pressure washing across Greater Vancouver for driveways, patios, siding and parkades. Pressure and tip matched to the surface, tested before we start.",
       faqs: [
         {
           question: "Will pressure washing damage my driveway or my siding?",
@@ -468,7 +470,7 @@ export const services: Service[] = [
       closing: "Ready for a Wash Your Siding Survives?",
       closingPhoto: "softClosing",
       metaDescription:
-        "Soft washing across Greater Vancouver for roofs, stucco, painted siding and cedar. Low pressure only, with moss and algae killed at the root instead of blasted off.",
+      "Soft washing across Greater Vancouver for roofs, stucco, painted siding and cedar. Low pressure only, with moss and algae killed at the root.",
       faqs: [
         {
           question: "What actually is soft washing?",
@@ -569,7 +571,7 @@ export const services: Service[] = [
       closing: "Ready to Seal Before the First Frost?",
       closingPhoto: "sealingClosing",
       metaDescription:
-        "Concrete and asphalt sealing across Greater Vancouver. Cracks routed and filled, oil degreased, the slab dried and metered, then sealed against water, salt and frost.",
+      "Concrete and asphalt sealing across Greater Vancouver. Cracks routed and filled, oil degreased, the slab metered dry, then sealed against water and salt.",
       faqs: [
         {
           question: "How often should a driveway be resealed?",
@@ -668,7 +670,7 @@ export const services: Service[] = [
       closing: "Ready for Glass You Can See Through?",
       closingPhoto: "windowClosing",
       metaDescription:
-        "Streak-free interior and exterior window cleaning across Greater Vancouver — glass, frames, sills, tracks and screens, on homes, storefronts and multi-storey buildings.",
+      "Streak-free window cleaning across Greater Vancouver — glass, frames, sills, tracks and screens, on homes, storefronts and multi-storey buildings.",
       // The six questions that actually come in before a window job is
       // booked, answered the way they would be answered on the phone. Each
       // one is published as FAQPage structured data, so none of them lean on
@@ -775,7 +777,7 @@ export const services: Service[] = [
       closing: "Ready Before the Rain Finds a Way In?",
       closingPhoto: "gutterClosing",
       metaDescription:
-        "Gutter cleaning across Greater Vancouver — every run cleared by hand, debris bagged and removed, downspouts flushed and augered, then flow-tested before we leave.",
+      "Gutter cleaning across Greater Vancouver — every run cleared by hand, debris bagged and removed, downspouts flushed and augered, then flow-tested.",
       faqs: [
         {
           question: "How often do gutters need clearing in Greater Vancouver?",
@@ -876,7 +878,7 @@ export const services: Service[] = [
       closing: "Ready to Take the Moss Off, Not the Roof?",
       closingPhoto: "roofClosing",
       metaDescription:
-        "Roof moss removal across Greater Vancouver. Shingle, tile and metal roofs treated at low pressure — no lance, no lost granules — with valleys and gutters cleared after.",
+      "Roof moss removal across Greater Vancouver. Shingle, tile and metal roofs treated at low pressure — no lance, no lost granules — gutters cleared after.",
       faqs: [
         {
           question: "Will cleaning damage my shingles?",
@@ -977,7 +979,7 @@ export const services: Service[] = [
       closing: "Ready for a Finish That Survives the Winter?",
       closingPhoto: "paintClosing",
       metaDescription:
-        "Interior and exterior painting across Greater Vancouver. Surfaces washed, scraped, filled, caulked and primed before the finish coats, so the work holds on a wet coast.",
+      "Interior and exterior painting across Greater Vancouver. Surfaces washed, scraped, filled, caulked and primed before the finish coats go on.",
       faqs: [
         {
           question: "What time of year can you paint outside here?",
@@ -1078,7 +1080,7 @@ export const services: Service[] = [
       closing: "Ready Before the First Flake Lands?",
       closingPhoto: "snowClosing",
       metaDescription:
-        "Snow removal and salting across Greater Vancouver. Driveways, walkways, strata lots and commercial entrances cleared at trigger depth, salted, and logged for your insurer.",
+      "Snow removal and salting across Greater Vancouver. Driveways, strata lots and commercial entrances cleared at trigger depth, salted, and logged.",
       faqs: [
         {
           question: "When do I need to book snow service?",
@@ -1181,7 +1183,7 @@ export const services: Service[] = [
       closing: "Ready to Light It Up Without the Ladder?",
       closingPhoto: "lightsClosing",
       metaDescription:
-        "Holiday light installation across Greater Vancouver. Rooflines, porches and trees measured, clipped and powered safely, serviced all season and taken down in January.",
+      "Holiday light installation across Greater Vancouver. Rooflines, porches and trees measured, clipped and powered safely, serviced all season.",
       faqs: [
         {
           question: "When should I book, and when do you install?",
@@ -1282,7 +1284,7 @@ export const services: Service[] = [
       closing: "Ready to Stop Thinking About the Lawn?",
       closingPhoto: "lawnClosing",
       metaDescription:
-        "Landscaping and lawn care across Greater Vancouver — mowing at the right height, bed edging, pruning in season, and cleanups for homes, strata grounds and frontages.",
+      "Landscaping and lawn care across Greater Vancouver — mowing at the right height, bed edging, seasonal pruning and cleanups for homes and strata grounds.",
       faqs: [
         {
           question: "How often should the lawn be cut in Greater Vancouver?",
@@ -1409,7 +1411,24 @@ export const services: Service[] = [
 export type LocationDetail = {
   /** Banner supporting line. One sentence, and about this place. */
   intro: string;
-  /** The route's own meta description. */
+  /**
+   * The route's own <title>. Written per community rather than built from a
+   * `Property Maintenance in {name}, BC` template, for two reasons.
+   *
+   * The derived form printed the brand twice — once as the generic phrase and
+   * again as the company name — and ran to 75 characters on New Westminster,
+   * which is fifteen past the point a SERP truncates. More importantly it
+   * could only ever say the slug's own name, and two of the nine slugs are
+   * groupings rather than municipalities: nobody searches "Tri-Cities
+   * pressure washing", they search Coquitlam or Port Moody, and nobody
+   * searches "Ridge Meadow" at all. Those two titles now carry the names
+   * people actually type, which is the whole point of the field being
+   * written rather than generated.
+   *
+   * Keep every one of these at 60 characters or under.
+   */
+  metaTitle: string;
+  /** The route's own meta description. Keep to 150-158 characters. */
   metaDescription: string;
   /** The local block's h2. Not "Property Care In X" nine times over. */
   heading: string;
@@ -1462,6 +1481,28 @@ export type Location = {
   blurb: string;
   /** Which bank of the Fraser, and which way from the New Westminster base. */
   bearing: "base" | "north-west" | "north-east" | "south";
+  /**
+   * The incorporated municipalities this entry actually covers, where `name`
+   * is not one of them.
+   *
+   * Seven of the nine entries are municipalities and leave this unset. Two are
+   * groupings: "Tri-Cities" is Coquitlam, Port Coquitlam and Port Moody, and
+   * "Ridge Meadow" is Maple Ridge and Pitt Meadows. Neither is a place — you
+   * cannot find either on a map, and `{"@type":"City","name":"Ridge Meadow"}`
+   * asks a crawler to resolve a city that does not exist.
+   *
+   * So the structured data expands this list where it is set: `areaServed` on
+   * every node that carries it now names five real municipalities instead of
+   * two groupings, which is what a search engine matching a query against a
+   * service area is trying to do. The page copy already names all five —
+   * sixteen to thirty-one times each — so this is the markup catching up with
+   * the prose rather than a new claim about where the company works.
+   *
+   * The display name stays as it is. "Maple Ridge & Pitt Meadows" on a card,
+   * in the nav and in nine breadcrumb trails is a layout problem, and the
+   * grouping is how the company actually talks about the area.
+   */
+  municipalities?: readonly string[];
   photo: PhotoKey;
   /** The copy for this community's own page. See `LocationDetail` above. */
   detail: LocationDetail;
@@ -1478,8 +1519,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "A village of acreages above Port Moody, where the conifers overhang the roofline all year and the driveway is usually longer than the house.",
+      metaTitle: "Anmore Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Anmore, BC — gutters, roofs, windows and driveways on the village's treed acreage lots. Free written quotes from RainCity, based in New Westminster.",
+        "Gutters, roofs, windows and driveways on Anmore's treed acreage lots. Year-round exterior cleaning from RainCity, based in New Westminster.",
       heading: "Working On Anmore's Acreages",
       body: [
         "Anmore is a village of a couple of thousand people spread across large lots between Port Moody and Buntzen Lake, and nearly every property in it is detached, private and standing in second-growth fir and cedar. That one fact sets most of the work. Needles and cones land on the roof and in the gutters twelve months of the year rather than for six weeks in October, and a north-facing slope under that much canopy stays damp enough to grow moss straight through the summer.",
@@ -1535,8 +1577,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "Four town centres, a mountain and a long industrial spine — the widest mix of property types we work in inside one city.",
+      metaTitle: "Burnaby Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Burnaby, BC — strata common areas, parkades, high glass and single-family homes across Metrotown, Brentwood, Lougheed and the Heights. Free written quotes from RainCity.",
+        "Exterior cleaning in Burnaby, BC — strata common areas, parkades, high glass and family homes from Metrotown to the Heights. Free written quotes.",
       heading: "One City, Four Town Centres",
       body: [
         "Burnaby fits four town centres, a university on a mountain and a long industrial spine into a single municipality, so the work changes street by street. Metrotown, Brentwood and Lougheed are concrete and glass — parkades, lobbies, common-area walkways and windows that only come clean off a water-fed pole. The streets between them are largely mid-century detached houses on standard lots, with the deep eaves and the mature street trees that come with that vintage.",
@@ -1592,8 +1635,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "Ladner, Tsawwassen and North Delta — flat, open, and close enough to the water that salt gets into everything.",
+      metaTitle: "Delta, Ladner & Tsawwassen Exterior Cleaning | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Delta, BC — Ladner, Tsawwassen and North Delta. Salt-film window cleaning, siding soft-washing, exterior painting and driveway work. Free written quotes from RainCity.",
+        "Exterior cleaning in Ladner, Tsawwassen and North Delta — salt-film window cleaning, siding soft-washing and driveway work. Free written quotes.",
       heading: "Three Communities, One Exposure",
       body: [
         "Delta is three places that share a municipality and very little else. Ladner is a village core with dyked farmland along the south arm of the Fraser. Tsawwassen faces the Strait of Georgia with almost nothing between it and the weather. North Delta is postwar subdivision on the escarpment above the river. What they have in common, and what matters to us, is exposure — this is the most open, least sheltered ground in our service area, and the wind carries salt and grit onto surfaces here that stay clean inland.",
@@ -1649,8 +1693,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "The Township and the City both — bigger lots, longer driveways, and a climate that runs a step away from the coast's.",
+      metaTitle: "Langley Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Langley, BC — driveway and lot sealing, pressure washing, gutters and roofs across Willoughby, Walnut Grove, Fort Langley, Brookswood and Aldergrove. Free quotes from RainCity.",
+        "Driveway and lot sealing, pressure washing, gutters and roofs across Willoughby, Walnut Grove, Fort Langley and Aldergrove. Free written quotes.",
       heading: "Acreages, Subdivisions And A Longer Dry Window",
       body: [
         "Langley is two municipalities and about as wide a spread of property as this region offers. Willoughby and Walnut Grove are recent subdivision — dense, new, and largely strata or small-lot detached. Fort Langley and Murrayville are heritage and mature. South of the highway, Brookswood, Campbell Valley and the land out towards Aldergrove are acreages, horse property and workshops. Twenty minutes inside the Township and the job in front of us has changed completely.",
@@ -1706,8 +1751,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "Home. The truck loads here, on the hill above the Fraser, and works its way out from it.",
+      metaTitle: "New Westminster Exterior Cleaning & Property Care",
       metaDescription:
-        "Exterior cleaning and property maintenance in New Westminster, BC — RainCity's home city. Heritage window and gutter work on the hill, strata care Uptown, at the Quay and in Queensborough. Free written quotes.",
+        "Exterior cleaning in New Westminster, BC — RainCity's home city. Heritage window and gutter work on the hill, strata care at the Quay. Free quotes.",
       heading: "The City The Truck Loads In",
       body: [
         "New Westminster is where we are based, which means it is the city we know street by street rather than by postal code — and it is also one of the harder ones to work in. The old grid runs straight down the hill to the river, so a great many properties in Queen's Park, Glenbrooke and the Brow of the Hill sit on a slope with a lane behind and tight on-street parking in front. The heritage stock is tall and timber, with original single-glazed windows and boxed gutters that do not behave like the modern equivalents.",
@@ -1756,6 +1802,7 @@ export const locations: Location[] = [
   {
     name: "Ridge Meadow",
     slug: "ridge-meadow",
+    municipalities: ["Maple Ridge", "Pitt Meadows"],
     blurb:
       "Maple Ridge and Pitt Meadows, out where the rain sits longest and a north-facing roof greens over fastest.",
     bearing: "north-east",
@@ -1763,8 +1810,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "Maple Ridge and Pitt Meadows, at the wet end of the valley, where a north-facing roof greens over faster than anywhere else we go.",
+      metaTitle: "Maple Ridge & Pitt Meadows Exterior Cleaning | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Maple Ridge and Pitt Meadows, BC — roof moss treatment, soft washing and gutter clearing at the wettest end of the valley. Free written quotes from RainCity.",
+        "Exterior cleaning in Maple Ridge and Pitt Meadows — roof moss treatment, soft washing and gutter clearing at the wettest end of the valley.",
       heading: "The Wet End Of The Valley",
       body: [
         "Ridge Meadows takes the weather the rest of the region only hears about. Rainfall climbs as you move east up the Fraser, and against the Golden Ears the cloud stalls and empties — so moss, algae and lichen out here are not an occasional problem, they are the standing condition. A north-facing roof slope in Silver Valley or Websters Corners will green over in a season and a half, and the shaded half of a driveway does much the same.",
@@ -1820,8 +1868,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "The largest area we cover — Whalley down to the border, and more commercial hard surface than the rest of the region put together.",
+      metaTitle: "Surrey Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Surrey, BC — parking lot sealing, commercial pressure washing, strata common areas and residential exterior cleaning from City Centre to South Surrey. Free quotes from RainCity.",
+        "Exterior cleaning in Surrey, BC — lot sealing, commercial pressure washing, strata common areas and homes from City Centre to South Surrey.",
       heading: "Six Town Centres And A Lot Of Asphalt",
       body: [
         "Surrey is six town centres rather than one city, and covering it properly means treating it that way. City Centre is towers and new mid-rise. Guildford, Fleetwood and Newton are largely 1980s and 90s subdivision with the townhouse complexes that arrived alongside them. Cloverdale is older and quieter. South Surrey runs newer, larger and closer to the water. It is the biggest single area we work in and the one with the widest span of building ages.",
@@ -1870,6 +1919,7 @@ export const locations: Location[] = [
   {
     name: "Tri-Cities",
     slug: "tri-cities",
+    municipalities: ["Coquitlam", "Port Coquitlam", "Port Moody"],
     blurb:
       "Coquitlam, Port Coquitlam and Port Moody. Hillside subdivisions, and hard surfaces that want the moss off every spring.",
     bearing: "north-east",
@@ -1877,8 +1927,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "Coquitlam, Port Coquitlam and Port Moody — hillside subdivision on one side, river and inlet flats on the other.",
+      metaTitle: "Tri-Cities Exterior Cleaning, Coquitlam BC | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in the Tri-Cities, BC — Coquitlam, Port Coquitlam and Port Moody. Moss removal, pressure washing, gutters and strata common areas. Free written quotes from RainCity.",
+        "Exterior cleaning in Coquitlam, Port Coquitlam and Port Moody — moss removal, pressure washing, gutters and strata common areas. Free quotes.",
       heading: "Three Cities, And A Lot Of Gradient",
       body: [
         "The Tri-Cities are three municipalities with one thing in common: gradient. Burke Mountain, Westwood Plateau and Heritage Mountain are hillside subdivision built into second-growth forest, so driveways are steep, lots are shaded, and hard surfaces stay damp long enough to grow moss down the north side of the house. At the bottom of the hill, Port Coquitlam's river flats and Port Moody's inlet edge are flatter, older and closer to water.",
@@ -1934,8 +1985,9 @@ export const locations: Location[] = [
     detail: {
       intro:
         "Character houses, laneways and mid-rise strata, on lots where access is the first thing we look at.",
+      metaTitle: "Vancouver Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning and property maintenance in Vancouver, BC — character-home window and gutter work, soft washing, and mid-rise strata common areas on the east side and the west. Free written quotes from RainCity.",
+        "Exterior cleaning in Vancouver, BC — character-home window and gutter work, soft washing, and mid-rise strata common areas, east side and west.",
       heading: "The Tightest Lots We Work On",
       body: [
         "Vancouver is the most constrained city in our area, and access decides a great deal of the quote. Character houses in Kitsilano, Dunbar, Mount Pleasant and across the east side sit close to their neighbours on narrow lots, often with a laneway house behind and no driveway at all — which means no truck at the house, hose and cord runs down a side yard barely wide enough for a ladder, and a word with the neighbour before anything is set up on their side of the fence. Cambie, Main and the West End add mid-rise strata, where the glass goes higher than a ladder ought to.",
@@ -2158,17 +2210,22 @@ export const testimonials = {
   label: "Testimonials",
   headline: "Real Feedback from Our Customers",
   /**
-   * Set to true once all reviews are verified real customer reviews and the
-   * placeholder entries have been replaced. When true, `localBusinessSchema`
-   * in lib/seo.tsx publishes an `aggregateRating` node using the values below.
-   * Do not set true while any placeholder entries remain — the schema would
-   * publish a fabricated rating signal.
+   * Every quote in `items` is a real customer review. True since the four
+   * invented entries were removed.
+   *
+   * This alone does NOT publish a rating: `localBusinessSchema` in lib/seo.tsx
+   * requires `verified && reviewCount > 0`, and the count below is still zero
+   * because no review platform has been connected yet. Both halves have to be
+   * true, which is the point — a rating with no count behind it is a number
+   * somebody made up.
    */
-  verified: false,
+  verified: true,
   /**
-   * Filled in when `verified` is true. Set both together: the average is
-   * meaningless without the count it was drawn from, and the count is
-   * unverifiable without the average it produces.
+   * Still zero, and that is the correct value. Set both together from a real
+   * source — a Google Business Profile review summary, not a tally of what is
+   * in `items` — because the average is meaningless without the count it was
+   * drawn from, and the count is unverifiable without the average it produces.
+   * The moment both are non-zero, a rating is published to search.
    */
   averageRating: 0,
   reviewCount: 0,
@@ -2186,51 +2243,22 @@ export const testimonials = {
       place: "New Westminster, Canada",
     },
 
-    /* =====================================================================
-       PLACEHOLDER — replace with real client reviews before launch.
-
-       The four entries below are invented. Only Sarah L. and Jason M. above
-       came off the client's own homepage; every name, quote, location and
-       service from here down was written to fill out the carousel and
-       corresponds to no actual customer.
-
-       Publishing invented testimonials misrepresents the business and, for
-       a company making paid service claims, is a consumer-protection
-       problem in Canada — not merely untidy copy. Swap them for real
-       reviews or delete them before this site goes live.
-
-       The two real reviews carry no `service` field on purpose: the source
-       material does not say what either customer bought, and attaching a
-       guess to a named real person would be inventing a fact about them.
-       ===================================================================== */
-    {
-      quote:
-        "Booked them for a full interior and exterior window clean before hosting family. Every pane came up spotless, and they were tidy about the whole job — nothing left behind for us to deal with.",
-      name: "Priya N.",
-      place: "Coquitlam, Canada",
-      service: "Window Cleaning",
-    },
-    {
-      quote:
-        "Our gutters were completely packed after the fall storms. The crew cleared everything out, flushed the downspouts, and sent through photos once they were finished. Straightforward to deal with.",
-      name: "Marc D.",
-      place: "North Vancouver, Canada",
-      service: "Gutter Cleaning",
-    },
-    {
-      quote:
-        "The driveway and back patio had not been touched in years and I honestly expected a patchy result. It came out even from edge to edge and looks close to new. Fair price for the amount of work.",
-      name: "Elena R.",
-      place: "Surrey, Canada",
-      service: "Power Washing",
-    },
-    {
-      quote:
-        "We signed up for seasonal clearing on our strata lot. They turned up early after every snowfall without us having to call, and the salting kept the walkways safe right through the winter.",
-      name: "Tom H.",
-      place: "Port Moody, Canada",
-      service: "Snow Removal & Salting",
-    },
+    /*
+     * Two reviews, both real, both from the client's own homepage.
+     *
+     * Four more sat here until the SEO pass: invented entries written to
+     * fill the carousel, carrying invented names, cities and services. They
+     * were removed rather than replaced, on the client's confirmation that
+     * only these two are genuine. Do not add a third without a real customer
+     * behind it - a carousel that looks thin is a smaller problem than a
+     * fabricated endorsement, and the four that were here are the reason
+     * this file carries a rule about it.
+     *
+     * Neither carries a `service` field on purpose: the source material does
+     * not say what either customer bought, and attaching a guess to a named
+     * real person would be inventing a fact about them. The field stays in
+     * the shape for the day a real review arrives with one.
+     */
   ],
 } as const;
 
@@ -2629,11 +2657,110 @@ export const servicePage = {
     body: "The things people actually ask before booking, answered the way we would answer them on the phone. If yours is not here, call — you will get a straight answer from someone who does the work.",
   },
 
+  /**
+   * The band that sends a service page back into the nine community pages.
+   *
+   * It exists because the link graph ran one way. `LocationServices` puts all
+   * eleven service links on all nine community pages, and nothing pointed
+   * back: a crawler reading the built HTML of /services/gutter-cleaning found
+   * links to `/`, `/about`, `/blog`, `/contact`, `/locations`, `/services`
+   * and the two policy pages, and nothing else. Not one deep link, on the
+   * eleven most commercially valuable pages on the site.
+   *
+   * The header's dropdowns do not count and are the reason this went
+   * unnoticed. `Header` holds its children behind `openMenu` state, so the
+   * eleven service links and the nine community links exist only after
+   * hydration — they are in nobody's server HTML, on any route.
+   *
+   * The heading is one fixed string across all eleven rather than taking the
+   * service name, and that was measured rather than preferred. `{title}
+   * Across Greater Vancouver` is the phrase the page would like to be found
+   * for; at display-l on a 375px screen it wraps to three lines on six of the
+   * eleven services and four on Concrete and Asphalt Sealing, against the
+   * two-line rule `overviewHeading` states and `check-layout.mjs` enforces.
+   * Every shorter suffix tried behaved the same way — the service names are
+   * simply too long for this type size plus a region.
+   *
+   * So the region stays and the service name comes off. The page has already
+   * named the service twice above this point, in the h1 and in the overview
+   * h2, so "this work" is not vague where it lands; and the nine links under
+   * the heading carry the geography that actually matters here. The two
+   * sibling bands on this template, `process` and `related`, are fixed
+   * strings for the same reason.
+   */
+  areas: {
+    label: "Where We Work",
+    heading: "This Work, Across Greater Vancouver",
+    body: "Everything comes off the truck — water, pressure, detergent and power — so the kit that reaches a strata lot in Surrey is the one that reaches an acreage in Anmore. Pick your community and the page will tell you what the work looks like there.",
+    /** The plate's link row. The community name is appended by the card. */
+    cardCta: "View",
+    allCta: "See all nine communities",
+  },
+
+  /**
+   * Two or three services that get booked alongside this one.
+   *
+   * `relatedServices` in this file is the map, and it is written rather than
+   * derived: the adjacencies that matter are the ones a crew actually sees on
+   * a job — the roof being cleared means the gutters are already open, the
+   * driveway being washed is the step before it can be sealed — and no
+   * ordering of the `services` array encodes that.
+   */
+  related: {
+    label: "Often Booked Together",
+    heading: "While We Are Already There",
+    body: "These are the jobs that go with this one, and the reason is nearly always the setup: the ladder, the truck or the dried surface is already where it needs to be. Worth knowing before a second visit is booked for something the first one was already set up for.",
+  },
+
   closing: {
     body: "Get a free quote today. Serving New Westminster and all of Greater Vancouver.",
     cta: "Get Your Free Quote",
   },
 } as const;
+
+/**
+ * Which services get booked alongside which, by slug.
+ *
+ * Written, not derived, and the reasoning is on `servicePage.related` above.
+ * Every value is a slug in `services`; `relatedServices` below resolves them,
+ * so a renamed slug drops a card rather than publishing a dead link — the
+ * same arrangement `nearbyLocations` has with `detail.nearby`.
+ *
+ * Two or three each. A fourth turns the band into a second catalogue, and the
+ * page already carries the full one in the footer of every community page it
+ * links to.
+ */
+const relatedBySlug: Record<string, readonly string[]> = {
+  // The roof is walked to clear the moss; the gutters are directly below it
+  // and the debris from one lands in the other.
+  "roof-cleaning": ["gutter-cleaning", "soft-washing", "window-cleaning"],
+  // The ladder is already up and the run is already open.
+  "gutter-cleaning": ["roof-cleaning", "window-cleaning", "soft-washing"],
+  // Same truck, same water, opposite ends of the pressure range. Which end a
+  // surface takes is the distinction the soft-washing page is written around,
+  // so the two belong beside each other.
+  "power-washing": ["concrete-and-asphalt-sealing", "soft-washing", "window-cleaning"],
+  "soft-washing": ["roof-cleaning", "power-washing", "painting"],
+  // A slab has to be washed and dried before it can be sealed. This pair is
+  // an order of operations, not a suggestion.
+  "concrete-and-asphalt-sealing": ["power-washing", "snow-removal-salting"],
+  // Glass, frames and tracks on the same elevation as the gutters above them.
+  "window-cleaning": ["gutter-cleaning", "power-washing", "commercial-cleaning"],
+  // Prep is a wash. Paint goes on a clean, sound surface or it does not hold.
+  painting: ["soft-washing", "power-washing"],
+  // The two seasonal ends of a strata or commercial contract.
+  "snow-removal-salting": ["landscaping-lawn-care", "concrete-and-asphalt-sealing", "commercial-cleaning"],
+  "holiday-light-installation": ["gutter-cleaning", "window-cleaning"],
+  "landscaping-lawn-care": ["power-washing", "snow-removal-salting", "gutter-cleaning"],
+  "commercial-cleaning": ["window-cleaning", "power-washing", "snow-removal-salting"],
+};
+
+/** The related services for one service, resolved. Unknown slugs drop out. */
+export function relatedServices(service: Service): Service[] {
+  return (relatedBySlug[service.slug] ?? [])
+    .map((slug) => services.find((s) => s.slug === slug))
+    .filter((s): s is Service => Boolean(s));
+}
 
 // --- Contact page ------------------------------------------------------
 
@@ -2891,51 +3018,45 @@ export const locationPage = {
 
 /**
  * ===========================================================================
- * PLACEHOLDER BLOG CONTENT — written to build and review the blog, not
- * supplied or approved by RainCity. Replace before launch.
+ * PUBLISHED BLOG CONTENT — authorised by the client, indexed, and no longer
+ * a placeholder. Read the two standing rules at the bottom before editing.
  * ===========================================================================
  *
- * Every post in `blogPosts` below was written for this build. The titles,
- * excerpts, dates, read times and body copy are all invented. The advice in
- * them is plausible for a Lower Mainland exterior-cleaning company and was
- * written to sound like this one, but nobody at RainCity has said any of it,
- * and some of it states timing and method as fact — when moss treatment
- * should be booked, what belongs on a strata schedule, how a sealer window
- * works. That is exactly the sort of thing a customer will quote back on the
- * phone, so it has to be confirmed or rewritten before it is public.
+ * Every post below was originally written for this build rather than supplied
+ * by RainCity, and for two passes it was held out of search on that basis.
+ * The client has since authorised publication, `indexing.blog` in lib/seo.tsx
+ * is `true`, and the six articles are in sitemap.xml with their own
+ * BlogPosting markup and a `blogPost` list on the index. They are the
+ * company's published position now, which is the whole reason for what
+ * follows.
  *
- * This is the same treatment `testimonials` and `legalPages` get, for the
- * same reason: it is content that looks finished, would ship silently, and
- * must not.
+ * WHAT WAS CHANGED BEFORE THAT FLAG MOVED, and what to repeat for any new
+ * post: the FAQ answers carried operational commitments nobody had confirmed.
+ * A completion time ("in practice before seven in the morning"), a trigger
+ * depth ("two centimetres is the standard starting point"), a pricing model
+ * ("priced per event rather than per pass"), a capacity guarantee, a
+ * visit-duration range, and a claim about what most commercial clients buy.
+ * Ten sentences across all six posts were rewritten to keep the advice and
+ * hand the specifics back to the written quote. A number in an article is a
+ * number the office has to hold to on the phone.
  *
- * Three deliberate absences were held while `/blog/[slug]` did not exist.
- * Two of them are now spent and one is not:
+ * The excerpts are the route's meta descriptions as well as the card copy, so
+ * they are held to 150-158 characters like every other description on the
+ * site. The post titles feed a `{title} | RainCity` template that has to stay
+ * under 60, which is why one of them lost the word "Actually".
  *
- *  1. No author, and this one stands. There is still no `author` field on
- *     `BlogPost` and no byline anywhere on the site, because putting a real
- *     person's name on copy they did not write is a worse kind of placeholder
- *     than an invented date. The BlogPosting markup names the *organisation*
- *     as author instead, which is true of any page on this site and asserts
- *     nothing about a person. Add the field, and the byline, when there is
- *     somebody to name.
- *  2. BlogPosting JSON-LD — lifted, with the template. Each post page now
- *     publishes a headline, image, date and author for its own article. Read
- *     that alongside the warning at the top of this block: the structured
- *     data is only as true as the copy under it, and this copy is invented.
- *     `blogPageSchema` still publishes no list of posts, because the index is
- *     not the place to assert six articles exist.
- *  3. Sitemap entries — lifted, with the template. The URLs resolve now, so
- *     listing them is no longer the claim about a 404 that app/sitemap.ts
- *     refused to make. /blog/page/N is still deliberately absent.
+ * TWO RULES THAT STILL STAND:
  *
- * What that leaves is the one thing to be careful about before launch: a
- * crawler is now told these six articles are real, at real URLs, with real
- * dates. If the copy is not going to be replaced or confirmed first, the
- * control is `noindex` on the route — the same answer the policy pages get —
- * not quietly deleting the markup again.
- *
- * When real posts land: replace this array and keep `slug` stable for
- * anything that was ever published.
+ *  1. No author, and no byline. There is no `author` field on `BlogPost`,
+ *     because putting a real person's name on copy they did not write is a
+ *     worse kind of placeholder than an invented date. `blogPostingSchema`
+ *     names the *organisation* as author, which is true of any page on this
+ *     domain and asserts nothing about a person. Add the field and the byline
+ *     together, on the day there is somebody to name.
+ *  2. The dates are build dates, not editorial ones. `lastModified` in the
+ *     sitemap is the publication date rather than a deploy timestamp, and
+ *     nothing tracks revisions. If a post is materially rewritten, move its
+ *     date deliberately rather than leaving a freshness signal nobody earned.
  *
  * On the shape of the copy below. Three of the six were expanded when the
  * template landed, so the page was built against a real range rather than
@@ -2943,8 +3064,8 @@ export const locationPage = {
  * long, with lists, an ordered sequence, a pull quote and a photograph in the
  * body; `moss-isnt-the-problem` sits in the middle; `three-days-of-snow` was
  * left as three short sections of plain prose. `readMinutes` was re-estimated
- * to match. That is more invented copy, not less, and it is replaced with the
- * rest of it.
+ * to match. Keep that spread if the set grows: six posts of identical length
+ * is what a template looks like when nobody has read it.
  */
 
 /**
@@ -2978,7 +3099,34 @@ export type BlogBlock =
    * into an article without one is decoration, and this site does not
    * decorate. `alt` still comes from the registry, as everywhere else.
    */
-  | { kind: "photo"; photo: PhotoKey; caption: string };
+  | { kind: "photo"; photo: PhotoKey; caption: string }
+  /**
+   * A paragraph with links in it.
+   *
+   * A bare string is still the shorthand for a paragraph and still the shape
+   * most blocks take; this is the same paragraph with the sentence broken
+   * into parts, so a phrase inside it can point at a page. `parts` reads in
+   * order — a string is prose, an object is an anchor — and the renderer
+   * joins them with no separator, so the spaces around a link belong to the
+   * strings either side of it.
+   *
+   * It exists because six articles about moss, gutters, strata schedules and
+   * driveway sealing could not link to the service that does the work. The
+   * union had no link in any shape, `PostBody` renders paragraphs as plain
+   * text, and there is deliberately no Markdown parser anywhere in the path —
+   * so the only route to a link was to add a member here and a branch there,
+   * which is exactly the extension CLAUDE.md prescribes. Both halves are
+   * reviewable, and a post still cannot introduce a treatment the design
+   * system has not ruled on.
+   *
+   * `href` is internal. Nothing on this site links out, and an external link
+   * from an article is a decision about who this company is willing to send
+   * a reader to — not something a content array should be able to do quietly.
+   */
+  | {
+      kind: "linked";
+      parts: readonly (string | { href: string; text: string })[];
+    };
 
 /**
  * One section of a post — an h2 and everything under it until the next one.
@@ -2999,7 +3147,18 @@ export type BlogSection = {
 export type BlogPost = {
   slug: string;
   title: string;
-  /** Two sentences for the card. Written to stand alone in a search result. */
+  /**
+   * Two sentences for the card, and the route's meta description — see
+   * `/blog/[slug]`, which passes this straight to `pageMetadata`.
+   *
+   * Written to stand alone in a search result, which means **150-158
+   * characters**. The six here run 178 to 205 and are the last set on the
+   * site still over that ceiling; they were left alone in the SEO pass
+   * because the copy they summarise is placeholder and is being replaced
+   * whole (see the PLACEHOLDER note on `blogPosts` below), and rewriting a
+   * summary of a draft is work that gets thrown away. Hold the replacement
+   * copy to the number.
+   */
   excerpt: string;
   /**
    * Named author. Add when a real person at RainCity is confirmed as the
@@ -3042,7 +3201,7 @@ export const blogPosts: BlogPost[] = [
     slug: "moss-isnt-the-problem",
     title: "Moss Isn’t The Problem. What It Holds Is.",
     excerpt:
-      "In Greater Vancouver, a green roof looks bad long before it is bad. What actually shortens a shingle’s life is the water the moss keeps against it, day after day, right through a coast winter.",
+      "A green roof looks bad long before it is bad. What shortens a shingle's life is the water the moss holds against it, day after day, through a wet winter.",
     category: "Roof Care",
     date: "2026-08-18",
     readMinutes: 9,
@@ -3093,7 +3252,26 @@ export const blogPosts: BlogPost[] = [
         heading: "When it is worth booking",
         blocks: [
           "Spring, after the growth flush, or early autumn before the rain settles in. Both give the treatment dry days to work in and leave the roof clear for the season that matters.",
-          "If there is already moss thick enough to see from the street, the gutters are carrying it too. The two jobs are usually one visit.",
+          {
+            kind: "linked",
+            parts: [
+              "If there is already moss thick enough to see from the street, the ",
+              { href: "/services/gutter-cleaning", text: "gutters are carrying it too" },
+              ". The two jobs are usually one visit.",
+            ],
+          },
+          {
+            kind: "linked",
+            parts: [
+              "The scope and the method are set out on the ",
+              { href: "/services/roof-cleaning", text: "roof cleaning page" },
+              ", and the low-pressure approach this article describes is ",
+              { href: "/services/soft-washing", text: "soft washing" },
+              ". We work across ",
+              { href: "/locations", text: "nine Greater Vancouver communities" },
+              ".",
+            ],
+          },
         ],
       },
       {
@@ -3102,7 +3280,7 @@ export const blogPosts: BlogPost[] = [
           { kind: "subheading", text: "How do I know if my roof needs moss treatment?" },
           "Visible growth on shingles is the obvious sign, but the more useful test is the north-facing slope in late spring. If it is still carrying a mat after the drier months, the root structure is well established. Gutters filling with granule grit are the other indicator — that is the shingle surface telling you how much life it has left.",
           { kind: "subheading", text: "How long does a treated Greater Vancouver roof stay clean?" },
-          "Three to five years after a proper low-pressure treatment, against roughly one year when growth is knocked off at pressure. The difference is the root: treatment kills it, so regrowth starts from new spores on a clean surface rather than from the root mass left behind. North-facing slopes and roofs under heavy conifer cover sit at the short end of that range.",
+          "Typically three to five years after a proper low-pressure treatment, against roughly one year when growth is knocked off at pressure. The difference is the root: treatment kills it, so regrowth starts from new spores on a clean surface rather than from the root mass left behind. North-facing slopes and roofs under heavy conifer cover sit at the short end of that range.",
           { kind: "subheading", text: "Can I pressure wash my own roof to save money?" },
           "The machine is available for rent, and the damage to an asphalt shingle is dramatic and invisible on the same afternoon. Granules leave the surface with the moss, water is driven up under the courses, and the roof looks dramatically better for one season before failing several years early. Low-pressure treatment is slower and is the only method that does not shorten the life of the roof it is treating.",
           { kind: "subheading", text: "Does roof cleaning affect my shingle warranty?" },
@@ -3117,7 +3295,7 @@ export const blogPosts: BlogPost[] = [
     slug: "the-fortnight-before-the-rain",
     title: "The Fortnight Before The Rain Sets In",
     excerpt:
-      "Late September is the cheapest two weeks of the year to own a building in Greater Vancouver. Everything booked after the first real storm costs more, takes longer, and usually involves a ladder in the wet.",
+      "Late September is the cheapest fortnight of the year to own a building in Greater Vancouver. Everything left until after the first storm is harder work.",
     category: "Seasonal",
     date: "2026-08-04",
     readMinutes: 8,
@@ -3134,7 +3312,15 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "What belongs in it",
         blocks: [
-          "Gutters cleared and flow-tested, not just scooped. Downspouts checked at the bottom as well as the top, because the blockage is usually at the elbow. Roof valleys cleared of needles. Yard drains and catch basins lifted and looked at.",
+          {
+            kind: "linked",
+            parts: [
+              { href: "/services/gutter-cleaning", text: "Gutters cleared and flow-tested" },
+              ", not just scooped. Downspouts checked at the bottom as well as the top, because the blockage is usually at the elbow. ",
+              { href: "/services/roof-cleaning", text: "Roof valleys cleared of needles" },
+              ". Yard drains and catch basins lifted and looked at.",
+            ],
+          },
           "On a strata, add the parkade drains and the walkway grates. They are the two that flood first and the two nobody has on a schedule.",
         ],
       },
@@ -3149,13 +3335,25 @@ export const blogPosts: BlogPost[] = [
               "The elbow is where most blockages form — it collects what the run above it carries down, and clears last in a flush from the top.",
           },
           "The clearing job is an hour. The fascia and the drywall behind it are a different trade and a different invoice.",
+          {
+            kind: "linked",
+            parts: [
+              "What a clearing visit covers is on the ",
+              { href: "/services/gutter-cleaning", text: "gutter cleaning page" },
+              "; the valleys and the roof itself are ",
+              { href: "/services/roof-cleaning", text: "roof cleaning" },
+              ". Both are booked in every one of the ",
+              { href: "/locations", text: "communities we cover" },
+              ".",
+            ],
+          },
         ],
       },
       {
         heading: "Questions About Fall Maintenance Timing in Greater Vancouver",
         blocks: [
           { kind: "subheading", text: "When exactly should I book gutters cleaned in autumn?" },
-          "Mid-September to early October is the ideal window — late enough that most deciduous leaves are down, early enough that the autumn rains have not set in. In practice this means the calendar fills quickly from early September. Booking when the weather is still fine, rather than when the first storm arrives, is the whole difference between a scheduled visit and an emergency call.",
+          "Mid-September to early October is the ideal window — late enough that most deciduous leaves are down, early enough that the autumn rains have not set in. In practice the window is short and it closes without much warning. Booking while the weather is still fine, rather than when the first storm arrives, is the whole difference between a scheduled visit and an emergency call.",
           { kind: "subheading", text: "What happens if I wait until after the first storm?" },
           "A blocked downspout does not fail quietly. The overflow backs up behind the fascia, runs down the inside of the board, and the first sign is usually a stain on an interior ceiling in December or January. The clearing job remains an hour's work; the fascia and the ceiling behind it are a different trade and a larger invoice.",
           { kind: "subheading", text: "Does timing change on a property with conifers?" },
@@ -3163,7 +3361,7 @@ export const blogPosts: BlogPost[] = [
           { kind: "subheading", text: "What is the full pre-rain checklist for a strata?" },
           "Gutters and downspouts cleared and flow-tested. Roof valleys and flat sections cleared of needles. Parkade drains and floor channels lifted and looked at. Walkway and stairwell grates checked. Yard drains and catch basins opened. The parkade drains and the grates are the two items most often missing from an inherited strata schedule and the ones that flood first.",
           { kind: "subheading", text: "How long does a gutter clearing visit take?" },
-          "A single-family home typically runs ninety minutes to two and a half hours depending on the run length, the volume of debris and how many downspouts need augering. A complex or strata with multiple buildings is priced by the scope. The flow test on every outlet is included rather than quoted separately — it is what turns a clearing into a working system.",
+          "How long a visit runs depends on the length of the runs, the volume of debris and how many downspouts need augering. A complex or strata with multiple buildings is priced by the scope. The flow test on every outlet is included rather than quoted separately — it is what turns a clearing into a working system.",
         ],
       },
     ],
@@ -3172,7 +3370,7 @@ export const blogPosts: BlogPost[] = [
     slug: "why-the-north-wall-greens-first",
     title: "Why The North Wall Greens Over First",
     excerpt:
-      "Same house, same siding, same year — and one elevation is green while the other is fine. It is not the paint. It is how long a north-facing wall in Greater Vancouver stays wet after it rains.",
+      "Same house, same siding, same year, and one wall is green while the other is fine. It is not the paint. It is how long a north-facing wall stays wet here.",
     category: "Exterior Cleaning",
     date: "2026-07-21",
     readMinutes: 7,
@@ -3188,7 +3386,16 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Low pressure, and a detergent that does the work",
         blocks: [
-          "Painted siding, stucco and cedar all take damage from a pressure washer long before the algae does. A soft wash puts a cleaning solution on the surface, gives it time, and rinses at something closer to garden-hose pressure.",
+          {
+            kind: "linked",
+            parts: [
+              "Painted siding, stucco and cedar all take damage from a ",
+              { href: "/services/power-washing", text: "pressure washer" },
+              " long before the algae does. A ",
+              { href: "/services/soft-washing", text: "soft wash" },
+              " puts a cleaning solution on the surface, gives it time, and rinses at something closer to garden-hose pressure.",
+            ],
+          },
           "It also kills what is rooted in the surface rather than shaving off what is visible, which is the difference between a wall that stays clean for two years and one that is green again by spring.",
         ],
       },
@@ -3203,6 +3410,18 @@ export const blogPosts: BlogPost[] = [
               "Algae growth on an exterior surface mid-treatment. The colour lifts as the solution works into the root structure; the weather carries the remainder off over the following weeks.",
           },
           "If the same wall is green twelve months after a wash, the problem is drainage or overhanging growth rather than the wash — worth looking at before booking the same job again.",
+          {
+            kind: "linked",
+            parts: [
+              "The wash this article describes is ",
+              { href: "/services/soft-washing", text: "soft washing" },
+              ", and a wall that has been left long enough to need refinishing afterwards is ",
+              { href: "/services/painting", text: "painting" },
+              ". Both are quoted on what is in front of us, anywhere in ",
+              { href: "/locations", text: "Greater Vancouver" },
+              ".",
+            ],
+          },
         ],
       },
       {
@@ -3224,9 +3443,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "what-a-strata-schedule-covers",
-    title: "What A Strata Maintenance Schedule Actually Covers",
+    title: "What A Strata Maintenance Schedule Covers",
     excerpt:
-      "Strata councils in Greater Vancouver usually inherit a schedule rather than write one. Here is what belongs on it, what is almost always missing, and which line items are worth an argument at the AGM.",
+      "Strata councils usually inherit a maintenance schedule rather than write one. What belongs on it, what goes missing, and what is worth an argument at the AGM.",
     category: "Strata & Commercial",
     date: "2026-06-30",
     readMinutes: 13,
@@ -3244,7 +3463,16 @@ export const blogPosts: BlogPost[] = [
               "The conditional work. Everything that happens because an inspection found it, and nothing that happens because it was on last year’s schedule.",
             ],
           },
-          "Most inherited schedules only have the first, which is how the same complex ends up paying for quarterly window cleaning it does not need and no gutter clearing at all.",
+          {
+            kind: "linked",
+            parts: [
+              "Most inherited schedules only have the first, which is how the same complex ends up paying for quarterly ",
+              { href: "/services/window-cleaning", text: "window cleaning" },
+              " it does not need and no ",
+              { href: "/services/gutter-cleaning", text: "gutter clearing" },
+              " at all.",
+            ],
+          },
         ],
       },
       {
@@ -3334,6 +3562,18 @@ export const blogPosts: BlogPost[] = [
         blocks: [
           "A schedule is easier to defend as three rhythms and a set of reports than as a list of prices, because the question a council is actually being asked is not what the work costs but what it prevents.",
           "If a line item has no answer to that question, it is worth cutting. If it has one, it is worth keeping at half the frequency rather than at none.",
+          {
+            kind: "linked",
+            parts: [
+              "The scheduled work described here is ",
+              { href: "/services/commercial-cleaning", text: "commercial and strata cleaning" },
+              ", and the line item this article keeps returning to is ",
+              { href: "/services/gutter-cleaning", text: "gutter clearing" },
+              ". Both are available in every one of the ",
+              { href: "/locations", text: "communities we cover" },
+              ".",
+            ],
+          },
         ],
       },
       {
@@ -3357,7 +3597,7 @@ export const blogPosts: BlogPost[] = [
     slug: "sealing-between-two-rainstorms",
     title: "Sealing A Driveway Between Two Rainstorms",
     excerpt:
-      "Sealer needs a dry surface and a dry forecast — a narrow ask in Greater Vancouver. The window is real, though, and it is wider than most people assume, and worth getting ahead of before the season fills.",
+      "Sealer needs a dry surface and a dry forecast, which is a narrow ask in Greater Vancouver. The window is real, though, and wider than most people assume.",
     category: "Hard Surfaces",
     date: "2026-05-19",
     readMinutes: 8,
@@ -3367,7 +3607,16 @@ export const blogPosts: BlogPost[] = [
         heading: "What the product actually needs",
         blocks: [
           "A clean, dry surface, air above about ten degrees, and enough hours after application to cure before the next rain. The surface matters more than the sky — concrete that looks dry can still be holding water from two days ago.",
-          "That is why the prep wash happens well before the seal coat rather than on the morning of it.",
+          {
+            kind: "linked",
+            parts: [
+              "That is why the ",
+              { href: "/services/power-washing", text: "prep wash" },
+              " happens well before the ",
+              { href: "/services/concrete-and-asphalt-sealing", text: "seal coat" },
+              " rather than on the morning of it.",
+            ],
+          },
         ],
       },
       {
@@ -3388,6 +3637,18 @@ export const blogPosts: BlogPost[] = [
               "A residential driveway after sealing. The sheen comes off after curing; what remains is the surface barrier that slows water ingress through the winter.",
           },
           "Sealed on a sensible cycle, the same slab lasts years longer, and the cracks that do appear stay small enough to fill.",
+          {
+            kind: "linked",
+            parts: [
+              "The full scope — routing, filling, degreasing, metering and the coat itself — is on the ",
+              { href: "/services/concrete-and-asphalt-sealing", text: "concrete and asphalt sealing page" },
+              ", and the prep wash that has to come first is ",
+              { href: "/services/power-washing", text: "pressure washing" },
+              ". Both travel across ",
+              { href: "/locations", text: "Greater Vancouver" },
+              ".",
+            ],
+          },
         ],
       },
       {
@@ -3398,7 +3659,7 @@ export const blogPosts: BlogPost[] = [
           { kind: "subheading", text: "How do I know when my driveway needs resealing?" },
           "Pour a small amount of water on the surface. If it beads and sits on top, the seal is working. If it soaks in and darkens the concrete, the surface is open to water — worth sealing before frost cycles work the moisture further in. Asphalt that has turned grey-brown and crumbly at the edges, or concrete with a spreading crack network, is approaching the point where sealing buys less time than repair.",
           { kind: "subheading", text: "How long does driveway sealing last in BC?" },
-          "Asphalt sealcoat holds two to three years under normal residential traffic; penetrating concrete sealers run three to five. Both depend more on the quality of the preparation than on the product itself. A sealed slab on a flat, open property will outlast the same product on a sloped driveway catching road salt off a busy street.",
+          "Asphalt sealcoat typically holds two to three years under normal residential traffic; penetrating concrete sealers commonly run three to five. Both depend more on the quality of the preparation than on the product itself. A sealed slab on a flat, open property will outlast the same product on a sloped driveway catching road salt off a busy street.",
           { kind: "subheading", text: "Does sealing prevent cracks from forming?" },
           "It slows them. A sealed surface sheds water rather than absorbing it, which limits the freeze-thaw expansion that levers concrete apart from the inside. What sealing cannot do is repair structural failure — a slab where the base underneath has settled needs attention that sealing will not provide. Working cracks are routed to a clean reservoir and filled before any coat goes down, because sealer painted over a crack reopens through the film by spring.",
           { kind: "subheading", text: "What is the difference between a penetrating sealer and a topical one?" },
@@ -3411,7 +3672,7 @@ export const blogPosts: BlogPost[] = [
     slug: "three-days-of-snow",
     title: "Three Days Of Snow, And They All Matter",
     excerpt:
-      "Greater Vancouver gets a handful of days a year that genuinely need clearing. The trouble is that nobody knows which ones, which is why the contract matters more than the shovel.",
+      "Greater Vancouver gets a handful of days a year that genuinely need clearing. Nobody knows which ones in advance, which is why the plan beats the shovel.",
     category: "Seasonal",
     date: "2026-01-20",
     readMinutes: 7,
@@ -3428,13 +3689,20 @@ export const blogPosts: BlogPost[] = [
         heading: "What a seasonal contract actually buys",
         blocks: [
           "A place in the route, and a trigger depth that says when the truck comes without anyone having to phone. On a commercial site it also buys a service log, which is what an insurer asks for after a fall.",
-          "It is priced for the season rather than the visit, because the alternative is a business that only makes money in a bad winter.",
+          "A seasonal agreement is written for the season rather than the visit, because the alternative is a business that only makes money in a bad winter.",
         ],
       },
       {
         heading: "Salt, and when it stops working",
         blocks: [
-          "Rock salt does very little far below freezing, and this region spends most of its cold snaps within a few degrees of it — which is why salting works here, and why timing it ahead of the freeze matters more than the quantity.",
+          {
+            kind: "linked",
+            parts: [
+              "Rock salt does very little far below freezing, and this region spends most of its cold snaps within a few degrees of it — which is why ",
+              { href: "/services/snow-removal-salting", text: "salting" },
+              " works here, and why timing it ahead of the freeze matters more than the quantity.",
+            ],
+          },
           {
             kind: "photo",
             photo: "snowSalting",
@@ -3442,6 +3710,18 @@ export const blogPosts: BlogPost[] = [
               "Salting ahead of a freeze rather than after it. The difference between the two is the difference between prevention and remediation, and on a commercial site the liability follows the same line.",
           },
           "Applied after the ice has bonded, it is mostly grit. Applied before, it stops the bond forming at all.",
+          {
+            kind: "linked",
+            parts: [
+              "Trigger depths, route position and the service log are set out on the ",
+              { href: "/services/snow-removal-salting", text: "snow removal and salting page" },
+              ", and the year-round side of a commercial site is ",
+              { href: "/services/commercial-cleaning", text: "common-area cleaning" },
+              ". Both are quoted for the property, in any of the ",
+              { href: "/locations", text: "communities we cover" },
+              ".",
+            ],
+          },
         ],
       },
       {
@@ -3450,13 +3730,13 @@ export const blogPosts: BlogPost[] = [
           { kind: "subheading", text: "Why book a snow removal contract instead of calling when it snows?" },
           "By the time a property in Greater Vancouver calls, the crews with capacity are already committed to sites that booked in October. This region gets snow on perhaps three to six days a year — often overnight, often heavily — and every uncovered property phones at the same time. A seasonal contract reserves capacity for your site before the season starts and means the truck comes automatically at the agreed trigger depth, without anyone having to call.",
           { kind: "subheading", text: "What trigger depth should I set for snow clearing?" },
-          "Two centimetres is the standard starting point for most commercial and strata sites, because at that depth the surface is covered but the snow has not yet compacted into the ice that makes mechanical clearing difficult. Sites with steep ramps, high pedestrian traffic or accessibility requirements often go lower. Residential driveways can usually go higher. The trigger is written into the contract and is not a judgement call on the morning of the event.",
+          "The trigger depth is set for the site rather than taken from a rule of thumb: low enough that the surface is covered, high enough that the snow has not yet compacted into the ice that makes mechanical clearing difficult. Sites with steep ramps, high pedestrian traffic or accessibility requirements often go lower. Residential driveways can usually go higher. The trigger is written into the contract and is not a judgement call on the morning of the event.",
           { kind: "subheading", text: "Is rock salt safe on concrete and parkade membranes?" },
           "Not on new concrete or waterproofed parkade decks. Sodium chloride on concrete under a year old causes surface scaling, and salt-laden meltwater running through a parkade membrane attacks the reinforcement below it. Those areas need magnesium chloride or a CMA blend. Tell us at the site walk if any area is newly poured, membraned or draining into landscaping, and the product is chosen for the surface.",
           { kind: "subheading", text: "How early will clearing happen on a commercial site?" },
-          "The aim for commercial and strata sites is completion before the first arrivals — in practice before seven in the morning. Heavy overnight events get a first pass before dawn and a second if the snow continues. Contracts are priced per event rather than per pass, because a site cleared at five and snowed on until nine has not been cleared.",
+          "The aim for commercial and strata sites is completion before the first arrivals, and the start time that follows from it is written into the agreement rather than left to the morning. Heavy overnight events get a first pass before dawn and a second if the snow continues. A site cleared at five and snowed on until nine has not been cleared, which is why the number of passes an event needs is settled with the site in advance rather than argued about afterwards.",
           { kind: "subheading", text: "What is the difference between a seasonal contract and a per-event rate?" },
-          "A seasonal contract locks in a fixed price for the winter regardless of how many events occur and holds you a place in the route. A per-event rate means paying a higher price only when it snows. A seasonal contract costs more in a mild winter and considerably less in a heavy one, and it guarantees the crew capacity that per-event clients often cannot get during a bad week. Most commercial and strata clients take the contract.",
+          "A seasonal agreement covers the winter regardless of how many events occur and holds a place in the route. A per-event arrangement is called on when it snows. Which one suits a property depends on what an uncleared morning actually costs it and how much certainty is worth paying for, and that is a conversation worth having before November rather than during it.",
         ],
       },
     ],
@@ -3666,7 +3946,9 @@ export type LegalPage = {
   lastUpdated: string;
   /** The same date as a machine-readable value for <time datetime>. */
   updatedISO: string;
+  /** The route's own <title>. 60 characters or under. */
   metaTitle: string;
+  /** The route's own meta description. 150-158 characters. */
   metaDescription: string;
   keywords: readonly string[];
   sections: readonly LegalSection[];
@@ -3702,10 +3984,9 @@ export const legalPages = {
       "The terms that govern quotes, bookings, payment, and work carried out by RainCity Property Maintenance.",
     lastUpdated: "September 1, 2026",
     updatedISO: "2026-09-01",
-    metaTitle:
-      "Terms & Conditions | RainCity Property Maintenance, New Westminster BC",
+    metaTitle: "Terms & Conditions | RainCity Property Maintenance",
     metaDescription:
-      "The terms governing quotes, scheduling, cancellation, payment, our workmanship guarantee and liability for RainCity Property Maintenance work across Greater Vancouver, under BC law.",
+      "The terms governing quotes, scheduling, cancellation, payment, our workmanship guarantee and liability for RainCity work, under BC law.",
     keywords: [
       "RainCity terms and conditions",
       "property maintenance terms of service BC",
@@ -3856,10 +4137,9 @@ export const legalPages = {
       "What we collect when you contact us, how it is used, how long it is kept, and how to request access or deletion.",
     lastUpdated: "September 1, 2026",
     updatedISO: "2026-09-01",
-    metaTitle:
-      "Privacy Policy | RainCity Property Maintenance, New Westminster BC",
+    metaTitle: "Privacy Policy | RainCity Property Maintenance",
     metaDescription:
-      "How RainCity Property Maintenance collects, uses, stores and deletes the information you give us when requesting a quote — and your rights under BC privacy law.",
+      "How RainCity collects, uses, stores and deletes the information you give us when requesting a quote — and your rights under BC privacy law.",
     keywords: [
       "RainCity privacy policy",
       "property maintenance privacy policy BC",

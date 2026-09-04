@@ -18,7 +18,8 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const metadata = pageMetadata({
   title: `About ${business.shortName} | Property Maintenance in ${business.base}, BC`,
-  description: `${business.name} is a mobile property maintenance and exterior cleaning company based in ${business.base}, BC. Meet the team, read our mission, and see the three-step process behind every job across ${business.region}.`,
+  // 147, down from 229.
+  description: `A mobile property maintenance and exterior cleaning company based in ${business.base}, BC. Meet the team and the process behind every job.`,
   path: "/about",
   // Deliberately narrower than the homepage's list. The homepage competes for
   // the service and city queries; this page should not be bidding against it

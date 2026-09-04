@@ -6,7 +6,9 @@ import {
   JsonLd,
   blogPostingSchema,
   breadcrumbSchema,
+  indexing,
   pageMetadata,
+  searchDirectives,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
@@ -52,7 +54,11 @@ export async function generateMetadata({
       // somebody scanning for an answer is actually reading. The category is
       // in there because a bare post title says nothing about the subject area
       // to a reader who has never heard of this company.
-      title: `${post.title} | ${post.category} | ${business.shortName}`,
+      // Headline then brand. The category used to sit between them and pushed
+      // every post past the 60-character render limit — 83 on the strata
+      // piece. It is on the card, on the page and in `articleSection`; a SERP
+      // title is not where it earns its place.
+      title: `${post.title} | ${business.shortName}`,
       // The excerpt, unchanged. It was written as two sentences that stand
       // alone in a search result — see the field's own note in content.ts — so
       // writing a second description for the same post would be writing a worse
@@ -79,7 +85,9 @@ export async function generateMetadata({
     // All six posts are placeholder content (PLACEHOLDER BLOG CONTENT in
     // lib/content.ts). Block indexing until copy is replaced and confirmed.
     // Remove when real posts are live.
-    robots: { index: false, follow: true },
+    // Single-source hold. See `indexing` in lib/seo.tsx — flipping the flag
+  // there lifts this noindex and adds the sitemap entries in one edit.
+  ...searchDirectives(indexing.blog),
   };
 }
 

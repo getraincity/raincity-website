@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts, legalPages, locations, services } from "@/lib/content";
-import { canonical } from "@/lib/seo";
+import { canonical, indexing } from "@/lib/seo";
 
 /**
  * sitemap.xml.
@@ -18,12 +18,22 @@ import { canonical } from "@/lib/seo";
  * services are generated from `services`.
  *
  * The blog posts were in exactly that state until `/blog/[slug]` landed, and
- * they are listed below as of that commit — alongside the BlogPosting markup
+ * they were listed here from that commit — alongside the BlogPosting markup
  * in lib/seo.tsx, which was held back on the same rule and lifted with it.
- * The copy at the other end is still placeholder; see the note on `blogPosts`
- * in content.ts. That is an argument for replacing the copy or putting
- * `noindex` on the route, not for leaving resolving URLs out of the sitemap —
- * the same reasoning the policy pages get at the bottom of this file.
+ *
+ * They are now conditional instead, and so are the two policy pages. The
+ * reasoning above has not changed: a resolving URL belongs in the sitemap and
+ * `noindex` is the control for copy that is not ready. What changed is that
+ * this file was applying only the first half of that. Eight blog URLs were
+ * listed here while the routes themselves carried `noindex`, which is the
+ * sitemap asserting "canonical content, please index" against a page header
+ * saying the opposite — the crawler resolves it in favour of the page, logs
+ * eight URLs under "Excluded by 'noindex' tag", and nobody is better off.
+ *
+ * Both halves now read one flag, `indexing` in lib/seo.tsx. A group that is
+ * held back is absent here and noindex on the route; a group that is released
+ * appears here and loses the noindex, in a single edit. See the note on that
+ * constant for what releases each one.
  *
  * /blog/page/2 and any pages after it resolve too and are deliberately not
  * listed. They are one archive under a canonical entry point rather than
@@ -79,15 +89,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.7,
     },
-    {
-      url: canonical("/blog"),
-      lastModified: new Date("2026-08-31"),
-      // The one page on the site that is meant to change: a new post moves
-      // this index even when nothing else on it does. Level with /contact —
-      // above the policy pages, below the pages that sell the work.
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
+    // The blog index, and below it one entry per post. Both are gated on
+    // `indexing.blog` — see the note at the top of this file.
+    //
+    // The one page on the site that is meant to change: a new post moves this
+    // index even when nothing else on it does. Level with /contact — above the
+    // policy pages, below the pages that sell the work.
+    ...(indexing.blog
+      ? [
+          {
+            url: canonical("/blog"),
+            lastModified: new Date("2026-08-31"),
+            changeFrequency: "weekly" as const,
+            priority: 0.7,
+          },
+        ]
+      : []),
     // One entry per service, generated from `services` rather than listed.
     // A hand-written block here would be the twelfth thing to remember on the
     // day a service is added or renamed, and the first one to be forgotten —
@@ -132,26 +149,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Level with /contact and the blog index, and `yearly` rather than the
     // index's `weekly`: the archive gains posts, an individual post does not
     // change once it is up.
-    ...blogPosts.map((post) => ({
-      url: canonical(`/blog/${post.slug}`),
-      lastModified: new Date(post.date),
-      changeFrequency: "yearly" as const,
-      priority: 0.6,
-    })),
+    ...(indexing.blog
+      ? blogPosts.map((post) => ({
+          url: canonical(`/blog/${post.slug}`),
+          lastModified: new Date(post.date),
+          changeFrequency: "yearly" as const,
+          priority: 0.6,
+        }))
+      : []),
     // The two policy pages (Privacy Policy, Terms & Conditions), generated
     // from `legalPages`. Disclaimer and Refund Policy have been removed and
     // redirect permanently to / and /terms respectively.
     //
     // Lowest priority on the site and yearly: pages that exist so a reader
     // who goes looking finds them, not pages that should rank for anything.
-    // Listed because they resolve and the footer links to both. noindex is
-    // set on the routes until legal review is complete — the control is on
-    // the route, not the sitemap.
-    ...Object.values(legalPages).map((page) => ({
-      url: canonical(`/${page.slug}`),
-      lastModified: new Date(page.updatedISO),
-      changeFrequency: "yearly" as const,
-      priority: 0.3,
-    })),
+    // Gated on `indexing.legal` for the same reason the blog is gated above —
+    // both routes carry noindex until a lawyer has read them, and listing a
+    // noindexed URL here only spends the crawler's time contradicting itself.
+    ...(indexing.legal
+      ? Object.values(legalPages).map((page) => ({
+          url: canonical(`/${page.slug}`),
+          lastModified: new Date(page.updatedISO),
+          changeFrequency: "yearly" as const,
+          priority: 0.3,
+        }))
+      : []),
   ];
 }

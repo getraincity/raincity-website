@@ -15,7 +15,8 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const metadata = pageMetadata({
   title: `Contact ${business.shortName} | Free Quotes in ${business.base}, BC`,
-  description: `Call, email or request a free quote from ${business.name} — mobile property maintenance and exterior cleaning based in ${business.base}, BC, serving ${business.region}. No obligation, no pushy follow-up.`,
+  // 145, down from 216.
+  description: `Call, email or request a free quote from ${business.shortName} — mobile exterior cleaning and property maintenance based in ${business.base}, BC. No obligation.`,
   path: "/contact",
   keywords: [
     `contact ${business.name}`,

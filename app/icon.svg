@@ -1,0 +1,8 @@
+<svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+  <!-- The site's one mark, unchanged from components/ui/Logo.tsx: the plate
+       cut at 12 degrees in RainCity Blue, with the Pacific Blue hairline
+       blade at the same angle. Both colours are locked tokens (raincity-
+       tokens.md); nothing new was introduced to make this file. -->
+  <path d="M0 0 H34 L26.77 34 H0 Z" fill="#1A5FA8" />
+  <path d="M28.5 0 L21.27 34" stroke="#3D8FD4" stroke-width="3" />
+</svg>

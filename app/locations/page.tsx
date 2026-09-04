@@ -16,10 +16,13 @@ import { LocationsClosing } from "@/components/locations/LocationsClosing";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const metadata = pageMetadata({
-  title: `Service Areas | Property Maintenance Across ${business.region}`,
-  description: `${business.name} is mobile, based in ${business.base} and working in ${locations.length} communities across ${business.region} — ${locations
-    .map((location) => location.name)
-    .join(", ")}. Find yours and get a free quote.`,
+  title: `Service Areas | Exterior Cleaning Across ${business.region}`,
+  // The nine community names used to be interpolated in here, which put the
+  // description at 251 characters and meant it was cut somewhere around
+  // "Langley". The names are on the page, in the card grid, in the ItemList
+  // markup and in the sitemap — a truncated list of five of them in the SERP
+  // was the one place they did nothing.
+  description: `${business.name} is mobile, based in ${business.base} and working across ${locations.length} ${business.region} communities. Find yours and get a free written quote.`,
   path: "/locations",
   // The city-by-city set, which this page is now the owner of. It used to sit
   // in the homepage's list; /services carries the service-led terms and

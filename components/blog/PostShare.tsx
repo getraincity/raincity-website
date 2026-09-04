@@ -79,7 +79,17 @@ export function PostShare({ post }: { post: BlogPost }) {
                 ))}
 
                 <li>
-                  <CopyLink url={url} />
+                  {/* Labels passed rather than imported: CopyLink is a client
+                      component, and an import of `@/lib/content` from inside
+                      one drags the whole content module into the bundle. */}
+                  <CopyLink
+                    url={url}
+                    labels={{
+                      copy: blogPage.post.share.copy,
+                      copied: blogPage.post.share.copied,
+                      copyFailed: blogPage.post.share.copyFailed,
+                    }}
+                  />
                 </li>
               </ul>
             </section>

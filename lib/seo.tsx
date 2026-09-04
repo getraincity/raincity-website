@@ -34,6 +34,68 @@ export const canonical = (path = "/") => new URL(path, SITE_URL).toString();
 export const OG_IMAGE = "/og-default.png";
 
 /**
+ * Which route groups are published to search — and the only place that
+ * decides.
+ *
+ * Two groups on this site are deliberately held back, and until now each was
+ * held back in two unrelated files: a `robots: { index: false }` on the route,
+ * and nothing at all in `app/sitemap.ts`, which went on listing all eight blog
+ * URLs. That is a contradiction a crawler reads twice — the sitemap says "this
+ * is canonical content, index it", the page header says "do not" — and it puts
+ * eight URLs into Search Console's "Excluded by 'noindex' tag" report for no
+ * reason. Worse, lifting the hold meant remembering to edit four route files
+ * *and* the sitemap, and the sitemap is the one that gets forgotten.
+ *
+ * One flag now drives both. Flipping `blog` to `true` took the `noindex` off
+ * three route files and put eight URLs into the sitemap, in one edit; `legal`
+ * does the same for two more on the day the lawyer signs off.
+ *
+ * The reasons for the holds are in CLAUDE.md and in the PLACEHOLDER blocks on
+ * `blogPosts` and `legalPages` in content.ts. Do not flip either of these
+ * because a build is being prepared; flip them because the condition named
+ * there has actually been met.
+ */
+export const indexing = {
+  /**
+   * Released. The client has authorised publication of the six articles.
+   *
+   * One thing was done before flipping this, and it is the thing to redo if
+   * more articles are ever written. Indexing an article turns every sentence
+   * in it into a published position of the company, and a compliance pass
+   * found the FAQ answers carrying commitments nobody at RainCity had
+   * confirmed: a completion time ("in practice before seven in the morning"),
+   * a trigger depth ("two centimetres is the standard starting point"), a
+   * pricing model ("priced per event rather than per pass"), a capacity
+   * guarantee, a visit-duration range, and a claim about what most commercial
+   * clients buy. Ten sentences across all six posts were rewritten to keep the
+   * advice and hand the specifics back to the agreement, because a published
+   * number the office does not hold to is worse than no number.
+   *
+   * Still true, and still worth knowing: no author is named on any post, and
+   * `blogPostingSchema` publishes the organisation as author rather than a
+   * person. That is deliberate — see the note there.
+   */
+  blog: true,
+  /** Terms & Privacy Policy. Blocked on legal review + operational sign-off. */
+  legal: false,
+} as const;
+
+/**
+ * The `robots` half of a page's Metadata, for a route in a held-back group.
+ *
+ * Spread into the metadata object rather than assigned, so a published route
+ * gets no `robots` key at all and inherits the layout's — rather than getting
+ * an explicit `index: true` that would have to be kept in step with it.
+ *
+ * `follow: true` is deliberate on a held route: the page is not for the index
+ * but the links out of it still pass through, so a noindex blog post still
+ * feeds the service page it points at.
+ */
+export function searchDirectives(published: boolean): Pick<Metadata, "robots"> {
+  return published ? {} : { robots: { index: false, follow: true } };
+}
+
+/**
  * Per-page metadata. Title and description are required rather than
  * defaulted: a page without its own pair inherits the site template and ends
  * up competing with the homepage for the same query. The title is emitted
@@ -151,13 +213,24 @@ const ORG_ID = `${SITE_URL}/#organization`;
  * more than once — so the shape is a constant rather than a pattern everyone
  * is trusted to repeat.
  */
+/**
+ * One `City` node per municipality this entry covers.
+ *
+ * Seven of the nine locations are municipalities and produce one node each.
+ * The two groupings produce their real constituents instead — see
+ * `municipalities` on `Location` in content.ts for why publishing
+ * `City: "Ridge Meadow"` was a claim about a place that does not exist.
+ */
+const citiesOf = (location: Location) =>
+  (location.municipalities ?? [location.name]).map((name) => ({
+    "@type": "City",
+    name,
+    containedInPlace: { "@type": "AdministrativeArea", name: business.region },
+  }));
+
 export const areaServed = [
   { "@type": "AdministrativeArea", name: business.region },
-  ...locations.map((location) => ({
-    "@type": "City",
-    name: location.name,
-    containedInPlace: { "@type": "AdministrativeArea", name: business.region },
-  })),
+  ...locations.flatMap(citiesOf),
 ];
 
 /** Site-wide. Rendered once in the root layout. */
@@ -177,6 +250,41 @@ export const organizationSchema = {
     addressRegion: "BC",
     addressCountry: "CA",
   },
+};
+
+/** Stable @id for the site itself, so every page can say what it is part of. */
+const SITE_ID = `${SITE_URL}/#website`;
+
+/**
+ * The site as an entity. Rendered once in the root layout, beside the
+ * Organization.
+ *
+ * Three nodes, three different claims, and they are not interchangeable: the
+ * Organization is the company, the ProfessionalService on the homepage is the
+ * local business a searcher can hire, and this is the publication those two
+ * appear on. Answer engines resolve entities before they resolve pages, and
+ * without this node the graph had a page tier and an organisation tier with
+ * nothing joining them. Every page-level node in this file — /about,
+ * /services, each service, /locations, /contact, the blog index — was
+ * pointing its `isPartOf` at the ProfessionalService, which is a business
+ * rather than a website, and which is only declared on the homepage. All six
+ * now point here instead, which is what `isPartOf` on a WebPage means.
+ *
+ * No `potentialAction` / `SearchAction`. There is no site search on this
+ * site, and publishing a search endpoint that does not exist is a claim a
+ * crawler can follow and find nothing at. Add it if and when a search route
+ * lands, not before.
+ */
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": SITE_ID,
+  url: SITE_URL,
+  name: business.name,
+  alternateName: business.shortName,
+  description: `Year-round exterior cleaning and property maintenance for homes, stratas and businesses in ${business.base} and across ${business.region}.`,
+  inLanguage: "en-CA",
+  publisher: { "@id": ORG_ID },
 };
 
 /**
@@ -281,10 +389,17 @@ export const aboutPageSchema = {
   name: `About ${business.name}`,
   description: `Who ${business.name} is, how the work is done and the standard it is held to — property maintenance and exterior cleaning in ${business.base} and across ${business.region}.`,
   inLanguage: "en-CA",
-  isPartOf: { "@id": `${SITE_URL}/#business` },
+  isPartOf: { "@id": SITE_ID },
   mainEntity: { "@id": ORG_ID },
   // The crew photograph the page opens on. RainCity's own, served locally.
-  primaryImageOfPage: `${SITE_URL}/about-section-picture.jpg`,
+  //
+  // Read from the registry rather than written out. It was a hardcoded
+  // `/about-section-picture.jpg`, and when that file was converted to webp
+  // the registry entry moved and this string did not — leaving the one image
+  // a crawler is explicitly told is this page's principal image pointing at a
+  // 404. `photos.aboutCrew.src` cannot drift from the file the page actually
+  // serves, because it is the same value the page renders from.
+  primaryImageOfPage: `${SITE_URL}${photos.aboutCrew.src}`,
 };
 
 /**
@@ -311,7 +426,7 @@ export const servicesPageSchema = {
   name: `Services | ${business.name}`,
   description: `The full range of exterior cleaning and property maintenance ${business.name} provides in ${business.base} and across ${business.region}.`,
   inLanguage: "en-CA",
-  isPartOf: { "@id": `${SITE_URL}/#business` },
+  isPartOf: { "@id": SITE_ID },
   about: { "@id": ORG_ID },
   mainEntity: {
     "@type": "ItemList",
@@ -430,7 +545,7 @@ function faqPage(url: string, aboutId: string, faqs: readonly Faq[]) {
     "@id": `${url}#faq`,
     url,
     inLanguage: "en-CA",
-    isPartOf: { "@id": `${SITE_URL}/#business` },
+    isPartOf: { "@id": SITE_ID },
     about: { "@id": aboutId },
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
@@ -475,11 +590,11 @@ function faqPage(url: string, aboutId: string, faqs: readonly Faq[]) {
  */
 export function locationSchema(location: Location) {
   const url = canonical(`/locations/${location.slug}`);
-  const city = {
-    "@type": "City",
-    name: location.name,
-    containedInPlace: { "@type": "AdministrativeArea", name: business.region },
-  };
+  // One node for a municipality, several for a grouping. `areaServed` accepts
+  // either a node or an array, so the single-entry case is unwrapped rather
+  // than published as a one-element list.
+  const cities = citiesOf(location);
+  const city = cities.length === 1 ? cities[0] : cities;
 
   return {
     "@context": "https://schema.org",
@@ -567,7 +682,7 @@ export const locationsPageSchema = {
   name: `Service Areas | ${business.name}`,
   description: `The ${locations.length} communities ${business.name} travels to across ${business.region}, from its ${business.base} base.`,
   inLanguage: "en-CA",
-  isPartOf: { "@id": `${SITE_URL}/#business` },
+  isPartOf: { "@id": SITE_ID },
   about: { "@id": ORG_ID },
   areaServed,
   mainEntity: {
@@ -577,19 +692,39 @@ export const locationsPageSchema = {
     // Alphabetical, which is a sequence and not a ranking. The nearest
     // community is not the best one and the page does not say it is.
     itemListOrder: "https://schema.org/ItemListUnordered",
-    itemListElement: locations.map((location, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "City",
-        name: location.name,
-        url: canonical(`/locations/${location.slug}`),
-        containedInPlace: {
-          "@type": "AdministrativeArea",
-          name: business.region,
-        },
-      },
-    })),
+    // One entry per page, not per municipality — this is a list of the nine
+    // routes, and `numberOfItems` above says nine.
+    //
+    // The item is a `City` for the seven entries that are one, and a `Place`
+    // holding real `City` nodes for the two that are not. It published
+    // `City: "Ridge Meadow"` and `City: "Tri-Cities"` until an independent
+    // QA pass caught it: `citiesOf` was threaded through `areaServed`,
+    // `serviceSchema` and `locationSchema` and missed here, because this node
+    // carries a `url` and so did not read as a bare place node. It is the
+    // same category error — a crawler asked to resolve a city that does not
+    // exist — on the one page whose whole job is to enumerate the service
+    // area. See `municipalities` on `Location` in content.ts.
+    itemListElement: locations.map((location, i) => {
+      const cities = citiesOf(location);
+      const url = canonical(`/locations/${location.slug}`);
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        item:
+          cities.length === 1
+            ? { ...cities[0], url }
+            : {
+                "@type": "Place",
+                name: location.name,
+                url,
+                containsPlace: cities,
+                containedInPlace: {
+                  "@type": "AdministrativeArea",
+                  name: business.region,
+                },
+              },
+      };
+    }),
   },
 };
 
@@ -608,7 +743,7 @@ export const contactPageSchema = {
   name: `Contact ${business.name}`,
   description: `Call, email or request a free quote from ${business.name} — mobile property maintenance and exterior cleaning based in ${business.base}, serving ${business.region}.`,
   inLanguage: "en-CA",
-  isPartOf: { "@id": `${SITE_URL}/#business` },
+  isPartOf: { "@id": SITE_ID },
   mainEntity: { "@id": ORG_ID },
 };
 
@@ -620,26 +755,30 @@ export const contactPageSchema = {
  * Blog, which is what that particular set is. Multi-typing says both without
  * publishing two nodes for a crawler to reconcile.
  *
- * What is still deliberately absent is the list of posts. `blogPost`, or an
- * ItemList of BlogPosting nodes, is what this would carry on a finished blog.
- * Half the reason it did not is now gone — the posts resolve, and each one
- * publishes its own BlogPosting from `blogPostingSchema` below. The other
- * half has not moved: the copy is placeholder, and an index that also
- * enumerates six invented articles would state the same untrue thing a second
- * time, in the one part of a page that is read as a claim rather than as
- * copy.
+ * `blogPost` lists the articles, published as of the release of
+ * `indexing.blog`. It was held back through two earlier passes on the rule
+ * that structured data is a claim rather than copy: while the six articles
+ * were unconfirmed, an index that also enumerated them would have stated the
+ * same untrue thing a second time, in the part of the page a crawler reads as
+ * an assertion. That condition is met, so the list goes out.
  *
- * There is no crawl cost to leaving it out. The cards on the page link every
- * post and the sitemap lists every post, so nothing here is undiscoverable —
- * this is a duplicate assertion, not a route.
+ * Each entry is a reference to the `@id` that post's own page publishes, not
+ * a second copy of its headline, date and image. One article described twice
+ * is a crawler's problem to reconcile; a reference is the same claim made
+ * once.
  *
- * Add the list when the copy is real. That is now the only condition left.
+ * `posts` is passed in rather than sliced here. The pagination lives in
+ * lib/blog.ts, and lib/blog.ts already imports `canonical` from this file —
+ * reaching back for `pagePosts` would close that into a cycle. The route
+ * rendering this node already holds its own slice, so it hands it over.
+ * Called with nothing, the node simply carries no list, which is the correct
+ * shape for a page whose posts are not known.
  *
  * Page two and beyond get their own node at their own URL rather than
  * pointing back at /blog: each is a different set of posts, and
  * `pageMetadata` already canonicalises each page to itself.
  */
-export function blogPageSchema(page = 1) {
+export function blogPageSchema(page = 1, posts: readonly BlogPost[] = []) {
   const url = canonical(page <= 1 ? "/blog" : `/blog/page/${page}`);
   return {
     "@context": "https://schema.org",
@@ -649,9 +788,16 @@ export function blogPageSchema(page = 1) {
     name: `Blog | ${business.name}`,
     description: `Seasonal timing, maintenance that pays for itself, and notes from the work — exterior cleaning and property maintenance in ${business.base} and across ${business.region}.`,
     inLanguage: "en-CA",
-    isPartOf: { "@id": `${SITE_URL}/#business` },
+    isPartOf: { "@id": SITE_ID },
     about: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
+    // Only the posts on this page of the archive. Each page of the pager is a
+    // different document and canonicalises to itself, so its node describes
+    // what is on it rather than the whole collection.
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      "@id": `${canonical(`/blog/${post.slug}`)}#article`,
+    })),
   };
 }
 

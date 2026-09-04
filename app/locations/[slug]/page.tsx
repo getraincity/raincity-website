@@ -55,10 +55,12 @@ export async function generateMetadata({
 
   return {
     ...pageMetadata({
-      // "Property Maintenance in City, BC | Company" — the city and the service
-      // first, because those are the two halves of the query this page is
-      // written for, and the brand last because nobody is searching for it yet.
-      title: `Property Maintenance in ${location.name}, BC | ${business.name}`,
+      // Written per community rather than templated. The template that used
+      // to sit here read "Property Maintenance in City, BC | RainCity Property
+      // Maintenance" — the brand twice, 75 characters on New Westminster, and
+      // no way to name Coquitlam on the page that covers it. See the note on
+      // `metaTitle` in content.ts.
+      title: location.detail.metaTitle,
       description: location.detail.metaDescription,
       path: `/locations/${location.slug}`,
       // City crossed with the service categories, and nothing regional. The

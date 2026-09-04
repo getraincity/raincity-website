@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import { business } from "@/lib/content";
-import { isPage, totalPages } from "@/lib/blog";
+import { isPage, totalPages, pagePosts } from "@/lib/blog";
 import {
   JsonLd,
   blogPageSchema,
   breadcrumbSchema,
+  indexing,
   pageMetadata,
+  searchDirectives,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
@@ -50,14 +52,16 @@ export async function generateMetadata({
       // The page number goes in the title, so two archive pages are not two
       // identical results in a SERP. Each canonicalises to itself, which is
       // what `pageMetadata` does with `path`.
-      title: `Blog, Page ${page} | Property Maintenance Advice for ${business.region}`,
+      title: `Blog, Page ${page} | ${business.shortName} Property Maintenance`,
       description: `Page ${page} of the ${business.name} archive — seasonal timing, maintenance advice and notes from the work across ${business.region}.`,
       path: `/blog/page/${page}`,
     }),
     // All posts are placeholder content. Block this paginated entry point as
     // well until real articles replace the placeholders (same rationale as
     // the hub and individual post routes).
-    robots: { index: false, follow: true },
+    // Single-source hold. See `indexing` in lib/seo.tsx — flipping the flag
+  // there lifts this noindex and adds the sitemap entries in one edit.
+  ...searchDirectives(indexing.blog),
   };
 }
 
@@ -82,7 +86,7 @@ export default async function BlogArchivePage({
 
   return (
     <>
-      <JsonLd schema={blogPageSchema(page)} />
+      <JsonLd schema={blogPageSchema(page, pagePosts(page))} />
       <JsonLd
         schema={breadcrumbSchema([
           { name: "Blog", path: "/blog" },
