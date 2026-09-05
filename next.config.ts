@@ -64,7 +64,11 @@ const nextConfig: NextConfig = {
               // on every request — substantially more complex than this site
               // warrants. 'unsafe-inline' is the accepted trade-off for static
               // Next.js deployments.
-              "script-src 'self' 'unsafe-inline'",
+              // www.clarity.ms serves the loader tag; Clarity's own
+              // collector then loads/executes from its *.clarity.ms
+              // regional subdomains, so the wildcard is required, not
+              // just the one host the snippet references.
+              "script-src 'self' 'unsafe-inline' https://www.clarity.ms https://*.clarity.ms",
               // Tailwind CSS v4 generates inline styles.
               "style-src 'self' 'unsafe-inline'",
               // All photographs are self-hosted; blur-up placeholders are
@@ -78,7 +82,10 @@ const nextConfig: NextConfig = {
               // Maps Embed API serves from www.google.com; maps.google.com
               // retained so any cached pages don't break during the rollout.
               "frame-src https://www.google.com https://maps.google.com",
-              "connect-src 'self'",
+              // Clarity's session/heatmap data beacons out to its
+              // *.clarity.ms collector hosts; without this the script
+              // loads but every reporting call is silently dropped.
+              "connect-src 'self' https://www.clarity.ms https://*.clarity.ms",
               "object-src 'none'",
               "base-uri 'self'",
             ].join("; "),
