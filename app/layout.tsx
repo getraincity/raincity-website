@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Chivo, IBM_Plex_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { business } from "@/lib/content";
 import {
@@ -104,6 +105,16 @@ export default function RootLayout({
         <JsonLd schema={websiteSchema} />
       </head>
       <body>
+        {/* Microsoft Clarity — session recording/heatmaps for
+            raincitypms.com. Loaded with next/script so it never
+            blocks hydration or the LCP render. */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "yddlgq9hjb");`}
+        </Script>
         {/* Belt and suspenders, not a fix for a real gap: the server HTML is
             already visible without JavaScript, because only the
             IntersectionObserver in Motion.tsx ever writes the armed
