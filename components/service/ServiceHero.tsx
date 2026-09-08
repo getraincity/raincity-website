@@ -109,6 +109,13 @@ export function ServiceHero({ service }: { service: Service }) {
             delay={0.06}
           >
             {service.title}
+            {/* The region, on its own line inside the heading. See
+                `servicePage.hero.h1Sub` for why it is a second line rather
+                than a longer single one — the one-line form was measured and
+                wrapped to three and four lines at 375px. */}
+            <span className="display-m mt-3 block text-fog">
+              {servicePage.hero.h1Sub}
+            </span>
           </RevealOnLoad>
 
           <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.14}>

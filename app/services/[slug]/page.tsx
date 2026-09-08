@@ -66,13 +66,23 @@ export async function generateMetadata({
     // Eleven pages competing for one term is eleven pages losing to each
     // other, so each takes its own service crossed with the geography and
     // nothing else. The catalogue at /services keeps the general terms.
-    keywords: [
-      `${service.title.toLowerCase()} ${business.region}`,
-      `${service.title.toLowerCase()} ${business.base} BC`,
-      `${service.title.toLowerCase()} near me`,
-      `strata ${service.title.toLowerCase()} BC`,
-      `commercial ${service.title.toLowerCase()} Vancouver`,
-    ],
+    // `qualify` exists for one page. Commercial Cleaning is already named for
+    // its market, so prefixing it produced "commercial commercial cleaning
+    // Vancouver". Nothing reads this tag — Google dropped `keywords` as a
+    // ranking input long ago — but it is in the served HTML where anyone can
+    // read it, and a doubled word there reads as a template nobody checked.
+    keywords: (() => {
+      const name = service.title.toLowerCase();
+      const qualify = (modifier: string) =>
+        name.startsWith(modifier) ? name : `${modifier} ${name}`;
+      return [
+        `${name} ${business.region}`,
+        `${name} ${business.base} BC`,
+        `${name} near me`,
+        `${qualify("strata")} BC`,
+        `${qualify("commercial")} Vancouver`,
+      ];
+    })(),
   });
 }
 

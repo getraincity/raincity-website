@@ -18,25 +18,27 @@ site links to now exists, and the two omissions that were held while
 item of the `locationsPageSchema` ItemList — were lifted in the same commit
 as that template.
 
-Concretely, as of the SEO growth pass: `next build` prerenders 39 HTML pages
+Concretely, as of the AEO/GEO pass: `next build` prerenders 52 HTML pages
 plus `robots.txt` and `sitemap.xml`. Four of those are not public routes — the
 framework's own `_not-found` and `_global-error`, and the `/disclaimer` and
-`/refund-policy` redirect stubs — leaving 35 public pages.
+`/refund-policy` redirect stubs — leaving 48 public pages. Four more are the
+`/blog/page/N` archive pages, which resolve, are linked, and are deliberately
+`noindex` (see "The archive pager is noindex" below), leaving 44 indexable.
 
-**The sitemap lists 32 of them.** `indexing.blog` (see "One flag decides what
+**The sitemap lists 42 of them.** `indexing.blog` (see "One flag decides what
 is indexed" below) moved from `false` to `true` in the SEO growth pass, so the
-blog index and its six posts are back in `sitemap.xml` and off `noindex` —
-seven URLs, up from the 25 the sitemap carried while the whole section was
-held. The two policy pages are still `noindex` and still absent, awaiting the
+blog index and its posts are in `sitemap.xml` and off `noindex`. The archive
+has since grown from six articles to sixteen, so that is seventeen URLs. The two policy pages are still `noindex` and still absent, awaiting the
 legal review `indexing.legal` is gated on. `/blog/page/2` is separately and
 permanently omitted so the archive keeps a single canonical entry point.
 
-Every internal `href` in the built HTML resolves to a built route — 1,465
-anchor tags, zero broken, verified from the build (the count moved up from
-the growth pass's 918 once `ServiceAreas` and `RelatedServices` landed on
-every service page and the blog's `linked` blocks shipped). There are no `#`
-placeholder links left anywhere: `social` is an empty array and the footer
-renders no social icons at all (see below).
+Every internal `href` in the built HTML resolves to a built route — zero
+broken, verified from the build on every pass. There are no `#` placeholder
+links left anywhere: `social` is an empty array and the footer renders no
+social icons at all (see below).
+
+The site does now link out, which it did not before. See "Outbound citations"
+below — eight of them, all to primary sources, all from article bodies.
 
 ## Tech stack
 
@@ -201,8 +203,10 @@ when the legal review lands and the pages return to the sitemap and lose the
 
 ### The blog posts are placeholder content
 
-`lib/content.ts` → `blogPosts` carries six articles under a `PLACEHOLDER BLOG
-CONTENT` comment block. Titles, excerpts, dates, read times and body copy were
+`lib/content.ts` → `blogPosts` carries sixteen articles. **The first six are
+placeholder** and sit under a `PLACEHOLDER BLOG CONTENT` comment block; the ten
+added in the AEO/GEO pass are a different kind of thing and are described under
+"The ten researched articles" below. Titles, excerpts, dates, read times and body copy were
 all written for the build. The advice reads as this company's and is not —
 nobody at RainCity has said any of it, and several posts state timing and
 method as fact (when moss treatment should be booked, what belongs on a strata
@@ -611,6 +615,207 @@ logs under `logs/`. Read `01` before proposing service × location pages: the
 market pattern is a 60–96 page matrix and this project deliberately has not
 built one, for reasons that are written down there along with the conditions
 under which it should be.
+
+## The AEO/GEO pass
+
+What changed, and the rules that came out of it. Read this before touching
+`app/robots.ts`, the hero headings, or `blogPosts`.
+
+### robots.txt must never disallow `/_next/`
+
+It did, and it was the single most damaging line on the site. On this stack
+that one prefix covers `/_next/image` — the URL **every photograph is served
+from**, 294 references on the homepage alone — plus the stylesheet, the client
+JS and both woff2 faces under `/_next/static/`.
+
+Two consequences, both silent: no image on this site could be crawled, so none
+could appear in image search; and Googlebot, which renders with a headless
+browser, was being served a page it could not style or script. The layout being
+judged was not the layout that shipped.
+
+Only `/api/` is disallowed now. Nothing under `/_next/` can be indexed *as a
+page* regardless — the chunks are not HTML and the image endpoint answers with
+an image content type — so allowing the fetch costs nothing. The reasoning is
+written out at the constant. **Do not put it back.**
+
+### The archive pager is noindex
+
+`/blog/page/N` carries `robots: { index: false, follow: true }`, set
+unconditionally rather than through `searchDirectives`.
+
+It used to read `searchDirectives(indexing.blog)`, which was right only while
+the blog was held back. The moment that flag went true the pager inherited
+`index, follow` and started contradicting `app/sitemap.ts`, which deliberately
+omits every `/blog/page/N` so the archive keeps one canonical entry point. The
+document a crawler found on resolving that disagreement was a few hundred words
+of card copy already published on `/blog`.
+
+`follow` stays on: the post links on those pages are the only path to the older
+half of the archive. And it is deliberately **not** driven by `indexing.blog` —
+that flag is about whether the articles are fit to publish, this is about an
+archive having one entry point, which is true either way.
+
+### Headings carry their keywords on a second line
+
+Every `display-xl` page heading is now two lines: the name at `display-xl`, and
+a `display-m` `<span className="block">` under it inside the same `h1`.
+
+The heading on `/locations/burnaby` was the word "Burnaby" and nothing else —
+the strongest on-page signal on the nine pages most likely to be entered on
+"exterior cleaning Burnaby", carrying no service term at all. Same on the
+service template ("Roof Cleaning"), the homepage, and both hubs.
+
+A `span` inside the `h1` rather than a sibling `h2`, because the point is that
+the heading *text* carries the terms; a sibling would leave the `h1` saying
+exactly what it said before. The copy is in `content.ts` —
+`locationPage.hero.h1Sub`, `servicePage.hero.h1Sub`,
+`servicesPage.hero.headingSub`, `locationsPage.hero.headingSub`.
+
+This also resolves the constraint recorded against `servicePage.areas.heading`:
+the one-line form `{service.title} Across Greater Vancouver` was measured at
+375px and wrapped to three and four lines. Splitting it puts the long half on
+its own line at a smaller size, where the wrap is fine. Verified at 375px on
+the worst case, Tri-Cities, which runs to three lines and still reads.
+
+The two grouped locations print their real municipalities here —
+`h1SubGrouped` plus `listMunicipalities` in `LocationHero` — because "Ridge
+Meadow" is a name nobody searches. The display name is still unchanged.
+
+### Metadata numbers are met, not aspired to
+
+**All 34 indexable pages sit inside 150–158 characters.** They did not before:
+28 of 35 were under, averaging 143. The blog excerpts are held to the same band
+and the post title template `{title} | RainCity` keeps every title under 60.
+
+The four `/blog/page/N` descriptions sit at 139 and are the deliberate
+exception — they are `noindex`, so the band buys nothing there.
+
+### Outbound citations
+
+`BlogBlock.linked` grew an `external?: boolean` on its anchor shape. Rendered
+as a plain `<a target="_blank" rel="noopener">` — deliberately **without**
+`nofollow`, because a citation the company stands behind is what a followed
+link is for.
+
+The old rule said `href` is internal because an external link is a decision
+about who this company sends a reader to. That reasoning is intact; the answer
+changed. Across thirty-five pages this site cited nothing, which for a company
+publishing advice on strata obligations, roof method and winter salting reads
+as unsupported to a reader and uncorroborated to the systems deciding what to
+quote.
+
+**The bar is a primary source and only a primary source** — the regulator, the
+statute, the standards body, the meteorological record. Not a competitor, not a
+supplier, not a blog that also says the thing. Every URL in the file was
+checked to resolve before it was written. A dead one should be removed, not
+redirected to something approximate.
+
+Currently eight, across: `vancouver.ca` (snow bylaw), `www2.gov.bc.ca` (strata
+depreciation reports), `asphaltroofing.org` (ARMA on pressure washing shingle),
+`worksafebc.com` (fall protection at 3 m), `climate.weather.gc.ca` (climate
+normals).
+
+### Structured Q&A is the site's strongest AEO asset — 217 pairs
+
+Up from 111. Three sources, and two of them are new:
+
+- **Service and location templates** — declared in `detail.faqs`. Unchanged.
+- **Blog posts** — *derived*, not declared. `postFaqs` in `lib/blog.ts` lifts
+  the pairs out of the article's own body: a `subheading` block whose text ends
+  in a question mark, followed by the plain-string paragraphs under it. A
+  second `faqs` array beside the prose would be the first thing to drift.
+  Two rules are deliberately strict — the question mark, because not every
+  subheading is a question; and plain strings only, because a list or a
+  photograph flattened into an answer reads wrongly out of context.
+- **The five pages above the templates** — homepage, both hubs, `/about`,
+  `/contact` — declared in `pageFaqs` in `content.ts` and rendered by
+  `components/ui/PageFaq.tsx`. These were the pages a broad question actually
+  lands on and they had nothing machine-readable on them.
+
+Every one of these publishes `FAQPage`, and every caller checks for an empty
+array first: an `FAQPage` with no questions is a page claiming to be something
+it is not.
+
+**`pageFaqs` is copy, not configuration.** One rule was applied writing it and
+should be applied to any edit: *an answer may restate what the site already
+says and may not invent what it does not.* No response times, no prices, no
+crew sizes, no booking windows — those are exactly the kinds of sentence the
+blog compliance pass had to strip, and a reassuring answer is where they creep
+back in.
+
+### The ten researched articles
+
+Ten posts were added to `blogPosts` and they are **not** placeholder in the way
+the original six are. Every factual claim is either verifiable public
+information with the citation in the paragraph, or a restatement of something
+this site already says. None states a price, a response time, a crew size or a
+completion window.
+
+What still needs the client, and should be raised with the other launch items:
+they are published under the company's name and nobody at RainCity has read
+them. The advice is defensible; the *positioning* is the client's call.
+
+Slugs: `what-changes-a-gutter-quote`, `soft-washing-or-pressure-washing`,
+`who-clears-the-sidewalk`, `what-a-strata-budgets-outside`,
+`how-often-gutters-need-doing`, `what-makes-a-window-quote-different`,
+`twenty-eight-days-before-sealing`, `what-should-be-in-writing`,
+`three-metres`, `the-exterior-year`.
+
+Still no author and no byline on any of the sixteen. That rule has not moved.
+
+`readMinutes` across all sixteen was recalibrated to roughly 200 words per
+minute. The original six were set near 85 wpm — a 775-word article claiming
+nine minutes — and mixing the two conventions on one index would have read as
+a bug. Compute it from the body rather than estimating it.
+
+### `sameAs` is wired and waiting
+
+`organizationSchema` and `localBusinessSchema` both spread a `sameAsField`
+derived from `social` in content.ts. It stays **absent** while that array is
+empty, because an empty `sameAs: []` is a published claim to have no profiles
+anywhere. Filling `social` lights it up on both nodes with no second edit here.
+
+This is the site's largest remaining gap and it is client-blocked: the entity
+is asserted by one domain and corroborated by nothing. The Google Business
+Profile URL is the one that matters most.
+
+Also added to the Organization, all derived so they cannot drift:
+`description`, `areaServed`, `knowsAbout` (from `services`), `contactPoint`;
+and `currenciesAccepted` / `knowsLanguage` on the business node.
+
+Four recommended LocalBusiness fields stay absent because nobody has supplied
+them — `priceRange`, `aggregateRating`, `foundingDate`, `numberOfEmployees`.
+The rule at that constant is the standing one: structured data may restate what
+the site already says and may not invent what it does not.
+
+### Images: one asset gap left
+
+`next.config.ts` sets `minimumCacheTTL` to 30 days. The optimiser derives its
+cache header from the upstream file and `public/` is served `max-age=0`, so
+every optimised variant was revalidated on every repeat visit — thirteen
+conditional round trips on a service page. The trade-off is stated at the
+constant: these URLs key on source path, not content hash, so **replacing a
+photo at the same filename leaves returning visitors on the old one for up to
+a month.** Change the filename instead; it is one line in `photos.ts`.
+
+The gap: `public/services/commercial-cleaning.webp` is **600x400** and is the
+LCP hero of `/services/commercial-cleaning`, upscaled roughly 2.4x on a
+full-bleed banner. It is the client's own photograph supplied at thumbnail
+size, and every larger commercial image is already assigned to a scope tile, so
+swapping it would either duplicate a photo on the page or weaken the card.
+**Ask the client for the original at 2560x1600.** Do not fix it by reusing a
+tile.
+
+### What the audit tools get wrong here
+
+Worth knowing before acting on one. A generic crawler will report the
+photography as unoptimised because it measures the source file in `public/`.
+Nobody downloads that file: `hero.webp` is 742 KB on disk and the browser
+receives **17.5 KB of AVIF** at 640px, 113 KB at 1920px. The whole homepage,
+all assets included, is 385 KB over 26 requests, with CLS at 0 and TTFB near
+60 ms.
+
+There is no image weight problem on this site. Chasing one costs quality.
 
 ## Version control
 

@@ -5,9 +5,7 @@ import {
   JsonLd,
   blogPageSchema,
   breadcrumbSchema,
-  indexing,
   pageMetadata,
-  searchDirectives,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
@@ -56,12 +54,24 @@ export async function generateMetadata({
       description: `Page ${page} of the ${business.name} archive — seasonal timing, maintenance advice and notes from the work across ${business.region}.`,
       path: `/blog/page/${page}`,
     }),
-    // All posts are placeholder content. Block this paginated entry point as
-    // well until real articles replace the placeholders (same rationale as
-    // the hub and individual post routes).
-    // Single-source hold. See `indexing` in lib/seo.tsx — flipping the flag
-  // there lifts this noindex and adds the sitemap entries in one edit.
-  ...searchDirectives(indexing.blog),
+    // `noindex, follow`, and unconditionally — not via `searchDirectives`.
+    //
+    // This used to read `searchDirectives(indexing.blog)`, which was correct
+    // only while the blog was held back. The moment that flag went true the
+    // pager inherited `index, follow` and started contradicting the sitemap:
+    // `app/sitemap.ts` deliberately omits every `/blog/page/N` so the archive
+    // keeps a single canonical entry point, while the page itself was asking
+    // to be indexed. A crawler resolving that disagreement gets a 282-word
+    // document whose entire body is card copy repeated from /blog.
+    //
+    // `follow` stays on for the same reason it stays on every held route
+    // here: the six post links on this page are the only path to the older
+    // half of the archive, and they must keep passing.
+    //
+    // Deliberately not driven by `indexing.blog`. The hold on that flag was
+    // about whether the *articles* were fit to publish; this is about an
+    // archive having one entry point, which is true whatever the copy says.
+    robots: { index: false, follow: true },
   };
 }
 

@@ -1,8 +1,10 @@
-import { business } from "@/lib/content";
+import { business, pageFaqs } from "@/lib/content";
 import {
-  JsonLd,
   breadcrumbSchema,
+  canonical,
   contactPageSchema,
+  JsonLd,
+  pageFaqSchema,
   pageMetadata,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
@@ -12,11 +14,12 @@ import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactDetails } from "@/components/contact/ContactDetails";
 import { NextSteps } from "@/components/contact/NextSteps";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { PageFaq } from "@/components/ui/PageFaq";
 
 export const metadata = pageMetadata({
   title: `Contact ${business.shortName} | Free Quotes in ${business.base}, BC`,
   // 145, down from 216.
-  description: `Call, email or request a free quote from ${business.shortName} — mobile exterior cleaning and property maintenance based in ${business.base}, BC. No obligation.`,
+  description: `Call, email or request a free written quote from ${business.shortName} — mobile exterior cleaning and property maintenance based in ${business.base}, BC. No obligation.`,
   path: "/contact",
   keywords: [
     `contact ${business.name}`,
@@ -47,6 +50,9 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        schema={pageFaqSchema("/contact", canonical("/contact") + "#webpage", pageFaqs.contact.faqs)}
+      />
       <JsonLd schema={contactPageSchema} />
       <JsonLd
         schema={breadcrumbSchema([{ name: "Get In Touch", path: "/contact" }])}
@@ -56,6 +62,15 @@ export default function ContactPage() {
         <ContactHero />
         <ContactDetails />
         <QuoteForm />
+        {/* After the ask, not in front of it — the same placement and the
+            same reasoning as ServiceFaq. */}
+        <PageFaq
+          id="contact-faq-heading"
+          label={pageFaqs.contact.label}
+          heading={pageFaqs.contact.heading}
+          body={pageFaqs.contact.body}
+          faqs={pageFaqs.contact.faqs}
+        />
         <NextSteps />
       </main>
       <Footer />

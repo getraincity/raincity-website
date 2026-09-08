@@ -1,8 +1,10 @@
-import { business, locations } from "@/lib/content";
+import { business, locations, pageFaqs } from "@/lib/content";
 import {
-  JsonLd,
   breadcrumbSchema,
+  canonical,
+  JsonLd,
   locationsPageSchema,
+  pageFaqSchema,
   pageMetadata,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
@@ -14,6 +16,7 @@ import { CoverageMap } from "@/components/locations/CoverageMap";
 import { LocationsGrid } from "@/components/locations/LocationsGrid";
 import { LocationsClosing } from "@/components/locations/LocationsClosing";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { PageFaq } from "@/components/ui/PageFaq";
 
 export const metadata = pageMetadata({
   title: `Service Areas | Exterior Cleaning Across ${business.region}`,
@@ -83,6 +86,9 @@ export const metadata = pageMetadata({
 export default function LocationsPage() {
   return (
     <>
+      <JsonLd
+        schema={pageFaqSchema("/locations", canonical("/locations") + "#webpage", pageFaqs.locations.faqs)}
+      />
       <JsonLd schema={locationsPageSchema} />
       <JsonLd
         schema={breadcrumbSchema([{ name: "Locations", path: "/locations" }])}
@@ -95,6 +101,15 @@ export default function LocationsPage() {
         <LocationsGrid />
         <LocationsClosing />
         <QuoteForm />
+        {/* After the ask, not in front of it — the same placement and the
+            same reasoning as ServiceFaq. */}
+        <PageFaq
+          id="locations-faq-heading"
+          label={pageFaqs.locations.label}
+          heading={pageFaqs.locations.heading}
+          body={pageFaqs.locations.body}
+          faqs={pageFaqs.locations.faqs}
+        />
       </main>
       <Footer />
       <ScrollToTop />

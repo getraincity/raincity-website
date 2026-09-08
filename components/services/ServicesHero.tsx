@@ -79,6 +79,11 @@ export function ServicesHero() {
               delay={0.06}
             >
               {servicesPage.hero.heading}
+              {/* "Our Services" names a category and no service and no place.
+                  The line under it carries both. */}
+              <span className="display-m mt-3 block text-fog">
+                {servicesPage.hero.headingSub}
+              </span>
             </RevealOnLoad>
 
             <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.14}>

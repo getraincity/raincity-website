@@ -45,6 +45,12 @@ export function Hero() {
               the first frame after hydration rather than waiting its turn. */}
           <RevealOnLoad as="h1" className="display-xl text-white">
             Year-Round Property Maintenance
+            {/* The region, inside the h1 rather than only in the title tag.
+                The homepage competes for "property maintenance Greater
+                Vancouver" and its heading named no place at all. */}
+            <span className="display-m mt-3 block text-fog">
+              In {business.region}
+            </span>
           </RevealOnLoad>
 
           <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.09}>

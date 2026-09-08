@@ -74,6 +74,11 @@ export function LocationsHero() {
             delay={0.06}
           >
             {locationsPage.hero.heading}
+            {/* Same as the service hub: "Where We Work" is good copy and a
+                poor heading, because it names neither the work nor where. */}
+            <span className="display-m mt-3 block text-fog">
+              {locationsPage.hero.headingSub}
+            </span>
           </RevealOnLoad>
 
           <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.14}>

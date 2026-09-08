@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import { blogPosts, business } from "@/lib/content";
-import { findPost } from "@/lib/blog";
+import { findPost, postFaqs } from "@/lib/blog";
 import { photos } from "@/lib/photos";
 import {
   JsonLd,
+  blogFaqSchema,
   blogPostingSchema,
   breadcrumbSchema,
   indexing,
@@ -133,9 +134,15 @@ export default async function BlogPostPage({
   // everything below.
   if (!post) notFound();
 
+  // Lifted from the article's own question section. Empty on a post that has
+  // none, and the node below is then not rendered at all — an FAQPage with no
+  // questions in it is a page claiming to be something it is not.
+  const faqs = postFaqs(post);
+
   return (
     <>
       <JsonLd schema={blogPostingSchema(post)} />
+      {faqs.length > 0 && <JsonLd schema={blogFaqSchema(post, faqs)} />}
       {/* The visible trail in PostHeader is this list, in the same order. A
           breadcrumb a crawler is told about and a reader cannot see is the
           one kind of structured data that is worth nothing. */}

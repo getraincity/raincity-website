@@ -1,7 +1,9 @@
-import { business, services } from "@/lib/content";
+import { business, pageFaqs, services } from "@/lib/content";
 import {
-  JsonLd,
   breadcrumbSchema,
+  canonical,
+  JsonLd,
+  pageFaqSchema,
   pageMetadata,
   servicesPageSchema,
 } from "@/lib/seo";
@@ -13,6 +15,7 @@ import { ServicesHero } from "@/components/services/ServicesHero";
 import { WhatWeOffer } from "@/components/services/WhatWeOffer";
 import { ServicesCatalogue } from "@/components/services/ServicesCatalogue";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { PageFaq } from "@/components/ui/PageFaq";
 
 export const metadata = pageMetadata({
   // 52 characters, down from 80. The catalogue does not need to list itself
@@ -20,7 +23,7 @@ export const metadata = pageMetadata({
   title: `Our Services | Exterior Cleaning in ${business.region}`,
   // 139, down from 266. The old one named nine of the eleven services and
   // was cut after the fourth.
-  description: `Eleven services, one company — pressure and soft washing, windows, gutters, roofs, sealing, painting, snow and lights, across ${business.region}.`,
+  description: `Eleven services, one company — pressure and soft washing, windows, gutters, roofs, sealing, painting, snow and lights, right across ${business.region}.`,
   path: "/services",
   // Service-led terms, where /about takes the company-led ones and the
   // homepage takes the city-by-city set. The three pages should not be
@@ -60,6 +63,9 @@ export const metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        schema={pageFaqSchema("/services", canonical("/services") + "#webpage", pageFaqs.services.faqs)}
+      />
       <JsonLd schema={servicesPageSchema} />
       <JsonLd
         schema={breadcrumbSchema([{ name: "Services", path: "/services" }])}
@@ -71,6 +77,15 @@ export default function ServicesPage() {
         <ServicesCatalogue />
         <Testimonials />
         <QuoteForm />
+        {/* After the ask, not in front of it — the same placement and the
+            same reasoning as ServiceFaq. */}
+        <PageFaq
+          id="services-faq-heading"
+          label={pageFaqs.services.label}
+          heading={pageFaqs.services.heading}
+          body={pageFaqs.services.body}
+          faqs={pageFaqs.services.faqs}
+        />
       </main>
       <Footer />
       <ScrollToTop />

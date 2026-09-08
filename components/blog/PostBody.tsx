@@ -9,6 +9,15 @@ import { PostColumn } from "@/components/blog/PostColumn";
 import { Reveal } from "@/components/ui/Motion";
 
 /**
+ * The site's one inline-link treatment — the same one /contact and the quote
+ * form's consent line use. Hoisted because two elements render it now (an
+ * internal `next/link` and an outbound anchor) and a link that changed colour
+ * depending on where it pointed would be a bug nobody would think to look for.
+ */
+const LINK =
+  "text-rc-blue underline underline-offset-4 transition-colors duration-200 hover:text-navy";
+
+/**
  * The article.
  *
  * Every element a post can contain is styled here and nowhere else, and the
@@ -251,19 +260,39 @@ function Block({ block }: { block: BlogBlock }) {
         // either side of a link carry.
         <PostColumn className="mt-5 first:mt-0">
           <p className="body-base text-steel">
-            {block.parts.map((part, i) =>
-              typeof part === "string" ? (
-                <Fragment key={`${i}-text`}>{part}</Fragment>
-              ) : (
-                <Link
-                  key={`${i}-${part.href}`}
-                  href={part.href}
-                  className="text-rc-blue underline underline-offset-4 transition-colors duration-200 hover:text-navy"
-                >
+            {block.parts.map((part, i) => {
+              if (typeof part === "string") {
+                return <Fragment key={`${i}-text`}>{part}</Fragment>;
+              }
+              // One treatment, two elements. An outbound citation is a plain
+              // anchor rather than next/link — there is no client-side route
+              // to prefetch — and opens in a new tab so the article a reader
+              // is part-way through is still behind them.
+              //
+              // No `nofollow`. These point at the regulator, the statute or
+              // the standards body the sentence is quoting; withholding the
+              // link equity from a source the company is relying on would be
+              // the wrong signal to send about its own claim. See the note on
+              // `external` in content.ts for what is allowed here.
+              if (part.external) {
+                return (
+                  <a
+                    key={`${i}-${part.href}`}
+                    href={part.href}
+                    target="_blank"
+                    rel="noopener"
+                    className={LINK}
+                  >
+                    {part.text}
+                  </a>
+                );
+              }
+              return (
+                <Link key={`${i}-${part.href}`} href={part.href} className={LINK}>
                   {part.text}
                 </Link>
-              ),
-            )}
+              );
+            })}
           </p>
         </PostColumn>
       );

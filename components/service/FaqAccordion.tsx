@@ -41,7 +41,11 @@ import { Stagger, StaggerItem } from "@/components/ui/Motion";
  * it is still in the DOM — which is what lets a crawler read all six answers
  * whatever the open state happens to be.
  */
-export function FaqAccordion({ items }: { items: Faq[] }) {
+// `readonly` because the callers hold `as const` data. The component only
+// reads the array, so widening the parameter is the honest fix — the
+// alternative is a spread at every call site that copies a list solely to
+// drop a modifier the component never needed.
+export function FaqAccordion({ items }: { items: readonly Faq[] }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (

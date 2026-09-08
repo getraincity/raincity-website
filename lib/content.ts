@@ -266,7 +266,7 @@ export const services: Service[] = [
       closing: "Ready for a Building That Looks Managed?",
       closingPhoto: "commercialClosing",
       metaDescription:
-      "Commercial cleaning across Greater Vancouver. Offices, retail and strata common areas cleaned to a written scope, on the cycle your building needs.",
+      "Commercial cleaning across Greater Vancouver. Offices, retail and strata common areas cleaned to a written scope, on the cycle your building actually needs.",
       faqs: [
         {
           question: "Can you clean outside our operating hours?",
@@ -470,7 +470,7 @@ export const services: Service[] = [
       closing: "Ready for a Wash Your Siding Survives?",
       closingPhoto: "softClosing",
       metaDescription:
-      "Soft washing across Greater Vancouver for roofs, stucco, painted siding and cedar. Low pressure only, with moss and algae killed at the root.",
+      "Soft washing across Greater Vancouver for roofs, stucco, painted siding and cedar. Low pressure only, with the moss and algae killed off at the roots.",
       faqs: [
         {
           question: "What actually is soft washing?",
@@ -670,7 +670,7 @@ export const services: Service[] = [
       closing: "Ready for Glass You Can See Through?",
       closingPhoto: "windowClosing",
       metaDescription:
-      "Streak-free window cleaning across Greater Vancouver — glass, frames, sills, tracks and screens, on homes, storefronts and multi-storey buildings.",
+      "Streak-free window cleaning across Greater Vancouver — glass, frames, sills, tracks and screens cleaned on homes, storefronts and multi-storey buildings.",
       // The six questions that actually come in before a window job is
       // booked, answered the way they would be answered on the phone. Each
       // one is published as FAQPage structured data, so none of them lean on
@@ -777,7 +777,7 @@ export const services: Service[] = [
       closing: "Ready Before the Rain Finds a Way In?",
       closingPhoto: "gutterClosing",
       metaDescription:
-      "Gutter cleaning across Greater Vancouver — every run cleared by hand, debris bagged and removed, downspouts flushed and augered, then flow-tested.",
+      "Gutter cleaning across Greater Vancouver — every run cleared by hand, debris bagged and taken away, downspouts flushed and augered, and then flow-tested.",
       faqs: [
         {
           question: "How often do gutters need clearing in Greater Vancouver?",
@@ -979,7 +979,7 @@ export const services: Service[] = [
       closing: "Ready for a Finish That Survives the Winter?",
       closingPhoto: "paintClosing",
       metaDescription:
-      "Interior and exterior painting across Greater Vancouver. Surfaces washed, scraped, filled, caulked and primed before the finish coats go on.",
+      "Interior and exterior painting across Greater Vancouver. Surfaces washed, scraped, filled, caulked and primed properly before any finish coat goes on.",
       faqs: [
         {
           question: "What time of year can you paint outside here?",
@@ -1080,7 +1080,7 @@ export const services: Service[] = [
       closing: "Ready Before the First Flake Lands?",
       closingPhoto: "snowClosing",
       metaDescription:
-      "Snow removal and salting across Greater Vancouver. Driveways, strata lots and commercial entrances cleared at trigger depth, salted, and logged.",
+      "Snow removal and salting across Greater Vancouver. Driveways, strata lots and commercial entrances cleared at the agreed trigger depth, salted and logged.",
       faqs: [
         {
           question: "When do I need to book snow service?",
@@ -1183,7 +1183,7 @@ export const services: Service[] = [
       closing: "Ready to Light It Up Without the Ladder?",
       closingPhoto: "lightsClosing",
       metaDescription:
-      "Holiday light installation across Greater Vancouver. Rooflines, porches and trees measured, clipped and powered safely, serviced all season.",
+      "Holiday light installation across Greater Vancouver. Rooflines, porches and trees measured, clipped and powered safely, then serviced all season long.",
       faqs: [
         {
           question: "When should I book, and when do you install?",
@@ -1521,7 +1521,7 @@ export const locations: Location[] = [
         "A village of acreages above Port Moody, where the conifers overhang the roofline all year and the driveway is usually longer than the house.",
       metaTitle: "Anmore Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Gutters, roofs, windows and driveways on Anmore's treed acreage lots. Year-round exterior cleaning from RainCity, based in New Westminster.",
+        "Gutters, roofs, windows and driveways on Anmore's treed acreage lots. under conifer cover all year. Exterior cleaning from a crew based in New Westminster.",
       heading: "Working On Anmore's Acreages",
       body: [
         "Anmore is a village of a couple of thousand people spread across large lots between Port Moody and Buntzen Lake, and nearly every property in it is detached, private and standing in second-growth fir and cedar. That one fact sets most of the work. Needles and cones land on the roof and in the gutters twelve months of the year rather than for six weeks in October, and a north-facing slope under that much canopy stays damp enough to grow moss straight through the summer.",
@@ -1579,7 +1579,7 @@ export const locations: Location[] = [
         "Four town centres, a mountain and a long industrial spine — the widest mix of property types we work in inside one city.",
       metaTitle: "Burnaby Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning in Burnaby, BC — strata common areas, parkades, high glass and family homes from Metrotown to the Heights. Free written quotes.",
+        "Exterior cleaning in Burnaby, BC — strata common areas, parkades, high glass and family homes from Metrotown up to Burnaby Heights. Free written quotes.",
       heading: "One City, Four Town Centres",
       body: [
         "Burnaby fits four town centres, a university on a mountain and a long industrial spine into a single municipality, so the work changes street by street. Metrotown, Brentwood and Lougheed are concrete and glass — parkades, lobbies, common-area walkways and windows that only come clean off a water-fed pole. The streets between them are largely mid-century detached houses on standard lots, with the deep eaves and the mature street trees that come with that vintage.",
@@ -1637,7 +1637,7 @@ export const locations: Location[] = [
         "Ladner, Tsawwassen and North Delta — flat, open, and close enough to the water that salt gets into everything.",
       metaTitle: "Delta, Ladner & Tsawwassen Exterior Cleaning | RainCity",
       metaDescription:
-        "Exterior cleaning in Ladner, Tsawwassen and North Delta — salt-film window cleaning, siding soft-washing and driveway work. Free written quotes.",
+        "Exterior cleaning in Ladner, Tsawwassen and North Delta — salt-film window cleaning, siding soft-washing and driveway sealing work. Free written quotes.",
       heading: "Three Communities, One Exposure",
       body: [
         "Delta is three places that share a municipality and very little else. Ladner is a village core with dyked farmland along the south arm of the Fraser. Tsawwassen faces the Strait of Georgia with almost nothing between it and the weather. North Delta is postwar subdivision on the escarpment above the river. What they have in common, and what matters to us, is exposure — this is the most open, least sheltered ground in our service area, and the wind carries salt and grit onto surfaces here that stay clean inland.",
@@ -1695,7 +1695,7 @@ export const locations: Location[] = [
         "The Township and the City both — bigger lots, longer driveways, and a climate that runs a step away from the coast's.",
       metaTitle: "Langley Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Driveway and lot sealing, pressure washing, gutters and roofs across Willoughby, Walnut Grove, Fort Langley and Aldergrove. Free written quotes.",
+        "Driveway and lot sealing, pressure washing, gutters and roofs across Willoughby, Walnut Grove, Fort Langley and out to Aldergrove. Free written quotes.",
       heading: "Acreages, Subdivisions And A Longer Dry Window",
       body: [
         "Langley is two municipalities and about as wide a spread of property as this region offers. Willoughby and Walnut Grove are recent subdivision — dense, new, and largely strata or small-lot detached. Fort Langley and Murrayville are heritage and mature. South of the highway, Brookswood, Campbell Valley and the land out towards Aldergrove are acreages, horse property and workshops. Twenty minutes inside the Township and the job in front of us has changed completely.",
@@ -1753,7 +1753,7 @@ export const locations: Location[] = [
         "Home. The truck loads here, on the hill above the Fraser, and works its way out from it.",
       metaTitle: "New Westminster Exterior Cleaning & Property Care",
       metaDescription:
-        "Exterior cleaning in New Westminster, BC — RainCity's home city. Heritage window and gutter work on the hill, strata care at the Quay. Free quotes.",
+        "Exterior cleaning in New Westminster, BC — RainCity's own home city. Heritage window and gutter work on the hill, strata care at the Quay. Free quotes.",
       heading: "The City The Truck Loads In",
       body: [
         "New Westminster is where we are based, which means it is the city we know street by street rather than by postal code — and it is also one of the harder ones to work in. The old grid runs straight down the hill to the river, so a great many properties in Queen's Park, Glenbrooke and the Brow of the Hill sit on a slope with a lane behind and tight on-street parking in front. The heritage stock is tall and timber, with original single-glazed windows and boxed gutters that do not behave like the modern equivalents.",
@@ -1812,7 +1812,7 @@ export const locations: Location[] = [
         "Maple Ridge and Pitt Meadows, at the wet end of the valley, where a north-facing roof greens over faster than anywhere else we go.",
       metaTitle: "Maple Ridge & Pitt Meadows Exterior Cleaning | RainCity",
       metaDescription:
-        "Exterior cleaning in Maple Ridge and Pitt Meadows — roof moss treatment, soft washing and gutter clearing at the wettest end of the valley.",
+        "Exterior cleaning in Maple Ridge and Pitt Meadows — roof moss treatment, soft washing and gutter clearing at the wettest end of the whole Fraser Valley.",
       heading: "The Wet End Of The Valley",
       body: [
         "Ridge Meadows takes the weather the rest of the region only hears about. Rainfall climbs as you move east up the Fraser, and against the Golden Ears the cloud stalls and empties — so moss, algae and lichen out here are not an occasional problem, they are the standing condition. A north-facing roof slope in Silver Valley or Websters Corners will green over in a season and a half, and the shaded half of a driveway does much the same.",
@@ -1870,7 +1870,7 @@ export const locations: Location[] = [
         "The largest area we cover — Whalley down to the border, and more commercial hard surface than the rest of the region put together.",
       metaTitle: "Surrey Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning in Surrey, BC — lot sealing, commercial pressure washing, strata common areas and homes from City Centre to South Surrey.",
+        "Exterior cleaning in Surrey, BC — lot sealing, commercial pressure washing, strata common areas and family homes from City Centre down to South Surrey.",
       heading: "Six Town Centres And A Lot Of Asphalt",
       body: [
         "Surrey is six town centres rather than one city, and covering it properly means treating it that way. City Centre is towers and new mid-rise. Guildford, Fleetwood and Newton are largely 1980s and 90s subdivision with the townhouse complexes that arrived alongside them. Cloverdale is older and quieter. South Surrey runs newer, larger and closer to the water. It is the biggest single area we work in and the one with the widest span of building ages.",
@@ -1929,7 +1929,7 @@ export const locations: Location[] = [
         "Coquitlam, Port Coquitlam and Port Moody — hillside subdivision on one side, river and inlet flats on the other.",
       metaTitle: "Tri-Cities Exterior Cleaning, Coquitlam BC | RainCity",
       metaDescription:
-        "Exterior cleaning in Coquitlam, Port Coquitlam and Port Moody — moss removal, pressure washing, gutters and strata common areas. Free quotes.",
+        "Exterior cleaning in Coquitlam, Port Coquitlam and Port Moody — roof moss removal, pressure washing, gutters and strata common areas. Free written quotes.",
       heading: "Three Cities, And A Lot Of Gradient",
       body: [
         "The Tri-Cities are three municipalities with one thing in common: gradient. Burke Mountain, Westwood Plateau and Heritage Mountain are hillside subdivision built into second-growth forest, so driveways are steep, lots are shaded, and hard surfaces stay damp long enough to grow moss down the north side of the house. At the bottom of the hill, Port Coquitlam's river flats and Port Moody's inlet edge are flatter, older and closer to water.",
@@ -1987,7 +1987,7 @@ export const locations: Location[] = [
         "Character houses, laneways and mid-rise strata, on lots where access is the first thing we look at.",
       metaTitle: "Vancouver Exterior Cleaning & Property Care | RainCity",
       metaDescription:
-        "Exterior cleaning in Vancouver, BC — character-home window and gutter work, soft washing, and mid-rise strata common areas, east side and west.",
+        "Exterior cleaning in Vancouver, BC — character-home window and gutter work, soft washing and mid-rise strata common areas, on the east side and the west.",
       heading: "The Tightest Lots We Work On",
       body: [
         "Vancouver is the most constrained city in our area, and access decides a great deal of the quote. Character houses in Kitsilano, Dunbar, Mount Pleasant and across the east side sit close to their neighbours on narrow lots, often with a laneway house behind and no driveway at all — which means no truck at the house, hose and cord runs down a side yard barely wide enough for a ladder, and a word with the neighbour before anything is set up on their side of the fence. Cambie, Main and the West End add mid-rise strata, where the glass goes higher than a ladder ought to.",
@@ -2492,6 +2492,8 @@ export const servicesPage = {
   hero: {
     crumb: "Services",
     heading: "Our Services",
+    /** Second line of the h1. See `locationPage.hero.h1Sub` for the why. */
+    headingSub: "Exterior Cleaning Across Greater Vancouver",
     body: "Exterior cleaning and property care for homes, stratas and businesses across Greater Vancouver — booked year-round, in whatever the sky is doing.",
     cta: "Get a Free Quote",
   },
@@ -2571,6 +2573,22 @@ export const servicesPage = {
 export const servicePage = {
   hero: {
     crumb: "Services",
+    /**
+     * The second line of the h1, under the service name.
+     *
+     * Same reasoning as `locationPage.hero.h1Sub`: the heading was the bare
+     * service name, so eleven pages each targeting "<service> Greater
+     * Vancouver" had the region in the title tag and nowhere in the heading.
+     *
+     * This is the fixed string rather than a template, and it is fixed for
+     * the reason recorded against `servicePage.areas.heading`: measured at
+     * 375px, "{service.title} Across Greater Vancouver" at display size wrapped
+     * to three and four lines. That constraint applied to a `display-l` h2
+     * carrying the whole phrase. Here the long half sits on its own line at
+     * `display-m`, which is where the wrapping problem goes away — the
+     * service name keeps `display-xl` to itself.
+     */
+    h1Sub: "In Greater Vancouver",
     quoteCta: "Get a Free Quote",
     callCta: "Call Us Now",
   },
@@ -2859,6 +2877,8 @@ export const locationsPage = {
   hero: {
     crumb: "Locations",
     heading: "Where We Work",
+    /** Second line of the h1. See `locationPage.hero.h1Sub` for the why. */
+    headingSub: "Nine Communities Across Greater Vancouver",
     body: "A mobile crew out of New Westminster, covering nine communities across Greater Vancouver — both banks of the Fraser, all year.",
     cta: "Get a Free Quote",
   },
@@ -2946,10 +2966,236 @@ export const locationsPage = {
  * the map at community zoom, questions written for this community and the
  * nearby cross-links — none of which appears anywhere else on the site.
  */
+/**
+ * The questions on the five pages above the two templates.
+ *
+ * Every other question set on this site belongs to one service or one
+ * community. These five belong to the pages a broad question lands on —
+ * the homepage, the two hubs, /about and /contact — which between them
+ * carried no machine-readable answers at all until this existed.
+ *
+ * One hard rule was applied writing these, and it is the same rule the blog
+ * compliance pass ran on: **an answer here may restate what the site already
+ * says and may not invent what it does not.** Every operational fact below
+ * is drawn from somewhere already published — the hours on `business`, the
+ * free written quote the CTAs promise site-wide, the licensed-and-insured
+ * claim in `servicesPage.intro.principles`, the no-storefront position in
+ * `locationsPage.overview`, and the "no travel charge and no minimum job
+ * size" line already answered on the Ridge Meadow page.
+ *
+ * Nothing here commits the office to a response time, a price, a crew size
+ * or a booking window. Those are the six kinds of sentence the blog audit
+ * had to strip, and a question set is exactly where they creep back in: an
+ * answer wants to be reassuring, and "we usually get back to you within the
+ * hour" is a promise somebody has to keep on a Tuesday in November.
+ *
+ * These are published as `FAQPage` on their pages. Editing an answer here
+ * edits what a search engine and an answer engine are told this company
+ * says, so treat a change to this object as a change to the site's copy
+ * rather than to its configuration.
+ */
+export const pageFaqs = {
+  home: {
+    label: "Common Questions",
+    heading: "The Questions We Get Asked First",
+    body: "Before a quote, most people want the same handful of things settled. These are the answers, and none of them change depending on who is asking.",
+    faqs: [
+      {
+        question: "What areas does RainCity cover?",
+        answer:
+          "Nine communities across Greater Vancouver, on both banks of the Fraser — Vancouver, Burnaby, New Westminster, Surrey, Delta, Langley, Anmore, the Tri-Cities and the Ridge Meadow area. RainCity is a mobile business working out of New Westminster, so the service area is drawn in communities rather than as a radius around a shop. If a property sits just beyond the edge of the map, it is worth asking rather than assuming.",
+      },
+      {
+        question: "Do you work with stratas and commercial properties?",
+        answer:
+          "Yes, alongside residential. Strata common areas, commercial frontages, parkades and multi-unit sites are a substantial share of the work, and they are scoped the same way a house is — in writing, against what is actually there. The difference is usually frequency: a building runs on a schedule where a house runs on a season.",
+      },
+      {
+        question: "Are quotes free, and are they in writing?",
+        answer:
+          "Yes to both. The quote is given in writing after looking at the property, and the figure on it is the figure on the invoice. Anything that could change it — a blocked downspout that has to be augered, a guard system nobody mentioned, a surface that turns out to be sealed rather than bare — is better identified before the work than argued about after it.",
+      },
+      {
+        question: "Are you licensed and insured?",
+        answer:
+          "Yes, and we will confirm it in writing on request. It is worth asking any contractor for on work involving height, and worth asking before anyone arrives rather than after an incident.",
+      },
+      {
+        question: "What are your hours?",
+        answer:
+          "Monday to Saturday, 7am to 10pm. Sunday is closed. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
+      },
+      {
+        question: "Is there a minimum job size or a travel charge?",
+        answer:
+          "No to both, anywhere inside the service area. A single gutter run in Anmore is quoted on the same terms as a strata block in Burnaby.",
+      },
+    ],
+  },
+
+  services: {
+    label: "About The Catalogue",
+    heading: "How These Services Fit Together",
+    body: "Eleven services is a wide list, and the questions it raises are mostly about how they combine rather than about any one of them.",
+    faqs: [
+      {
+        question: "Can several services be booked in one visit?",
+        answer:
+          "Usually, and often they should be. Some jobs are naturally one visit — the ladder is already at the gutter line when the roof needs looking at, and a slab is washed before it is sealed. Combining them is quoted as one scope rather than as separate jobs stacked together.",
+      },
+      {
+        question: "Which services are seasonal?",
+        answer:
+          "Sealing and exterior painting need consecutive dry days and are effectively a late-spring-to-early-autumn proposition here. Snow clearing and holiday lighting are winter. Everything else runs year-round, though the sensible timing for roof and gutter work is tied to the growth flush in spring and the leaf drop in autumn rather than to the calendar.",
+      },
+      {
+        question: "What is the difference between power washing and soft washing?",
+        answer:
+          "Power washing removes what is on a surface with force; soft washing removes it with a detergent applied at low pressure and then rinsed. The surface decides which is appropriate, not the stain. Hard ground surfaces take pressure. Roofs, cedar, stucco and painted siding take soft washing, because pressure removes the finish along with the growth.",
+      },
+      {
+        question: "Do you offer maintenance on a schedule rather than one-off?",
+        answer:
+          "Yes. Recurring work is the normal arrangement for stratas and commercial sites and is available residentially too. The practical argument for it is scheduling rather than price — exterior work in this region has narrow right weeks, and work booked in advance lands in them.",
+      },
+      {
+        question: "What is included in a quote?",
+        answer:
+          "The areas covered, the method, the access assumed, what happens to any debris, and what finished looks like. Those five are what make two quotes comparable, and a quote that leaves one out has made an assumption about it that you cannot see.",
+      },
+    ],
+  },
+
+  locations: {
+    label: "About The Coverage",
+    heading: "Whether We Come To You",
+    body: "The map answers most of it. These are the questions the map raises — edges, boundaries and whether where you are changes anything.",
+    faqs: [
+      {
+        question: "Do you charge more for communities further out?",
+        answer:
+          "No. There is no travel charge and no minimum job size anywhere inside the service area. A property in Aldergrove is quoted on the same terms as one four blocks from the New Westminster yard.",
+      },
+      {
+        question: "My property is just outside the areas listed. Can you still come?",
+        answer:
+          "Ask. The nine communities are where the work concentrates rather than a hard boundary, and the answer takes one phone call. We cross the odd municipal line for the right job.",
+      },
+      {
+        question: "Why are Tri-Cities and Ridge Meadow listed as groupings?",
+        answer:
+          "Because that is how the areas are talked about locally, but they are not municipalities. Tri-Cities means Coquitlam, Port Coquitlam and Port Moody; Ridge Meadow means Maple Ridge and Pitt Meadows. All five are covered individually — the grouping is a label on a map, not a limit on where the truck goes.",
+      },
+      {
+        question: "Is there an office or a shop I can visit?",
+        answer:
+          "No. RainCity is a mobile business and there is no storefront — the truck loads in New Westminster and drives to the property. Everything that would happen at a counter happens at the property instead, which is where the quote has to be worked out anyway.",
+      },
+      {
+        question: "Does the same crew cover every community?",
+        answer:
+          "The whole catalogue travels, and the terms do not change by postcode. What changes between communities is what the properties there actually need — acreage lots under conifer cover ask for different work than a mid-rise strata does, and the individual community pages set out what each one tends to want.",
+      },
+    ],
+  },
+
+  about: {
+    label: "About Us",
+    heading: "Who You Are Actually Hiring",
+    body: "The page above answers what we do. These are the questions about who turns up and what stands behind the work.",
+    faqs: [
+      {
+        question: "Is RainCity a local company?",
+        answer:
+          "Yes — based in New Westminster and working across Greater Vancouver. That matters more here than it sounds: the timing of nearly every job on the list is set by a rainfall pattern that is specific to this coast, and knowing when the window closes is most of knowing how to schedule the work.",
+      },
+      {
+        question: "Are you licensed and insured?",
+        answer:
+          "Yes, and confirmed in writing on request. On any work involving height it is worth asking a contractor for both, along with confirmation that their workers are covered.",
+      },
+      {
+        question: "What happens if I am not happy with the work?",
+        answer:
+          "Tell us, and the first remedy is putting it right rather than arguing about it. The workmanship guarantee is set out in the terms and conditions, and it is written with a return visit as the first response.",
+      },
+      {
+        question: "Do you do residential and commercial, or specialise?",
+        answer:
+          "Both, and the same crew and the same standard cover them. What differs is the scope and the rhythm — a house is generally seasonal work, a building is generally a schedule — rather than the method or the equipment.",
+      },
+      {
+        question: "How is a job scoped before it starts?",
+        answer:
+          "Someone looks at the property, and the scope comes back in writing: the areas, the method, the access, what happens to debris, and what finished means. That document is what the crew works to on the day, which is why it is written before anything starts rather than after.",
+      },
+    ],
+  },
+
+  contact: {
+    label: "Before You Call",
+    heading: "What To Expect From A Quote",
+    body: "A few things worth knowing before you pick up the phone, so the call is a short one.",
+    faqs: [
+      {
+        question: "How do I get a quote?",
+        answer:
+          "Call, email, or send the form on this page with the property and the work in it. For anything with height or awkward access, the quote follows someone looking at the property — a number given over the phone for work nobody has seen is a number that changes on the day.",
+      },
+      {
+        question: "Does a quote cost anything or commit me to anything?",
+        answer:
+          "No to both. Quotes are free and carry no obligation, and there is no charge for coming out to look at a property inside the service area.",
+      },
+      {
+        question: "What should I tell you when I get in touch?",
+        answer:
+          "The address, roughly what needs doing, how many storeys, and anything awkward about getting to it — a deck under the eaves, a steep bank, a locked side gate, a parkade with a height bar. Access is the thing that most often changes a quote, so it is the thing most worth mentioning first.",
+      },
+      {
+        question: "Can I book several jobs at once?",
+        answer:
+          "Yes, and it is usually the cheaper way round. Work that shares access shares setup — gutters and roof, washing and sealing — and it is quoted as one scope rather than as separate visits.",
+      },
+      {
+        question: "What are your hours?",
+        answer:
+          "Monday to Saturday, 7am to 10pm, and closed Sunday. Email arrives whenever you send it; the phone is the faster route during working hours.",
+      },
+    ],
+  },
+} as const;
+
 export const locationPage = {
   hero: {
     /** The middle crumb. The trail is Home / Locations / [community]. */
     crumb: "Locations",
+    /**
+     * The second line of the h1, under the community name.
+     *
+     * The heading used to be the bare community name and nothing else, which
+     * read well and said nothing: "Burnaby" is the strongest on-page signal
+     * on the page most likely to be entered on "exterior cleaning Burnaby",
+     * and it carried no service term at all. The title tag had them; the
+     * heading did not.
+     *
+     * Splitting the h1 rather than rewriting it keeps both. The community
+     * name stays at `display-xl` and still dominates — a reader arriving from
+     * a search for their own city is checking they landed in the right place,
+     * which is what the original note here argued and is still true — while
+     * the line under it at `display-m` puts the service terms inside the
+     * heading element. Read as text, the h1 is now "Burnaby Exterior Cleaning
+     * & Property Maintenance".
+     *
+     * `grouped` is the variant for the two entries that are not
+     * municipalities. "Ridge Meadow" is a name nobody searches, and the whole
+     * reason `municipalities` exists on `Location` is that Maple Ridge and
+     * Pitt Meadows are what people actually type. The display name is
+     * deliberately unchanged — see the note on `municipalities` — so this
+     * line is where the real names go.
+     */
+    h1Sub: "Exterior Cleaning & Property Maintenance",
+    h1SubGrouped: "Exterior Cleaning in ",
     quoteCta: "Get a Free Quote",
     callCta: "Call Us Now",
   },
@@ -3119,13 +3365,36 @@ export type BlogBlock =
    * reviewable, and a post still cannot introduce a treatment the design
    * system has not ruled on.
    *
-   * `href` is internal. Nothing on this site links out, and an external link
-   * from an article is a decision about who this company is willing to send
-   * a reader to — not something a content array should be able to do quietly.
+   * `href` was internal only, on the reasoning that an external link is a
+   * decision about who this company is willing to send a reader to and not
+   * something a content array should be able to make quietly. That reasoning
+   * is intact; what changed is the answer to it.
+   *
+   * Across all thirty-five public pages this site linked out precisely
+   * nowhere. For a company publishing advice about strata obligations, roof
+   * method and winter salting, citing nothing is its own signal: the claims
+   * are unsupported to a reader and uncorroborated to the systems that decide
+   * what to quote. So `external` was added rather than the rule relaxed —
+   * every outbound link is still a deliberate, reviewable act, it just now
+   * has a shape.
+   *
+   * The bar for setting it: a primary source, and only a primary source. The
+   * regulator, the statute, the standards body, the meteorological record.
+   * Not a competitor, not a supplier, not a blog that also says the thing.
+   * Every URL carried in this file was checked to resolve before it was
+   * written, and any that dies should be removed rather than redirected to
+   * something approximate.
+   *
+   * Rendered with `target="_blank"` and `rel="noopener"`, and deliberately
+   * *without* `nofollow`: a citation the company stands behind is exactly
+   * what a followed link is for.
    */
   | {
       kind: "linked";
-      parts: readonly (string | { href: string; text: string })[];
+      parts: readonly (
+        | string
+        | { href: string; text: string; external?: boolean }
+      )[];
     };
 
 /**
@@ -3204,7 +3473,7 @@ export const blogPosts: BlogPost[] = [
       "A green roof looks bad long before it is bad. What shortens a shingle's life is the water the moss holds against it, day after day, through a wet winter.",
     category: "Roof Care",
     date: "2026-08-18",
-    readMinutes: 9,
+    readMinutes: 4,
     photo: "roofCleaning",
     featured: true,
     body: [
@@ -3298,7 +3567,7 @@ export const blogPosts: BlogPost[] = [
       "Late September is the cheapest fortnight of the year to own a building in Greater Vancouver. Everything left until after the first storm is harder work.",
     category: "Seasonal",
     date: "2026-08-04",
-    readMinutes: 8,
+    readMinutes: 3,
     photo: "gutterCleaning",
     featured: true,
     body: [
@@ -3373,7 +3642,7 @@ export const blogPosts: BlogPost[] = [
       "Same house, same siding, same year, and one wall is green while the other is fine. It is not the paint. It is how long a north-facing wall stays wet here.",
     category: "Exterior Cleaning",
     date: "2026-07-21",
-    readMinutes: 7,
+    readMinutes: 3,
     photo: "softWashing",
     body: [
       {
@@ -3448,7 +3717,7 @@ export const blogPosts: BlogPost[] = [
       "Strata councils usually inherit a maintenance schedule rather than write one. What belongs on it, what goes missing, and what is worth an argument at the AGM.",
     category: "Strata & Commercial",
     date: "2026-06-30",
-    readMinutes: 13,
+    readMinutes: 6,
     photo: "commercialCleaning",
     body: [
       {
@@ -3600,7 +3869,7 @@ export const blogPosts: BlogPost[] = [
       "Sealer needs a dry surface and a dry forecast, which is a narrow ask in Greater Vancouver. The window is real, though, and wider than most people assume.",
     category: "Hard Surfaces",
     date: "2026-05-19",
-    readMinutes: 8,
+    readMinutes: 3,
     photo: "concreteAsphaltSealing",
     body: [
       {
@@ -3675,7 +3944,7 @@ export const blogPosts: BlogPost[] = [
       "Greater Vancouver gets a handful of days a year that genuinely need clearing. Nobody knows which ones in advance, which is why the plan beats the shovel.",
     category: "Seasonal",
     date: "2026-01-20",
-    readMinutes: 7,
+    readMinutes: 3,
     photo: "snowRemoval",
     body: [
       {
@@ -3737,6 +4006,1047 @@ export const blogPosts: BlogPost[] = [
           "The aim for commercial and strata sites is completion before the first arrivals, and the start time that follows from it is written into the agreement rather than left to the morning. Heavy overnight events get a first pass before dawn and a second if the snow continues. A site cleared at five and snowed on until nine has not been cleared, which is why the number of passes an event needs is settled with the site in advance rather than argued about afterwards.",
           { kind: "subheading", text: "What is the difference between a seasonal contract and a per-event rate?" },
           "A seasonal agreement covers the winter regardless of how many events occur and holds a place in the route. A per-event arrangement is called on when it snows. Which one suits a property depends on what an uncleared morning actually costs it and how much certainty is worth paying for, and that is a conversation worth having before November rather than during it.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "what-changes-a-gutter-quote",
+    title: "What Changes The Number On A Gutter Quote",
+    excerpt:
+      "Two houses on the same street get different gutter quotes. Six things move the figure, and the length of the run is nowhere near the biggest of the six.",
+    category: "Costs",
+    date: "2026-08-25",
+    readMinutes: 4,
+    photo: "gutterRuns",
+    body: [
+      {
+        heading: "Why nobody quotes this over the phone",
+        blocks: [
+          "The question that comes in most often is what gutter cleaning costs, and the honest answer is that the number is set by things nobody can see from a phone call. Two houses on the same street, built the same year, can be quoted differently — and usually are.",
+          "That is not evasion. It is that the length of the gutter run, the one thing a caller can measure, is a long way from being the thing that decides the work.",
+        ],
+      },
+      {
+        heading: "The six things that actually move it",
+        blocks: [
+          "Roughly in the order they matter:",
+          {
+            kind: "list",
+            items: [
+              "Height, and what it does to access. A single-storey bungalow is ladder work. A three-storey with a walkout basement at the back is a different job on the same footprint — and on that building the front and the back are two different jobs.",
+              "What is standing under the eaves. A deck, a conservatory, a hedge or a steep bank all mean the ladder cannot go where the gutter is, and the work moves to poles or to roof access.",
+              "Roof pitch, where the gutter has to be reached from above. A low slope can be walked. A steep one cannot, and that changes the equipment before it changes anything else.",
+              "Tree cover, and the species. Conifers are the ones that matter here — needles pack rather than pile, and packed needles are pulled out rather than scooped.",
+              "Whether there are guards, and what kind. Removing and refitting a guard system is often the largest single block of time on the job.",
+              "The state of the downspouts. A clear run is flushed in minutes. A blocked elbow is augered, and until it is opened the gutter above it has not actually been fixed.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "What matters less than people expect",
+        blocks: [
+          "Linear footage is the obvious one. It sets a floor and very little else — the difference between ninety and a hundred and thirty feet of gutter is far smaller than the difference between reaching it off a ladder and reaching it off a roof.",
+          "How bad it looks from the ground is the other. A gutter packed solid and a gutter half full take a similar amount of time to do properly, because both are emptied along their whole length and both end on the same flow test.",
+          {
+            kind: "quote",
+            text: "The expensive part of a gutter is almost never the gutter. It is what has to happen before anyone can stand next to it.",
+          },
+        ],
+      },
+      {
+        heading: "The one that surprises people",
+        blocks: [
+          "Guards. They are sold as the thing that ends gutter cleaning and they are closer to the thing that changes it: fine debris still passes, moss still grows on the mesh, and the guard now has to come off and go back on around whatever is cleared underneath.",
+          "None of that makes them a bad idea. It does mean a guarded gutter is not automatically a cheaper one, and a quote that does not mention them has probably not accounted for them.",
+        ],
+      },
+      {
+        heading: "Why this matters more here than most places",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "The climate normals for Vancouver International Airport put the site at roughly 1,189 mm of precipitation a year, with about three quarters of it falling between October and March — ",
+              {
+                href: "https://climate.weather.gc.ca/climate_normals/",
+                text: "Environment and Climate Change Canada publishes the record",
+                external: true,
+              },
+              ". A gutter here is not managing the occasional storm. It is moving water more or less continuously for half the year.",
+            ],
+          },
+          "That is why the flow test at the end is the part worth insisting on. A gutter that has been emptied looks finished. A gutter that has been tested is finished.",
+        ],
+      },
+      {
+        heading: "Questions About Gutter Pricing in Greater Vancouver",
+        blocks: [
+          { kind: "subheading", text: "Why will nobody give me a price over the phone?" },
+          "Because the two things that set the figure — how the gutter is reached, and what is standing under the eaves — cannot be described accurately by someone on the ground looking up. A number given without seeing those is a number that changes on the day, which is worse than no number at all.",
+          { kind: "subheading", text: "Does a bigger house always cost more?" },
+          "Not reliably. A long single-storey run with clear ground under it can be quicker than a short second-storey run over a deck. Footprint sets a floor; access sets the price.",
+          { kind: "subheading", text: "Do gutter guards make cleaning cheaper?" },
+          "They tend to make it less frequent rather than less expensive per visit, because the guard is lifted and refitted around whatever is cleared. Ask whether a quote includes guard removal — that single line is the most common reason two quotes on the same house do not match.",
+          { kind: "subheading", text: "Should downspouts be included?" },
+          "They should be quoted explicitly, one way or the other. A gutter cleared into a blocked downspout has not been fixed, and the blockage is usually at the elbow rather than at the top where it can be seen from a ladder.",
+          { kind: "subheading", text: "What should be in writing before work starts?" },
+          "The runs included, whether guards are removed and refitted, whether downspouts are flushed and augered, what happens to the debris, and whether the job ends on a flow test. Anything absent from that list is the thing most likely to be argued about afterwards.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "The full scope and method is on the ",
+              { href: "/services/gutter-cleaning", text: "gutter cleaning page" },
+              ". If the gutters are carrying moss, the ",
+              { href: "/services/roof-cleaning", text: "roof is where it is coming from" },
+              " and the two are usually one visit. We quote across ",
+              { href: "/locations", text: "nine Greater Vancouver communities" },
+              ".",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "soft-washing-or-pressure-washing",
+    title: "Soft Washing Or Pressure Washing For A Roof",
+    excerpt:
+      "Two different machines doing two different jobs, and choosing wrong costs a roof years. The surface decides it, not the stain. Here is how the call is made.",
+    category: "Exterior Cleaning",
+    date: "2026-08-11",
+    readMinutes: 4,
+    photo: "softRoofs",
+    body: [
+      {
+        heading: "What the two actually are",
+        blocks: [
+          "Pressure washing removes what is on a surface with force — water at high pressure through a tip that concentrates it. It is mechanical. The dirt comes off because it is knocked off.",
+          "Soft washing removes what is on a surface with chemistry — a detergent solution applied at roughly garden-hose pressure, left to work, then rinsed. It is biological. The growth comes off because it has been killed and has let go.",
+          "Everything else about the choice follows from that. One of them strips. The other one treats.",
+        ],
+      },
+      {
+        heading: "The surface decides, not the stain",
+        blocks: [
+          "The instinct is to pick the method by how bad the mess looks. That is backwards. The mess tells you what needs removing; the surface tells you what may be used to remove it.",
+          {
+            kind: "list",
+            items: [
+              "Asphalt shingle — soft wash only. The granule layer is the wearing surface, and pressure takes it off along with the moss.",
+              "Cedar shakes and cedar siding — soft wash. Pressure raises the grain and drives water into it.",
+              "Stucco and painted siding — soft wash. Pressure finds every hairline crack and puts water behind the finish.",
+              "Concrete driveways, walkways and parkade decks — pressure. Nothing on the surface is damaged by it, and the soiling is mechanical rather than biological.",
+              "Brick and concrete block — usually pressure, at a reduced setting, tested on an inconspicuous patch first.",
+              "Composite and painted decking — soft wash or low pressure. The manufacturer's guidance for the board almost always caps the pressure, and it is worth reading before anyone starts.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "The roof is the one that is not a judgement call",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "On asphalt shingle there is no debate to have. The ",
+              {
+                href: "https://www.asphaltroofing.org/algae-moss-prevention-cleaning-asphalt-roofing-systems/",
+                text: "Asphalt Roofing Manufacturers Association",
+                external: true,
+              },
+              " — the trade body behind the major North American shingle makers — states that high-pressure washing is likely to damage asphalt roofing and should not be used on it, for removing algae or for any other purpose.",
+            ],
+          },
+          "That is not a preference published by a cleaning company. It is the position of the people who make the product, and it is the document a manufacturer reaches for if a warranty claim ever turns on how the roof was cleaned.",
+          {
+            kind: "photo",
+            photo: "roofMossy",
+            caption:
+              "Growth at this depth comes off in an afternoon under pressure, and takes the granule layer with it. Treated instead, it releases over the following weeks and the surface stays intact.",
+          },
+        ],
+      },
+      {
+        heading: "Why the treated roof looks worse first",
+        blocks: [
+          "This is worth knowing before booking, because it is what generates the phone call a fortnight later.",
+          "A pressure-washed roof looks finished the same day. A soft-washed roof does not — the growth is dead but still sitting there, and it releases over the following weeks as the weather works on it. The roof looks untidy for a month and then clears.",
+          {
+            kind: "quote",
+            text: "One method is finished when the crew leaves. The other is finished when the next month of rain has done its half of the work.",
+          },
+        ],
+      },
+      {
+        heading: "Questions About Roof And Siding Cleaning Methods",
+        blocks: [
+          { kind: "subheading", text: "Which one does my roof need?" },
+          "If it is asphalt shingle, cedar, or tile with any age on it, soft washing. Pressure belongs on hard, non-porous ground surfaces and on very little else around a house. The surface is the deciding factor, not how heavy the growth looks.",
+          { kind: "subheading", text: "Is soft washing just spraying bleach on my roof?" },
+          "The active ingredient in most roof treatments is a dilute sodium hypochlorite solution, which is what the manufacturers' own guidance describes. The work is in the dilution, the dwell time and the rinse — and in protecting what sits underneath, because planting, gutters and downspouts all need handling before anything is applied.",
+          { kind: "subheading", text: "Will pressure washing void my roof warranty?" },
+          "It can, and manufacturers are explicit about it. If a roof is inside its warranty period, the maintenance section of that warranty is worth reading before choosing a method — and worth asking any contractor to confirm in writing which method they intend to use.",
+          { kind: "subheading", text: "Can pressure washing be used anywhere on a house?" },
+          "On hard ground surfaces, yes — driveways, walkways, parkade decks, some brick. The rule of thumb is that if a surface has a coating, a grain or a granule layer that is doing a job, pressure will remove that too.",
+          { kind: "subheading", text: "How long does each one last?" },
+          "A treated surface stays clear substantially longer than a stripped one, because treatment kills the root structure while stripping leaves it behind to regrow from. Shaded and north-facing elevations come back first either way — that is orientation, not method.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "The low-pressure method is set out on the ",
+              { href: "/services/soft-washing", text: "soft washing page" },
+              ", the machine work on the ",
+              { href: "/services/power-washing", text: "power washing page" },
+              ", and how the two apply to a roof on the ",
+              { href: "/services/roof-cleaning", text: "roof cleaning page" },
+              ".",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "who-clears-the-sidewalk",
+    title: "Who Clears The Sidewalk, And By When",
+    excerpt:
+      "In Vancouver the public sidewalk outside your building is your responsibility and the deadline is 10am. Most owners have that rule the wrong way round.",
+    category: "Seasonal",
+    date: "2026-02-17",
+    readMinutes: 4,
+    photo: "snowSalting",
+    body: [
+      {
+        heading: "The rule most people have backwards",
+        blocks: [
+          "The common assumption is that the city clears the public sidewalk and the owner clears their own driveway. In Vancouver it is closer to the opposite.",
+          {
+            kind: "linked",
+            parts: [
+              "The ",
+              {
+                href: "https://vancouver.ca/streets-transportation/snow-removal-from-city-streets.aspx",
+                text: "City of Vancouver's winter maintenance rules",
+                external: true,
+              },
+              " make the property owner and the occupant responsible for clearing snow and ice from the full width of the sidewalk in front of their property — and alongside it as well, on a corner lot — by 10am each day.",
+            ],
+          },
+          "Meanwhile there is no bylaw requirement to clear snow from your own private property at all. The part you are legally obliged to clear is the part you do not own.",
+        ],
+      },
+      {
+        heading: "What full width means",
+        blocks: [
+          "It means what it says: property line to curb, not a shovel-width path down the middle. A cleared track through the snow is the most common good-faith attempt and it is not compliance.",
+          "It also means the sidewalk is cleared every day there is snow on it, rather than once after the storm. Snow that melts in the afternoon and refreezes overnight is the condition that puts people in hospital, and it is the condition a daily deadline exists for.",
+        ],
+      },
+      {
+        heading: "The number that gets attention",
+        blocks: [
+          "Vancouver attaches a fine to missing the deadline, and a substantially larger one where snow and ice is left beyond twenty-four hours. The city publishes the current figures and they have moved upward over the years, so they are worth checking against the winter you are reading this in rather than trusting a number in an article.",
+          "The larger exposure is not the fine. A fall on an uncleared sidewalk in front of a commercial building or a strata is a liability question, and the answer to it starts with whether the owner met the standard the bylaw sets.",
+          {
+            kind: "quote",
+            text: "The fine is the cheap outcome. The expensive one arrives months later on a lawyer's letterhead.",
+          },
+        ],
+      },
+      {
+        heading: "This is a municipal rule, not a regional one",
+        blocks: [
+          "Every municipality in Greater Vancouver writes its own version and the deadlines are not the same. Vancouver's is 10am. Others sit later in the morning, and some define the obligation differently for commercial and residential frontages.",
+          "If a property sits on a boundary — and a surprising number of strata sites do — the rule that applies is the one for the municipality the frontage is in, not the one the strata office is in. Worth confirming once, in writing, rather than every December.",
+        ],
+      },
+      {
+        heading: "What this means for a strata or a commercial site",
+        blocks: [
+          "Three things, in practice:",
+          {
+            kind: "steps",
+            items: [
+              "Establish which municipality's rule applies and what its deadline actually is. A five-minute job done once, and it decides everything below it.",
+              "Decide before the season who is clearing and at what trigger. An arrangement agreed in November is an arrangement. One agreed at six in the morning during a snowfall is not.",
+              "Keep a record of what was done and when. If a fall claim ever arrives, the log is the difference between demonstrating a standard and asserting one.",
+            ],
+          },
+          "The third is the one most often skipped, and the only one that matters after the fact.",
+        ],
+      },
+      {
+        heading: "Questions About Snow Clearing Obligations in BC",
+        blocks: [
+          { kind: "subheading", text: "Am I really responsible for the public sidewalk?" },
+          "In Vancouver, yes — the bylaw places it on the property owner and the occupant, for the full width, by 10am daily. Most Greater Vancouver municipalities have an equivalent rule with a different deadline. Read the city's own page rather than a summary of it, including this one.",
+          { kind: "subheading", text: "Does this apply to renters as well as owners?" },
+          "In Vancouver the obligation names both the owner and the occupier, so a tenant in a commercial unit or a house can carry it. Where a lease is silent on it, both parties are exposed — which is an argument for making it explicit in the lease rather than discovering it in February.",
+          { kind: "subheading", text: "What if I clear a path down the middle?" },
+          "That is not compliance. The requirement is the full width, property line to curb. A cleared track is the most common form of good-faith non-compliance and it is still non-compliance.",
+          { kind: "subheading", text: "Who is liable if someone falls?" },
+          "That is decided on the facts, and whether the bylaw standard was met forms a substantial part of it. This article is general information rather than legal advice — for a specific site, and particularly a commercial one, that conversation belongs with your insurer and your lawyer before the season rather than after an incident.",
+          { kind: "subheading", text: "Does salting count as clearing?" },
+          "Salting is part of the job and not the whole of it. Snow has to be removed; salt manages what is left behind and what refreezes. Salt spread onto an uncleared sidewalk melts a layer and produces exactly the refreeze the daily deadline exists to prevent.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "How clearing and salting is scoped, triggered and logged is on the ",
+              { href: "/services/snow-removal-salting", text: "snow removal and salting page" },
+              ". Commercial entrances and strata common areas sit under ",
+              { href: "/services/commercial-cleaning", text: "commercial cleaning" },
+              ".",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "what-a-strata-budgets-outside",
+    title: "What A Strata Should Budget For Outside",
+    excerpt:
+      "Depreciation reports cover the roof and the envelope. The recurring exterior work that keeps both alive usually sits in a line nobody has costed properly.",
+    category: "Strata & Commercial",
+    date: "2026-04-14",
+    readMinutes: 5,
+    photo: "commercialSchedule",
+    body: [
+      {
+        heading: "The report that changed the conversation",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Strata corporations in British Columbia with five or more lots are required to obtain a depreciation report on a five-year cycle, projecting the repair, maintenance and renewal of common property across a thirty-year horizon. The ",
+              {
+                href: "https://www2.gov.bc.ca/gov/content/housing-tenancy/strata-housing/operating-a-strata/repairs-and-maintenance/depreciation-reports",
+                text: "Province publishes the requirements and the guidance",
+                external: true,
+              },
+              ", and the option to defer by annual three-quarter vote is no longer available.",
+            ],
+          },
+          "That has pushed a lot of councils into looking properly at the exterior for the first time. The report tells you the roof has a remaining life and what replacing it will cost. What it is generally not written to tell you is how much of that remaining life depends on work nobody has scheduled.",
+        ],
+      },
+      {
+        heading: "Two different kinds of spending",
+        blocks: [
+          "It helps to separate them, because they behave differently and they are funded differently.",
+          {
+            kind: "list",
+            items: [
+              "Renewal — the roof, the membrane, the paint cycle, the asphalt. Large, infrequent, forecastable, and the thing the depreciation report exists to model.",
+              "Recurring maintenance — gutters, roof moss, drains, common-area glass, hard surfaces, seasonal clearing. Small individually, annual or better, and the thing that decides whether the renewal line arrives on schedule or early.",
+            ],
+          },
+          "A council that funds the first and skips the second is not saving money. It is moving a large number forward in time, and the depreciation report will duly capture that movement at the next five-year cycle.",
+          {
+            kind: "quote",
+            text: "Deferred maintenance does not disappear from a budget. It changes column, and it grows on the way across.",
+          },
+        ],
+      },
+      {
+        heading: "What belongs in the recurring line",
+        blocks: [
+          "Not an exhaustive list, and the mix changes with the building. But most sites in this region have some version of all of it:",
+          {
+            kind: "list",
+            items: [
+              "Gutters and downspouts, cleared and flow-tested. On a treed site this is twice a year rather than once, and the second visit is the one that gets cut first and matters most.",
+              "Roof moss, treated rather than stripped. This is the single line with the clearest link to the renewal date of the largest asset on the site.",
+              "Perimeter and site drains, checked before the wet season rather than during it.",
+              "Common-area glass — lobby, corridor, amenity room. Frequency is a presentation decision more than a building one, which is why it belongs in a schedule rather than in a phone call.",
+              "Hard surfaces: walkways, entrance aprons, visitor parking and the parkade deck. Moss on a walkway is a slip claim waiting for the right morning.",
+              "Winter clearing and salting, with the trigger and the responsibility agreed before the season.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "What usually gets missed",
+        blocks: [
+          "Three things, consistently.",
+          "The first is the second gutter clean. A treed site fills again between late October and December, and a single autumn visit booked for early October is a site with full gutters through the wettest eight weeks of the year.",
+          "The second is anything that requires access equipment. Work that needs a lift or rope access gets deferred not because it is unimportant but because it needs a decision at council rather than a phone call from the manager — so it waits for a meeting, and then for the next one.",
+          "The third is the record. A strata that has the work done and does not keep a log of what was done and when is a strata that cannot demonstrate a maintenance standard when it needs to — to an insurer, to a purchaser's lawyer, or in a dispute with an owner.",
+        ],
+      },
+      {
+        heading: "How to make it comparable between contractors",
+        blocks: [
+          "Most exterior quotes to stratas are not comparable, because they are not scoped the same way. Four things make them comparable:",
+          {
+            kind: "steps",
+            items: [
+              "State the frequency, not just the work. Twice-yearly gutters and annual gutters are different products at different prices, and a quote that omits frequency is quoting one visit.",
+              "State what is included at the boundary. Downspouts, guard removal, debris disposal, and whether the drains at the bottom are anyone's job.",
+              "State the access method. Ladder, pole, lift or rope changes the price more than the surface area does, and a quote silent on it has assumed the cheapest one.",
+              "Require a written record per visit. Date, areas covered, anything found. This costs a contractor nothing and is the only part of the whole arrangement that has value years later.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Questions About Strata Exterior Budgeting in BC",
+        blocks: [
+          { kind: "subheading", text: "Does the depreciation report cover exterior cleaning?" },
+          "It is written around common property renewal — roofs, envelope, paving, membranes — rather than around recurring cleaning. The two are connected, though: the assumed remaining life of a roof or a hard surface generally presumes it is being maintained, and a council reading the report is entitled to ask what that assumption depends on.",
+          { kind: "subheading", text: "How often should strata gutters be cleared?" },
+          "It is set by tree cover rather than by the calendar. A site with mature conifers overhanging the roofline usually needs two visits, weighted so the second falls after the bulk of the drop rather than in the middle of it. An open site with no overhang can often hold at one.",
+          { kind: "subheading", text: "Who decides — the council, the manager, or the contractor?" },
+          "The council owns the decision and the budget. The value a contractor adds is telling you what the building in front of them actually needs, including where the answer is less than you were expecting. A scope that never shrinks is a sales document.",
+          { kind: "subheading", text: "Is a multi-year agreement worth it?" },
+          "The practical argument for one is scheduling rather than price: work that is booked in advance happens in the right week, and exterior work in this region has narrow right weeks. Terms vary and should be settled in the agreement itself rather than assumed from an article.",
+          { kind: "subheading", text: "What should we keep on file?" },
+          "The scope, the frequency, the access method, and a dated record of each visit with anything found noted on it. That file is the evidence of a maintenance standard, and it is worth more at the point of an insurance question or a sale than it costs to keep.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Common areas, back-of-house and scheduled cycles are on the ",
+              { href: "/services/commercial-cleaning", text: "commercial cleaning page" },
+              ". The two lines with the clearest link to renewal dates are ",
+              { href: "/services/gutter-cleaning", text: "gutter cleaning" },
+              " and ",
+              { href: "/services/roof-cleaning", text: "roof moss treatment" },
+              ".",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "how-often-gutters-need-doing",
+    title: "How Often Gutters Actually Need Doing Here",
+    excerpt:
+      "Twice a year is the standard answer and it is right about half the time. What decides it is what is growing over the roof, not what the calendar says.",
+    category: "Seasonal",
+    date: "2026-09-02",
+    readMinutes: 4,
+    photo: "gutterDebris",
+    body: [
+      {
+        heading: "The standard answer, and where it fails",
+        blocks: [
+          "Twice a year — spring and autumn — is the answer most people have heard, and for a lot of properties it is correct. It fails in two directions, and both are common here.",
+          "It over-serves an open site. A townhouse with no overhanging trees and a low-pitched roof may genuinely need one visit a year, and paying for two is paying for a schedule rather than for a building.",
+          "It under-serves a treed one. A house under mature conifers can fill a gutter completely between two visits booked six months apart, and the fill will happen at the worst possible point in the year.",
+        ],
+      },
+      {
+        heading: "What actually decides it",
+        blocks: [
+          {
+            kind: "list",
+            items: [
+              "Species overhead. Deciduous trees drop heavily and briefly, in a window you can plan around. Conifers shed all year and the needles pack into a mat that holds water rather than letting it through.",
+              "Distance and height of the canopy relative to the roofline. A tall tree twenty feet away puts more into a gutter than a short one against the wall.",
+              "Roof pitch. A steep roof throws debris off into the gutter. A shallow one lets it sit on the surface, which is a different problem and a slower one.",
+              "Whether there are guards, and whether they are working. A guard that is doing its job changes the interval substantially. A guard with a moss mat growing on it has become the blockage.",
+              "What the gutter is protecting. A gutter above a finished basement stairwell or a below-grade entry is not a maintenance item, it is a water-ingress control.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "The timing matters more than the count",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "About three quarters of this region's annual precipitation falls between October and March — the ",
+              {
+                href: "https://climate.weather.gc.ca/climate_normals/",
+                text: "Environment and Climate Change Canada climate normals",
+                external: true,
+              },
+              " put the airport near 1,189 mm a year, concentrated hard into that half. November and December are the two heaviest months on the record.",
+            ],
+          },
+          "Which makes the autumn visit the one that carries the year. Booked too early, it clears the first of the leaves and misses the rest; the gutter is full again before the rain peaks. Booked after the drop has finished, it holds through the season.",
+          {
+            kind: "quote",
+            text: "An autumn gutter clean done in early October is a spring clean done six months early. It is the same work, at the wrong end of the drop.",
+          },
+        ],
+      },
+      {
+        heading: "How to tell without going up there",
+        blocks: [
+          "Three checks from the ground, none of which need a ladder:",
+          {
+            kind: "steps",
+            items: [
+              "Watch a downspout during steady rain. Water should be running out of it. If a downspout is dry while the others are running, the gutter feeding it is blocked or the elbow is.",
+              "Look at the line of the gutter from across the street. A run holding a full load of wet debris sags visibly between brackets.",
+              "Look for growth on the outside edge. Anything green on the front lip of a gutter is growing in what is inside it, and it has been there long enough to root.",
+            ],
+          },
+          "Staining down the fascia below a joint is the fourth sign, and by the time it shows the water has already been going somewhere it should not for a while.",
+        ],
+      },
+      {
+        heading: "Questions About Gutter Frequency in Greater Vancouver",
+        blocks: [
+          { kind: "subheading", text: "How often should I clean my gutters in Vancouver?" },
+          "Twice a year is a reasonable default for a property with any overhanging tree cover, and once a year can be enough on an open site with no canopy over the roofline. Tree species overhead is the deciding factor, not the size of the house.",
+          { kind: "subheading", text: "When is the best time for the autumn clean?" },
+          "After the bulk of the drop has finished rather than at the start of it, so the gutter goes into the wettest months clear. Booked too early it clears the first fall of leaves and refills before the rain peaks, which spends the visit at the wrong end of the season.",
+          { kind: "subheading", text: "Do I still need it done if I have gutter guards?" },
+          "Yes, usually less often. Fine debris passes through most guard systems and moss will grow on the mesh itself, at which point the guard has become the blockage. Guards change the interval; they do not remove the job.",
+          { kind: "subheading", text: "What happens if I skip a year?" },
+          "The immediate risk is overflow at the joints, which puts water down the fascia and against the wall rather than into the downspout. The slower one is weight — a full gutter holding water is heavy, and brackets and fascia are the things that give.",
+          { kind: "subheading", text: "Is it worth doing before or after the first storm?" },
+          "Before. Everything on this list is ordinary maintenance in September and October and becomes an access problem once the roof is wet and the weather has closed in.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "The scope and the flow test are on the ",
+              { href: "/services/gutter-cleaning", text: "gutter cleaning page" },
+              ". Moss coming off the roof into the gutters is dealt with on the ",
+              { href: "/services/roof-cleaning", text: "roof cleaning page" },
+              ".",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "what-makes-a-window-quote-different",
+    title: "What Makes One Window Quote Different",
+    excerpt:
+      "Counting panes is the least useful way to price window cleaning. Access, what is included at the edges, and frequency are what separate any two quotes.",
+    category: "Costs",
+    date: "2026-07-28",
+    readMinutes: 4,
+    photo: "windowGlass",
+    body: [
+      {
+        heading: "Pane count is not the number",
+        blocks: [
+          "Almost every window quote starts with a count, and the count is the least useful thing in it. Panes tell you how much glass there is. They tell you nothing about how long it takes to stand in front of each one, which is where the time goes.",
+          "A ground-floor picture window and a stairwell window over a staircase are one pane each. They are not one job each.",
+        ],
+      },
+      {
+        heading: "What separates two quotes on the same house",
+        blocks: [
+          {
+            kind: "list",
+            items: [
+              "Access. Reachable from the ground, from a ladder, from a pole system, or from inside over a stairwell — four different jobs, and the last one is the one that gets underestimated.",
+              "Interior as well as exterior. Interiors mean furniture moved, floors protected and someone home. Some quotes assume both sides; some assume one.",
+              "Tracks and sills. Cleaning the glass and cleaning the opening are different amounts of work, and the difference is not small on an older house.",
+              "Screens. Removing, washing, drying and refitting screens is a real block of time and is the single most common thing to be quietly excluded.",
+              "Frames. Painted, vinyl and aluminium frames all clean differently, and cedar frames are a soft-wash job rather than a glass job.",
+              "Hard water and mineral staining. Glass with etched mineral deposits is a restoration task, not a cleaning one, and it should be quoted separately or it will be argued about later.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "The exclusions that cause the arguments",
+        blocks: [
+          "Two quotes that look ten per cent apart are usually thirty per cent apart on scope. The gap is nearly always in the same four places: screens, tracks, interiors, and what happens to glass that will not come clean.",
+          "That last one deserves a sentence of its own. Glass with hard-water etching or construction overspray may not return to clear with ordinary cleaning, and a contractor who has looked at it should say so before the job rather than after it.",
+          {
+            kind: "quote",
+            text: "The cheapest quote and the most expensive quote are usually the same work. One of them has told you where it stops.",
+          },
+        ],
+      },
+      {
+        heading: "How often is a separate question",
+        blocks: [
+          "Frequency is driven by exposure rather than by preference. A west-facing elevation on an arterial road collects traffic film and needs doing more often than a sheltered garden elevation on the same building.",
+          "For commercial frontage the driver is presentation and it is usually a fixed cycle. For a house it is generally twice a year, weighted to spring — after the winter has finished putting everything it has onto the glass.",
+          "Salt is the regional variable worth naming. Properties near the water in Tsawwassen, Ladner and along the Fraser carry a salt film that returns faster than ordinary road dust, and the interval there is genuinely shorter.",
+        ],
+      },
+      {
+        heading: "Questions About Window Cleaning Quotes",
+        blocks: [
+          { kind: "subheading", text: "Why does one quote cost more than another for the same windows?" },
+          "Nearly always scope rather than rate. Check four lines specifically: are interiors included, are screens removed and washed, are tracks and sills done, and what has been assumed about access. Two quotes matching on all four are comparable; otherwise they are not.",
+          { kind: "subheading", text: "Are screens usually included?" },
+          "Not by default, and this is the most common exclusion. Removing, washing, drying and refitting screens takes real time, so it should be a named line either way rather than an assumption on either side.",
+          { kind: "subheading", text: "How often should house windows be cleaned?" },
+          "Twice a year suits most properties, weighted towards spring so the winter's film comes off. Exposure moves it — an elevation facing a busy road or sitting near salt water will want doing more often than a sheltered one on the same house.",
+          { kind: "subheading", text: "Can all glass be made clear again?" },
+          "No. Hard-water etching, mineral scale and construction overspray can be permanent, and standard cleaning will not shift them. Anyone quoting should identify that before starting and price any restoration attempt separately from the cleaning.",
+          { kind: "subheading", text: "Do high windows cost significantly more?" },
+          "They can, because the access method changes rather than the glass. Pole work, ladder work and anything requiring a lift are different jobs, and a quote that has not stated its access method has assumed the cheapest one available.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Glass, frames, sills, tracks and screens are all set out on the ",
+              { href: "/services/window-cleaning", text: "window cleaning page" },
+              ". Cedar frames and painted trim are handled as ",
+              { href: "/services/soft-washing", text: "soft washing" },
+              " rather than as glass work.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "twenty-eight-days-before-sealing",
+    title: "The Twenty-Eight Days Before A Slab Is Sealed",
+    excerpt:
+      "New concrete cannot be sealed straight away, and salt on an uncured slab is the most expensive winter mistake available. The timing is not negotiable.",
+    category: "Hard Surfaces",
+    date: "2026-07-07",
+    readMinutes: 4,
+    photo: "sealingPrep",
+    body: [
+      {
+        heading: "Why the slab waits",
+        blocks: [
+          "Fresh concrete is still curing long after it is hard enough to drive on. The usual figure in manufacturer guidance is twenty-eight days before a slab should meet a penetrating sealer or a de-icing salt, and full strength development runs longer than that again.",
+          "Seal it early and the sealer sits on a surface that is still releasing moisture, which is how you get a cloudy finish, poor adhesion, or a film that lifts within a season. Salt it early and the damage is structural rather than cosmetic.",
+        ],
+      },
+      {
+        heading: "What salt actually does to it",
+        blocks: [
+          "De-icing salt does not dissolve concrete. It does something less obvious and worse: it lowers the freezing point of water at the surface, which multiplies the number of freeze-thaw cycles the slab goes through in a winter.",
+          "Each cycle expands trapped water inside the surface layer. Repeat it enough times and the top few millimetres let go — scaling, pop-outs, then a pitted surface that holds more water and freezes faster. On a young slab that has not reached full strength, the process starts earlier and moves faster.",
+          {
+            kind: "quote",
+            text: "Salt does not eat concrete. It just arranges for the winter to do it far more times than it otherwise would.",
+          },
+        ],
+      },
+      {
+        heading: "The window here is narrower than the calendar suggests",
+        blocks: [
+          "Sealing needs the slab dry, the air warm enough, and no rain during cure. In this region that rules out most of the year rather than a little of it.",
+          {
+            kind: "linked",
+            parts: [
+              "With roughly three quarters of the annual precipitation falling between October and March according to the ",
+              {
+                href: "https://climate.weather.gc.ca/climate_normals/",
+                text: "Environment and Climate Change Canada normals",
+                external: true,
+              },
+              ", the practical sealing season runs from late spring to early autumn — and inside it, what is actually needed is a run of consecutive dry days rather than one.",
+            ],
+          },
+          "That is why sealing gets booked against a forecast rather than against a date, and why a contractor who moves the date is usually doing the right thing.",
+        ],
+      },
+      {
+        heading: "What happens before the sealer",
+        blocks: [
+          "Sealing a dirty slab locks the dirt in. The preparation is most of the job and it runs in a fixed order:",
+          {
+            kind: "steps",
+            items: [
+              "Clean the surface properly, including the oil. Oil and tyre marks are not dirt and do not come off with water alone; they are degreased separately or the sealer will not bond over them.",
+              "Deal with the cracks. Routed and filled before sealing, because a sealer bridges nothing — a crack under a fresh coat is a crack with a coat over it.",
+              "Let it dry. A washed slab holds water for longer than it looks, and this is where a rushed job goes wrong.",
+              "Confirm the slab is actually dry rather than dry-looking, then seal in two light coats rather than one heavy one, with the second worked across the first.",
+            ],
+          },
+          "The order is not stylistic. Every step is there because the one after it fails without it.",
+        ],
+      },
+      {
+        heading: "Questions About Concrete And Asphalt Sealing in BC",
+        blocks: [
+          { kind: "subheading", text: "How long after pouring can concrete be sealed?" },
+          "Manufacturer guidance commonly sets twenty-eight days as the minimum before a penetrating sealer or de-icing salt should touch a new slab, and the product data sheet for whatever is being applied governs. If a contractor offers to seal a slab poured a fortnight ago, that is the wrong answer.",
+          { kind: "subheading", text: "Does sealing actually prevent salt damage?" },
+          "It substantially reduces it rather than eliminating it, by limiting how much water and dissolved salt gets into the surface in the first place. It is not a substitute for keeping salt use proportionate, particularly on younger concrete.",
+          { kind: "subheading", text: "When is the best time of year to seal in Greater Vancouver?" },
+          "Late spring through early autumn, and inside that window the deciding factor is a run of dry days rather than the month. Sealing needs the slab dry going on and dry while it cures, which is a scarcer condition here than the calendar implies.",
+          { kind: "subheading", text: "How often does a driveway need resealing?" },
+          "It depends on the product used, the traffic it carries and how much sun the surface takes. The honest way to answer it is to look at how the last coat is wearing rather than to count years — a surface that has started to darken and absorb water at the edges is telling you where it is.",
+          { kind: "subheading", text: "Can a slab be sealed over moss or oil?" },
+          "No. Both have to come off first — moss because the sealer will not bond to it, oil because it will not bond over it and the stain is then permanent under a coat. Preparation is most of the job, and skipping it is visible within a year.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Crack routing, degreasing, moisture metering and the two-coat application are set out on the ",
+              { href: "/services/concrete-and-asphalt-sealing", text: "concrete and asphalt sealing page" },
+              ". The cleaning that comes first is ",
+              { href: "/services/power-washing", text: "power washing" },
+              ", and winter salting is on the ",
+              { href: "/services/snow-removal-salting", text: "snow removal page" },
+              ".",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "what-should-be-in-writing",
+    title: "Reading A Quote: What Belongs In Writing",
+    excerpt:
+      "Most exterior quotes are not comparable because they are not scoped alike. Seven lines decide whether two numbers mean the same thing. Here they all are.",
+    category: "Costs",
+    date: "2026-06-16",
+    readMinutes: 5,
+    photo: "truck",
+    body: [
+      {
+        heading: "Why three quotes rarely compare",
+        blocks: [
+          "The standard advice is to get three quotes, and it is good advice that mostly does not work. Three numbers arrive, they are spread across a wide range, and there is no way to tell whether the cheapest one is efficient or is simply doing less.",
+          "That is not usually anybody being dishonest. Exterior work has no standard scope, so each contractor quotes what they assume the job is — and those assumptions are invisible in the total.",
+        ],
+      },
+      {
+        heading: "The seven lines that make quotes comparable",
+        blocks: [
+          "Ask for these explicitly and the spread between three quotes usually collapses to something rational:",
+          {
+            kind: "list",
+            items: [
+              "The areas included, named. Not the property — the elevations, the runs, the surfaces. A quote for a house is a quote for whichever parts of it the writer had in mind.",
+              "The method, and for a roof, the pressure. This is the difference between a surface that is treated and a surface that is stripped, and it does not show up in a total.",
+              "The access assumed. Ladder, pole, lift or rope. Access moves a price more than area does, and an unstated one is the cheapest one.",
+              "What happens at the boundaries. Downspouts, guard removal, screens, tracks, the drain at the bottom of the run — the parts that sit between two obvious jobs are the parts that fall out of both.",
+              "Debris. Bagged and removed, or left on site. This is a small line that generates a disproportionate number of complaints.",
+              "The finish condition. What does done look like — is there a flow test, a walk-round, a rinse-down of what was worked over?",
+              "Frequency, where the work recurs. One visit and a twice-yearly cycle are different products, and a quote silent on frequency has priced one visit.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "The two questions worth asking out loud",
+        blocks: [
+          "First: what is not included that I might reasonably expect to be? A contractor who answers that one straightforwardly is telling you where their scope stops, which is the single most useful thing you can learn before signing anything.",
+          "Second: what would change this price on the day? The honest answers are specific — a blocked downspout that has to be augered, a guard system nobody mentioned, a surface that turns out to be sealed rather than bare. A quote that cannot change is either padded or about to become a conversation.",
+          {
+            kind: "quote",
+            text: "The useful question is not what does it cost. It is what stops being your problem when I pay this.",
+          },
+        ],
+      },
+      {
+        heading: "What a scope protects on both sides",
+        blocks: [
+          "A written scope is usually presented as a protection for the customer, and it is. It is also the reason the crew on site knows what they are doing without phoning anyone, and the reason the invoice matches the quote.",
+          "For a strata or a commercial site it does a third thing, and this is the one that gets underrated: it produces a record. A dated scope with a record of each visit against it is evidence of a maintenance standard — which matters to an insurer, to a purchaser's lawyer, and in any dispute about whether a building was being looked after.",
+        ],
+      },
+      {
+        heading: "Warning signs in a quote",
+        blocks: [
+          {
+            kind: "list",
+            items: [
+              "A single line and a total, with no scope under it.",
+              "A price given over the phone for work nobody has looked at, on a property with any height or access complexity.",
+              "No mention of method on roof or siding work, where method is the whole question.",
+              "Pressure offered on asphalt shingle, cedar or stucco — that is a red flag about the work rather than about the price.",
+              "Payment in full up front for work not yet started.",
+              "No written confirmation of licensing and insurance, on any job involving height.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Questions About Comparing Exterior Quotes",
+        blocks: [
+          { kind: "subheading", text: "How do I compare exterior cleaning quotes properly?" },
+          "Normalise the scope before you compare the numbers. Ask each contractor for the areas included, the method, the access assumed, what happens to debris, and what done looks like. Quotes that match on those five are comparable; quotes that do not are not, whatever the totals say.",
+          { kind: "subheading", text: "Is the cheapest quote usually doing less?" },
+          "Frequently, and not always dishonestly — it may simply be a narrower assumption about the job. The way to find out is to ask what is excluded rather than to assume the difference is efficiency or greed.",
+          { kind: "subheading", text: "Should I pay a deposit?" },
+          "Deposits are normal on larger or materials-heavy work and terms vary by contractor, so the arrangement belongs in the written agreement. What is not normal is full payment up front for work that has not started.",
+          { kind: "subheading", text: "What should I check about insurance?" },
+          "That the contractor is licensed and carries liability insurance, and for anything at height, that their workers are covered. Ask for it in writing before work begins rather than after an incident, when it is too late for the answer to help.",
+          { kind: "subheading", text: "Does a written scope really matter for a small job?" },
+          "It matters most where the work is recurring or where anyone other than you will need to know what was agreed — a strata council, a property manager, a future owner. On a one-off residential job it mostly protects against a disagreement about what done meant.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Every service page here sets out its own scope and method — the ",
+              { href: "/services", text: "full catalogue is here" },
+              " — and quotes are given in writing after looking at the property. If it is easier to talk it through, the ",
+              { href: "/contact", text: "contact page" },
+              " has the phone number on it.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "three-metres",
+    title: "Three Metres, And Why We Bring A Ladder",
+    excerpt:
+      "British Columbia sets fall protection at three metres, and a second-storey gutter sits above it. The rule explains most of what a quote is actually buying.",
+    category: "Exterior Cleaning",
+    date: "2026-06-02",
+    readMinutes: 4,
+    photo: "gutterFascia",
+    body: [
+      {
+        heading: "The number everything else follows from",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "British Columbia's Occupational Health and Safety Regulation requires fall protection where a worker could fall three metres — about ten feet — or more, and also where a fall from less than that could cause serious injury. ",
+              {
+                href: "https://www.worksafebc.com/en/health-safety/tools-machinery-equipment/fall-protection",
+                text: "WorkSafeBC sets out the requirement and the systems that satisfy it",
+                external: true,
+              },
+              ".",
+            ],
+          },
+          "A second-storey gutter on an ordinary house sits above that line. So does most roof work, and so does a good deal of what looks from the driveway like straightforward ladder work.",
+        ],
+      },
+      {
+        heading: "The ladder exception, and its conditions",
+        blocks: [
+          "There is a limited exception for working from a portable ladder, and it is narrower than most people assume. Broadly, the work has to be light duty and short in duration at each position, the worker's centre of gravity has to stay between the side rails, one hand has to remain available for the ladder, and the ladder must not be positioned where a fall would carry further than the ladder height.",
+          "Read that list against what gutter clearing actually involves — reaching sideways along a run, two hands in the trough, moving along without repositioning — and most of the exception has been used up before the work starts.",
+          {
+            kind: "quote",
+            text: "The exception is for changing a bulb. It was never written for spending an afternoon leaning into a gutter.",
+          },
+        ],
+      },
+      {
+        heading: "What this means if you are doing it yourself",
+        blocks: [
+          "The regulation governs workers rather than homeowners on their own property, so nothing here makes a Saturday on a ladder unlawful. What it does is tell you what the people whose job is to assess this risk concluded about it.",
+          "Falls from height are among the most serious injury categories in residential work, and the ladder is over-represented in it relative to how dangerous it feels. The characteristic incident is not a dramatic one — it is a side-reach on a stable ladder that becomes an off-centre load.",
+          "If the decision is to do it anyway: work from the ground where possible, move the ladder rather than reaching, keep a hand free, and do not do it on wet ground or against a gutter you intend to lean on. A gutter is not a handhold and it is not fixed to the building to be one.",
+        ],
+      },
+      {
+        heading: "What it means in a quote",
+        blocks: [
+          "This is why access is the line that moves an exterior price more than area does. Above three metres the work needs a system — anchored fall arrest, an elevated platform, or a method that keeps the worker off the height altogether, such as pole work from the ground.",
+          "It is also why a quote should say which of those it assumed. A number priced for ladder work on a building that turns out to need a lift is not a competitive quote; it is a quote that has not been finished.",
+          "And it is worth asking a contractor to confirm their workers are covered. On any job involving height, that answer belongs in writing before the work rather than after an incident.",
+        ],
+      },
+      {
+        heading: "Questions About Height, Ladders And Exterior Work",
+        blocks: [
+          { kind: "subheading", text: "What height does fall protection become mandatory in BC?" },
+          "Three metres, or roughly ten feet, for workers under the provincial OHS Regulation — and lower than that where a fall could still cause serious injury. WorkSafeBC publishes the requirement and the acceptable systems.",
+          { kind: "subheading", text: "Can a contractor just use a ladder?" },
+          "Only within a narrow exception: light work, short duration at each position, centre of gravity between the rails, a hand free for the ladder, and no increased fall distance. Sustained gutter or roof work generally falls outside it.",
+          { kind: "subheading", text: "Is it illegal for me to clean my own gutters?" },
+          "No. The regulation covers workers rather than homeowners on their own property. It is still the most useful available assessment of the risk, made by people whose job is to assess exactly this.",
+          { kind: "subheading", text: "Why is second-storey work more expensive?" },
+          "Because above three metres the method changes, not just the height. Fall protection, elevated platforms or pole systems are different ways of working with different equipment, and that difference is most of the price gap between a bungalow and a three-storey.",
+          { kind: "subheading", text: "What should I ask a contractor about safety?" },
+          "That they are licensed and insured, that their workers are covered, and what access method they have assumed for your property specifically. All three should be answerable in writing before anyone arrives.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Most of what this affects is ",
+              { href: "/services/gutter-cleaning", text: "gutter cleaning" },
+              " and ",
+              { href: "/services/roof-cleaning", text: "roof work" },
+              ", where the height is unavoidable, and ",
+              { href: "/services/window-cleaning", text: "window cleaning" },
+              " on anything above one storey.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "the-exterior-year",
+    title: "The Exterior Year, Month By Month",
+    excerpt:
+      "Exterior work here has narrow right weeks and most of them are missed by a month. A calendar for a Greater Vancouver property, built around the rainfall.",
+    category: "Seasonal",
+    date: "2026-09-08",
+    readMinutes: 4,
+    photo: "rooftops",
+    body: [
+      {
+        heading: "Why a calendar and not a checklist",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Everything outside a building here is scheduled around one fact: roughly three quarters of the year's precipitation arrives between October and March. The ",
+              {
+                href: "https://climate.weather.gc.ca/climate_normals/",
+                text: "Environment and Climate Change Canada climate normals",
+                external: true,
+              },
+              " put Vancouver International Airport near 1,189 mm a year, with November and December the two heaviest months on the record and July by far the driest.",
+            ],
+          },
+          "That is not a mild seasonal skew. It means the work that has to happen dry has a genuinely short window, and the work that protects against water has a hard deadline. A checklist ignores both. A calendar is the same list with the timing that makes it work.",
+        ],
+      },
+      {
+        heading: "Spring — March to May",
+        blocks: [
+          "The catch-up months. Everything the winter did is visible and the weather is workable again.",
+          {
+            kind: "list",
+            items: [
+              "Roof moss treatment, after the growth flush. Treated now it has the dry season to release.",
+              "Gutters, clearing whatever the winter storms put in after the autumn visit.",
+              "Windows, weighted here rather than to autumn — this is the visit that takes off the winter's film and salt.",
+              "Hard surfaces: walkways, patios and driveways washed of the moss and traffic film that built up through the wet months.",
+              "A walk of the perimeter drains before anyone forgets about them for six months.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Summer — June to August",
+        blocks: [
+          "The only reliable dry window, and therefore the only sensible slot for anything that has to cure.",
+          {
+            kind: "list",
+            items: [
+              "Concrete and asphalt sealing. This needs consecutive dry days on both sides of the application and there is no other season that reliably supplies them.",
+              "Exterior painting, for the same reason and with the same constraint.",
+              "Soft washing of siding, stucco and cedar, where the surface needs to dry properly afterwards.",
+              "Anything needing an elevated platform, while the ground is firm and the weather is predictable.",
+            ],
+          },
+          {
+            kind: "quote",
+            text: "Everything that has to cure competes for the same eight weeks. The work does not get harder in September — it gets impossible to schedule.",
+          },
+        ],
+      },
+      {
+        heading: "Autumn — September to November",
+        blocks: [
+          "The most important stretch of the year, and the one most often mistimed.",
+          {
+            kind: "steps",
+            items: [
+              "Early September: book the autumn gutter clean now, for later. The booking happens in September; the visit should not.",
+              "Late September into early October: the last practical window for anything that needs dry weather. Sealing, painting and exterior repairs close here.",
+              "Late October into November: the gutter clean itself, after the bulk of the drop rather than at the start of it. This is the single most valuable visit of the year.",
+              "November: agree the winter arrangement — who clears, at what trigger, and by when. Before it snows, not during.",
+            ],
+          },
+          "The second item and the third are the ones that get collapsed into one visit in early October, which is how a property ends up with clear gutters in the middle of the leaf drop and full ones through the rain.",
+        ],
+      },
+      {
+        heading: "Winter — December to February",
+        blocks: [
+          "Reactive rather than scheduled, with two exceptions.",
+          {
+            kind: "list",
+            items: [
+              "Snow clearing and salting to whatever trigger was agreed in November, on the municipal deadline that applies to the frontage.",
+              "Holiday lighting, installed before the weather closes in and serviced through the season rather than left to fail.",
+              "A check of the downspouts and drains during the first real storm — this is the one time of year the system can be observed under load, and a dry downspout in heavy rain tells you exactly where the blockage is.",
+            ],
+          },
+          "The third one costs nothing and is the best diagnostic available all year. It only works while it is raining, which is why it never gets scheduled.",
+        ],
+      },
+      {
+        heading: "Questions About Seasonal Exterior Maintenance in BC",
+        blocks: [
+          { kind: "subheading", text: "What is the single most important job on this list?" },
+          "The late-autumn gutter clean, timed after the bulk of the leaf drop. It is the one visit that determines whether water goes down the downspout or down the wall through the wettest eight weeks of the year.",
+          { kind: "subheading", text: "When should exterior painting and sealing be booked?" },
+          "Between late spring and early autumn, and inside that on a run of dry days rather than on a date. Both need dry going on and dry while curing, which this region supplies reliably only in summer.",
+          { kind: "subheading", text: "Is winter a dead season for exterior work?" },
+          "For anything requiring cure or dry surfaces, largely yes. Snow clearing, salting, lighting service and storm-driven drainage problems are what actually happens between December and February.",
+          { kind: "subheading", text: "When is the best time to treat roof moss?" },
+          "Spring after the growth flush, or early autumn before the sustained rain. Both give the treatment dry working days, and both leave the roof clear going into the season that follows.",
+          { kind: "subheading", text: "How far ahead should this be booked?" },
+          "The autumn work is worth arranging in late summer, because the useful weeks in October and November are narrow and everyone wants the same ones. Booking early does not move the visit earlier — it makes sure the visit lands in the right week.",
+        ],
+      },
+      {
+        heading: "Where to read the rest",
+        blocks: [
+          {
+            kind: "linked",
+            parts: [
+              "Everything above has its own page: ",
+              { href: "/services/gutter-cleaning", text: "gutters" },
+              ", ",
+              { href: "/services/roof-cleaning", text: "roof moss" },
+              ", ",
+              { href: "/services/window-cleaning", text: "windows" },
+              ", ",
+              { href: "/services/concrete-and-asphalt-sealing", text: "sealing" },
+              ", ",
+              { href: "/services/painting", text: "painting" },
+              ", ",
+              { href: "/services/snow-removal-salting", text: "snow and salting" },
+              " and ",
+              { href: "/services/holiday-light-installation", text: "holiday lighting" },
+              ". We work across ",
+              { href: "/locations", text: "nine Greater Vancouver communities" },
+              ".",
+            ],
+          },
         ],
       },
     ],
@@ -3986,7 +5296,7 @@ export const legalPages = {
     updatedISO: "2026-09-01",
     metaTitle: "Terms & Conditions | RainCity Property Maintenance",
     metaDescription:
-      "The terms governing quotes, scheduling, cancellation, payment, our workmanship guarantee and liability for RainCity work, under BC law.",
+      "The terms governing quotes, scheduling, cancellation, payment, our workmanship guarantee and liability for all RainCity work, under British Columbia law.",
     keywords: [
       "RainCity terms and conditions",
       "property maintenance terms of service BC",
@@ -4139,7 +5449,7 @@ export const legalPages = {
     updatedISO: "2026-09-01",
     metaTitle: "Privacy Policy | RainCity Property Maintenance",
     metaDescription:
-      "How RainCity collects, uses, stores and deletes the information you give us when requesting a quote — and your rights under BC privacy law.",
+      "How RainCity collects, uses, stores and deletes the information you give us when requesting a quote — and your rights under BC privacy law, explained.",
     keywords: [
       "RainCity privacy policy",
       "property maintenance privacy policy BC",

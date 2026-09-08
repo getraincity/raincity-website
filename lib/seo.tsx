@@ -3,6 +3,7 @@ import {
   business,
   locations,
   services,
+  social,
   testimonials,
   type BlogPost,
   type Faq,
@@ -234,6 +235,39 @@ export const areaServed = [
 ];
 
 /** Site-wide. Rendered once in the root layout. */
+/**
+ * `sameAs`, derived from `social` rather than written out.
+ *
+ * This is the field an answer engine and a knowledge graph use to decide that
+ * the company on this page is the same company as the one on a review
+ * profile, a directory listing and a maps entry — the single strongest
+ * disambiguation signal an unranked local business can publish. Without it
+ * the entity here is asserted by one domain and corroborated by nothing.
+ *
+ * It is derived so it cannot be forgotten. `social` is an empty array while
+ * the client's real profile URLs are outstanding (see the note there), and an
+ * empty `sameAs: []` is a published claim to have no profiles anywhere — so
+ * the key is spread in only when there is something to put in it. Filling
+ * `social` in content.ts now lights this up on both nodes at once, with no
+ * second edit here to remember.
+ *
+ * The Google Business Profile URL belongs in this list too, and it is the one
+ * that matters most: it is the link between this site and the local pack.
+ */
+const sameAs = social.map((profile) => profile.href).filter((href) => href !== "#");
+const sameAsField = sameAs.length > 0 ? { sameAs } : {};
+
+/**
+ * What this company works on, as plain nouns.
+ *
+ * Derived from the service catalogue rather than written, so it cannot drift
+ * from it. `knowsAbout` is how a topic is attached to an entity rather than
+ * to a page, which is the level answer engines resolve at — a system deciding
+ * who to cite for "roof moss removal in Burnaby" is matching a topic to an
+ * organisation before it ever ranks a URL.
+ */
+const knowsAbout = services.map((service) => service.title);
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -244,12 +278,33 @@ export const organizationSchema = {
   logo: `${SITE_URL}${OG_IMAGE}`,
   email: business.email,
   telephone: business.phone,
+  // The same sentence the WebSite node publishes. An Organization with no
+  // description is a name and a phone number; a crawler reconciling this
+  // against the page has nothing to match the copy to.
+  description: `Year-round exterior cleaning and property maintenance for homes, stratas and businesses in ${business.base} and across ${business.region}.`,
   address: {
     "@type": "PostalAddress",
     addressLocality: business.base,
     addressRegion: "BC",
     addressCountry: "CA",
   },
+  // Same constant the business node and every service page publish, so the
+  // company and the service it provides cannot claim different territory.
+  areaServed,
+  knowsAbout,
+  // The phone and email are already on this node as bare fields. This states
+  // what they are *for* and in which language they are answered, which is the
+  // form a voice or chat assistant reads when a user asks how to reach a
+  // business rather than where it is.
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    telephone: business.phone,
+    email: business.email,
+    areaServed: "CA",
+    availableLanguage: ["English"],
+  },
+  ...sameAsField,
 };
 
 /** Stable @id for the site itself, so every page can say what it is part of. */
@@ -314,6 +369,13 @@ export const localBusinessSchema = {
   },
   geo: { "@type": "GeoCoordinates", ...GEO },
   areaServed,
+  // Both are facts about a Canadian business rather than claims about it, and
+  // both are fields a local pack and an answer engine read. Nothing here is
+  // an operational commitment — see the block below `hasOfferCatalog` for the
+  // fields that are, and are deliberately still absent.
+  currenciesAccepted: "CAD",
+  knowsLanguage: "en-CA",
+  ...sameAsField,
   // Mon–Sat 07:00–22:00. Sunday is closed, so it is simply absent: the spec
   // reads a missing day as closed, and an explicit 00:00–00:00 entry is a
   // common way to accidentally publish "open all day".
@@ -347,6 +409,21 @@ export const localBusinessSchema = {
       },
     })),
   },
+  // Four fields Google lists as recommended for a LocalBusiness are absent
+  // here, and all four are absent for the same reason: nobody has supplied
+  // them, and each would be a number a caller could hold the office to.
+  //
+  //   priceRange        — a positioning claim ("$$"), not a fact on file.
+  //   aggregateRating   — see the gate immediately below.
+  //   foundingDate      — /about prints a years-in-business figure that is the
+  //                       client's own unverified claim; publishing it as a
+  //                       date makes it checkable in a way the page does not.
+  //   numberOfEmployees — never stated anywhere on the site.
+  //
+  // Add each one when the client confirms it, not before. The rule this file
+  // has followed throughout is that structured data may restate what the site
+  // already says and may not invent what it does not.
+  //
   // Published only once testimonials are verified real customer reviews.
   // Set `testimonials.verified = true` and fill `averageRating` / `reviewCount`
   // in lib/content.ts when replacing placeholder reviews. The node is absent
@@ -872,6 +949,48 @@ export function blogPostingSchema(post: BlogPost) {
     publisher: { "@id": ORG_ID },
     isPartOf: { "@id": `${canonical("/blog")}#webpage` },
   };
+}
+
+/**
+ * The questions on a page that is not a service, a community or an article.
+ *
+ * The homepage, the two hubs, /about and /contact. Same node the other three
+ * callers publish, pointed at the page's own WebPage-level `@id` where it has
+ * one and at the URL itself where it does not — the homepage's questions are
+ * about the business node it already declares, which is why `aboutId` is a
+ * parameter rather than derived here.
+ */
+export function pageFaqSchema(
+  path: string,
+  aboutId: string,
+  faqs: readonly Faq[],
+) {
+  return faqPage(canonical(path), aboutId, faqs);
+}
+
+/**
+ * The questions inside an article, as FAQPage.
+ *
+ * Same node the service and location templates publish, pointed at the
+ * article instead of at a Service. The answers are lifted from the post's own
+ * body by `postFaqs` in lib/blog.ts rather than written twice — see the note
+ * there for what qualifies as a pair and why the rule is strict.
+ *
+ * `about` points at the BlogPosting on the same page, so a crawler reads the
+ * questions as belonging to the article rather than floating on the URL. The
+ * two nodes coexist deliberately: `BlogPosting` says what the document is,
+ * `FAQPage` says what is answered in it, and an answer engine looking for the
+ * second will not find it inside the first.
+ *
+ * Callers must check for an empty array first, exactly as `faqSchema` above
+ * requires. Six of the sixteen posts were written before this existed and
+ * every one of them happens to carry a question section — but a post that
+ * does not is a valid post, and an FAQPage with no questions in it is a page
+ * claiming to be something it is not.
+ */
+export function blogFaqSchema(post: BlogPost, faqs: readonly Faq[]) {
+  const url = canonical(`/blog/${post.slug}`);
+  return faqPage(url, `${url}#article`, faqs);
 }
 
 /**

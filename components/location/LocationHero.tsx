@@ -6,6 +6,19 @@ import { Phone } from "@/components/ui/Icon";
 import { RevealOnLoad } from "@/components/ui/Motion";
 
 /**
+ * "Maple Ridge & Pitt Meadows", "Coquitlam, Port Coquitlam & Port Moody".
+ *
+ * Only the two grouped entries reach this — the other seven are
+ * municipalities and take the fixed sub-line instead. An ampersand rather
+ * than "and" because every other list in this design system uses one, and
+ * the serial comma is dropped before it for the same reason.
+ */
+function listMunicipalities(names: readonly string[]): string {
+  if (names.length <= 1) return names[0] ?? "";
+  return `${names.slice(0, -1).join(", ")} & ${names[names.length - 1]}`;
+}
+
+/**
  * Community page banner.
  *
  * The system banner, unchanged in its grammar from /about, /services,
@@ -94,6 +107,23 @@ export function LocationHero({ location }: { location: Location }) {
             delay={0.06}
           >
             {location.name}
+            {/* The service half of the heading, on its own line.
+
+                A `span` inside the h1 rather than a second element beside it:
+                the point of the change is that the heading *text* carries the
+                service terms, and a sibling h2 would leave the h1 saying
+                "Burnaby" exactly as before. `block` puts it on its own line;
+                `display-m` and `text-fog` keep it subordinate so the community
+                name still reads first at a glance.
+
+                The two groupings print their real municipalities here. See
+                `locationPage.hero.h1SubGrouped` and the note on
+                `municipalities` in content.ts. */}
+            <span className="display-m mt-3 block text-fog">
+              {location.municipalities
+                ? `${locationPage.hero.h1SubGrouped}${listMunicipalities(location.municipalities)}`
+                : locationPage.hero.h1Sub}
+            </span>
           </RevealOnLoad>
 
           <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.14}>

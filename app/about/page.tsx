@@ -1,8 +1,10 @@
-import { business } from "@/lib/content";
+import { business, pageFaqs } from "@/lib/content";
 import {
-  JsonLd,
   aboutPageSchema,
   breadcrumbSchema,
+  canonical,
+  JsonLd,
+  pageFaqSchema,
   pageMetadata,
 } from "@/lib/seo";
 import { Header } from "@/components/home/Header";
@@ -15,11 +17,12 @@ import { MissionVision } from "@/components/about/MissionVision";
 import { Process } from "@/components/about/Process";
 import { SectionEdge } from "@/components/ui/SectionEdge";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { PageFaq } from "@/components/ui/PageFaq";
 
 export const metadata = pageMetadata({
   title: `About ${business.shortName} | Property Maintenance in ${business.base}, BC`,
   // 147, down from 229.
-  description: `A mobile property maintenance and exterior cleaning company based in ${business.base}, BC. Meet the team and the process behind every job.`,
+  description: `A mobile property maintenance and exterior cleaning company based in ${business.base}, BC. Meet the crew, the standard and the process behind every job.`,
   path: "/about",
   // Deliberately narrower than the homepage's list. The homepage competes for
   // the service and city queries; this page should not be bidding against it
@@ -51,6 +54,9 @@ export const metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        schema={pageFaqSchema("/about", canonical("/about") + "#webpage", pageFaqs.about.faqs)}
+      />
       <JsonLd schema={aboutPageSchema} />
       <JsonLd schema={breadcrumbSchema([{ name: "About", path: "/about" }])} />
       <Header />
@@ -64,6 +70,15 @@ export default function AboutPage() {
         <MissionVision />
         <Process />
         <QuoteForm />
+        {/* After the ask, not in front of it — the same placement and the
+            same reasoning as ServiceFaq. */}
+        <PageFaq
+          id="about-faq-heading"
+          label={pageFaqs.about.label}
+          heading={pageFaqs.about.heading}
+          body={pageFaqs.about.body}
+          faqs={pageFaqs.about.faqs}
+        />
       </main>
       <Footer />
       <ScrollToTop />

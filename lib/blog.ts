@@ -1,4 +1,9 @@
-import { blogPosts, type BlogPost, type BlogSection } from "./content";
+import {
+  blogPosts,
+  type BlogPost,
+  type BlogSection,
+  type Faq,
+} from "./content";
 import { canonical } from "./seo";
 
 /**
@@ -231,4 +236,66 @@ export function relatedPosts(post: BlogPost, count = 3): BlogPost[] {
   const rest = others.filter((p) => p.category !== post.category);
 
   return [...sameCategory, ...rest].slice(0, count);
+}
+
+/**
+ * The question-and-answer pairs inside a post, derived from its own body.
+ *
+ * Every article here ends on a section of questions, written as a
+ * `subheading` block followed by the paragraphs that answer it. That content
+ * was already on the page and was published as nothing at all — the service
+ * and location templates emit `FAQPage`, and the blog, which is where the
+ * questions are actually answered at length, emitted none.
+ *
+ * Derived rather than declared, for the same reason the contents list is:
+ * a second copy of these answers in a `faqs` array would be a second thing to
+ * keep in step with the prose, and the first one to drift. Editing the
+ * article edits the structured data.
+ *
+ * Two rules decide what qualifies, and both are deliberately strict:
+ *
+ *   - the subheading has to end in a question mark. Not every subheading is a
+ *     question, and a heading like "The window" published as a `Question` is
+ *     a claim about the page that is simply untrue.
+ *   - only the plain-string blocks following it count as the answer. A list,
+ *     a photograph or a pull quote inside an answer would be flattened into
+ *     prose that reads wrongly out of context, so a pair that runs into one
+ *     stops there rather than swallowing it.
+ *
+ * A post with no qualifying pairs returns an empty array, and the caller is
+ * expected to publish nothing rather than an empty `FAQPage` — see the note
+ * on `faqSchema` in lib/seo.tsx, which has the same contract.
+ */
+export function postFaqs(post: BlogPost): Faq[] {
+  const faqs: Faq[] = [];
+
+  for (const section of post.body) {
+    let question: string | null = null;
+    let answer: string[] = [];
+
+    const flush = () => {
+      if (question && answer.length > 0) {
+        faqs.push({ question, answer: answer.join(" ") });
+      }
+      question = null;
+      answer = [];
+    };
+
+    for (const block of section.blocks) {
+      if (typeof block === "string") {
+        if (question) answer.push(block);
+        continue;
+      }
+      if (block.kind === "subheading") {
+        flush();
+        question = block.text.trim().endsWith("?") ? block.text.trim() : null;
+        continue;
+      }
+      // Any other block shape ends the answer it interrupts.
+      flush();
+    }
+    flush();
+  }
+
+  return faqs;
 }

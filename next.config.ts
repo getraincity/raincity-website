@@ -25,6 +25,24 @@ const nextConfig: NextConfig = {
     // 75 stays listed because it is next/image's default and anything that
     // does not go through `PhotoFrame` would otherwise 400.
     qualities: [68, 75],
+    // Thirty days, and it has to be set explicitly.
+    //
+    // The optimiser derives its own `Cache-Control` from the upstream file's,
+    // and the upstream here is a static asset out of `public/`, which the
+    // host serves as `max-age=0, must-revalidate`. Every optimised variant
+    // inherited that, so a returning visitor revalidated every photograph on
+    // the page before any of it could be painted from cache — thirteen
+    // conditional round trips on a service page, on a connection where the
+    // round trip is the expensive part. `minimumCacheTTL` is the floor that
+    // overrides it.
+    //
+    // The trade-off, stated because it is the one that will bite: these URLs
+    // are keyed by source path, not by content hash. Replacing a photograph
+    // *at the same path* leaves returning visitors on the old one until the
+    // month is out. The fix is to change the filename, which costs one line —
+    // the `src` on that slot's entry in `lib/photos.ts` — and is already how
+    // every photograph on this site is addressed.
+    minimumCacheTTL: 2592000,
   },
 
   async redirects() {

@@ -24,7 +24,7 @@ export const metadata = {
     // 140, down from 202. The route is noindex until the six articles are
     // real (see `indexing` in lib/seo.tsx), but the description is what a
     // shared link shows too, and that is not gated on anything.
-    description: `Seasonal timing, the maintenance that pays for itself, and advice specific to ${business.region} — notes from a crew based in ${business.base}.`,
+    description: `Seasonal timing, the maintenance that pays for itself and advice specific to ${business.region} — notes from a working crew based in ${business.base}, BC.`,
     path: "/blog",
     // Informational terms only. The commercial ones belong to /services and the
     // city-by-city set to /locations; a blog index bidding against either would
