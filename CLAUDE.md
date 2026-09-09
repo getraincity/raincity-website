@@ -300,6 +300,117 @@ the array is empty — add it in the same pass that fills the array, not before.
 Raise this at launch alongside the testimonials, the policy pages and the
 blog. It is the smallest of the four and the quickest to close.
 
+### /about carries a Home Ground section, and one line in it is unconfirmed
+
+Added at the client's request ("about local to New West"). It sits between
+`Process` and `QuoteForm` on Mist, and the reasoning for the copy is on
+`aboutPage.local` in `lib/content.ts` while the reasoning for the layout is on
+`components/about/HomeGround.tsx`. Read both before editing it — four obvious
+treatments are ruled out on that page in particular, and the fourth is the one
+that catches people: `QuoteForm` sits directly below and already embeds a map
+queried on the base city, so a map in this section would be the second New
+Westminster map inside one screen.
+
+**`travelValue` — "None, anywhere in the service area" — is not confirmed by
+the client, and it is the fifth launch item.** The policy is already published,
+in the "Is it cheaper because you are based here?" answer on
+`/locations/new-westminster`, but that is one answer at the foot of one page.
+This promotes it to a ruled fact directly above the quote form. A published
+pricing policy the office does not hold to on the phone is worse than none,
+which is the standing rule on the legal pages and does not change here. Raise
+it with the testimonials, the policy pages, the blog and `social`.
+
+Everything else in the section restates copy the site already publishes — the
+moss releasing gradually is the Soft Washing FAQ, the sealer window is the
+`twenty-eight-days-before-sealing` article, the paintable season is the
+Painting FAQ, and the hill above the Fraser is the New Westminster location
+copy. Both derived facts derive: `business.base`, and a count off `locations`.
+
+**The photograph is `aboutHomeGround`, and it is not New Westminster.** No
+frame of this city exists here, and the stock pools have nothing usable: the
+New Westminster results are street furniture, a SkyTrain at a platform and a
+set of monkey bars; the Fraser River results are wilderness; and one frame
+returned under "New Westminster" is in fact Edinburgh, which is worth
+remembering before trusting any of those listings again. So the frame is
+chosen the way the nine location cards are — it shows the kind of property and
+the kind of weather the copy describes, and its alt says what is in the picture
+rather than naming a city. It is a sloped residential street under coastal
+cloud, uncropped at its native 3:2, and every hard surface in it (rooflines,
+gutter runs, a driveway apron, a retaining wall) is on the service list. It was
+already vetted for this site: it is the alternate recorded on the `hero` entry.
+A real New Westminster frame is still the better answer if the client ever
+shoots one — it drops into the same slot and nothing else changes.
+
+Two frames were ruled out along the way and the reasons outlive this section.
+`rooftops` is the `/locations` hub hero, doing this same "here is the place"
+job one page over. And **`aboutCrew` shows a crew *re-roofing* a house** —
+laying underlay, stripped shingles bagged below — which is not one of the
+eleven services. It is fine as atmosphere on `/blog`, but it is also the
+New Westminster card photo on `/locations`, where it is standing in for the
+work this company does. Worth revisiting separately.
+
+### /about also carries Founders and Partnerships, and one of them is empty
+
+Both added at the client's request. `founders` and `partnerships` in
+`lib/content.ts` hold the data; `components/about/Founders.tsx` and
+`components/about/Partnerships.tsx` hold the reasoning.
+
+**Both render `null` when their arrays are empty, and Founders is empty
+today.** That is the `social` arrangement — an empty array and no section,
+rather than a section full of stand-ins — and it means neither has to be
+commented out of `app/about/page.tsx` and then remembered later.
+
+**The gated section broke the page's colour rhythm in a way that only showed in
+one of its two states, and that is the thing to remember here.** The sequence
+was designed as Stats (Fog) → Founders (White) → Partnerships (Fog) → the cut,
+which is correct — but with Founders rendering nothing, Stats and Partnerships
+became two Fog bands touching. Partnerships is therefore **White**, its plates
+are Fog rather than white so they stay visible, and `SectionEdge` now runs
+`from="bg-white"` because that section is what it cuts out of in either state.
+Any future gated section needs its grounds checked in both states, not just the
+filled one.
+
+**Founders is one person — Glevin Wilson — and is still missing what it needs
+to publish.** The client first wrote "Glevin and Wilson", which reads as two
+names and was built as two until they were asked; it is one founder. Still
+outstanding: role, bio, and a portrait. One spelling trap is recorded at the
+constant and repeated here because it looks like a typo and is not — **the name
+is Glevin**, confirmed by the client, even though the LinkedIn profile they
+supplied is
+`linkedin.com/in/andglavin`. Do not "correct" it to Glavin. LinkedIn answers
+automated requests with HTTP 999, so the profile cannot be read to check.
+
+**Partnerships ships with real names and no logos.** No logo file was supplied
+for any of them, so each renders as its name set in the site's own type inside
+the plate that would hold the mark — honest, needs no trademark asset, and
+`Partner.logo` is optional so real files drop in one at a time with no
+component change. Logos go under `public/partners/`, not `photos.ts`: that
+registry is for photography and its tone, ratio and focal fields mean nothing
+for a wordmark.
+
+Two things about that section are **not settled and should not be published
+without the client confirming them**:
+
+1. **Every group says "partners", on the client's instruction.** Asked what
+   these organisations are, they said the companies are trade partners, that
+   RainCity also works at some of their sites, and that because those are
+   separate businesses the relationship to publish is the partnership rather
+   than the customer one. Keep it that way — "client" asserts a commercial
+   engagement about a named third party and would need each of them to agree
+   to it being published. The three groups split by sector, not relationship;
+   the relationship is the same across all nine.
+2. **"CFOne" and "CFIB" were sent as "cfone" and "cfib".** CFIB is almost
+   certainly the Canadian Federation of Independent Business and CFOne most
+   likely the Canadian Armed Forces community programme, but "almost certainly"
+   is not the standard for printing an organisation's name on a client's site.
+
+**The `Property management` group is empty on purpose.** The client asked to
+"put just some property management companies for now". Inventing those would
+put identifiable third parties on this page as customers of a company they may
+never have engaged, in a market small enough that both sides would recognise
+it. That is a false endorsement, not placeholder copy, and it is the one
+instruction in that message that was not carried out. Same rule governs logos.
+
 ### The post template
 
 `/blog/[slug]` renders `post.body`, which is a list of `BlogSection`s, each an
@@ -816,6 +927,123 @@ all assets included, is 385 KB over 26 requests, with CLS at 0 and TTFB near
 60 ms.
 
 There is no image weight problem on this site. Chasing one costs quality.
+
+## Analytics, and telling Bing when a page changes
+
+Two separate things, added in the same pass at the client's request. Neither is
+a secret, and both fail silently when they fail, which is the reason for the
+length of what follows.
+
+### Google Analytics 4 — and the CSP line that makes it work
+
+`GA_MEASUREMENT_ID` in `app/layout.tsx` is `G-SJE51YKEFY`, declared once and
+used twice (loader URL, `config` call) so the two cannot disagree. It loads
+through `next/script` at `afterInteractive`, alongside Microsoft Clarity, rather
+than inline "immediately after `<head>`" as Google's copy-paste instructions
+say — that wording is for a hand-authored page with no script loader, and
+putting a third-party script in front of the LCP render would cost the number
+analytics exists to measure.
+
+**The load-bearing part is not the tag, it is `next.config.ts`.** This site
+sends a strict `Content-Security-Policy`, so a pasted snippet does nothing at
+all until its hosts are allowed, and there is no error anybody sees on a
+production build. GA4 needs three directives, not one:
+
+- `script-src` → `https://www.googletagmanager.com`, for `gtag.js`. Missing
+  this, nothing loads.
+- `connect-src` → `https://*.google-analytics.com`, and the wildcard is
+  required rather than tidier: a Canadian property collects to
+  `region1.google-analytics.com`, not the `www` host the docs quote. Missing
+  this is the worse failure of the two, because the tag loads, Realtime shows
+  a user, and every event after that is dropped.
+- `img-src` → the same hosts, for the pixel fallback gtag uses when the page is
+  unloading.
+
+**Any future analytics, ads or tag-manager snippet gets its hosts added in the
+same commit as the snippet.** That rule exists because the opposite already
+happened here: `*.clarity.ms` was in `script-src` and `connect-src` but never
+in `img-src`, so `c.clarity.ms/c.gif` had been refused on every page load since
+Clarity landed, and it was found only because adding GA4 meant reading the
+console on a production build. Clarity's actual telemetry was never affected —
+that goes to `t.clarity.ms` over `connect-src` — so session replay and heatmaps
+have been recording correctly the whole time. Only the ID-sync pixel was blocked.
+
+**One CSP error survives on purpose and is not a bug to fix.**
+`c.clarity.ms/c.gif` redirects to `c.bing.com` to sync the Clarity ID with a
+Bing advertising ID, and CSP is enforced on the redirect target. `c.bing.com`
+is deliberately absent, for the same reason `stats.g.doubleclick.net` is absent
+from `connect-src`: an ad host is a new vendor for visitor data to reach, which
+is the client's decision and not something to open in order to quiet a console
+warning. If the client asks for Google Signals or the Clarity/Bing Ads
+integration, that is when those hosts go in.
+
+**No route-change handler, and that is verified rather than assumed.** App
+Router navigations do not reload the document, so the usual worry is one
+page_view per session. GA4's Enhanced Measurement watches History API changes
+itself; a client-side navigation from `/` to `/services` was measured on a
+production build sending a second `page_view` with the new `dl`. Keeping it out
+means no `usePathname` client boundary, which keeps the no-client-imports
+invariant intact. If pageview counts ever look like one-per-session, check
+Enhanced Measurement in Admin → Data streams before writing a handler.
+
+### IndexNow — `npm run indexnow`
+
+`indexnow.mjs` submits URLs to Bing and the other participating engines so a
+changed page is fetched now rather than at the next crawl. Run it **after** a
+deploy is live:
+
+```
+npm run indexnow                 every URL in the live sitemap
+npm run indexnow -- --dry-run    preflight only
+npm run indexnow -- --url /about --url /services/roof-cleaning
+```
+
+**The key is public by design.** IndexNow verifies ownership by having the key
+served from the domain, so `public/b4fb95fcf3d843bfb3a53c9040b9b56e.txt` is
+committed and published on purpose. The script reads the key out of that served
+file rather than repeating it, so filename, contents and submitted key cannot
+drift; rotating the key is one file rename, and the script refuses to run if it
+finds two key files, because a stale one still being served hides a half-done
+rotation.
+
+**The Bing Webmaster Tools OAuth client ID and secret are a different thing and
+are not in this repository.** They are for an application reading a Webmaster
+Tools account; IndexNow needs no authentication at all. Do not add them.
+
+**What it submits comes off the live sitemap, deliberately.** A second list of
+URLs would be the first thing to drift, and drift means submitting a `noindex`
+URL or a 404 — the two failures `app/sitemap.ts` is written to avoid. Reading
+the live sitemap means this script cannot disagree with the `indexing` flags or
+with what is actually deployed, and a route held back by a flag is never
+submitted with no second condition to remember.
+
+**Google does not participate in IndexNow.** Bing, Yandex, Seznam, Naver and
+DuckDuckGo do, and `api.indexnow.org` fans one submission out to all of them.
+Google's Indexing API takes JobPosting and BroadcastEvent only, so for this site
+Google stays sitemap plus Search Console. There is no "Google IndexNow" to add.
+
+**And there is no sitemap ping to add either.** The obvious-looking substitute
+is `GET /ping?sitemap=...`, which is still in a decade of blog posts and in
+plenty of deploy scripts. Both endpoints are gone, measured on 2026-09-09
+rather than assumed: Google's answers **404**, Bing's answers **410 Gone** —
+the status code for "deliberately not coming back". Bing replaced it with
+IndexNow, which is why `indexnow.mjs` exists. Adding a ping would be a request
+that fails on every run, and the failure would read as the script being broken.
+
+Google's side is already wired as far as it can be: `sitemap.xml` is declared in
+`robots.txt` (`app/robots.ts`), and `public/google807aab8c24a997b5.html` is the
+Search Console verification. There is no way to *push* a change to Google. That
+asymmetry with Bing is a fact about the two companies, not a gap to close.
+
+**A 202 is not proof of anything.** The endpoint answers `202 Accepted` to a GET
+carrying a key that has never existed anywhere; validation happens later and out
+of band. The real check is the key file being reachable, which the script does
+itself before submitting and refuses to continue without.
+
+It is a command rather than a `postbuild` hook because a build hook fires on
+preview builds and on builds that never go live, each one asserting that a
+production URL has changed. Wiring it into CI later is fine — it needs no
+secret.
 
 ## Version control
 

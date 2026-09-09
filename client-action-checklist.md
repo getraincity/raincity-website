@@ -210,6 +210,52 @@ actual RainCity jobs). A disclaimer is shown above the grid while
 
 ---
 
+## 10. Analytics and Bing Indexing (mostly done — four things left)
+
+Google Analytics 4 (`G-SJE51YKEFY`) and IndexNow submission for Bing are both
+wired up and verified working. Four items still need somebody outside this
+repository.
+
+**a) Rotate the Bing Webmaster Tools OAuth client secret. Do this one first.**
+The client ID and secret were sent over chat, so they now sit in a chat
+transcript. Nothing on this site uses them — IndexNow authenticates with the
+public key file alone — so rotating or deleting them costs nothing and closes
+the exposure. Bing Webmaster Tools → Settings → API access.
+
+Verified on 2026-09-09: neither the client ID nor the secret appears anywhere in
+this repository or in any commit in its history, and `.env.local.example` now
+carries a note saying they must not be added. So the only copy is the one in the
+chat transcript, and rotating in Bing Webmaster Tools closes it completely —
+there is nothing to purge from git.
+The IndexNow key itself (`b4fb95fcf3d843bfb3a53c9040b9b56e`) does **not** need
+rotating: it is published as a text file on purpose, which is how IndexNow
+verifies the domain.
+
+**b) Confirm the site is verified in Bing Webmaster Tools.** Having an API key
+suggests it already is. If not, the fastest route is importing the existing
+Google Search Console verification rather than adding another DNS record.
+
+**c) Confirm Enhanced Measurement is on** in GA4 → Admin → Data streams. The
+site relies on it to count page views on client-side navigations instead of
+shipping its own route-change handler. It is on by default in a new property,
+and a client-side navigation was measured sending a page view correctly, so this
+is a confirmation rather than a fix.
+
+**d) Decide on the advertising hosts, or leave them off.** Two are deliberately
+blocked by the site's security policy: `c.bing.com` (syncs the Clarity visitor
+ID with a Bing advertising ID) and `stats.g.doubleclick.net` (Google Signals /
+Ads linking). Neither is needed for analytics, session replay or heatmaps, all
+of which are working. They only matter if the client wants to run ads against
+this audience, and opening them sends visitor data to an ad network — which is
+their call, not a technical detail. Leaving them blocked is the default and
+costs nothing today.
+
+**One thing to know about running it.** After every deploy that changes or adds
+a page, somebody runs `npm run indexnow` to tell Bing. It is one command, it
+needs no password, and it refuses to do anything if the deploy is not actually
+live yet. It is not automatic on purpose — an automatic version would fire on
+test builds that never reach the public site.
+
 ## Summary
 
 | # | Category | Blocking launch? | Who acts |

@@ -82,6 +82,19 @@ export const metadata: Metadata = {
   category: "Property Maintenance",
 };
 
+/**
+ * Google Analytics 4 measurement ID, declared once because it appears twice
+ * below — in the loader URL and in the `config` call — and a mismatch between
+ * the two is silent: the tag loads, the config names a property that is not
+ * the one being loaded, and the reports stay empty.
+ *
+ * Not an environment variable. It is printed in the HTML of every page, so it
+ * is not a secret, and reading it from `process.env` would mean a missing value
+ * in the host's dashboard silently switches analytics off on a deploy. Clarity
+ * hardcodes its project ID one screen down for the same reason.
+ */
+const GA_MEASUREMENT_ID = "G-SJE51YKEFY";
+
 export const viewport: Viewport = {
   // Harbour Navy. The only literal colour in the codebase outside the token
   // block: browser-chrome metadata cannot read a CSS custom property.
@@ -105,6 +118,45 @@ export default function RootLayout({
         <JsonLd schema={websiteSchema} />
       </head>
       <body>
+        {/* Google Analytics 4.
+
+            NOT literally "immediately after <head>", which is what Google's
+            copy-paste instructions say. That wording is written for a hand-
+            authored HTML page with no script loader; on this stack the same
+            two tags go through next/script, which is the documented
+            equivalent and is what Clarity below already uses. `afterInteractive`
+            injects them once hydration is underway, so the tag cannot sit in
+            front of the LCP render — and the LCP hero is the one number on
+            this site that analytics must not cost anything, since it is the
+            thing analytics exists to measure.
+
+            One tag, and only one. Google's warning about not adding a second
+            Google tag per page is the real constraint here: gtag.js is also
+            what a Google Ads tag, a Search Console tag or a GTM container
+            would load, and a second copy double-counts every session. If any
+            of those arrive later they belong in this same pair of tags as an
+            extra `config` line, not as another loader.
+
+            No route-change handler, deliberately. App Router navigations do
+            not reload the document, so a naive integration counts one
+            page_view per session — but GA4's Enhanced Measurement watches
+            History API changes and records those views itself, and it is on by
+            default in a new property. That keeps this a server component with
+            no `usePathname` client boundary, which is the invariant in
+            CLAUDE.md about not pulling content.ts into the client bundle.
+            Confirm Enhanced Measurement is on in Admin -> Data streams before
+            trusting the pageview counts. */}
+        <Script
+          id="ga4-loader"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-config" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');`}
+        </Script>
         {/* Microsoft Clarity — session recording/heatmaps for
             raincitypms.com. Loaded with next/script so it never
             blocks hydration or the LCP render. */}
