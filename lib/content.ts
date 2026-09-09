@@ -2454,7 +2454,263 @@ export const aboutPage = {
     ],
     cta: "Explore Our Services",
   },
-} as const;
+
+  /**
+   * Home Ground — the local section, added at the client's request.
+   *
+   * The brief was "about local to New West". The obvious version of that
+   * section is unbuildable here: this site already says "New Westminster
+   * based" in fourteen places — a trust point on all eleven service pages,
+   * the `pageFaqs.about` answer "Is RainCity a local company?", and two full
+   * paragraphs on /locations/new-westminster — so a section whose argument is
+   * "we are local" would be the fifteenth and would add nothing. Worse,
+   * rewriting the New Westminster location copy onto /about would put two of
+   * our own pages in front of the same queries, which is the doorway pattern
+   * the note on `LocationDetail` exists to prevent.
+   *
+   * So this section argues the thing the repetitions do not: what being based
+   * here changes about the work. The seed is a clause already in the About
+   * FAQ — that the timing of nearly every job is set by a rainfall pattern
+   * specific to this coast — and the second paragraph is that clause expanded
+   * into the three windows the service pages already publish. The FAQ's own
+   * wording is deliberately not reused; both sit on this page, and the two
+   * would have read as one sentence printed twice.
+   *
+   * WHAT IS ASSERTED HERE: nothing new. Moss releasing gradually after a
+   * treatment is the Soft Washing FAQ. A slab needing time before it will
+   * take a sealer is the `twenty-eight-days-before-sealing` article. The
+   * paintable season is the Painting FAQ. The hill above the Fraser and the
+   * Quay are the New Westminster location copy. The one line that is not a
+   * restatement of settled copy is `travelValue` — see the note on it.
+   *
+   * No count is written into the copy, for the reason given on
+   * `servicesPage.catalogue`: `areaSuffix` is a suffix because the number in
+   * front of it is `locations.length` at render, so adding a tenth community
+   * cannot leave a stale "nine" behind on this page.
+   */
+  local: {
+    label: "Home Ground",
+    /**
+     * Two parts, the same shape as the page headings the AEO pass split: the
+     * name at the larger size, the qualifying half at `display-m` beneath it
+     * inside the same heading. Written as one sentence first and measured at
+     * three lines in this column at 1440 — against the two-line rule
+     * `check-layout.mjs` enforces. Split, the long half drops to a size that
+     * sets on one line, and "New Westminster" takes the largest type in the
+     * section, which is the half the client asked to be prominent.
+     *
+     * "Service area" rather than "coverage area" — it is the phrase the rest
+     * of the site uses, and this heading contradicts it on purpose.
+     */
+    heading: "New Westminster Is Home",
+    headingSub: "Not A Service Area",
+    body: [
+      "We are based in New Westminster, on the hill above the Fraser, and every job on the schedule starts from there. It is not a regional office or a mailing address — it is where the truck loads and where the equipment lives, and it is the reason a property at the Quay and a property in Langley are quoted on the same basis, with nothing added for the distance in between.",
+      "The name is not decoration either. Almost everything on the service list is timed by this coast’s weather rather than by a calendar — when moss lets go after a treatment, how long a slab needs before it will take a sealer, how much of a summer is actually dry enough to paint in. A company working from somewhere else has to look those windows up. We schedule inside them every season.",
+    ],
+    /**
+     * The three facts read as a set about the truck, which is why the second
+     * label is "Where it works" rather than a second noun phrase. Values are
+     * resolved in `HomeGround.tsx`: the first is `business.base` and the
+     * second counts `locations`, so neither can drift from the source.
+     */
+    baseLabel: "Where the truck loads",
+    areaLabel: "Where it works",
+    areaSuffix: "communities, both banks of the Fraser",
+    /**
+     * NOT CONFIRMED BY THE CLIENT, and the one line on this page that needs
+     * to be before launch. It is already published — the "Is it cheaper
+     * because you are based here?" answer on /locations/new-westminster says
+     * there is no travel charge anywhere in the service area — but that is
+     * one answer at the foot of one page, and this promotes it to a ruled
+     * fact directly above the quote form. A published pricing policy the
+     * office does not hold to on the phone is worse than none, which is the
+     * standing rule on the legal pages and applies unchanged here. Raise it
+     * at launch alongside the testimonials, the policy pages and `social`.
+     */
+    travelLabel: "Travel charge",
+    travelValue: "None, anywhere in the service area",
+  },} as const;
+
+// --- Founders and partnerships ---------------------------------------------
+
+/**
+ * Added at the client's request — "add partnerships section, add founders
+ * section, add some companies we work with n built the developers logos n some
+ * we work with" — which is two sections, because the third clause is the
+ * content of the first rather than a section of its own.
+ *
+ * ONE INSTRUCTION IN THAT MESSAGE WAS NOT CARRIED OUT, and it should not be
+ * without the client understanding what it does: "u can put just some property
+ * management companies for now". Inventing property-management names would put
+ * identifiable third parties on this page as customers of a company they may
+ * never have engaged, in a market small enough that both sides would recognise
+ * the error. That is a false endorsement rather than filler copy, and it is a
+ * different order of problem from the placeholder text elsewhere in this file.
+ * The group is declared and empty; it fills when real names arrive.
+ *
+ * The same line governs logos. A partner mark is somebody else's trademark and
+ * printing it asserts a relationship, so nothing goes in `logo` that the client
+ * has not sent and confirmed.
+ */
+
+/** One founder. Everything here has to come from the client. */
+export type Founder = {
+  /** As they want it printed, and spelled as they spell it. */
+  name: string;
+  role: string;
+  /** Two or three sentences, in their voice or approved by them. */
+  bio: string;
+  /**
+   * Optional, and the section is built to read correctly without it — a
+   * founder with no portrait renders as name, role and bio rather than as a
+   * hole where a face should be. Needs a `photos.ts` entry first.
+   */
+  photo?: PhotoKey;
+};
+
+/**
+ * STILL EMPTY, AND THE SECTION RENDERS NOTHING WHILE IT IS. Two first names
+ * have been given — Glavin and Wilson — and that is not enough to publish.
+ * Three things are missing and one is actively uncertain:
+ *
+ *  1. SPELLING IS SETTLED, AND IT IS NOT WHAT THE LINK SUGGESTS. The client
+ *     has confirmed "Glevin". The LinkedIn profile they sent for them reads
+ *     linkedin.com/in/andglavin, which looks like Gl-a-vin and is the
+ *     obvious thing to "correct" it to — do not. That handle is prefixed
+ *     "and", the client was asked directly, and Glevin is the answer.
+ *     LinkedIn answers automated requests with HTTP 999, so the profile
+ *     cannot be used to check this either way.
+ *  2. RESOLVED: this is one person, Glevin Wilson, not two founders. It was
+ *     read as two because the client wrote "Glevin and Wilson", and the copy
+ *     here was plural until they were asked. The layout takes a single entry
+ *     at a constrained width rather than a full-bleed row, because one 4:5
+ *     portrait at `max-w-site` would stand over a thousand pixels tall.
+ *  3. No roles, and no bio.
+ *  4. No portraits. The client offered to send them from LinkedIn.
+ *
+ * Fill `people` and the section appears. Nothing else has to change.
+ *
+ * No `body` paragraph, deliberately. A lead sentence would have to assert
+ * something — that there are two of them, that they still run the company,
+ * that they answer the phone — and none of that has been supplied. The bios
+ * carry the section once they exist.
+ */
+export const founders = {
+  label: "The Founder",
+  heading: "Who Started RainCity",
+  people: [] as readonly Founder[],
+};
+
+/**
+ * One partner.
+ *
+ * `logo` is OPTIONAL and is the reason this section can ship today. No logo
+ * file has been supplied for any of the names below, so each renders as its
+ * name set in the site's own type inside the standard plate. That is honest,
+ * it needs no trademark asset, and it reads as deliberate rather than as a
+ * broken image. When real files arrive they drop into `logo` and the plate
+ * swaps what is inside it — no component change.
+ *
+ * A logo is NOT a `PhotoKey` and does not belong in `photos.ts`. That registry
+ * is for photography and carries a dominant tone, an aspect ratio and a focal
+ * point, none of which mean anything for a wordmark. Logos follow the
+ * `awards.badge` shape instead: a path, intrinsic dimensions and alt text,
+ * rendered straight through `next/image`.
+ *
+ * No `href`. Linking a logo out is a decision about who this company sends its
+ * readers to, and this site has a written standard for outbound links that a
+ * partner's marketing site does not meet — see the outbound-citations note in
+ * CLAUDE.md. If the client wants them to link, that is a deliberate change to
+ * that rule, not a field somebody quietly fills in.
+ */
+export type Partner = {
+  /** The organisation's name as it writes it. This is what renders today. */
+  name: string;
+  logo?: {
+    /** Under `public/partners/`. SVG, or transparent PNG at 1000px or more. */
+    src: string;
+    width: number;
+    height: number;
+    /** Describes the mark and names the relationship. */
+    alt: string;
+  };
+};
+
+/**
+ * A group is a claim, which is the whole reason this is grouped rather than
+ * one undifferentiated strip. "We maintain their buildings", "we refer work to
+ * each other" and "they certify us" are three different statements, and a
+ * single row of marks silently makes the strongest of the three about every
+ * name in it.
+ *
+ * A group with no items is skipped rather than rendered as an empty heading,
+ * so the four below fill one at a time and in any order.
+ */
+export type PartnerGroup = {
+  label: string;
+  items: readonly Partner[];
+};
+
+/**
+ * EVERY GROUP SAYS "PARTNERS", AND THAT IS THE CLIENT'S OWN INSTRUCTION RATHER
+ * THAN CAUTION ON THIS SIDE. Asked what these organisations are, they said the
+ * companies are trade partners, that RainCity also works at some of their
+ * sites, and that because those are separate businesses the relationship to
+ * publish is the partnership rather than the customer one.
+ *
+ * That is the more conservative of the two available claims and it is the one
+ * to keep. "Client" asserts a commercial engagement about a named third party
+ * and would need each of them to agree to it being published; "partner" is
+ * what the client has actually confirmed. Do not upgrade a group to "clients"
+ * because somebody mentions in passing that a name on this list is one.
+ *
+ * The three groups split by sector, not by relationship — the relationship is
+ * the same across all nine. The split is there because nine names in one flat
+ * row scans worse than three groups of three, and because sector is checkable.
+ *
+ * Two names also need their spelling settled before this is published:
+ * "CFOne" and "CFIB" were sent as "cfone" and "cfib". CFIB is almost certainly
+ * the Canadian Federation of Independent Business and CFOne is most likely the
+ * Canadian Armed Forces community programme, but "almost certainly" is not the
+ * standard for printing an organisation's name on a client's website.
+ */
+export const partnerships = {
+  label: "Partnerships",
+  heading: "Who We Work With",
+  groups: [
+    {
+      label: "Cleaning partners",
+      items: [
+        { name: "Bright Nest Cleaning" },
+        { name: "Crystal Clear Cleans" },
+        { name: "SA Cleaning" },
+      ],
+    },
+    {
+      label: "Post-secondary partners",
+      items: [
+        { name: "Kwantlen Polytechnic University" },
+        { name: "Capilano University" },
+        { name: "Thompson Rivers University" },
+      ],
+    },
+    {
+      label: "Business and member partners",
+      items: [
+        { name: "CFOne" },
+        { name: "Union Savings" },
+        { name: "CFIB" },
+      ],
+    },
+    /**
+     * Empty on purpose. See the note at the top of this block: the client
+     * asked for "just some property management companies for now" and that is
+     * the one thing that cannot be filled in from here.
+     */
+    { label: "Property management", items: [] },
+  ] as readonly PartnerGroup[],
+};
 
 // --- Services page ---------------------------------------------------------
 

@@ -13,8 +13,11 @@ import { QuoteForm } from "@/components/home/QuoteForm";
 import { AboutHero } from "@/components/about/AboutHero";
 import { WhoWeAre } from "@/components/about/WhoWeAre";
 import { Stats } from "@/components/about/Stats";
+import { Founders } from "@/components/about/Founders";
+import { Partnerships } from "@/components/about/Partnerships";
 import { MissionVision } from "@/components/about/MissionVision";
 import { Process } from "@/components/about/Process";
+import { HomeGround } from "@/components/about/HomeGround";
 import { SectionEdge } from "@/components/ui/SectionEdge";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { PageFaq } from "@/components/ui/PageFaq";
@@ -64,11 +67,27 @@ export default function AboutPage() {
         <AboutHero />
         <WhoWeAre />
         <Stats />
-        {/* Signature use #3 — the 12 degree cut carrying Fog into Navy, the
-            same transition the homepage makes into its Pillars band. */}
-        <SectionEdge from="bg-fog" to="bg-navy" />
+        {/* Both added at the client request, and both render nothing while
+            their arrays are empty. Founders is empty today, which is exactly
+            why Partnerships is White rather than Fog: with Founders absent it
+            sits straight under Stats, and two Fog bands in a row read as one.
+            Grounds here have to work in both states, not just the filled one. */}
+        <Founders />
+        <Partnerships />
+        {/* Signature use #3 — the 12 degree cut, now carrying White into
+            Navy. It ran out of Fog until Partnerships landed above it; that
+            section is White because Founders between it and Stats renders
+            nothing while it has no people, and the cut has to come out of
+            whichever section actually precedes it in both states. The note on
+            Partnerships carries the full reasoning. */}
+        <SectionEdge from="bg-white" to="bg-navy" />
         <MissionVision />
         <Process />
+        {/* Added at the client's request. It sits between two white
+            sections on purpose — see the comment block on the component for
+            why Mist, why here, and why no map: QuoteForm directly below
+            already embeds one queried on the base city. */}
+        <HomeGround />
         <QuoteForm />
         {/* After the ask, not in front of it — the same placement and the
             same reasoning as ServiceFaq. */}

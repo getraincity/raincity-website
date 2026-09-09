@@ -145,6 +145,16 @@ export const photos = {
     note: "Our Process figure on /about. Served at 1600x1232 (1.3:1), converted from the 2530x1948 original in `assets/`, against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
   },
 
+  aboutHomeGround: {
+    src: "/about-home-ground.webp",
+    alt: "A residential street falling away down a slope under low coastal cloud, stucco and shingled houses along it with their rooflines and gutters in view, a wide concrete driveway apron and a stone-capped retaining wall in the foreground, and firs going into the fog on the hill behind.",
+    credit: "Ali Kazal",
+    tone: "#99a0a0",
+    ratio: "3:2",
+    focal: "50% 50%",
+    note: "Home Ground figure on /about. Served at 1600x1067, converted from the 3200x2134 original in `assets/`. Native 3:2 and rendered at 3:2, so this is the one figure on /about with no crop at all — deliberate, because the frame needs both ends of itself: the cloud along the top is half the argument and the driveway apron and retaining wall along the bottom are the other half. NOT NEW WESTMINSTER: it is Victoria, and the alt says what is in the frame rather than naming a city, which is the same rule the nine location cards follow. It was already vetted for this site — it is the alternate recorded on the `hero` entry — and it is the only frame checked that carries both halves of the section's argument at once: a sloped residential street of the stock this company works on, and the coastal weather the copy says sets the calendar. The hard surfaces are the reason it beats a scenic frame. Every roofline, gutter run, driveway apron and retaining wall in it is something on the service list. The New Westminster stock pools were checked first and have nothing usable — see the note in CLAUDE.md before spending time there again.",
+  },
+
   servicesHero: {
     src: "/our-services-hero-background.webp",
     alt: "A RainCity technician on a tiled Greater Vancouver roof running a pressure-washing wand across a row of solar panels under a clear blue sky.",

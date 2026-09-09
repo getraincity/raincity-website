@@ -256,6 +256,12 @@ type Tag =
   | "ul"
   | "ol"
   | "li"
+  // `dl` and no `dt`/`dd`: the wrapper becomes the list, and the pairs
+  // inside it are grouped by plain divs, which is what HTML wants there
+  // anyway. Added for the Home Ground facts on /about — a stagger over
+  // label-and-value rows, where a `ul` would have been the wrong markup
+  // for the sake of the type.
+  | "dl"
   | "figure"
   | "h1"
   | "h2"
