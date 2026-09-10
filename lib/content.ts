@@ -2618,15 +2618,51 @@ export const founders = {
  * `awards.badge` shape instead: a path, intrinsic dimensions and alt text,
  * rendered straight through `next/image`.
  *
- * No `href`. Linking a logo out is a decision about who this company sends its
- * readers to, and this site has a written standard for outbound links that a
- * partner's marketing site does not meet — see the outbound-citations note in
- * CLAUDE.md. If the client wants them to link, that is a deliberate change to
- * that rule, not a field somebody quietly fills in.
+ * `href` IS NOW ALLOWED, AND THAT IS A REVERSAL OF THE ORIGINAL RULE HERE. The
+ * previous version of this comment said linking out is a decision about who
+ * this company sends its readers to, and that a partner's marketing site does
+ * not meet the outbound-link bar the rest of the site holds citations to — see
+ * the outbound-citations note in CLAUDE.md. That bar is still correct for an
+ * *editorial* link from inside an article, which is what it was written for.
+ * It was the wrong bar for this section: a trade partner's own site is not a
+ * source being cited, it is the other half of a relationship this page is
+ * already asserting exists, and Touseef gave explicit sign-off to add
+ * "redirect links" here on 2026-09-09. So `href` is independent of `logo` —
+ * a partner can carry a real URL before a logo file exists, or a logo with no
+ * URL — and it stays `undefined` for every entry below until a real one is
+ * supplied. No URL has been invented for any partner. A tile or plate with no
+ * `href` renders as inert (no wrapping link), never as a link to nowhere.
+ * Rendered as `target="_blank" rel="noopener"`, deliberately without
+ * `nofollow` — the same choice `PostBody.tsx` makes for outbound citations,
+ * for the same reason: a relationship the company is willing to publish is
+ * what a followed link is for.
  */
 export type Partner = {
   /** The organisation's name as it writes it. This is what renders today. */
   name: string;
+  /** The partner's own site. Absent until the client supplies it — see above. */
+  href?: string;
+  /**
+   * The partner's own primary brand colour, as a hex string. Touseef's
+   * instruction on 2026-09-09 was explicit: "these brands also don't need to
+   * be losing their identities... make sure to use their identity in this
+   * partner section." A uniform Fog plate is still the right answer for the
+   * fallback logo state — see the note above — but a real, independently
+   * branded company sitting on this page deserves more than RainCity's own
+   * palette painted over it.
+   *
+   * `accent` is that "more," kept deliberately thin: a coloured top edge on
+   * the tile, and the colour of the "Visit site" link and its icon. It does
+   * not repaint the card, and it does not stand in for a logo — once a real
+   * logo file lands in `logo`, the accent becomes a complement to it rather
+   * than the only signal of whose brand this is.
+   *
+   * EVERY VALUE HERE WAS READ OFF THE PARTNER'S OWN LIVE SITE, NEVER GUESSED.
+   * `getComputedStyle` on their heading/primary-CTA colour, on the date noted
+   * against each one — the same discipline `logo` is held to: nothing about
+   * another company's identity gets invented, only recorded.
+   */
+  accent?: string;
   logo?: {
     /** Under `public/partners/`. SVG, or transparent PNG at 1000px or more. */
     src: string;
@@ -2646,9 +2682,26 @@ export type Partner = {
  *
  * A group with no items is skipped rather than rendered as an empty heading,
  * so the four below fill one at a time and in any order.
+ *
+ * `layout` drives the visual treatment in `Partnerships.tsx`, so the component
+ * stays data-driven rather than special-casing a group by matching its label
+ * string — the same reasoning `indexing` in `lib/seo.tsx` is built on.
+ *
+ * - `"tiles"` — an individual card per partner: its own logo plate, its name,
+ *   and (once `href` exists) a "Visit site" link. Used where each name is its
+ *   own claim worth its own space — the trade partners with sites of their
+ *   own, and the business/member marks that exist here specifically for
+ *   credibility, the same job `Awards.tsx`'s credential row already does.
+ * - `"carousel"` — the same scroll-snap mechanism the homepage testimonials
+ *   use (`TestimonialsCarousel.tsx`), generalised to logo plates instead of
+ *   quote cards, in `PartnerCarousel.tsx`. Requested by name: Touseef asked
+ *   for this group to read like the homepage reviews section rather than a
+ *   grid. It is a second, independent component rather than a shared one —
+ *   see the note at the top of `PartnerCarousel.tsx` for why.
  */
 export type PartnerGroup = {
   label: string;
+  layout: "tiles" | "carousel";
   items: readonly Partner[];
 };
 
@@ -2681,34 +2734,141 @@ export const partnerships = {
   groups: [
     {
       label: "Cleaning partners",
+      layout: "tiles",
       items: [
-        { name: "Bright Nest Cleaning" },
-        { name: "Crystal Clear Cleans" },
+        {
+          name: "Bright Nest Cleaning",
+          href: "https://brightnestcleaning.ca/",
+          // Their own h1 and primary CTA button colour, measured directly
+          // off brightnestcleaning.ca on 2026-09-09.
+          accent: "#142636",
+          // Pulled from their own site's header on 2026-09-10. The file
+          // is a WebP served as .png at the source; saved with the
+          // correct extension here. Two things stated at the point of use:
+          // 1) this is the company's own trademarked mark, published for
+          //    a partnerships review pass at the client's explicit
+          //    instruction ("use their identity in this partner section")
+          //    and needs written permission before the page ships publicly;
+          // 2) the file is 7 KB — small enough that Next's image optimiser
+          //    would add nothing measurable, so the render below uses a
+          //    plain <img>, consistent with SVG partners on this page.
+          logo: {
+            src: "/partners/bright-nest-cleaning.webp",
+            width: 300,
+            height: 90,
+            alt: "Bright Nest Cleaning — partner",
+          },
+        },
+        {
+          name: "Crystal Clear Cleans",
+          href: "https://crystalclearcleans.ca/",
+          // Their own "Book Now" CTA colour, measured directly off
+          // crystalclearcleans.ca on 2026-09-09.
+          accent: "#ff99cc",
+          // Their site-icon file — a transparent PNG at 273×257. Same
+          // permission caveat as Bright Nest applies.
+          logo: {
+            src: "/partners/crystal-clear-cleans.png",
+            width: 273,
+            height: 257,
+            alt: "Crystal Clear Cleans — partner",
+          },
+        },
+        // No URL supplied yet for SA Cleaning — stays inert until one
+        // arrives, same as every other unconfirmed partner on this page.
+        // Renders as a stylised wordmark rather than a bare tag; see the
+        // note in `Partnerships.tsx` on how a partner with no logo file
+        // still reads as a designed entry rather than a placeholder.
         { name: "SA Cleaning" },
       ],
     },
+    // Carousel, on request — see the note on `PartnerGroup.layout`.
+    // The three universities are named partners; the logos rendered here
+    // are the institutional coats of arms as published on each
+    // university's Wikipedia page, since the modern flat wordmarks are
+    // gated behind brand-portal downloads. Same permission caveat as the
+    // cleaning partners applies: the client confirms before this ships.
     {
       label: "Post-secondary partners",
+      layout: "carousel",
       items: [
-        { name: "Kwantlen Polytechnic University" },
-        { name: "Capilano University" },
-        { name: "Thompson Rivers University" },
+        {
+          name: "Kwantlen Polytechnic University",
+          logo: {
+            src: "/partners/kpu.png",
+            width: 250,
+            height: 241,
+            alt: "Kwantlen Polytechnic University — partner",
+          },
+        },
+        {
+          name: "Capilano University",
+          logo: {
+            src: "/partners/capilano.jpg",
+            width: 200,
+            height: 154,
+            alt: "Capilano University — partner",
+          },
+        },
+        {
+          name: "Thompson Rivers University",
+          logo: {
+            src: "/partners/tru.png",
+            width: 303,
+            height: 329,
+            alt: "Thompson Rivers University — partner",
+          },
+        },
       ],
     },
     {
       label: "Business and member partners",
+      layout: "tiles",
       items: [
+        // CFOne — Canadian Armed Forces community programme, most likely.
+        // A public brand asset was not locatable from cfmws.ca or the
+        // program's own landing pages, so this entry ships as a stylised
+        // wordmark rather than a logo file. If the client is a CFOne
+        // partner with access to the CFMWS brand portal, drop the SVG or
+        // transparent PNG into `public/partners/cfone.svg` and add a
+        // `logo:` entry here to switch it over.
         { name: "CFOne" },
-        { name: "Union Savings" },
-        { name: "CFIB" },
+        {
+          name: "Union Savings",
+          // Source: their own header logo, `unionsavings.ca/img/logo_en.svg`,
+          // fetched on 2026-09-10. SVG, so rendered via a plain <img>
+          // rather than next/image — the site config deliberately does
+          // not enable `dangerouslyAllowSVG` on the image optimiser, and
+          // that setting isn't going to change for one wordmark.
+          logo: {
+            src: "/partners/union-savings.svg",
+            width: 310,
+            height: 48,
+            alt: "Union Savings — partner",
+          },
+        },
+        {
+          name: "CFIB",
+          // Canonical CFIB logo from the Canadian Federation of
+          // Independent Business page on Wikimedia Commons. SVG, same
+          // <img>-vs-next/image reasoning as Union Savings above.
+          logo: {
+            src: "/partners/cfib.svg",
+            width: 323,
+            height: 110,
+            alt: "CFIB — Canadian Federation of Independent Business — partner",
+          },
+        },
       ],
     },
     /**
      * Empty on purpose. See the note at the top of this block: the client
      * asked for "just some property management companies for now" and that is
-     * the one thing that cannot be filled in from here.
+     * the one thing that cannot be filled in from here. `layout` still has to
+     * be a valid value even though it renders nothing — "tiles" is the
+     * harmless default for whichever layout it turns out to need.
      */
-    { label: "Property management", items: [] },
+    { label: "Property management", layout: "tiles", items: [] },
   ] as readonly PartnerGroup[],
 };
 

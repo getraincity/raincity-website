@@ -1,122 +1,302 @@
-import Image from "next/image";
 import { partnerships } from "@/lib/content";
+import type { Partner } from "@/lib/content";
+import { cn } from "@/lib/cn";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { ExternalLink } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { PartnerCarousel } from "@/components/about/PartnerCarousel";
 
 /**
  * Partnerships.
  *
- * Added at the client's request. The names are theirs and are listed on
- * `partnerships` in content.ts, along with the two things about them that are
- * not settled — what each relationship actually is, and how two of the names
- * are spelled.
+ * REDESIGN #2 — 2026-09-10, on the feedback that the previous version still
+ * "reads as placeholder" because every plate carried the partner's name as
+ * text rather than their actual mark. Touseef pushed the standard: this
+ * section is for a client review, and needs to read as production. Two
+ * concessions were made explicitly:
  *
- * GROUPED, NOT ONE STRIP, and that is the substance of the section rather than
- * a layout preference. A single undifferentiated row of marks makes the same
- * implied claim about every name in it, and the strongest available reading of
- * "who we work with" is "these are our customers". Splitting it means a
- * university that runs a member programme and a cleaning company that swaps
- * referrals are not both silently presented as clients. An empty group is
- * skipped rather than printed as a bare heading, so the four groups fill one
- * at a time and in any order — which matters, because one of them is empty on
- * purpose and is meant to stay visible as a gap in the data rather than in the
- * page.
+ *   1. "Use their identity in this partner section" — for the two cleaning
+ *      partners whose sites and marks are publicly available, pull the real
+ *      logo. This overrides the earlier "no third-party trademark artwork"
+ *      rule for the length of this review pass. `client-action-checklist.md`
+ *      documents that this needs written permission before the page is
+ *      indexed publicly; the mark files sit in `public/partners/` with a
+ *      note on each one.
  *
- * NO LOGO FILE EXISTS FOR ANY OF THESE YET, and the section ships anyway. Each
- * partner renders as its name set in the site's own type inside the plate that
- * would otherwise hold the mark. That is honest, it needs no trademark asset
- * from anybody, and it reads as a deliberate list rather than as a row of
- * broken images. `Partner.logo` is optional, so a real file drops in per
- * partner with no change here — and the two states can coexist while the logos
- * arrive one at a time.
+ *   2. "If you are not sure about anything, just use any company making
+ *      sense according to the business. I will go through it later for
+ *      confirmation." So the universities and business/member marks are
+ *      publicly-published forms (Wikimedia Commons for CFIB and the three
+ *      coats of arms; the partner's own header logo for Union Savings).
+ *      Nothing was invented — every asset has a source recorded on its
+ *      `logo:` entry in content.ts.
  *
- * The plates are the same answer `Awards` reached for the credential badges,
- * and for the same reason. Marks from a dozen different houses will never
- * agree on colour, weight or aspect ratio, and restyling artwork this company
- * does not own is not an option — so an identical plate and identical type do
- * the unifying, and the container carries the consistency rather than the
- * artwork. Fog plates on white, the same way round as Awards.
+ * Two partners still have no logo file — CFOne (its brand asset was not
+ * locatable without a CFMWS-supplied download) and SA Cleaning (no site
+ * URL supplied yet). Those fall through to `WordmarkPlate` below, which
+ * renders a distinct stylised nameplate rather than the generic Fog tag
+ * the earlier version produced. That's the "still identifiable, still
+ * production-looking" state.
  *
- * WHITE, AND THAT IS LOAD-BEARING RATHER THAN TASTE. Founders sits directly
- * above and renders nothing while it has no people, so this band has two
- * neighbours depending on the day: Founders when it is filled, Stats when it
- * is not. Stats is Fog, so a Fog ground here merged the two into one band the
- * moment Founders was empty — which is the state that ships first. White works
- * against both, needs no condition, and does not invert the day the founder
- * data lands. It is also why the `SectionEdge` below now cuts out of white:
- * this section is what it cuts out of, in either state.
+ * ─── the treatments, one per group ──────────────────────────────────
  *
- * Flex-wrap rather than a grid. These are wordmarks of wildly different
- * lengths — "SA Cleaning" against "Kwantlen Polytechnic University" — and a
- * rigid grid would either shrink the long ones or strand the short ones in a
- * lot of white space. Wrapping plates size to their content and stay tidy at
- * every width, and they behave the same once real logos replace the type.
+ * "Cleaning partners" — `layout: "tiles"`, LARGE cards. Each partner gets
+ * its own accent colour along the top edge, a large logo well in Fog, the
+ * name below, and a "Visit site" link on partners that carry a URL. This
+ * is the most branded of the three treatments because these three are the
+ * partners with the deepest working relationship, and (for two of the
+ * three) the ones whose brands the reader can go and verify. Grid: 1 col
+ * phone, 2 col tablet, 3 col desktop.
  *
- * Fog and `py-section-sm`. It is a supporting band rather than a full section:
- * it sits under the founders, who are the substance, and above the cut into
- * Mission. Running it at full section height would give a list of names the
- * same weight as the people.
+ * "Post-secondary partners" — `layout: "carousel"`. The horizontal
+ * scroll-snap mechanism the homepage testimonials use, generalised to
+ * logo-only plates. Requested by name: "as we have a section on home
+ * page, the review section... continuous... logos in full length." No
+ * name captions below the logos — the coats of arms are read by shape,
+ * and captioning them repeats what the mark already says. The plates are
+ * shorter than they were in v1: "you can just reduce the size — I don't
+ * think that much big will make more sense."
+ *
+ * "Business and member partners" — `layout: "tiles"`, SMALLER cards than
+ * the Cleaning group. These are credibility badges rather than active
+ * partnerships (a business federation, a benefits programme, a forces
+ * community programme), and the badge grammar `Awards.tsx` already uses
+ * for credential marks is the right reference. No accent stripe, no
+ * "Visit site" link — the mark itself is the whole point.
+ *
+ * ─── the shared invariants ──────────────────────────────────────────
+ *
+ * A group with no items is skipped rather than rendered as a bare heading,
+ * so the "Property management" group stays absent from the page while its
+ * `items` array is empty.
+ *
+ * White ground, `py-section` height, and the fog-to-navy cut below still
+ * come out of White — see the earlier version of this comment for why
+ * that is load-bearing on the Founders-absent state.
  */
+
+/**
+ * PARTNERLOGO — one presentational primitive both tile groups and the
+ * carousel use to render a partner's mark.
+ *
+ * SVGs and raster images go through a plain `<img>` tag rather than
+ * `next/image`. Two reasons:
+ *   1. Next's image optimiser will refuse an SVG source unless
+ *      `dangerouslyAllowSVG` is enabled on `next.config.ts`, and the site
+ *      deliberately does not have that turned on. Two of the seven logos
+ *      here are SVG.
+ *   2. Every logo file on disk is under 175 KB (most under 20 KB), which is
+ *      small enough that the optimiser adds no measurable saving. A uniform
+ *      `<img>` render keeps the code path identical across formats.
+ *
+ * `object-contain` inside a fixed-height plate is what actually controls
+ * the rendered dimensions, so the `width`/`height` here only supply the
+ * intrinsic aspect ratio — passing them explicitly still prevents a
+ * layout shift while the file is downloading.
+ */
+type PartnerLike = {
+  name: string;
+  logo?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
+};
+
+function PartnerLogo({
+  partner,
+  heightClass,
+}: {
+  partner: PartnerLike;
+  /** Tailwind height utility for the logo well; e.g. `h-14 sm:h-16`. */
+  heightClass: string;
+}) {
+  if (!partner.logo) {
+    return <WordmarkPlate name={partner.name} heightClass={heightClass} />;
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- see the note on
+    // this component for why `<img>` rather than next/image.
+    <img
+      src={partner.logo.src}
+      alt={partner.logo.alt}
+      width={partner.logo.width}
+      height={partner.logo.height}
+      loading="lazy"
+      decoding="async"
+      className={cn(heightClass, "w-auto max-w-full object-contain")}
+    />
+  );
+}
+
+/**
+ * WordmarkPlate — the "no logo file yet" state.
+ *
+ * Renders the partner's name as a typographic mark rather than as body
+ * text on a plain background. The design decision: two lines of contrast,
+ * both drawn from the site's own type system — `display-s` for the
+ * primary name, `eyebrow` for a small "PARTNER" caption underneath. The
+ * result reads as a deliberate wordmark rather than as a placeholder,
+ * which is the whole point of the change.
+ *
+ * Kept in the same fixed-height plate as a real logo so a mixed row (some
+ * with logos, some without) still aligns.
+ */
+function WordmarkPlate({
+  name,
+  heightClass,
+}: {
+  name: string;
+  heightClass: string;
+}) {
+  return (
+    <div className={cn(heightClass, "flex flex-col items-center justify-center gap-1 px-2 text-center")}>
+      <span className="display-s text-navy">{name}</span>
+      <span className="eyebrow text-steel">Partner</span>
+    </div>
+  );
+}
+
 export function Partnerships() {
-  // Groups with nothing in them are dropped before anything renders, so an
-  // empty section never reaches the page and `partnerships.groups` can be
-  // extended without touching this file.
   const groups = partnerships.groups.filter((group) => group.items.length > 0);
   if (groups.length === 0) return null;
 
   return (
-    <section
-      className="bg-white py-section-sm"
-      aria-labelledby="partnerships-heading"
-    >
-      <div className="mx-auto grid max-w-site grid-cols-1 gap-y-block px-edge lg:grid-cols-12 lg:gap-x-gap-x">
-        {/* Heading left, the marks right — the same label-and-evidence split
-            Awards and PageFaq use. Run full width the groups hug the left edge
-            and leave roughly half the band empty, because wrapped plates size
-            to their content and nine short names do not reach 1440px. */}
-        <Reveal className="lg:col-span-4">
+    <section className="bg-white py-section" aria-labelledby="partnerships-heading">
+      <div className="mx-auto max-w-site px-edge">
+        {/* Heading full-width, on its own line. Same treatment as `Process`
+            higher up the page. */}
+        <Reveal className="max-w-prose">
           <SectionLabel>{partnerships.label}</SectionLabel>
           <h2 id="partnerships-heading" className="display-l mt-5 text-navy">
             {partnerships.heading}
           </h2>
         </Reveal>
 
-        <div className="flex flex-col gap-10 lg:col-span-7 lg:col-start-6">
+        <div className="mt-block flex flex-col gap-14">
           {groups.map((group) => (
             <Reveal key={group.label} delay={0.08}>
-              {/* The group name is the claim, so it is a real heading in the
-                  outline rather than a styled paragraph. `meta` keeps it well
-                  under the h2 above it. */}
               <h3 className="meta text-steel">{group.label}</h3>
 
-              <Stagger as="ul" className="mt-5 flex flex-wrap gap-3">
-                {group.items.map((item) => (
-                  <StaggerItem
-                    as="li"
-                    key={item.name}
-                    className="flex min-h-16 items-center border border-line bg-fog px-6 py-4"
-                  >
-                    {item.logo ? (
-                      <Image
-                        src={item.logo.src}
-                        alt={item.logo.alt}
-                        width={item.logo.width}
-                        height={item.logo.height}
-                        sizes="200px"
-                        className="h-8 w-auto object-contain sm:h-10"
-                      />
-                    ) : (
-                      <span className="body-s font-medium text-navy">
-                        {item.name}
-                      </span>
-                    )}
-                  </StaggerItem>
-                ))}
-              </Stagger>
+              {group.layout === "carousel" ? (
+                <div className="mt-6">
+                  {/* Spread to a plain mutable array — content.ts declares
+                      `readonly Partner[]`, and a client component's prop
+                      cannot accept `readonly` without a per-partner
+                      unwrap. Cheap copy of three small objects. */}
+                  <PartnerCarousel items={[...group.items]} />
+                </div>
+              ) : group.label === "Cleaning partners" ? (
+                <CleaningTiles items={group.items} />
+              ) : (
+                <BadgeTiles items={group.items} />
+              )}
             </Reveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * CleaningTiles — the large branded card variant, used by the "Cleaning
+ * partners" group.
+ *
+ * Per-card structure:
+ *   - Accent stripe along the top edge, in the partner's own colour (from
+ *     `accent`). Set via inline `borderTopColor` because the value is a
+ *     different hex per partner and cannot be one of a small set of
+ *     literal Tailwind class names.
+ *   - Large Fog well holding the logo (or wordmark plate). `h-24 sm:h-28`.
+ *   - The partner name in `display-s`, so it also carries typographic
+ *     weight when the logo is small.
+ *   - A "Visit site" link, in RainCity blue rather than the partner's
+ *     accent (a partner's brand colour is not guaranteed to clear WCAG's
+ *     4.5:1 contrast floor on white — Crystal Clear's own pink measures
+ *     ~2:1). The border on top can carry brand colour because it's
+ *     decoration; the link cannot because it's text.
+ *
+ * Whole card becomes a link on partners that carry `href`, using the same
+ * `target="_blank" rel="noopener"` pattern the outbound-citations in blog
+ * posts use.
+ */
+function CleaningTiles({ items }: { items: readonly Partner[] }) {
+  return (
+    <Stagger
+      as="ul"
+      className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+      delay={0.06}
+    >
+      {items.map((item) => {
+        const card = (
+          <div
+            className={cn(
+              "flex h-full flex-col gap-6 border border-line bg-white p-6 sm:p-7",
+              item.accent && "border-t-4",
+              item.href && "transition-colors group-hover:border-rc-blue",
+            )}
+            style={item.accent ? { borderTopColor: item.accent } : undefined}
+          >
+            <div className="flex h-24 items-center justify-center bg-fog px-6 sm:h-28">
+              <PartnerLogo partner={item} heightClass="h-16 sm:h-20" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="display-s text-navy">{item.name}</p>
+              {item.href && (
+                <span className="eyebrow inline-flex items-center gap-1.5 text-rc-blue">
+                  Visit site
+                  <ExternalLink className="size-3" />
+                </span>
+              )}
+            </div>
+          </div>
+        );
+
+        return (
+          <StaggerItem as="li" key={item.name}>
+            {item.href ? (
+              <a href={item.href} target="_blank" rel="noopener" className="group block h-full">
+                {card}
+              </a>
+            ) : (
+              card
+            )}
+          </StaggerItem>
+        );
+      })}
+    </Stagger>
+  );
+}
+
+/**
+ * BadgeTiles — the smaller credential-badge variant, used by "Business
+ * and member partners".
+ *
+ * Deliberately quieter than `CleaningTiles`: a smaller card, no accent
+ * stripe, no "Visit site" link, no wrapping anchor. The mark is the whole
+ * claim — same grammar the `Awards.tsx` credential row uses. The name
+ * appears in a `meta` caption below the plate rather than a `display-s`
+ * heading, because the mark itself already names the organisation.
+ */
+function BadgeTiles({ items }: { items: readonly Partner[] }) {
+  return (
+    <Stagger
+      as="ul"
+      className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      delay={0.05}
+    >
+      {items.map((item) => (
+        <StaggerItem as="li" key={item.name}>
+          <div className="flex h-full flex-col items-center gap-4 border border-line bg-white px-6 py-6 text-center">
+            <div className="flex h-16 w-full items-center justify-center bg-fog px-4">
+              <PartnerLogo partner={item} heightClass="h-10 sm:h-12" />
+            </div>
+            <p className="meta text-navy">{item.name}</p>
+          </div>
+        </StaggerItem>
+      ))}
+    </Stagger>
   );
 }

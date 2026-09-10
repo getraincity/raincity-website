@@ -1,6 +1,8 @@
 import { aboutPage, business, locations } from "@/lib/content";
+import { cn } from "@/lib/cn";
 import { Photo } from "@/components/ui/Photo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { MapPin, Route, Check } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 
 /**
@@ -72,14 +74,43 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 export function HomeGround() {
   const { local } = aboutPage;
 
+  // Each fact carries its own icon, its own accent colour, and a tint
+  // background — the same alternating cool/warm/cool grammar the homepage
+  // WhyChooseUs section uses on its row wash, adapted to Mist rather than
+  // White (which is what changed since v1 of this section).
+  //
+  // The icons are all in `Icon.tsx` already, so nothing new was added to
+  // the icon library for this: MapPin marks the fixed base, Route marks
+  // the run of the service area, Check marks the "no travel charge"
+  // benefit — mapping icon-to-value rather than icon-to-label. The
+  // colours pull from the tokens the rest of the site already uses:
+  // rc-blue for the base fact (primary), amber for the region fact
+  // (warm), and rc-blue again for the price fact (which needs to read as
+  // a positive — a green would be a new token; a blue check is already
+  // the treatment `CheckPlate` uses on the service pages).
   const facts = [
-    { label: local.baseLabel, value: business.base },
+    {
+      label: local.baseLabel,
+      value: business.base,
+      Icon: MapPin,
+      tint: "bg-rc-blue/8 hover:bg-rc-blue/15",
+      iconClass: "text-rc-blue",
+    },
     {
       label: local.areaLabel,
       value: `${locations.length} ${local.areaSuffix}`,
+      Icon: Route,
+      tint: "bg-amber/10 hover:bg-amber/18",
+      iconClass: "text-amber-ink",
     },
-    { label: local.travelLabel, value: local.travelValue },
-  ];
+    {
+      label: local.travelLabel,
+      value: local.travelValue,
+      Icon: Check,
+      tint: "bg-rc-blue/8 hover:bg-rc-blue/15",
+      iconClass: "text-rc-blue",
+    },
+  ] as const;
 
   return (
     <section
@@ -104,12 +135,47 @@ export function HomeGround() {
 
           {/* No `priority`. This is a long way down /about, the banner is the
               LCP element, and everything below the fold on this site is
-              lazy. */}
+              lazy.
+              *
+              * The photograph sits inside its own container specifically so
+              * the drop shadow can attach to a wrapper rather than the img
+              * element itself. Touseef's note on 2026-09-10: "the picture
+              * here isn't looking that much. Maybe there needs a effect of
+              * dropping or something like that, a little bit slight smooth
+              * so that the corner and the around the area doesn't look like
+              * sharp anymore."
+              *
+              * The design system runs zero border-radius everywhere on
+              * purpose — that discipline stays. Softness comes from a
+              * shadow, not from curves. The value:
+              *
+              *   `0_25px_50px_-15px_rgba(20,38,54,0.28)`
+              *
+              * A large downward blur (50px) at negative spread (-15px) so
+              * the shadow gathers under the photograph and fades gently
+              * outward against Mist rather than ringing the frame. `#142636`
+              * is Navy at 28% alpha — dark enough to read against the
+              * pale ground, subtle enough not to compete with the picture
+              * itself. Compared to the previous flat-edged treatment,
+              * corners now feel seated on the ground rather than cut
+              * into it. */}
           <Reveal className="mt-10" delay={0.08}>
-            <Photo
-              name="aboutHomeGround"
-              sizes="(min-width: 1024px) 41vw, 100vw"
-            />
+            {/* Shadow set via inline style rather than a Tailwind arbitrary
+                value. The commas inside `rgba(...)` are what tripped it —
+                Tailwind's arbitrary-value parser treats them as separators
+                and the whole box-shadow declaration comes out empty. An
+                inline style bypasses the parser entirely, which is fine
+                for a static value used in exactly one place. */}
+            <div
+              style={{
+                boxShadow: "0 25px 50px -15px rgba(20, 38, 54, 0.28)",
+              }}
+            >
+              <Photo
+                name="aboutHomeGround"
+                sizes="(min-width: 1024px) 41vw, 100vw"
+              />
+            </div>
           </Reveal>
         </div>
 
@@ -122,29 +188,53 @@ export function HomeGround() {
             <p className="body-base mt-5 text-steel">{local.body[1]}</p>
           </Reveal>
 
-          {/* A definition list, because these are label-and-value pairs and the
-              markup should say so. Set as a vertical stack rather than a row of
-              three: three hairline-divided columns on a pale band is exactly
-              what Stats is further up this page, and two sections sharing that
-              shape would make the page repeat itself.
-
-              Navy at 15% for the rules, not `border-line`. The line token is
-              #dde4eb against Mist's #d8e9f6 — a couple of percent of luminance
-              apart, which is a rule nobody can see. Opacity on a token colour
-              is the same move Mission makes with Pacific on its navy row. */}
-          <Stagger
-            as="dl"
-            className="mt-10 border-t border-t-navy/15"
-            delay={0.16}
-          >
+          {/* The facts, redesigned 2026-09-10 on the note that the plain
+              hairline-divided list was reading as filler on this page.
+              Touseef's own reference was WhyChooseUs on the homepage — a
+              coloured, tinted, hover-active row grammar — and that is what
+              this is, adapted to Mist. Three rows, each with its own icon
+              medallion, alternating cool and warm tint, hovering to a
+              deeper wash.
+              *
+              * The rows are cards rather than divided rows so each fact
+              * reads as its own claim rather than as a strip. On Mist the
+              * divisions of a plain hairline list disappear (line token
+              * #dde4eb sits about 2 percent of luminance off the Mist
+              * ground #d8e9f6 — a rule nobody can see). Tinted cards fix
+              * that at the same time as the "feels flat" note.
+              *
+              * `<dl>` markup preserved: these are still label-and-value
+              * pairs and the outline should say so. `dt`/`dd` sit inside
+              * each row so a screen reader still walks the six items in
+              * pairs rather than a flat list of six independent
+              * paragraphs. */}
+          <Stagger as="dl" className="mt-10 flex flex-col gap-3" delay={0.16}>
             {facts.map((fact) => (
               <StaggerItem
                 as="div"
                 key={fact.label}
-                className="border-b border-b-navy/15 py-4"
+                className={cn(
+                  "flex items-start gap-4 border border-line px-5 py-5 sm:gap-5 sm:px-6 sm:py-6",
+                  "transition-colors duration-250 ease-out",
+                  fact.tint,
+                )}
               >
-                <dt className="eyebrow text-rc-blue">{fact.label}</dt>
-                <dd className="body-base mt-2 text-navy">{fact.value}</dd>
+                {/* Icon medallion. A square Fog plate holding the glyph —
+                    the same treatment the credential row on the homepage
+                    Awards section uses, at a smaller size. */}
+                <span
+                  className={cn(
+                    "flex size-11 shrink-0 items-center justify-center bg-white sm:size-12",
+                    fact.iconClass,
+                  )}
+                  aria-hidden="true"
+                >
+                  <fact.Icon className="size-5 sm:size-6" />
+                </span>
+                <div className="flex flex-col">
+                  <dt className="eyebrow text-steel">{fact.label}</dt>
+                  <dd className="display-s mt-1 text-navy">{fact.value}</dd>
+                </div>
               </StaggerItem>
             ))}
           </Stagger>

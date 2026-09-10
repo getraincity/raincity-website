@@ -256,6 +256,39 @@ needs no password, and it refuses to do anything if the deploy is not actually
 live yet. It is not automatic on purpose — an automatic version would fire on
 test builds that never reach the public site.
 
+---
+
+## 11. Partner Logos — permission to display
+
+The Partnerships section on `/about` now shows real logos for seven of the nine
+partners, so the client can see the section as it is meant to look rather than a
+grid of name tags. The marks came from public sources: each cleaning partner's
+own website (Bright Nest Cleaning, Crystal Clear Cleans), and Wikimedia Commons
+or the organisation's own site for the universities, CFIB and Union Savings.
+Every file records its source in a comment beside its entry in `lib/content.ts`.
+
+**Action required before this page is public:**
+
+- **Confirm each of the nine partners is actually a partner**, and that they are
+  comfortable being named on RainCity's site. The relationship shown is
+  "partner" for all of them (never "client") — but a named third party on a
+  public page is still something they should have agreed to.
+- **Get permission to use each logo.** Displaying another company's trademark to
+  imply a relationship needs their say-so, even when the mark is downloadable.
+  A short email confirming "yes, you can list us and use our logo" covers it.
+- **Two partners have no logo yet** — CFOne (no public brand asset was findable)
+  and SA Cleaning (no website supplied). They render as styled name plates. Send
+  a logo file for either and it drops in with a one-line change.
+- **`CFOne` / `CFIB` spelling** is still unconfirmed — sent originally as
+  lowercase "cfone" / "cfib". CFIB is almost certainly the Canadian Federation
+  of Independent Business; CFOne is most likely the Canadian Armed Forces
+  community programme. Confirm both.
+- **The "Property management" partner group is intentionally empty** and hidden.
+  It appears once real property-management partner names are supplied.
+
+Until these are confirmed, the section is fine for internal review but should
+not go live.
+
 ## Summary
 
 | # | Category | Blocking launch? | Who acts |
@@ -269,3 +302,4 @@ test builds that never reach the public site.
 | 7 | Branded fleet photograph | No (stand-in shown) | Client/photographer |
 | 8 | Resend email configuration | No (mailto: fallback active) | Client (hosting) |
 | 9 | Real before/after job photography | No (disclaimer shown) | Client/photographer |
+| 11 | Partner confirmation + logo permission | Yes (do not publish `/about` until done) | Client |
