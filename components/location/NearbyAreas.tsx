@@ -37,7 +37,10 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * not the service area, and a reader whose city is none of them should not
  * have to use the back button to find the list of nine.
  *
- * White, between the Fog FAQ above and the navy closing below.
+ * Fog, with White plates, since Local Partners (White) landed above it on
+ * 2026-09-13. It was White with Fog plates, which already sat White-on-White
+ * against the map; swapping ground and plate keeps the same contrast. The
+ * amber SectionEdge below runs from its own colour, so it is unaffected.
  */
 
 export function NearbyAreas({ location }: { location: Location }) {
@@ -54,7 +57,7 @@ export function NearbyAreas({ location }: { location: Location }) {
   const offsetClasses = shortRowOffsets(nearby.length);
 
   return (
-    <section className="bg-white py-section" aria-labelledby="nearby-heading">
+    <section className="bg-fog py-section" aria-labelledby="nearby-heading">
       <div className="mx-auto max-w-site px-edge">
         <Reveal className="max-w-prose">
           <SectionLabel>{locationPage.nearby.label}</SectionLabel>
@@ -81,7 +84,7 @@ export function NearbyAreas({ location }: { location: Location }) {
             >
               <Link
                 href={`/locations/${neighbour.slug}`}
-                className="group flex h-full flex-col border border-line bg-fog p-6 transition-colors duration-200 hover:border-rc-blue focus-visible:border-rc-blue sm:p-8"
+                className="group flex h-full flex-col border border-line bg-white p-6 transition-colors duration-200 hover:border-rc-blue focus-visible:border-rc-blue sm:p-8"
               >
                 <MapPin className="shrink-0 text-rc-blue" />
 

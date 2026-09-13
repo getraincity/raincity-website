@@ -302,8 +302,17 @@ blog. It is the smallest of the four and the quickest to close.
 
 ### /about carries a Home Ground section, and one line in it is unconfirmed
 
-Added at the client's request ("about local to New West"). It sits between
-`Process` and `QuoteForm` on Mist, and the reasoning for the copy is on
+Added at the client's request ("about local to New West"), and **redesigned
+on 2026-09-13** after the client rejected three versions. **It is now built to
+the `WhoWeAre.tsx` template, on the client's explicit instruction** — same
+grid, heading size, 1:1 photo with navy-scrim caption, secondary button, and
+copy held to the template's character counts. Keep the two in step. Deliberate
+differences: Fog ground (White neighbours both sides), "Our Home" set under an
+amber `<mark>` highlighter at the client's request (the second decorative use
+of amber on the site, after the Why Choose Us row wash — keep it at two), and
+the button goes to `/locations`. The three-fact list is gone; the derived base
+and community count live in the caption. It sits between
+`Process` and `QuoteForm`, and the reasoning for the copy is on
 `aboutPage.local` in `lib/content.ts` while the reasoning for the layout is on
 `components/about/HomeGround.tsx`. Read both before editing it — four obvious
 treatments are ruled out on that page in particular, and the fourth is the one
@@ -326,28 +335,27 @@ moss releasing gradually is the Soft Washing FAQ, the sealer window is the
 Painting FAQ, and the hill above the Fraser is the New Westminster location
 copy. Both derived facts derive: `business.base`, and a count off `locations`.
 
-**The photograph is `aboutHomeGround`, and it is not New Westminster.** No
-frame of this city exists here, and the stock pools have nothing usable: the
-New Westminster results are street furniture, a SkyTrain at a platform and a
-set of monkey bars; the Fraser River results are wilderness; and one frame
-returned under "New Westminster" is in fact Edinburgh, which is worth
-remembering before trusting any of those listings again. So the frame is
-chosen the way the nine location cards are — it shows the kind of property and
-the kind of weather the copy describes, and its alt says what is in the picture
-rather than naming a city. It is a sloped residential street under coastal
-cloud, uncropped at its native 3:2, and every hard surface in it (rooflines,
-gutter runs, a driveway apron, a retaining wall) is on the service list. It was
-already vetted for this site: it is the alternate recorded on the `hero` entry.
-A real New Westminster frame is still the better answer if the client ever
-shoots one — it drops into the same slot and nothing else changes.
+**The photograph is `aboutHomeGround`, and since 2026-09-13 it really is New
+Westminster:** Westminster Pier Park's boardwalk with the SkyBridge and the
+Pattullo arch behind (Unsplash `jI-L9NbH_fw`, free licence). The client asked
+for a picture that reads as this city at a glance. An earlier search concluded
+the stock pools had nothing usable; searching Unsplash for
+"new-westminster-bc" and reading each photo's API `location` found eight
+tagged frames, two strong. **Verify by eye, not by tag** — one earlier
+"New Westminster" result was Edinburgh, and most of these carry the city's
+default coordinates rather than a pinned spot. The alternates are recorded on
+the registry entry. The previous frame (a Victoria street) is still in
+`assets/` and `public/about-home-ground.webp`, unreferenced.
 
 Two frames were ruled out along the way and the reasons outlive this section.
 `rooftops` is the `/locations` hub hero, doing this same "here is the place"
 job one page over. And **`aboutCrew` shows a crew *re-roofing* a house** —
 laying underlay, stripped shingles bagged below — which is not one of the
-eleven services. It is fine as atmosphere on `/blog`, but it is also the
-New Westminster card photo on `/locations`, where it is standing in for the
-work this company does. Worth revisiting separately.
+eleven services. It is fine as atmosphere on `/blog`. It used to be the
+New Westminster photo on `/locations` and that community's hero; on 2026-09-13
+it was replaced there by `aboutHomeGround` (Pier Park), and Surrey's 550px
+`concreteSealing` hero — stretched 2.6x at desktop — by `powerParkades`.
+Both came out of an image audit of all nine community pages at 1x, 2x and 3x.
 
 ### /about also carries Founders and Partnerships, and one of them is empty
 
@@ -364,8 +372,9 @@ commented out of `app/about/page.tsx` and then remembered later.
 one of its two states, and that is the thing to remember here.** The sequence
 was designed as Stats (Fog) → Founders (White) → Partnerships (Fog) → the cut,
 which is correct — but with Founders rendering nothing, Stats and Partnerships
-became two Fog bands touching. Partnerships is therefore **White**, its plates
-are Fog rather than white so they stay visible, and `SectionEdge` now runs
+became two Fog bands touching. Partnerships is therefore **White**, its logo
+tiles are Fog so they stay visible (marks use `mix-blend-multiply` so
+Capilano's white-ground JPEG doesn't show as a box), and `SectionEdge` now runs
 `from="bg-white"` because that section is what it cuts out of in either state.
 Any future gated section needs its grounds checked in both states, not just the
 filled one.
@@ -380,13 +389,29 @@ supplied is
 `linkedin.com/in/andglavin`. Do not "correct" it to Glavin. LinkedIn answers
 automated requests with HTTP 999, so the profile cannot be read to check.
 
-**Partnerships ships with real names and no logos.** No logo file was supplied
-for any of them, so each renders as its name set in the site's own type inside
-the plate that would hold the mark — honest, needs no trademark asset, and
-`Partner.logo` is optional so real files drop in one at a time with no
-component change. Logos go under `public/partners/`, not `photos.ts`: that
-registry is for photography and its tone, ratio and focal fields mean nothing
-for a wordmark.
+**Partnerships was redesigned on 2026-09-13 until the client approved the
+direction.** Current form: **partner cards built on the service card's
+anatomy**, at the client's request — a Fog visual panel holding the logo with
+the blue corner notch, then sector tag (`PartnerGroup.tag`), `display-s` name,
+a two-line `body-s` blurb (`Partner.blurb`) and "Visit Site →" for linked
+partners. 3x3 at `lg` (a row per sector), two across with the ninth centred on
+tablet, one column on phones. **Blurbs describe the organisation from its own
+site or the public record, never the relationship**; SA Cleaning and CFOne
+carry "full details to follow" placeholders until the client supplies
+something verifiable. **4px corners
+(`--radius-card` in `globals.css`) are the site's only card radius** — the
+client asked for a slight softening here; do not spread it without asking.
+Rejected along the way, each recorded in the component: a ruled register with
+96px marks (logos louder than the heading), a strip of small nameless tiles
+("a pencil drawing without colours"), and 16px-rounded sector panels holding
+tiles (messy nesting, too round). The per-group `layout` field, the
+`PartnerCarousel` component and the per-partner `accent` stripes were all
+removed. Do not bring back a carousel for a handful of marks. Seven partners carry logo files (sourced from their own
+sites or Wikimedia, recorded on each `logo` entry, and **needing the client's
+written permission before launch**); CFOne and SA Cleaning have none and render
+their name as the mark. `Partner.logo` is optional so files drop in one at a
+time. Logos go under `public/partners/`, not `photos.ts`: that registry is for
+photography and its tone, ratio and focal fields mean nothing for a wordmark.
 
 Two things about that section are **not settled and should not be published
 without the client confirming them**:
@@ -410,6 +435,35 @@ put identifiable third parties on this page as customers of a company they may
 never have engaged, in a market small enough that both sides would recognise
 it. That is a false endorsement, not placeholder copy, and it is the one
 instruction in that message that was not carried out. Same rule governs logos.
+
+### Community pages carry Off The Clock and Local Partners, and the first is placeholder
+
+Added to `/locations/[slug]` on 2026-09-13 at the client's request ("companies
+we work with locally or voluntary, with some local events pictures"), after
+the map: `LocationCommunity` (Fog), then `LocationPartners` (White), then
+`NearbyAreas`, which moved to Fog with White plates so the grounds alternate.
+
+**Off The Clock is placeholder content with stock photography, written on the
+client's explicit instruction so the design could be reviewed finished.** The
+events and places are real and were checked (Hyack, Blues + Roots, Cloverdale
+Rodeo, Sun Festival, Cranberry Festival, Pitt Meadows Day, Haney Farmers
+Market, Golden Spike Days, the Great Canadian Shoreline Cleanup); **RainCity's
+part in every one of them is assumed.** The client says real phone photos
+exist. Before launch each entry is confirmed, replaced or deleted, and the
+photos swapped — a named festival on a business's site reads as "we were
+there". This is the sixth launch item; raise it with the others. The banner
+on `communityBySlug` in `content.ts` carries the detail, the nine frames are
+the community block in `photos.ts`, and `locationPage.community.illustrative`
+prints "Photographs are illustrative" until it goes false. Entries never claim
+a sponsorship or an organiser relationship, and `when` is never a year.
+
+**Local Partners invents nothing.** `localPartnersFor` reads `Partner.local`
+— each partner's *own* published service area or campus list (checked on
+their sites) — and the card eyebrow says so ("Cleaning · Serves Burnaby").
+National partners fill a short row as "Across Canada". Partners with no
+checkable reach are left off. The card is `components/ui/PartnerCard.tsx`,
+shared with /about so the two cannot drift; the 1-2-3 panel tints and the
+linked-card hover deepen live there.
 
 ### The post template
 

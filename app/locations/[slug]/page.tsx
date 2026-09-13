@@ -14,6 +14,8 @@ import { LocationHero } from "@/components/location/LocationHero";
 import { LocationIntro } from "@/components/location/LocationIntro";
 import { LocationServices } from "@/components/location/LocationServices";
 import { LocationMap } from "@/components/location/LocationMap";
+import { LocationCommunity } from "@/components/location/LocationCommunity";
+import { LocationPartners } from "@/components/location/LocationPartners";
 import { LocationFaq } from "@/components/location/LocationFaq";
 import { NearbyAreas } from "@/components/location/NearbyAreas";
 import { LocationClosing } from "@/components/location/LocationClosing";
@@ -111,6 +113,16 @@ export async function generateMetadata({
  * community. /locations refuses them for the same reason and says so in its
  * own header comment; this is that refusal held at nine times the scale.
  *
+ * TWO SECTIONS WERE ADDED AFTER THE MAP at the client's request (2026-09-13):
+ * Off The Clock (community involvement, `LocationCommunity`) and Local
+ * Partners (`LocationPartners`). They extend the same argument — where it is,
+ * then that we are part of it, then who we work alongside there — and both
+ * are per-community rather than recited: the community entries are written
+ * nine times (placeholder, see `communityBySlug`) and the partners are
+ * filtered by each partner's own published service area. Grounds now
+ * alternate cleanly — Map White, Community Fog, Partners White, Nearby Fog —
+ * which also removed the White-on-White join Map and Nearby used to make.
+ *
  * The FAQ comes after the quote form, exactly as it does on a service page:
  * everything above the form is an argument for booking, and the questions are
  * for the reader who scrolled past it holding a specific doubt. The check
@@ -161,6 +173,8 @@ export default async function LocationDetailPage({
         <LocationIntro location={location} />
         <LocationServices location={location} />
         <LocationMap location={location} />
+        <LocationCommunity location={location} />
+        <LocationPartners location={location} />
         <NearbyAreas location={location} />
         <SectionEdge from="bg-amber" to="bg-navy" size="slim" />
         <LocationClosing location={location} />

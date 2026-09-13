@@ -45,11 +45,15 @@ export function Hero() {
               the first frame after hydration rather than waiting its turn. */}
           <RevealOnLoad as="h1" className="display-xl text-white">
             Year-Round Property Maintenance
-            {/* The region, inside the h1 rather than only in the title tag.
-                The homepage competes for "property maintenance Greater
-                Vancouver" and its heading named no place at all. */}
+            {/* A place inside the h1 rather than only in the title tag — the
+                heading once named no place at all. It names the base city, not
+                the region, at the client's request (2026-09-13): New
+                Westminster is the claim this company leads with. "Greater
+                Vancouver" still appears in the paragraph directly below, in
+                the title tag and in the structured data, so the region query
+                keeps its on-page signal. */}
             <span className="display-m mt-3 block text-fog">
-              In {business.region}
+              In {business.base}
             </span>
           </RevealOnLoad>
 

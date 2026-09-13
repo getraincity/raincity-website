@@ -146,13 +146,13 @@ export const photos = {
   },
 
   aboutHomeGround: {
-    src: "/about-home-ground.webp",
-    alt: "A residential street falling away down a slope under low coastal cloud, stucco and shingled houses along it with their rooflines and gutters in view, a wide concrete driveway apron and a stone-capped retaining wall in the foreground, and firs going into the fog on the hill behind.",
-    credit: "Ali Kazal",
-    tone: "#99a0a0",
-    ratio: "3:2",
-    focal: "50% 50%",
-    note: "Home Ground figure on /about. Served at 1600x1067, converted from the 3200x2134 original in `assets/`. Native 3:2 and rendered at 3:2, so this is the one figure on /about with no crop at all — deliberate, because the frame needs both ends of itself: the cloud along the top is half the argument and the driveway apron and retaining wall along the bottom are the other half. NOT NEW WESTMINSTER: it is Victoria, and the alt says what is in the frame rather than naming a city, which is the same rule the nine location cards follow. It was already vetted for this site — it is the alternate recorded on the `hero` entry — and it is the only frame checked that carries both halves of the section's argument at once: a sloped residential street of the stock this company works on, and the coastal weather the copy says sets the calendar. The hard surfaces are the reason it beats a scenic frame. Every roofline, gutter run, driveway apron and retaining wall in it is something on the service list. The New Westminster stock pools were checked first and have nothing usable — see the note in CLAUDE.md before spending time there again.",
+    src: "/about-home-ground-pier-park.webp",
+    alt: "The boardwalk at Westminster Pier Park running along the Fraser River in New Westminster, with the two cable-stayed towers of the SkyBridge and the orange arch of the Pattullo Bridge behind it under a clear blue sky.",
+    credit: "Gennifer Miller",
+    tone: "#507da2",
+    ratio: "1:1",
+    focal: "45% 50%",
+    note: "Home Ground figure on /about, rendered 1:1. GENUINELY NEW WESTMINSTER, which the previous frame (a Victoria street, `about-home-ground.webp`, still in assets/ and public/) was not. Unsplash photo jI-L9NbH_fw by Gennifer Miller, location pinned to Westminster Pier Park, 6th Street — and verified by eye rather than by tag: the SkyBridge towers and the Pattullo arch are unmistakable, which matters because an earlier 'New Westminster' search result turned out to be Edinburgh. Free Unsplash licence, commercial use, no attribution required; the name is recorded because the API supplied it. Chosen at the client's request (2026-09-13) for a picture that reads as New Westminster at first glance. Downloaded at 2400x1800 into `assets/new-westminster-pier-park-skybridge.jpg`, served at 1600x1200 webp. Focal sits a little left of centre so the square crop keeps the boardwalk and both bridge towers. Other verified New Westminster candidates if this ever needs replacing: v1-pWlkHrkA (barge under the SkyBridge, New West towers, warm grade) and GIfAQbvQkGE (SkyBridge at sunset).",
   },
 
   servicesHero: {
@@ -1209,6 +1209,118 @@ export const photos = {
     tone: "#718056",
     focal: "50% 55%",
     note: "No crew and no machines, and every line the page has been arguing about is visible at once — the cut, the edge against the wall, the shrubs held to shape. A residential frontage rather than the strata grounds the brief offered as the alternative, which suits the band: it is the scale most readers are picturing.",
+  },
+
+  // --- Community (location pages) -----------------------------------------
+  //
+  // ILLUSTRATIVE STOCK, NOT RAINCITY. Nine Unsplash frames (free licence,
+  // commercial use, no attribution required) standing in for the client's own
+  // phone photos of community work, which exist and have not been supplied
+  // yet. They illustrate the KIND of activity each `communityBySlug` entry in
+  // content.ts describes; none of them shows RainCity, a RainCity crew or the
+  // named event, and the section prints an "illustrative" line while
+  // `locationPage.community.illustrative` is true. Alt text therefore
+  // describes only what is in the frame — never "our crew", never the event.
+  //
+  // Chosen from a contact sheet on 2026-09-13. The three clean-up frames are
+  // one shoot (matching light-blue shirts, blue bags), picked deliberately so
+  // the pool reads as one set rather than nine unrelated stock looks — and
+  // because that blue sits next to RainCity Blue without fighting it.
+  // Originals at 2400px in `assets/community-*.jpg`; served webp at 1600 wide
+  // (landscape) or 1200 wide (portrait). Replace a slot by swapping `src`
+  // and `credit` for a client photo and nothing downstream changes.
+
+  communityShoreline: {
+    src: "/community/shoreline-cleanup.webp",
+    alt: "Volunteers in light-blue shirts bending to pick litter off a sandy shoreline into blue bags, with calm water and trees behind them.",
+    credit: "Unsplash",
+    tone: "#686f54",
+    ratio: "3:2",
+    focal: "50% 55%",
+    note: "Unsplash FJRYUL_YHXg. Stands in for a shoreline clean-up on the Fraser, Boundary Bay, Crescent Beach, Port Moody's inlet or Jericho. A lake rather than tidal water, which is not visible at card size.",
+  },
+
+  communityTrail: {
+    src: "/community/trail-cleanup.webp",
+    alt: "Volunteers in light-blue shirts filling blue rubbish bags along a wooded path, one of them smiling towards the camera.",
+    credit: "Unsplash",
+    tone: "#849f84",
+    ratio: "3:2",
+    focal: "55% 45%",
+    note: "Unsplash jgRfl2R4mUs. Trail and creek-side clean-ups: Buntzen Lake, the Brunette River, Brydon Lagoon, the Alouette. Birch rather than Coast fir — read as woodland, not as a particular forest.",
+  },
+
+  communityCrew: {
+    src: "/community/cleanup-crew.webp",
+    alt: "Five volunteers in matching light-blue shirts standing on a sandy path, each holding a full blue rubbish bag.",
+    credit: "Unsplash",
+    tone: "#5f7463",
+    ratio: "3:2",
+    focal: "50% 45%",
+    note: "Unsplash YrYN3omk2BY. The end of a clean-up shift — used for festival grounds and neighbourhood litter picks.",
+  },
+
+  communityParade: {
+    src: "/community/parade-band.webp",
+    alt: "A drumline in white uniforms and plumed hats marching down a tree-lined street past spectators.",
+    credit: "Unsplash",
+    tone: "#545a53",
+    ratio: "3:2",
+    focal: "50% 50%",
+    note: "Unsplash kDfhZgKgOmA. A community parade — Hyack, Tsawwassen Sun Festival, Pitt Meadows Day. Not any of them; no signage in frame to say otherwise.",
+  },
+
+  communityConcert: {
+    src: "/community/park-concert.webp",
+    alt: "A crowd sitting and standing on the grass of a tree-lined park in front of an outdoor stage on a summer afternoon.",
+    credit: "Unsplash",
+    tone: "#6e766d",
+    ratio: "3:2",
+    focal: "50% 60%",
+    note: "Unsplash 7NuZ_tPEK7M. A free festival in a park — Burnaby Blues + Roots at Deer Lake, Golden Spike Days at Rocky Point. Illustrative of the setting only.",
+  },
+
+  communityMarket: {
+    src: "/community/street-market.webp",
+    alt: "Shoppers walking between two rows of white market tents on a tree-lined street on a bright day.",
+    credit: "Unsplash",
+    tone: "#808478",
+    ratio: "3:2",
+    focal: "50% 60%",
+    note: "Unsplash BVLVJ6YErSc. Portrait source (1200x1500 served), so every landscape crop takes a band through the middle — the tents and the walkway, which is the part that says market.",
+  },
+
+  communityStreetFair: {
+    src: "/community/street-fair.webp",
+    alt: "A street festival under autumn trees, with a vendor tent and bright banners in the foreground and a crowd filling the road beyond.",
+    credit: "Unsplash",
+    tone: "#624d43",
+    ratio: "3:2",
+    focal: "50% 60%",
+    note: "Unsplash Q5VmILYHgZo. Autumn colour, which is why it sits against the October Fort Langley Cranberry Festival entry. Portrait source; crops to the crowd and the banners.",
+  },
+
+  communitySnow: {
+    src: "/community/snow-shovelling.webp",
+    alt: "A person in a dark jacket shovelling a deep snowfall off a driveway in front of a house.",
+    credit: "Unsplash",
+    tone: "#919aa1",
+    ratio: "3:2",
+    // 66% down, not centred: a 3:2 window on this portrait source is under
+    // half its height, and at 50% it held only the jacket — the shovel blade,
+    // the cleared asphalt and the snowbank (the whole story) sat below it.
+    focal: "50% 66%",
+    note: "Unsplash TDiWmXb9-qk. Clearing snow for neighbours who cannot — ties to the `who-clears-the-sidewalk` article. Portrait source; the crop holds the shovel and the cleared strip.",
+  },
+
+  communityLeaves: {
+    src: "/community/leaf-clearing.webp",
+    alt: "A worker in a hi-vis vest running a leaf blower across a lawn thick with fallen autumn leaves beside a large tree.",
+    credit: "Unsplash",
+    tone: "#928f7d",
+    ratio: "3:2",
+    focal: "55% 60%",
+    note: "Unsplash 20Xibv0RrDo. An autumn leaf clear-up. The hi-vis reads as a groundskeeper rather than a volunteer; acceptable for 'clearing leaves for neighbours', worth replacing first when client photos arrive.",
   },
 } as const satisfies Record<string, Photo>;
 

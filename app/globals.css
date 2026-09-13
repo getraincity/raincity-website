@@ -92,6 +92,12 @@
      position dots. A 8px dot is a mark, not a softened box. Nothing with an
      edge — card, plate, field, button — takes a radius on this site. */
   --radius-full: calc(infinity * 1px);
+  /* The second exception, added 2026-09-13 on the client's explicit sign-off:
+     the partner cards on /about. The client asked for the corners there to be
+     softened "slightly — not much", after 16px panels read as out of place
+     against a site whose buttons and cards are square. 4px takes the edge off
+     without reading as rounded. Scoped to that one section by name. */
+  --radius-card: 4px;
 
   /* --- Layout ------------------------------------------------------------ */
   --container-*: initial;

@@ -1747,7 +1747,12 @@ export const locations: Location[] = [
     blurb:
       "Home. Heritage houses on the hill and a steep grid of streets — we know which ones the truck can park on.",
     bearing: "base",
-    photo: "aboutCrew",
+    // Was `aboutCrew`, which shows a crew RE-ROOFING a house — not one of the
+    // eleven services, standing in for this company's work on its own home
+    // page. Now the Westminster Pier Park frame: the SkyBridge and the
+    // Pattullo arch make it unmistakably New Westminster, and it is the same
+    // photograph /about's Home Ground section uses for the same city.
+    photo: "aboutHomeGround",
     detail: {
       intro:
         "Home. The truck loads here, on the hill above the Fraser, and works its way out from it.",
@@ -1864,7 +1869,12 @@ export const locations: Location[] = [
     blurb:
       "The largest area we cover, Cloverdale down to South Surrey, and no shortage of commercial ground to keep sealed.",
     bearing: "south",
-    photo: "concreteSealing",
+    // Was `concreteSealing`, a 550x419 file stretched 2.6x across the hero
+    // banner at desktop and visibly soft on every screen (image audit,
+    // 2026-09-13). `powerParkades` is RainCity's own photograph, 1600px, of an
+    // operator driving grime out of paving — the hard-surface work this
+    // page's copy is about.
+    photo: "powerParkades",
     detail: {
       intro:
         "The largest area we cover — Whalley down to the border, and more commercial hard surface than the rest of the region put together.",
@@ -2049,6 +2059,274 @@ export function nearbyLocations(location: Location): Location[] {
   return location.detail.nearby
     .map((slug) => locations.find((l) => l.slug === slug))
     .filter((l): l is Location => Boolean(l));
+}
+
+/**
+ * ===========================================================================
+ * PLACEHOLDER COMMUNITY CONTENT — written for the build, not supplied.
+ * ===========================================================================
+ *
+ * The "Off The Clock" section on every community page. The client asked for
+ * community involvement "with some local events pictures", said real phone
+ * photos exist but cannot be supplied yet, and on 2026-09-13 told us to write
+ * plausible entries ourselves so the section can be reviewed as a finished
+ * design. So:
+ *
+ *  - THE EVENTS AND PLACES ARE REAL and were checked on 2026-09-13: the Hyack
+ *    Festival parade (New Westminster, May), Burnaby Blues + Roots at Deer
+ *    Lake Park (August), the Cloverdale Rodeo and Country Fair (Surrey, May
+ *    long weekend), the Tsawwassen Sun Festival (Delta, BC Day weekend), the
+ *    Fort Langley Cranberry Festival (October), Pitt Meadows Day (first
+ *    Saturday in June), the Haney Farmers Market at Memorial Peace Park
+ *    (Saturdays, May to October), Golden Spike Days at Rocky Point Park (Port
+ *    Moody, late June), and the Great Canadian Shoreline Cleanup (Ocean Wise
+ *    and WWF-Canada, national, September).
+ *  - RAINCITY'S PART IN EACH IS ASSUMED. Nobody has confirmed that the crew
+ *    turned out for any of these. Every entry is the kind of help an exterior
+ *    cleaning company plausibly gives — litter crews, shoreline and trail
+ *    clean-ups, snow and leaves for neighbours — and none claims a
+ *    sponsorship, an official role or a relationship with an organiser.
+ *  - THE PHOTOGRAPHS ARE ILLUSTRATIVE STOCK. See the community block in
+ *    photos.ts, and `locationPage.community.illustrative`.
+ *
+ * BEFORE LAUNCH, and raise it with the other launch items: the client replaces
+ * each entry with what actually happened (or deletes it), and swaps in their
+ * own photos. A named festival on a business's site is read as "we were
+ * there"; if the crew was not, the entry comes out. An empty array for a
+ * community renders no section rather than an empty one.
+ *
+ * Kept as a map beside the locations rather than inside each `detail` block
+ * — the `relatedBySlug` arrangement — so the whole placeholder set sits under
+ * one banner and can be replaced in one pass. Each community's three entries
+ * are its own: the doorway-page rule on `LocationDetail` applies here too.
+ *
+ * `when` is a month or a season, never a year — a dated entry goes stale the
+ * day after launch. The first entry is the large feature frame.
+ */
+export type CommunityItem = {
+  /** Month or season. Printed as the caption's eyebrow. */
+  when: string;
+  title: string;
+  /** One line, roughly 90 characters. What the help was, and where. */
+  line: string;
+  photo: PhotoKey;
+};
+
+export const communityBySlug: Record<string, readonly CommunityItem[]> = {
+  anmore: [
+    {
+      when: "April",
+      title: "Litter pick on the Buntzen Lake trails",
+      line: "Gloves and bags on the trails around Buntzen Lake before the summer crowds arrive.",
+      photo: "communityTrail",
+    },
+    {
+      when: "Winter",
+      title: "Driveways for neighbours",
+      line: "When snow holds up the hill, clearing long driveways for neighbours who cannot.",
+      photo: "communitySnow",
+    },
+    {
+      when: "November",
+      title: "Needles and leaves, cleared",
+      line: "A clear-out of needles and leaves on lots whose owners can no longer get up a ladder.",
+      photo: "communityLeaves",
+    },
+  ],
+  burnaby: [
+    {
+      when: "August",
+      title: "Blues + Roots at Deer Lake Park",
+      line: "Working the litter crew on the grounds of the free festival at Deer Lake Park.",
+      photo: "communityConcert",
+    },
+    {
+      when: "April",
+      title: "Brunette River clean-up",
+      line: "Pulling litter out of the banks of the Brunette before the spring runoff moves it on.",
+      photo: "communityTrail",
+    },
+    {
+      when: "November",
+      title: "Leaves for neighbours",
+      line: "Clearing yards and walks for Burnaby neighbours who cannot manage the autumn drop.",
+      photo: "communityLeaves",
+    },
+  ],
+  delta: [
+    {
+      when: "August",
+      title: "Tsawwassen Sun Festival",
+      line: "On bags and gloves along the Rotary Parade route over the BC Day long weekend.",
+      photo: "communityParade",
+    },
+    {
+      when: "September",
+      title: "Shoreline Cleanup at Boundary Bay",
+      line: "Part of the Great Canadian Shoreline Cleanup, on the beach at Boundary Bay.",
+      photo: "communityShoreline",
+    },
+    {
+      when: "November",
+      title: "Leaves in Ladner",
+      line: "Clearing autumn leaves off walks and lawns for Ladner neighbours who need a hand.",
+      photo: "communityLeaves",
+    },
+  ],
+  langley: [
+    {
+      when: "October",
+      title: "Fort Langley Cranberry Festival",
+      line: "Helping keep the village streets clear through the festival weekend before Thanksgiving.",
+      photo: "communityStreetFair",
+    },
+    {
+      when: "April",
+      title: "Brydon Lagoon clean-up",
+      line: "A spring litter pick on the paths around Brydon Lagoon in Langley City.",
+      photo: "communityTrail",
+    },
+    {
+      when: "Winter",
+      title: "Walks cleared for neighbours",
+      line: "After a snowfall, clearing walks and steps for neighbours who cannot do it themselves.",
+      photo: "communitySnow",
+    },
+  ],
+  "new-westminster": [
+    {
+      when: "May",
+      title: "Hyack Festival parade",
+      line: "Clearing the route behind the parade, from downtown up to Queens Park.",
+      photo: "communityParade",
+    },
+    {
+      when: "September",
+      title: "Shoreline Cleanup on the Fraser",
+      line: "Part of the Great Canadian Shoreline Cleanup, along the river below the Quay.",
+      photo: "communityShoreline",
+    },
+    {
+      when: "Winter",
+      title: "Stairs and sidewalks on the hill",
+      line: "When snow lands on New West's slopes, clearing steps and walks for neighbours who cannot.",
+      photo: "communitySnow",
+    },
+  ],
+  "ridge-meadow": [
+    {
+      when: "May to October",
+      title: "Haney Farmers Market",
+      line: "Helping keep Memorial Peace Park clear through the Saturday market season.",
+      photo: "communityMarket",
+    },
+    {
+      when: "June",
+      title: "Pitt Meadows Day",
+      line: "On the clean-up crew for the parade and the day at Pitt Meadows Athletic Park.",
+      photo: "communityParade",
+    },
+    {
+      when: "September",
+      title: "Alouette River clean-up",
+      line: "Part of the Great Canadian Shoreline Cleanup, along the banks of the Alouette.",
+      photo: "communityShoreline",
+    },
+  ],
+  surrey: [
+    {
+      when: "May",
+      title: "Cloverdale Rodeo and Country Fair",
+      line: "Working the litter crew around the fairgrounds over the Victoria Day long weekend.",
+      photo: "communityCrew",
+    },
+    {
+      when: "September",
+      title: "Shoreline Cleanup at Crescent Beach",
+      line: "Part of the Great Canadian Shoreline Cleanup, on the sand at Crescent Beach.",
+      photo: "communityShoreline",
+    },
+    {
+      when: "Winter",
+      title: "Sidewalks for neighbours",
+      line: "After a snowfall, clearing walks for Surrey neighbours who cannot get out to do it.",
+      photo: "communitySnow",
+    },
+  ],
+  "tri-cities": [
+    {
+      when: "June",
+      title: "Golden Spike Days",
+      line: "Working the litter crew at Rocky Point Park through Port Moody's festival weekend.",
+      photo: "communityConcert",
+    },
+    {
+      when: "September",
+      title: "Shoreline Cleanup in Port Moody",
+      line: "Part of the Great Canadian Shoreline Cleanup, along the Shoreline Trail at the head of the inlet.",
+      photo: "communityShoreline",
+    },
+    {
+      when: "November",
+      title: "Leaves in Coquitlam",
+      line: "Clearing autumn leaves off walks and yards for Coquitlam neighbours who need a hand.",
+      photo: "communityLeaves",
+    },
+  ],
+  vancouver: [
+    {
+      when: "September",
+      title: "Shoreline Cleanup at Jericho Beach",
+      line: "Part of the Great Canadian Shoreline Cleanup, working the tideline at Jericho.",
+      photo: "communityShoreline",
+    },
+    {
+      when: "April",
+      title: "A litter pick on Commercial Drive",
+      line: "A spring neighbourhood clean-up along the Drive and the side streets off it.",
+      photo: "communityCrew",
+    },
+    {
+      when: "Winter",
+      title: "Sidewalks for neighbours",
+      line: "The city asks owners to clear their walks by ten. Some neighbours cannot, so we help.",
+      photo: "communitySnow",
+    },
+  ],
+};
+
+/** The entries for one community, in order. Empty when there are none. */
+export function communityFor(location: Location): readonly CommunityItem[] {
+  return communityBySlug[location.slug] ?? [];
+}
+
+/**
+ * Partners that operate in this community, for the Local Partners section.
+ *
+ * Only a partner whose `local.slugs` names this community qualifies — the
+ * slugs come from each partner's own published service area or campus list,
+ * never from a guess. Partners with a national reach (`local.everywhere`)
+ * fill the row up to three, so a community with fewer local matches still
+ * gets a full row, and the card says "Across Canada" rather than implying
+ * they are local.
+ */
+export function localPartnersFor(
+  location: Location,
+): { partner: Partner; tag: string; where: string }[] {
+  const all = partnerships.groups.flatMap((group) =>
+    group.items.map((partner) => ({ partner, group })),
+  );
+  const local = all.flatMap(({ partner, group }) =>
+    partner.local && "slugs" in partner.local && partner.local.slugs.includes(location.slug)
+      ? [{ partner, tag: group.tag, where: `${partner.local.verb} ${location.name}` }]
+      : [],
+  );
+  const national = all.flatMap(({ partner, group }) =>
+    partner.local && "everywhere" in partner.local
+      ? [{ partner, tag: group.tag, where: partner.local.everywhere }]
+      : [],
+  );
+  return [...local, ...national].slice(0, 3);
 }
 
 // --- Navigation ------------------------------------------------------------
@@ -2480,8 +2758,18 @@ export const aboutPage = {
    * treatment is the Soft Washing FAQ. A slab needing time before it will
    * take a sealer is the `twenty-eight-days-before-sealing` article. The
    * paintable season is the Painting FAQ. The hill above the Fraser and the
-   * Quay are the New Westminster location copy. The one line that is not a
-   * restatement of settled copy is `travelValue` — see the note on it.
+   * Quay are the New Westminster location copy. The one clause that is not a
+   * restatement of settled copy is "nothing added for the distance" — the
+   * no-travel-charge policy. It is published in the "Is it cheaper because
+   * you are based here?" answer on /locations/new-westminster, but NOT
+   * CONFIRMED BY THE CLIENT, and a pricing policy the office does not hold to
+   * on the phone is worse than none. Raise it at launch.
+   *
+   * SET TO THE WHO WE ARE TEMPLATE, 2026-09-13, at the client's instruction:
+   * same structure, same heading size, and copy held to the same length as
+   * `intro` above (heading 27 vs 29 characters, paragraphs 306 vs 315 and
+   * 254 vs 258). The three-fact list went with the redesign; its two derived
+   * facts moved into the photo caption, as Who We Are's base and region do.
    *
    * No count is written into the copy, for the reason given on
    * `servicesPage.catalogue`: `areaSuffix` is a suffix because the number in
@@ -2491,45 +2779,20 @@ export const aboutPage = {
   local: {
     label: "Home Ground",
     /**
-     * Two parts, the same shape as the page headings the AEO pass split: the
-     * name at the larger size, the qualifying half at `display-m` beneath it
-     * inside the same heading. Written as one sentence first and measured at
-     * three lines in this column at 1440 — against the two-line rule
-     * `check-layout.mjs` enforces. Split, the long half drops to a size that
-     * sets on one line, and "New Westminster" takes the largest type in the
-     * section, which is the half the client asked to be prominent.
-     *
-     * "Service area" rather than "coverage area" — it is the phrase the rest
-     * of the site uses, and this heading contradicts it on purpose.
+     * Split in two so the component can set `headingMark` under the amber
+     * highlighter the client asked for. Read together they are the heading.
      */
-    heading: "New Westminster Is Home",
-    headingSub: "Not A Service Area",
+    heading: "New Westminster Is",
+    headingMark: "Our Home",
     body: [
-      "We are based in New Westminster, on the hill above the Fraser, and every job on the schedule starts from there. It is not a regional office or a mailing address — it is where the truck loads and where the equipment lives, and it is the reason a property at the Quay and a property in Langley are quoted on the same basis, with nothing added for the distance in between.",
-      "The name is not decoration either. Almost everything on the service list is timed by this coast’s weather rather than by a calendar — when moss lets go after a treatment, how long a slab needs before it will take a sealer, how much of a summer is actually dry enough to paint in. A company working from somewhere else has to look those windows up. We schedule inside them every season.",
+      "We are based in New Westminster, on the hill above the Fraser, and every job on the schedule starts from there. It is not a mailing address — it is where the truck loads and the equipment lives, so a property at the Quay and one in Langley are quoted on the same basis, with nothing added for the distance.",
+      "Almost everything we do is timed by this coast’s weather rather than by a calendar: when moss lets go, when a slab will take a sealer, how much of a summer is dry enough to paint. A company based elsewhere looks those windows up. We schedule inside them.",
     ],
-    /**
-     * The three facts read as a set about the truck, which is why the second
-     * label is "Where it works" rather than a second noun phrase. Values are
-     * resolved in `HomeGround.tsx`: the first is `business.base` and the
-     * second counts `locations`, so neither can drift from the source.
-     */
-    baseLabel: "Where the truck loads",
-    areaLabel: "Where it works",
+    /** Button under the copy — Who We Are's CTA sits in the same place. */
+    cta: "See Where We Work",
+    /** Photo caption, line one; the base city is appended at render. */
+    captionPrefix: "Based in",
     areaSuffix: "communities, both banks of the Fraser",
-    /**
-     * NOT CONFIRMED BY THE CLIENT, and the one line on this page that needs
-     * to be before launch. It is already published — the "Is it cheaper
-     * because you are based here?" answer on /locations/new-westminster says
-     * there is no travel charge anywhere in the service area — but that is
-     * one answer at the foot of one page, and this promotes it to a ruled
-     * fact directly above the quote form. A published pricing policy the
-     * office does not hold to on the phone is worse than none, which is the
-     * standing rule on the legal pages and applies unchanged here. Raise it
-     * at launch alongside the testimonials, the policy pages and `social`.
-     */
-    travelLabel: "Travel charge",
-    travelValue: "None, anywhere in the service area",
   },} as const;
 
 // --- Founders and partnerships ---------------------------------------------
@@ -2643,26 +2906,33 @@ export type Partner = {
   /** The partner's own site. Absent until the client supplies it — see above. */
   href?: string;
   /**
-   * The partner's own primary brand colour, as a hex string. Touseef's
-   * instruction on 2026-09-09 was explicit: "these brands also don't need to
-   * be losing their identities... make sure to use their identity in this
-   * partner section." A uniform Fog plate is still the right answer for the
-   * fallback logo state — see the note above — but a real, independently
-   * branded company sitting on this page deserves more than RainCity's own
-   * palette painted over it.
-   *
-   * `accent` is that "more," kept deliberately thin: a coloured top edge on
-   * the tile, and the colour of the "Visit site" link and its icon. It does
-   * not repaint the card, and it does not stand in for a logo — once a real
-   * logo file lands in `logo`, the accent becomes a complement to it rather
-   * than the only signal of whose brand this is.
-   *
-   * EVERY VALUE HERE WAS READ OFF THE PARTNER'S OWN LIVE SITE, NEVER GUESSED.
-   * `getComputedStyle` on their heading/primary-CTA colour, on the date noted
-   * against each one — the same discipline `logo` is held to: nothing about
-   * another company's identity gets invented, only recorded.
+   * Two lines on the card saying what the organisation is. HELD TO WHAT THE
+   * ORGANISATION SAYS OF ITSELF, checked on 2026-09-13 — its own site for the
+   * companies, the public record for the universities and CFIB. It describes
+   * THEM, never the relationship: nothing here claims what RainCity does with
+   * or for a partner, because the client has confirmed only that they are
+   * partners. Where nothing verifiable is on file (SA Cleaning, CFOne) the
+   * blurb says only that, and should be replaced once the client supplies it.
    */
-  accent?: string;
+  blurb: string;
+  /**
+   * Where the organisation itself operates, for the Local Partners section on
+   * the community pages (`localPartnersFor`). Either the community slugs it
+   * publishes as its own service area or campus list — with the verb the card
+   * prints, "Serves" or "Campus in" — or a national reach, printed as-is.
+   *
+   * SOURCED FROM THE PARTNER, NOT INFERRED, checked 2026-09-13. Absent means
+   * nothing checkable is on file, and the partner does not appear on any
+   * community page. It says where THEY work, never that RainCity works with
+   * them there.
+   */
+  local?:
+    | { verb: string; slugs: readonly string[] }
+    | { everywhere: string };
+  // No `accent` field any more. A per-partner brand colour used to run along
+  // the top of each tile; with real marks in the cells the logo carries the
+  // identity the client asked to keep, and a navy stripe beside a pink one
+  // read as noise rather than as two brands. See `Partnerships.tsx`.
   logo?: {
     /** Under `public/partners/`. SVG, or transparent PNG at 1000px or more. */
     src: string;
@@ -2683,25 +2953,16 @@ export type Partner = {
  * A group with no items is skipped rather than rendered as an empty heading,
  * so the four below fill one at a time and in any order.
  *
- * `layout` drives the visual treatment in `Partnerships.tsx`, so the component
- * stays data-driven rather than special-casing a group by matching its label
- * string — the same reasoning `indexing` in `lib/seo.tsx` is built on.
- *
- * - `"tiles"` — an individual card per partner: its own logo plate, its name,
- *   and (once `href` exists) a "Visit site" link. Used where each name is its
- *   own claim worth its own space — the trade partners with sites of their
- *   own, and the business/member marks that exist here specifically for
- *   credibility, the same job `Awards.tsx`'s credential row already does.
- * - `"carousel"` — the same scroll-snap mechanism the homepage testimonials
- *   use (`TestimonialsCarousel.tsx`), generalised to logo plates instead of
- *   quote cards, in `PartnerCarousel.tsx`. Requested by name: Touseef asked
- *   for this group to read like the homepage reviews section rather than a
- *   grid. It is a second, independent component rather than a shared one —
- *   see the note at the top of `PartnerCarousel.tsx` for why.
+ * Every group renders the same way — one row of the register in
+ * `Partnerships.tsx`. There used to be a `layout` field choosing between
+ * tiles and a carousel per group; three treatments on one section was the
+ * main reason it read as unfinished, and a carousel holding three plates
+ * scrolled nothing. One grammar, so a group needs nothing but its names.
  */
 export type PartnerGroup = {
   label: string;
-  layout: "tiles" | "carousel";
+  /** The short sector name printed on each partner's card: "Cleaning". */
+  tag: string;
   items: readonly Partner[];
 };
 
@@ -2731,17 +2992,35 @@ export type PartnerGroup = {
 export const partnerships = {
   label: "Partnerships",
   heading: "Who We Work With",
+  /**
+   * Restates what the groups below already say and nothing more: who they
+   * are, and that they are sorted by sector. It does not describe the
+   * relationship beyond "works alongside" — see the note above on why
+   * "partner" is the strongest claim this page is entitled to make.
+   */
+  body: "The trade partners, institutions and business bodies RainCity works alongside, grouped by sector.",
+  /** The link row on a partner card that has a site — the service card's "View Service". */
+  visitLabel: "Visit Site",
   groups: [
     {
       label: "Cleaning partners",
-      layout: "tiles",
+      tag: "Cleaning",
       items: [
         {
           name: "Bright Nest Cleaning",
+          // Was "across Burnaby, the Tri-Cities and New Westminster" — true but
+          // partial, and it contradicted the "Serves Delta" tag this card now
+          // carries on the community pages. Their own site lists all nine.
+          blurb: "Residential and commercial cleaning, from deep cleans to move-outs, across Greater Vancouver and the Tri-Cities.",
           href: "https://brightnestcleaning.ca/",
-          // Their own h1 and primary CTA button colour, measured directly
-          // off brightnestcleaning.ca on 2026-09-09.
-          accent: "#142636",
+          // Their homepage names Coquitlam, Vancouver, Burnaby, Port
+          // Coquitlam, Port Moody, Surrey and New Westminster; their locations
+          // menu adds Anmore, Delta, Langley, Maple Ridge and Pitt Meadows.
+          // That covers all nine communities. Checked 2026-09-13.
+          local: {
+            verb: "Serves",
+            slugs: ["anmore", "burnaby", "delta", "langley", "new-westminster", "ridge-meadow", "surrey", "tri-cities", "vancouver"],
+          },
           // Pulled from their own site's header on 2026-09-10. The file
           // is a WebP served as .png at the source; saved with the
           // correct extension here. Two things stated at the point of use:
@@ -2761,10 +3040,16 @@ export const partnerships = {
         },
         {
           name: "Crystal Clear Cleans",
+          blurb: "Residential and commercial cleaning across Greater Vancouver, from Vancouver and Richmond out to Langley.",
           href: "https://crystalclearcleans.ca/",
-          // Their own "Book Now" CTA colour, measured directly off
-          // crystalclearcleans.ca on 2026-09-09.
-          accent: "#ff99cc",
+          // Their homepage: Vancouver, Burnaby, Coquitlam, Port Coquitlam,
+          // Port Moody, New Westminster, Richmond, Surrey, Delta, Langley,
+          // North Vancouver, Anmore "and the Ridge Meadows area" — all nine.
+          // Checked 2026-09-13.
+          local: {
+            verb: "Serves",
+            slugs: ["anmore", "burnaby", "delta", "langley", "new-westminster", "ridge-meadow", "surrey", "tri-cities", "vancouver"],
+          },
           // Their site-icon file — a transparent PNG at 273×257. Same
           // permission caveat as Bright Nest applies.
           logo: {
@@ -2779,10 +3064,13 @@ export const partnerships = {
         // Renders as a stylised wordmark rather than a bare tag; see the
         // note in `Partnerships.tsx` on how a partner with no logo file
         // still reads as a designed entry rather than a placeholder.
-        { name: "SA Cleaning" },
+        {
+          name: "SA Cleaning",
+          // Nothing verifiable on file — no site supplied. Replace when it is.
+          blurb: "A cleaning company RainCity partners with. Full details to follow.",
+        },
       ],
     },
-    // Carousel, on request — see the note on `PartnerGroup.layout`.
     // The three universities are named partners; the logos rendered here
     // are the institutional coats of arms as published on each
     // university's Wikipedia page, since the modern flat wordmarks are
@@ -2790,10 +3078,14 @@ export const partnerships = {
     // cleaning partners applies: the client confirms before this ships.
     {
       label: "Post-secondary partners",
-      layout: "carousel",
+      tag: "Post-secondary",
       items: [
         {
           name: "Kwantlen Polytechnic University",
+          blurb: "A public polytechnic university with campuses in Surrey, Richmond, Langley and Cloverdale.",
+          // Public record: Surrey (and Cloverdale, which is in Surrey) and
+          // Langley. Richmond is not one of the nine communities.
+          local: { verb: "Campus in", slugs: ["surrey", "langley"] },
           logo: {
             src: "/partners/kpu.png",
             width: 250,
@@ -2803,6 +3095,7 @@ export const partnerships = {
         },
         {
           name: "Capilano University",
+          blurb: "A public university based in North Vancouver, serving the North Shore and the Sunshine Coast.",
           logo: {
             src: "/partners/capilano.jpg",
             width: 200,
@@ -2812,6 +3105,7 @@ export const partnerships = {
         },
         {
           name: "Thompson Rivers University",
+          blurb: "A public university in Kamloops, with distance learning across Canada through TRU Open Learning.",
           logo: {
             src: "/partners/tru.png",
             width: 303,
@@ -2823,7 +3117,7 @@ export const partnerships = {
     },
     {
       label: "Business and member partners",
-      layout: "tiles",
+      tag: "Business & member",
       items: [
         // CFOne — Canadian Armed Forces community programme, most likely.
         // A public brand asset was not locatable from cfmws.ca or the
@@ -2832,9 +3126,15 @@ export const partnerships = {
         // partner with access to the CFMWS brand portal, drop the SVG or
         // transparent PNG into `public/partners/cfone.svg` and add a
         // `logo:` entry here to switch it over.
-        { name: "CFOne" },
+        {
+          name: "CFOne",
+          // Identity still unconfirmed (see the note above) — so the blurb
+          // names no organisation behind the acronym. Replace when confirmed.
+          blurb: "A business and member partner of RainCity. Full details to follow.",
+        },
         {
           name: "Union Savings",
+          blurb: "A not-for-profit, union-run benefits program offering everyday savings to union members across Canada.",
           // Source: their own header logo, `unionsavings.ca/img/logo_en.svg`,
           // fetched on 2026-09-10. SVG, so rendered via a plain <img>
           // rather than next/image — the site config deliberately does
@@ -2849,6 +3149,8 @@ export const partnerships = {
         },
         {
           name: "CFIB",
+          blurb: "The Canadian Federation of Independent Business, the country's largest association of small businesses.",
+          local: { everywhere: "Across Canada" },
           // Canonical CFIB logo from the Canadian Federation of
           // Independent Business page on Wikimedia Commons. SVG, same
           // <img>-vs-next/image reasoning as Union Savings above.
@@ -2864,11 +3166,9 @@ export const partnerships = {
     /**
      * Empty on purpose. See the note at the top of this block: the client
      * asked for "just some property management companies for now" and that is
-     * the one thing that cannot be filled in from here. `layout` still has to
-     * be a valid value even though it renders nothing — "tiles" is the
-     * harmless default for whichever layout it turns out to need.
+     * the one thing that cannot be filled in from here.
      */
-    { label: "Property management", layout: "tiles", items: [] },
+    { label: "Property management", tag: "Property management", items: [] },
   ] as readonly PartnerGroup[],
 };
 
@@ -3642,6 +3942,41 @@ export const locationPage = {
     /** Beside the map: two facts, both derived rather than written. */
     baseLabel: "Booked and loaded from",
     bearingLabel: "Where it sits",
+  },
+
+  /**
+   * "Off The Clock" — community involvement, per community. The entries are
+   * `communityBySlug` above, and they are PLACEHOLDER: read that banner.
+   */
+  community: {
+    label: "In the Community",
+    /** Two lines: "Off The Clock" / "In {name}". */
+    headingBefore: "Off The Clock",
+    headingPlace: "In ",
+    body: "Not everything the crew does here goes on an invoice. These are the festivals, shorelines and sidewalks we turn out for when the schedule allows.",
+    /**
+     * True while the photographs are stock. Prints `illustrativeNote` under
+     * the frames; set false only when every frame is the client's own.
+     */
+    illustrative: true,
+    illustrativeNote: "Photographs are illustrative.",
+    /** The invitation under the photographs. The community name goes between. */
+    inviteBefore: "Running a clean-up or a community event in ",
+    inviteAfter: "?",
+    inviteCta: "Tell Us About It",
+  },
+
+  /**
+   * Partners that operate in this community. Derived by `localPartnersFor`
+   * from each partner's own published service area — see `Partner.local`.
+   */
+  localPartners: {
+    label: "Local Partners",
+    /** Two lines: "Who We Work With" / "Around {name}". */
+    headingBefore: "Who We Work With",
+    headingPlace: "Around ",
+    body: "RainCity partners whose own service area or campus includes this community, from what they publish themselves.",
+    allCta: "See all our partners",
   },
 
   faq: {
