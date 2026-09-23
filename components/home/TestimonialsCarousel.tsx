@@ -2,22 +2,23 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
-import { ArrowLeft, ArrowRight } from "@/components/ui/Icon";
+import { ArrowLeft, ArrowRight, Star } from "@/components/ui/Icon";
 
 /**
  * One review, flattened for the boundary.
  *
- * `service` is `string | null` rather than optional because the source array
- * marks the two real reviews by *omitting* the field, and `"service" in item`
- * is not a test that survives serialization. The server does that test once
- * and normalises the result; a null here means the same thing it meant there —
- * the customer's own words do not record what they bought, and it will not be
- * guessed at.
+ * Every optional field is `string | null` (or `number | null`) rather than
+ * optional, because "absent" does not survive serialization reliably; the
+ * server normalises once. A null means the source does not state it — a Google
+ * review records no city, and no review records what was bought — and it will
+ * not be guessed at.
  */
 export type TestimonialItem = {
   quote: string;
   name: string;
-  place: string;
+  place: string | null;
+  source: string | null;
+  stars: number | null;
   service: string | null;
 };
 
@@ -132,32 +133,49 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
         )}
       >
         {items.map((item) => {
-          // Only the placeholder reviews carry a service. The two real ones
-          // do not record what was bought, and it will not be guessed at.
           const service = item.service;
           return (
             <li
               key={item.name}
               className="w-slide shrink-0 snap-start sm:w-slide-sm lg:w-slide-lg"
             >
-              <figure className="flex h-full flex-col bg-fog p-7">
-                <span
-                  aria-hidden="true"
-                  className="block h-hairline w-label-bar shrink-0 bg-amber"
-                />
+              {/* `relative` is load-bearing. The stars carry an `sr-only`
+                  label, which is absolutely positioned; with no positioned
+                  ancestor inside the scroll track it anchors to the page and
+                  escapes the track's clipping, and the off-screen cards'
+                  labels widened the whole document by ~270px on a phone.
+                  Measured, and fixed here, on 2026-09-23. */}
+              <figure className="relative flex h-full flex-col bg-fog p-7">
+                {/* Stars where the review carries a rating, the amber rule
+                    where it does not — the same slot either way, so the quote
+                    starts on one line across the row. */}
+                {item.stars ? (
+                  <p className="flex h-4 items-center gap-0.5 text-amber-ink">
+                    {Array.from({ length: item.stars }, (_, i) => (
+                      <Star key={i} className="size-4" />
+                    ))}
+                    <span className="sr-only">{item.stars} out of 5 stars</span>
+                  </p>
+                ) : (
+                  <span aria-hidden="true" className="flex h-4 items-center">
+                    <span className="block h-hairline w-label-bar bg-amber" />
+                  </span>
+                )}
+                {/* body-base rather than body-l since real Google reviews
+                    arrived: the longest runs to ~640 characters and every
+                    card in the track stretches to the tallest, so at 19px
+                    the short reviews sat in tall, mostly empty cards. */}
                 <blockquote className="mt-6 grow">
-                  <p className="body-l text-navy">&ldquo;{item.quote}&rdquo;</p>
+                  <p className="body-base text-navy">&ldquo;{item.quote}&rdquo;</p>
                 </blockquote>
                 {/* Fixed height so the rule above the attribution lands on
-                    the same line in every card. Two of the six carry no
-                    service, and without this their divider rode ~20px
-                    higher than its neighbours' across the visible row.
-                    96px clears the tallest caption — name, place and
-                    service, each on one line — at every width where more
-                    than one card is on screen at a time. */}
+                    the same line in every card, whichever lines a card
+                    carries under the name. */}
                 <figcaption className="mt-7 min-h-24 border-t border-t-line pt-5">
                   <p className="display-s text-navy">{item.name}</p>
-                  <p className="meta mt-1.5 text-steel">{item.place}</p>
+                  <p className="meta mt-1.5 text-steel">
+                    {item.source ? `${item.source} review` : item.place}
+                  </p>
                   {service && <p className="meta mt-1 text-rc-blue">{service}</p>}
                 </figcaption>
               </figure>

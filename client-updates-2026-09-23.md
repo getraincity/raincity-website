@@ -32,8 +32,9 @@ several of these are facts the site repeats elsewhere.
   button "View All Posts"
 
 ### 6. Home › Awards › "Credentials & Guarantees" → "Memberships & Partnerships"
-- [x] Six cards: New West Spotlight, CFIB, WorkSafeBC, Zensurance, Hello Gabby,
-  Tri-Cities Business Networking Group
+- [x] Partner cards with each organisation's original logo: New West
+  Spotlight, CFIB, WorkSafeBC, Hello Gabby. Zen Insurance and the Tri-Cities
+  Business Networking Group are held back until their logo files arrive
 - [x] The four stock badges (Licensed & Insured, Satisfaction Guaranteed,
   Five-Star Rated, Best Quality) removed
 
@@ -57,6 +58,9 @@ several of these are facts the site repeats elsewhere.
 ## Waiting on the client
 
 ### 5. Testimonials — from the Google Business Profile
+Profile link supplied and three reviews added — see the third round below.
+The original request, for reference:
+
 For each review to be shown:
 - The reviewer's name **exactly as Google displays it**, the star rating, the
   date, and the review text (a screenshot of each is ideal — it doubles as the
@@ -121,3 +125,28 @@ worth doing for visitors, not for star snippets.
 1. **Founders**: each founder's role (if not "Co-Founder"), a 2–3 sentence
    bio, and a portrait photo. The lead line above the cards is placeholder too
 2. **Zen Insurance** and **Tri-Cities** logo files (see above)
+
+---
+
+# Testimonials — 2026-09-23 (third round)
+
+## Done
+- [x] **Three Google reviews added**, word for word from the public Business
+  Profile (Tri N., Sal S., Josephine C. — all five stars), alongside the two
+  from the old site. Five reviews in the carousel now
+- [x] Each Google card shows its stars and "Google review"
+- [x] A **"5.0 · 17 Google reviews · September 2026"** summary beside the
+  heading, linking to the listing
+- [x] The Business Profile link is on the site (Google icon in the header strip
+  and footer) and in the structured data, tying the website to the listing
+  for Google — the biggest SEO gap, now closed
+
+## Still needed
+1. **The other 14 reviews.** Google only shows three to a signed-out visitor.
+   Either sign in to Google in the browser pane and tell me — I'll read the
+   rest myself — or send screenshots of the ones to include
+2. **The address on the Google listing.** It shows 828 Agnes St (Westminster
+   Towers), but the website says there is no storefront. If that is a home
+   address, hide it on the listing (Google lets service-area businesses do
+   that); if it is the business address, say so and it goes on the website
+   too. The two should agree

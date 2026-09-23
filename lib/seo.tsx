@@ -434,10 +434,13 @@ export const localBusinessSchema = {
   // has followed throughout is that structured data may restate what the site
   // already says and may not invent what it does not.
   //
-  // Published only once testimonials are verified real customer reviews.
-  // Set `testimonials.verified = true` and fill `averageRating` / `reviewCount`
-  // in lib/content.ts when replacing placeholder reviews. The node is absent
-  // while `verified` is false so no fabricated rating reaches a crawler.
+  // KEPT SHUT ON PURPOSE, even though the real Google figures are known
+  // (5.0 from 17, `testimonials.google`). A business marking up its own
+  // reviews on its own site is "self-serving" under Google's review-snippet
+  // rules: never shown as stars, and open to a manual action. So the rating
+  // is printed for visitors on the page and `averageRating` / `reviewCount`
+  // stay 0, which keeps this node out. The reasoning is on those fields in
+  // content.ts — change it there, deliberately, or not at all.
   ...(testimonials.verified && testimonials.reviewCount > 0
     ? {
         aggregateRating: {

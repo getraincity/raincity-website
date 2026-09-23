@@ -40,15 +40,30 @@ export const business = {
 } as const;
 
 /*
- * Social profile links. Add an entry for each network once the real URL is
- * confirmed. An empty array is the correct state here — rendering a "#" icon
- * reads as broken, and the wrong handle points visitors to a stranger's account.
+ * Social and profile links. Add an entry per network only once its real URL is
+ * confirmed — never a "#" or a guessed handle, which points visitors at a
+ * stranger's account. Every entry renders an icon in the header strip and the
+ * footer and feeds `sameAs` in the structured data automatically.
  *
- * When real URLs are ready: add them here and add `sameAs` to the
- * LocalBusiness schema in lib/seo.tsx in the same pass.
+ * Only the Google Business Profile is known so far (2026-09-23). Facebook,
+ * Instagram and the rest still need their real URLs from the client; the
+ * icons for them already exist in Icon.tsx.
  */
 export const social: readonly { label: string; href: string; icon: string }[] =
-  [];
+  [
+    {
+      // The Google Business Profile, supplied by Touseef on 2026-09-23 as a
+      // share.google link. That link resolves through a Google search page,
+      // so this is the listing's permanent CID form instead — checked to open
+      // "Raincity Property Maintenance" on Google Maps the same day. Being in
+      // this array is what turns on `sameAs` in the Organization and
+      // LocalBusiness structured data (lib/seo.tsx), tying the site to the
+      // listing its reviews live on.
+      label: "RainCity on Google",
+      href: "https://maps.google.com/?cid=6027837514590759918",
+      icon: "google",
+    },
+  ];
 
 // --- Services --------------------------------------------------------------
 
@@ -2605,30 +2620,96 @@ export const latestWork = {
   cta: "View All Posts",
 } as const;
 
+/**
+ * One customer review, exactly as the customer wrote it.
+ *
+ * `place` only when the source states it; a Google review does not, so those
+ * carry `source` and `stars` instead, and the card prints "Google review" under
+ * the stars rather than a city nobody told us.
+ */
+export type Testimonial = {
+  quote: string;
+  /** First name and last initial, as the older entries already are. */
+  name: string;
+  place?: string;
+  source?: "Google";
+  stars?: number;
+  service?: string;
+};
+
 export const testimonials = {
   label: "Testimonials",
   headline: "Real Feedback from Our Customers",
   /**
    * Every quote in `items` is a real customer review. True since the four
-   * invented entries were removed.
-   *
-   * This alone does NOT publish a rating: `localBusinessSchema` in lib/seo.tsx
-   * requires `verified && reviewCount > 0`, and the count below is still zero
-   * because no review platform has been connected yet. Both halves have to be
-   * true, which is the point — a rating with no count behind it is a number
-   * somebody made up.
+   * invented entries were removed, and still true now that Google reviews
+   * have been added.
    */
   verified: true,
   /**
-   * Still zero, and that is the correct value. Set both together from a real
-   * source — a Google Business Profile review summary, not a tally of what is
-   * in `items` — because the average is meaningless without the count it was
-   * drawn from, and the count is unverifiable without the average it produces.
-   * The moment both are non-zero, a rating is published to search.
+   * DELIBERATELY STILL ZERO, even though the Google figures are known (see
+   * `google` below). A non-zero pair here publishes an `aggregateRating` in
+   * the LocalBusiness structured data, and Google's review-snippet rules make
+   * a business's own reviews of itself, marked up on its own site, ineligible
+   * for stars — "self-serving" — with markup that breaks those rules exposed to
+   * a manual action. The stars would never show, and the risk is not zero. So
+   * the rating is shown to visitors on the page, from `google`, and kept out of
+   * the markup. Do not "fix" this by filling these in.
    */
   averageRating: 0,
   reviewCount: 0,
+  /**
+   * The Google Business Profile summary, read off the listing on 2026-09-23:
+   * 5.0 from 17 reviews, all five stars. It is printed with the date it was
+   * read, because the count goes up and a static site does not know when —
+   * update it with the reviews, and move `checked` with it.
+   */
+  google: {
+    rating: "5.0",
+    count: 17,
+    checked: "September 2026",
+    url: "https://maps.google.com/?cid=6027837514590759918",
+  },
+  /*
+   * Google reviews first, then the two from the client's original homepage.
+   *
+   * The three Google reviews are copied word for word from the public listing
+   * (2026-09-23) — including "no long clogging and spilling sideway", which is
+   * the customer's wording and is not ours to correct. Names are shortened to
+   * first name and last initial, as the older two already are. No date is
+   * printed: Google gives only "5 months ago", and turning that into a month
+   * would be a guess.
+   *
+   * Only three could be read: Google now shows a signed-out visitor a few
+   * reviews and asks them to sign in for the rest. The other fourteen are
+   * five-star too and go in the same way, verbatim, once they are copied from
+   * a signed-in view.
+   *
+   * The standing rule is unchanged: never a review without a real customer
+   * behind it, and never a `service` field the review itself does not state.
+   */
   items: [
+    {
+      quote:
+        "Very impressed with their gutter cleaning services. I could tell the team took their time to blow and clean every corner of my gutter and roof and after the rain today I could tell it’s no long clogging and spilling sideway! Pricing was very reasonable for the work that was done. They definitely went above and beyond. Highly recommended!!",
+      name: "Tri N.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Great experience had my siding cleaned and driveway pressure washed and they did a really good job, looking forward to calling in the future for more work.",
+      name: "Sal S.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "I recently used Raincity for exterior cleaning and pressure washing, and I'm incredibly happy with the results. From the first phone call to the job's completion, their crew was courteous, on time, and paid close attention to detail. They cleaned my driveway, siding, deck, and patio to perfection—everything looks freshly restored. I also really valued how careful they were with my property and how they made sure I was completely satisfied before finishing up. Their pricing is reasonable for the high standard of work they provide. I wouldn't hesitate to recommend Raincity to anyone in need of trustworthy and thorough exterior cleaning.",
+      name: "Josephine C.",
+      source: "Google",
+      stars: 5,
+    },
     {
       quote:
         "Absolutely impressed with the results! The team was professional, on time, and made our property look brand new. Highly recommended.",
@@ -2641,25 +2722,8 @@ export const testimonials = {
       name: "Jason M.",
       place: "New Westminster, Canada",
     },
-
-    /*
-     * Two reviews, both real, both from the client's own homepage.
-     *
-     * Four more sat here until the SEO pass: invented entries written to
-     * fill the carousel, carrying invented names, cities and services. They
-     * were removed rather than replaced, on the client's confirmation that
-     * only these two are genuine. Do not add a third without a real customer
-     * behind it - a carousel that looks thin is a smaller problem than a
-     * fabricated endorsement, and the four that were here are the reason
-     * this file carries a rule about it.
-     *
-     * Neither carries a `service` field on purpose: the source material does
-     * not say what either customer bought, and attaching a guess to a named
-     * real person would be inventing a fact about them. The field stays in
-     * the shape for the day a real review arrives with one.
-     */
-  ],
-} as const;
+  ] as readonly Testimonial[],
+};
 
 export const awards = {
   label: "Excellence Backed by Trust",

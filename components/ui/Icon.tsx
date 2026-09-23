@@ -323,7 +323,42 @@ export function MapPin({ className }: IconProps) {
   );
 }
 
+/**
+ * One rating star, filled. The only filled glyph among the UI icons, because a
+ * rating is read as a count of solid marks — an outlined star reads as "not
+ * earned". Used for the Google review ratings in Testimonials.
+ */
+export function Star({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      width="16"
+      height="16"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        d="M8 1.6 9.9 5.6l4.4.55-3.25 3 .85 4.35L8 11.35 4.1 13.5l.85-4.35-3.25-3 4.4-.55L8 1.6Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Viewboxes for marks not drawn on the 16px grid. The Google "G" is the Simple
+ * Icons path (CC0), drawn on 24px; the padded box sets it at the same optical
+ * size as the four marks below, which fill roughly the middle 11px of 16.
+ */
+const socialViewBoxes: Record<string, string> = {
+  google: "-5.5 -5.5 35 35",
+};
+
 const socialPaths: Record<string, string> = {
+  // The Google Business Profile (2026-09-23) — the link that ties the site to
+  // the listing its reviews live on. Monochrome, like the others.
+  google:
+    "M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z",
   facebook:
     "M13.5 8.05a5.5 5.5 0 1 0-6.36 5.43V9.64H5.74V8.05h1.4V6.83c0-1.38.82-2.14 2.08-2.14.6 0 1.23.1 1.23.1v1.36h-.7c-.68 0-.9.43-.9.87v1.03h1.53l-.24 1.59H8.85v3.84a5.5 5.5 0 0 0 4.65-5.43Z",
   instagram:
@@ -344,7 +379,7 @@ export function SocialIcon({
   if (!d) return null;
   return (
     <svg
-      viewBox="0 0 16 16"
+      viewBox={socialViewBoxes[name] ?? "0 0 16 16"}
       width="16"
       height="16"
       aria-hidden="true"

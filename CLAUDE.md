@@ -216,16 +216,37 @@ Everything goes through `Reveal`, `RevealOnLoad`, `Stagger` and `StaggerItem`.
 If a new section needs motion, use those. Do not introduce a second idiom, and
 do not add a library back.
 
-### Testimonials — two, both real
+### Testimonials — five, all real
 
-The four invented entries were removed rather than replaced. Details and the
-reasoning are under "Four testimonials were removed, not replaced" below. The
-standing rule is unchanged and is the important part:
+Three Google reviews (added 2026-09-23, copied word for word from the public
+Google Business Profile) and the two from the client's original homepage. The
+four invented entries were removed long ago and are not coming back — see
+"Four testimonials were removed, not replaced" below. The standing rule is the
+important part:
 
-**Never invent a testimonial, a star rating or a review count.** Do not add
-`Review` or `AggregateRating` JSON-LD from anything other than a real review
-platform. `lib/seo.tsx` gates the rating on `verified && reviewCount > 0` and
-both halves have to be earned.
+**Never invent a testimonial, a star rating or a review count.** Copy reviews
+verbatim, customer typos included; shorten names to first name and last
+initial; never add a city, a date or a service the review itself does not
+state (Google gives only "5 months ago", so no date is printed).
+
+**Only three of the seventeen Google reviews could be read** — signed out,
+Google Maps shows a few and asks you to sign in for the rest. The remaining
+fourteen go in the same way once someone copies them from a signed-in view.
+
+**The rating is shown to visitors, not marked up.** `testimonials.google`
+holds "5.0 from 17, September 2026" and the section prints it with a link to
+the listing. `averageRating` / `reviewCount` stay 0 *on purpose*, which keeps
+`aggregateRating` out of the LocalBusiness JSON-LD: a business marking up its
+own reviews on its own site is "self-serving" under Google's review-snippet
+rules — never shown as stars, and exposed to a manual action. The reasoning is
+on those fields and at the gate in `lib/seo.tsx`. Update the count and the
+month together when more reviews are added.
+
+**`relative` on each carousel card is load-bearing.** The star rating's
+`sr-only` label is absolutely positioned; without a positioned ancestor inside
+the scroll track it escaped the track's clipping and widened the homepage by
+~270px on phones. Any absolutely positioned child of a scroll container needs
+the same containment.
 
 ### The two policy pages are unreviewed placeholder text
 
@@ -362,21 +383,27 @@ taken on a job or they get made.
 The registry's own header comment carries the same account at the point of
 use. Keep the two in step.
 
-### The social links are placeholders
+### Social links: Google is in, the rest are still missing
 
-`social` in `lib/content.ts` is now an **empty array**, and the footer
-therefore renders no social icons at all. It carried four entries — Facebook,
-Instagram, X, LinkedIn — with every `href` set to `"#"`, until commit `71dc640`
-emptied it: four icons that go nowhere read as broken, and a guessed handle is
-worse still, because it points visitors at a stranger's account under
-RainCity's name. The client has not supplied the real profile URLs.
+`social` in `lib/content.ts` carries **one entry: the Google Business
+Profile** (2026-09-23), as the listing's permanent CID link
+(`maps.google.com/?cid=…`) rather than the share.google link it was supplied
+as, which resolves through a search page. It renders a Google "G" in the header
+strip, the footer and the Awards "Follow" row, and it turns on `sameAs`.
 
-Before launch, add an entry per network the company actually uses, with its
-real URL. `sameAs` is deliberately absent from the LocalBusiness JSON-LD while
-the array is empty — add it in the same pass that fills the array, not before.
+It carried four `"#"` entries until commit `71dc640` emptied it: icons that go
+nowhere read as broken, and a guessed handle points visitors at a stranger's
+account under RainCity's name. That rule stands — **add Facebook, Instagram and
+the rest only with their real URLs**; their icons already exist in `Icon.tsx`.
 
-Raise this at launch alongside the testimonials, the policy pages and the
-blog. It is the smallest of the four and the quickest to close.
+**One discrepancy to raise with the client.** The Google listing shows a street
+address — 828 Agnes St, New Westminster ("Located in: Westminster Towers") —
+while this site says there is no storefront and its LocalBusiness data
+deliberately has no `streetAddress`. Westminster Towers is a residential
+building, so this may be a home address listed for verification. Either the
+listing hides it (a service-area business can) or the site adds it; a name,
+address and phone that disagree between a site and its Google listing is a
+local-SEO consistency problem. Do not add it to the site without asking.
 
 ### /about carries a Home Ground section, and one line in it is unconfirmed
 
@@ -720,17 +747,17 @@ banner on `blogPosts`.
 
 ### Four testimonials were removed, not replaced
 
-`testimonials.items` carries two reviews, both real, both from the client's own
-homepage. The other four were invented to fill the carousel and are gone, on the
-client's confirmation that only those two are genuine. The on-page disclaimer
+`testimonials.items` carried two reviews, both real, both from the client's own
+homepage (three verbatim Google reviews were added beside them on 2026-09-23).
+The other four were invented to fill the carousel and are gone, on the client's
+confirmation that only those two were genuine. The on-page disclaimer
 went with them, along with the condition that gated it — which tested whether a
 review carried a `service` field, a proxy for "is a placeholder" that would have
 put the disclaimer back over the first real review that happened to have one.
 
-`verified` is now `true` and means what it says. **No rating is published**:
-`localBusinessSchema` requires `verified && reviewCount > 0`, and the count is
-still zero because no review platform is connected. Set the count and the
-average together, from a real source, or not at all.
+`verified` is `true` and means what it says. **No rating is published in the
+structured data, deliberately** — the real Google figures are shown on the page
+instead; see "Testimonials — five, all real" above for why the count stays 0.
 
 ### One flag decides what is indexed
 
@@ -990,16 +1017,15 @@ minute. The original six were set near 85 wpm — a 775-word article claiming
 nine minutes — and mixing the two conventions on one index would have read as
 a bug. Compute it from the body rather than estimating it.
 
-### `sameAs` is wired and waiting
+### `sameAs` is live, with the Google Business Profile
 
 `organizationSchema` and `localBusinessSchema` both spread a `sameAsField`
-derived from `social` in content.ts. It stays **absent** while that array is
-empty, because an empty `sameAs: []` is a published claim to have no profiles
-anywhere. Filling `social` lights it up on both nodes with no second edit here.
-
-This is the site's largest remaining gap and it is client-blocked: the entity
-is asserted by one domain and corroborated by nothing. The Google Business
-Profile URL is the one that matters most.
+derived from `social` in content.ts. Since 2026-09-23 it carries the Google
+Business Profile, so both nodes now name the listing — which closes what was
+the site's largest gap: the entity was asserted by one domain and corroborated
+by nothing. Each further profile added to `social` joins it with no edit here.
+It would go **absent** again if the array were emptied, because an empty
+`sameAs: []` is a published claim to have no profiles anywhere.
 
 Also added to the Organization, all derived so they cannot drift:
 `description`, `areaServed`, `knowsAbout` (from `services`), `contactPoint`;
