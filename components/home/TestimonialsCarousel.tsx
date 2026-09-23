@@ -213,7 +213,9 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
                     ref={(el) => {
                       quoteRefs.current[i] = el;
                     }}
-                    className={cn("body-base text-navy", !isOpen && "review-clamp")}
+                    // `whitespace-pre-line` keeps the reviewer's own paragraph
+                    // breaks (`\n` in the data) and still wraps normally.
+                    className={cn("body-base whitespace-pre-line text-navy", !isOpen && "review-clamp")}
                   >
                     &ldquo;{item.quote}&rdquo;
                   </p>
@@ -255,9 +257,18 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
       </ol>
       </div>
 
-      {/* Controls — dots left, arrows right. */}
+      {/* Controls — position left, arrows right.
+
+          Dots from `sm` up; a "3 / 14" counter on phones. Fourteen dots and
+          two arrows need ~360px, and a phone's column is 335px — the row
+          pushed the whole page sideways once the Google reviews arrived.
+          The counter carries the same information in a fixed width however
+          many reviews there are. */}
       <div className="mt-8 flex items-center justify-between gap-6">
-        <ul className="flex items-center gap-2">
+        <p className="meta text-steel sm:hidden" aria-live="polite">
+          {index + 1} / {items.length}
+        </p>
+        <ul className="hidden items-center gap-2 sm:flex">
           {items.map((item, i) => (
             <li key={item.name}>
               <button

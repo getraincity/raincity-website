@@ -2673,17 +2673,28 @@ export const testimonials = {
   /*
    * Google reviews first, then the two from the client's original homepage.
    *
-   * The three Google reviews are copied word for word from the public listing
-   * (2026-09-23) — including "no long clogging and spilling sideway", which is
-   * the customer's wording and is not ours to correct. Names are shortened to
-   * first name and last initial, as the older two already are. No date is
+   * All twelve Google reviews are copied word for word from the listing, read
+   * signed in on 2026-09-23, with the customers' own spelling ("no long
+   * clogging and spilling sideway", "exemplorary") and paragraph breaks — the
+   * card renders `\n` as a break. Names are shortened to first name and last
+   * initial, as the older two already are, and capitalised. No date is
    * printed: Google gives only "5 months ago", and turning that into a month
-   * would be a guess.
+   * would be a guess. Staff first names that customers used (Wass, Mathew)
+   * are left in — they are the customers' words.
    *
-   * Only three could be read: Google now shows a signed-out visitor a few
-   * reviews and asks them to sign in for the rest. The other fourteen are
-   * five-star too and go in the same way, verbatim, once they are copied from
-   * a signed-in view.
+   * SIXTEEN OF THE SEVENTEEN COULD BE READ, AND FOUR ARE LEFT OUT ON PURPOSE:
+   *  - Clayton D'mello: the review has no text — what shows under it is
+   *    RainCity's own reply ("Hi Clayton, Thank you…"), which is not a quote.
+   *  - Jisel Dcunha: Google shows it truncated and it would not expand, so it
+   *    cannot be quoted whole.
+   *  - Salman Shan: almost certainly the same reviewer as "Sal Shan", who is
+   *    already here; two cards from one person reads as padding.
+   *  - "Iamdanishofficial": a username, not a name, and the review runs almost
+   *    sentence for sentence alongside Josephine C.'s. Side by side the two
+   *    would invite exactly the doubt a reviews section exists to remove.
+   * The seventeenth never loads in any view, so it is likely a rating with no
+   * text. Order mixes long and short so the first screenful is not all one
+   * length.
    *
    * The standing rule is unchanged: never a review without a real customer
    * behind it, and never a `service` field the review itself does not state.
@@ -2691,7 +2702,7 @@ export const testimonials = {
   items: [
     {
       quote:
-        "Very impressed with their gutter cleaning services. I could tell the team took their time to blow and clean every corner of my gutter and roof and after the rain today I could tell it’s no long clogging and spilling sideway! Pricing was very reasonable for the work that was done. They definitely went above and beyond. Highly recommended!!",
+        "Very impressed with their gutter cleaning services.\n\nI could tell the team took their time to blow and clean every corner of my gutter and roof and after the rain today I could tell it’s no long clogging and spilling sideway! Pricing was very reasonable for the work that was done. They definitely went above and beyond. Highly recommended!!",
       name: "Tri N.",
       source: "Google",
       stars: 5,
@@ -2707,6 +2718,68 @@ export const testimonials = {
       quote:
         "I recently used Raincity for exterior cleaning and pressure washing, and I'm incredibly happy with the results. From the first phone call to the job's completion, their crew was courteous, on time, and paid close attention to detail. They cleaned my driveway, siding, deck, and patio to perfection—everything looks freshly restored. I also really valued how careful they were with my property and how they made sure I was completely satisfied before finishing up. Their pricing is reasonable for the high standard of work they provide. I wouldn't hesitate to recommend Raincity to anyone in need of trustworthy and thorough exterior cleaning.",
       name: "Josephine C.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Wass did a fantastic job cleaning our very slippery walkways and fixing some unsightly and wearing stones.  Great job, fast and efficient service within the quote they gave us.  We'll definitely be using them again!",
+      name: "Michael B.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Impressive Driveway Sealing Work\n\nI’m really happy with the driveway sealing service. The crew arrived on time, prepped everything properly, and applied the sealer with care and precision. The finish looks great — smooth, clean, and even throughout. They were friendly, professional, and took the time to explain the drying process and how to maintain it. Great value for the quality of work. I’d definitely recommend them to anyone looking to protect and refresh their driveway.",
+      name: "Yash S.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Fantastic job blowing and packing leaves on our yard and driveway. Fair prices, prompt service, great result.",
+      name: "Heather A.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "We had a great experience with RainCity Property Maintenance. They showed up right on time, were extremely professional, and treated our property with care—especially around the landscaping. Our driveway and siding look brand new! Excellent service at a great price.\nHighly recommend them for any exterior cleaning needs.",
+      name: "Shaina S.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Mathew is great. The company is fantastic. I’d recommend them to anyone who is looking for any sort of service related to their properties.",
+      name: "Gurinder M.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Recently hired them for yard cleaning and fence repair, they did a great job on both.",
+      name: "Adeel S.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Great Company did a fantastic job power washing the deck…. I would highly recommend this company!!!!",
+      name: "Linda P.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote:
+        "Cleaned my rental house and everything is perfect now! Thank you !",
+      name: "Lucy L.",
+      source: "Google",
+      stars: 5,
+    },
+    {
+      quote: "Attention to detail was exemplorary.",
+      name: "John C.",
       source: "Google",
       stars: 5,
     },

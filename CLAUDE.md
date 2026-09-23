@@ -181,10 +181,11 @@ The client's homepage feedback, tracked item by item in
 - **Memberships & Partnerships replaced four stock badges** on the homepage
   Awards section, as `PartnerCard`s with each organisation's original logo
   (the logos-always rule under the /about section below). Four show: New West
-  Spotlight, CFIB, WorkSafeBC, Hello Gabby. **Two wait for their logo files and
-  do not render until they arrive**: Zen Insurance (Zen Insurance Inc.,
-  Calgary — confirmed, and *not* Zensurance; its domain is parked) and the
-  Tri-Cities Business Networking Group (not findable online). WorkSafeBC's
+  Spotlight, CFIB, WorkSafeBC, Hello Gabby. **Two stay in the data but do not
+  render, and Touseef has said to skip them (2026-09-23)**: Zen Insurance (Zen
+  Insurance Inc., Calgary — *not* Zensurance; its domain is parked) and the
+  Tri-Cities Business Networking Group (not findable online). Adding a `logo`
+  to either is all it would take to show it. WorkSafeBC's
   blurb is the one sentence WorkSafeBC permits, word for word; its terms also
   restrict employers' use of the logo, which Touseef was told and chose to
   show anyway, taking responsibility — so the logo carries no link.
@@ -216,10 +217,14 @@ Everything goes through `Reveal`, `RevealOnLoad`, `Stagger` and `StaggerItem`.
 If a new section needs motion, use those. Do not introduce a second idiom, and
 do not add a library back.
 
-### Testimonials — five, all real
+### Testimonials — fourteen, all real
 
-Three Google reviews (added 2026-09-23, copied word for word from the public
-Google Business Profile) and the two from the client's original homepage. The
+Twelve Google reviews (added 2026-09-23, copied word for word from the Google
+Business Profile, read signed in) and the two from the client's original
+homepage. Four of the sixteen readable Google reviews are left out on purpose —
+an owner reply with no review text, a truncated one, a probable duplicate
+reviewer, and a username whose text runs almost sentence for sentence with
+another shown review; the reasons are on `testimonials.items`. The
 four invented entries were removed long ago and are not coming back — see
 "Four testimonials were removed, not replaced" below. The standing rule is the
 important part:
@@ -229,9 +234,9 @@ verbatim, customer typos included; shorten names to first name and last
 initial; never add a city, a date or a service the review itself does not
 state (Google gives only "5 months ago", so no date is printed).
 
-**Only three of the seventeen Google reviews could be read** — signed out,
-Google Maps shows a few and asks you to sign in for the rest. The remaining
-fourteen go in the same way once someone copies them from a signed-in view.
+**Reading them needs a signed-in Google session** — signed out, Maps shows
+three. With one, the Reviews tab lazy-loads about ten, and re-sorting and the
+topic filters surface the rest. New reviews go in the same way, verbatim.
 
 **The rating is shown to visitors, not marked up.** `testimonials.google`
 holds "5.0 from 17, September 2026" and the section prints it with a link to
@@ -405,14 +410,13 @@ nowhere read as broken, and a guessed handle points visitors at a stranger's
 account under RainCity's name. That rule stands — **add Facebook, Instagram and
 the rest only with their real URLs**; their icons already exist in `Icon.tsx`.
 
-**One discrepancy to raise with the client.** The Google listing shows a street
-address — 828 Agnes St, New Westminster ("Located in: Westminster Towers") —
-while this site says there is no storefront and its LocalBusiness data
-deliberately has no `streetAddress`. Westminster Towers is a residential
-building, so this may be a home address listed for verification. Either the
-listing hides it (a service-area business can) or the site adds it; a name,
-address and phone that disagree between a site and its Google listing is a
-local-SEO consistency problem. Do not add it to the site without asking.
+**The street address stays off the site — decided by Touseef, 2026-09-23.**
+The Google listing shows one (828 Agnes St, New Westminster, in Westminster
+Towers); this site shows none and its LocalBusiness data has no
+`streetAddress`, as a mobile business with no storefront. Asked, Touseef said
+there is no need to show it. Do not add it. (If local-SEO consistency ever
+matters more, the lever is hiding the address on the Google listing, which a
+service-area business can do — not publishing it here.)
 
 ### /about carries a Home Ground section, and one line in it is unconfirmed
 
@@ -496,7 +500,9 @@ nothing personal (only that the two co-founded the company, plus copy the site
 already uses), so nothing false goes live if they are missed; replace them
 wholesale. Each card keeps its 4:5 portrait frame as a navy plate with the
 founder's initial, so a photo drops in by setting `photo` with nothing moving.
-This is a launch item.
+Touseef chose to publish with the placeholders in place (2026-09-23) and send
+the real bios and photos later — so they are live, and replacing them is still
+outstanding.
 
 **Grounds: Stats (Fog) → Founders (White) → Partnerships (Fog) → the cut**,
 restored now that Founders always renders (Partnerships had been White only

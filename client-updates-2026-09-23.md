@@ -150,3 +150,20 @@ worth doing for visitors, not for star snippets.
    address, hide it on the listing (Google lets service-area businesses do
    that); if it is the business address, say so and it goes on the website
    too. The two should agree
+
+---
+
+# Final round — 2026-09-23
+
+## Done
+- [x] **All readable Google reviews reviewed; 12 published**, word for word,
+  with the 2 from the old site — 14 in the carousel. Four left out: an owner
+  reply with no review text (Clayton D'mello), a truncated one (Jisel Dcunha),
+  a probable duplicate reviewer (Salman Shan / Sal Shan), and a username whose
+  text nearly matches another shown review (Iamdanishofficial)
+
+## Decided by Touseef
+- Founders: publish with placeholder bios and initial plates; real bios and
+  photos to follow
+- Zen Insurance and Tri-Cities: skip (hidden until a logo exists)
+- Street address from the Google listing: not shown on the site
