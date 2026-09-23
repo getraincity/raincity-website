@@ -52,6 +52,34 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
 
+  /**
+   * Long reviews are clamped to five lines (`review-clamp`) so every card is
+   * the same height with no dead space under a short one. Which reviews are
+   * actually cut off depends on the card width, so it is measured, not
+   * guessed from a character count: `truncated[i]` is true when quote i
+   * overflows its five lines at the current width. `open` holds the cards a
+   * reader has expanded.
+   */
+  const quoteRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const [truncated, setTruncated] = useState<boolean[]>([]);
+  const [open, setOpen] = useState<ReadonlySet<number>>(new Set());
+
+  const measure = useCallback(() => {
+    setTruncated(
+      quoteRefs.current.map((el) =>
+        el ? el.scrollHeight > el.clientHeight + 1 : false,
+      ),
+    );
+  }, []);
+
+  const toggle = (i: number) =>
+    setOpen((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+
   /** Read the carousel's position back out of the DOM after any scroll. */
   const sync = useCallback(() => {
     const el = trackRef.current;
@@ -78,13 +106,18 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
 
   useEffect(() => {
     sync();
+    measure();
     const el = trackRef.current;
     if (!el) return;
-    // Slide widths are percentages, so every resize moves the snap points.
-    const observer = new ResizeObserver(sync);
+    // Slide widths are percentages, so every resize moves the snap points —
+    // and changes where a quote's fifth line ends, so re-measure with it.
+    const observer = new ResizeObserver(() => {
+      sync();
+      measure();
+    });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [sync]);
+  }, [sync, measure]);
 
   const goTo = useCallback((target: number) => {
     const el = trackRef.current;
@@ -128,12 +161,21 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
         onKeyDown={onKeyDown}
         tabIndex={0}
         className={cn(
-          "no-scrollbar mt-block -mx-edge flex snap-x snap-mandatory gap-x-gap-x",
+          // `items-start`, not the default stretch: every closed card is
+          // already the same height (five reserved lines of quote, a fixed
+          // caption), so stretching only ever mattered when one was opened —
+          // and then it padded every neighbour with the dead space this
+          // layout exists to remove. Now an opened review grows on its own.
+          "no-scrollbar mt-block -mx-edge flex items-start snap-x snap-mandatory gap-x-gap-x",
           "scroll-px-edge overflow-x-auto scroll-smooth px-edge",
         )}
       >
-        {items.map((item) => {
+        {items.map((item, i) => {
           const service = item.service;
+          const isOpen = open.has(i);
+          // Shown for a quote that is cut off, and kept while it is open so
+          // it can be closed again (an open quote no longer overflows).
+          const canToggle = isOpen || truncated[i];
           return (
             <li
               key={item.name}
@@ -161,17 +203,45 @@ export function TestimonialsCarousel({ items }: { items: TestimonialItem[] }) {
                     <span className="block h-hairline w-label-bar bg-amber" />
                   </span>
                 )}
-                {/* body-base rather than body-l since real Google reviews
-                    arrived: the longest runs to ~640 characters and every
-                    card in the track stretches to the tallest, so at 19px
-                    the short reviews sat in tall, mostly empty cards. */}
-                <blockquote className="mt-6 grow">
-                  <p className="body-base text-navy">&ldquo;{item.quote}&rdquo;</p>
+                {/* Five lines, held (`review-clamp`), so every card is the
+                    same height and none carries dead space. The quote stays
+                    whole in the HTML — only its display is clamped — so
+                    crawlers and screen readers get the full review. */}
+                <blockquote className="mt-6">
+                  <p
+                    id={`review-${i}`}
+                    ref={(el) => {
+                      quoteRefs.current[i] = el;
+                    }}
+                    className={cn("body-base text-navy", !isOpen && "review-clamp")}
+                  >
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
                 </blockquote>
-                {/* Fixed height so the rule above the attribution lands on
-                    the same line in every card, whichever lines a card
-                    carries under the name. */}
-                <figcaption className="mt-7 min-h-24 border-t border-t-line pt-5">
+                {/* The toggle's line is always reserved and only made
+                    visible once a quote is measured as cut off, so nothing
+                    moves when the script arrives: `invisible` keeps the box
+                    and removes it from focus and from screen readers. */}
+                <button
+                  type="button"
+                  onClick={() => toggle(i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`review-${i}`}
+                  className={cn(
+                    "meta mt-3 self-start text-rc-blue transition-colors hover:text-navy",
+                    !canToggle && "invisible",
+                  )}
+                >
+                  {isOpen ? "Show less" : "Read more"}
+                  <span className="sr-only"> of {item.name}&rsquo;s review</span>
+                </button>
+                {/* Name, then one line: "Google review" or the city. Every
+                    review carries exactly those two, so the caption needs no
+                    reserved height — it used to hold 96px for a third
+                    (service) line no real review has, which left a band of
+                    empty card under every name. If a review ever arrives with
+                    a service, reserve that line here for all cards. */}
+                <figcaption className="mt-5 border-t border-t-line pt-5">
                   <p className="display-s text-navy">{item.name}</p>
                   <p className="meta mt-1.5 text-steel">
                     {item.source ? `${item.source} review` : item.place}

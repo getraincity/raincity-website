@@ -242,6 +242,15 @@ rules — never shown as stars, and exposed to a manual action. The reasoning is
 on those fields and at the gate in `lib/seo.tsx`. Update the count and the
 month together when more reviews are added.
 
+**Cards are equal height with no dead space, by clamping, not stretching.**
+Every quote is held to five lines and always takes five lines' room
+(`review-clamp` in `globals.css`, using the `lh` unit); longer reviews end in an
+ellipsis and open with "Read more", which appears only where the quote is
+measurably cut off at the current width. The track is `items-start`, so an
+opened card grows alone. The full review text stays in the HTML. Stretching to
+the tallest card — the previous approach — padded every short review with
+blank space, which the client rejected.
+
 **`relative` on each carousel card is load-bearing.** The star rating's
 `sr-only` label is absolutely positioned; without a positioned ancestor inside
 the scroll track it escaped the track's clipping and widened the homepage by

@@ -563,6 +563,21 @@
   );
 }
 
+/* Review quote: held to five lines, and always taking five lines' room.
+   Every card in the testimonials track is then the same height with no dead
+   space under a short review; a longer one ends in an ellipsis and opens with
+   "Read more". `lh` is one line of the element's own type, so this stays
+   exact if the quote's size ever changes — no pixel value to keep in step.
+   Supported by every browser in package.json's browserslist. */
+@utility review-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+  min-height: 5lh;
+}
+
 /* Service card: a corner notched out of the photo to reveal RainCity Blue. */
 @utility card-corner-cut {
   clip-path: polygon(
