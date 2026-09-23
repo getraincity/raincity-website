@@ -1,28 +1,42 @@
 import Image from "next/image";
 import { awards, social } from "@/lib/content";
+import { cn } from "@/lib/cn";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { PartnerCard, panelTint } from "@/components/ui/PartnerCard";
 import { Check, SocialIcon } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+
+/** Memberships with a logo on file — the only ones shown. See the row below. */
+const shownMemberships = awards.memberships.filter((m) => m.logo);
+
+/**
+ * `lg` columns by count, as whole literal class strings (the scanner never
+ * sees a constructed one). Four across for four, three across for five or
+ * six — which is two full rows at six.
+ */
+const membershipColumns: Record<number, string> = {
+  1: "lg:grid-cols-1 lg:max-w-sm",
+  2: "lg:grid-cols-2",
+  3: "lg:grid-cols-3",
+  4: "lg:grid-cols-4",
+};
 
 /**
  * Awards & Recognition.
  *
- * One credential is the headline and four support it. The Canadian Choice
- * Award takes an oversized plate on the right of the section — the same
- * copy-left / evidence-right grammar the rest of the page uses — sized to
- * fill the column beside the copy, with the supporting marks running
- * underneath at a fraction of the size. The ranking is legible before a word
- * is read.
+ * One credential is the headline and the memberships support it. The Canadian
+ * Choice Award takes an oversized plate on the right of the section — the
+ * same copy-left / evidence-right grammar the rest of the page uses — sized
+ * to fill the column beside the copy, with the Memberships & Partnerships
+ * cards running underneath at a fraction of the weight. The ranking is
+ * legible before a word is read.
  *
- * The five source images come from different houses: two 3D renders in gold,
- * one in red, one flat vector in blue. Rather than restyle artwork we do not
- * own, every supporting mark is set in an identical Fog plate inside an
- * identical white card and captioned in the same type. The containers carry
- * the consistency, which is why the row reads as one deliberate set.
+ * The row under it held four stock badges until 2026-09-23; the reasoning for
+ * the cards that replaced them is at the row itself, and the list is
+ * `awards.memberships` in content.ts.
  *
- * Plates are square, not circular: the system resets `--radius-*` and takes
- * no radius on any card, field or panel, so a pill or a circle here would be
- * the only rounded edge in the section.
+ * Nothing here is rounded: the system resets `--radius-*` and takes no radius
+ * on any card, field or panel.
  */
 export function Awards() {
   return (
@@ -96,30 +110,34 @@ export function Awards() {
           </Reveal>
         </div>
 
-        {/* Supporting marks. 2x2 on phones and tablets &mdash; four across only
-            once the column is wide enough for the longest caption to sit on
-            two lines rather than three. */}
+        {/* Memberships & Partnerships — the client's list, replacing four
+            stock badges (2026-09-23).
+
+            `PartnerCard`, the /about partner card, so the logo leads: people
+            recognise these organisations by their marks. ONLY ENTRIES WITH A
+            LOGO RENDER — the standing rule is no name-only cards, so an
+            organisation still waiting for its file stays in content.ts and
+            appears here the day `logo` is set, with no change to this file.
+
+            Column count follows the number shown, so the grid never strands
+            one card on a row of its own. */}
         <Reveal as="h3" className="meta mt-14 text-steel">
-          {awards.credentialsLabel}
+          {awards.membershipsLabel}
         </Reveal>
-        <Stagger as="ul" className="mt-5 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {awards.credentials.map((c) => (
-            <StaggerItem
-              as="li"
-              key={c.label}
-              className="flex flex-col items-center gap-4 border border-line bg-white px-4 py-6 text-center sm:px-6"
-            >
-              <span className="flex size-24 shrink-0 items-center justify-center bg-fog p-3 sm:size-32 sm:p-4">
-                <Image
-                  src={c.src}
-                  alt={c.alt}
-                  width={c.width}
-                  height={c.height}
-                  sizes="(min-width: 640px) 128px, 96px"
-                  className="h-full w-full object-contain"
-                />
-              </span>
-              <p className="meta text-navy">{c.label}</p>
+        <Stagger
+          as="ul"
+          className={cn(
+            "mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6",
+            membershipColumns[shownMemberships.length] ?? "lg:grid-cols-3",
+          )}
+        >
+          {shownMemberships.map((m, i) => (
+            <StaggerItem as="li" key={m.name}>
+              <PartnerCard
+                partner={m}
+                tag={m.tag}
+                tint={panelTint[i % panelTint.length]}
+              />
             </StaggerItem>
           ))}
         </Stagger>

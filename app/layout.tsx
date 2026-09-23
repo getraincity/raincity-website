@@ -3,6 +3,7 @@ import { Chivo, IBM_Plex_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { business } from "@/lib/content";
+import { LogoSprite } from "@/components/ui/LogoSprite";
 import {
   JsonLd,
   OG_IMAGE,
@@ -176,6 +177,12 @@ export default function RootLayout({
         <noscript>
           <style>{`[data-motion]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
+        {/* The logo's shapes, once per page. Every <Logo /> — header, mobile
+            menu, footer, closing band — draws them through <use>; see
+            LogoSprite.tsx for why they are not inlined per instance. It lives
+            in the layout so it survives client-side navigation with the
+            header that depends on it. */}
+        <LogoSprite />
         <a
           href="#main"
           className="meta sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-navy focus:px-5 focus:py-3 focus:text-white"

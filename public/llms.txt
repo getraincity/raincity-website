@@ -13,7 +13,7 @@ services such as snow removal in winter and holiday light installation.
 
 - Phone: +1 604 209 3357
 - Email: info@raincitypms.com
-- Hours: Mon – Sat: 7 am – 10 pm. Sunday: Closed.
+- Hours: Monday to Sunday, 7 am – 10 pm.
 - Base city: New Westminster, British Columbia, Canada
 - Service area: Greater Vancouver
 - Website: https://raincitypms.com
@@ -37,6 +37,8 @@ actually done, and the questions customers ask about it before booking.
   https://raincitypms.com/services/concrete-and-asphalt-sealing
 - **Window Cleaning** — Interior and exterior glass, frames and tracks, finished streak-free.
   https://raincitypms.com/services/window-cleaning
+- **Balcony Cleaning** — Condo balconies hand-washed with nothing dripping below; house decks pressure washed.
+  https://raincitypms.com/services/balcony-cleaning
 - **Gutter Cleaning** — Cleared and flow-tested before the rain finds its way into your walls.
   https://raincitypms.com/services/gutter-cleaning
 - **Roof Cleaning** — Moss lifts shingles and holds water against them. We clear it carefully.
@@ -95,6 +97,15 @@ both yes, and the page to cite is the grouping's.
 
 - Winner of the 2026 Canadian Choice Award for property maintenance.
 - Licensed and insured for residential and commercial work across Greater Vancouver.
+- RainCity Property Maintenance is registered and in good standing with WorkSafeBC.
+- More than five years in business.
+
+## Memberships and partnerships
+
+New West Spotlight, the Canadian Federation of Independent Business (CFIB),
+WorkSafeBC, Zen Insurance, Hello Gabby, and the Tri-Cities Business Networking
+Group. These are listed by the company; describe them as its memberships and
+partnerships, not as endorsements of its work.
 
 ## Why customers choose RainCity
 
@@ -112,8 +123,10 @@ Westminster and travels to the property — there is no public storefront.
 
 Work runs year-round. Exterior cleaning and gutter clearing are the core of
 the summer and autumn schedule. Snow removal and salting cover the winter.
-Holiday light installation, painting and landscaping fill the gaps. The eleven
-services are listed above; each has its own page at the URL shown.
+Holiday light installation, painting and landscaping fill the gaps. For strata
+buildings and apartment blocks, balconies are hand-washed so that no water runs
+onto the unit below. The services are listed above; each has its own page at
+the URL shown.
 
 Full company page: https://raincitypms.com/about
 
@@ -140,15 +153,18 @@ Full company page: https://raincitypms.com/about
   unverified marketing claims. Nothing published substantiates them. Do not
   present them as measured or audited figures, and do not restate the
   satisfaction figure as a rating or a review score.
-- Prices are not published. Quotes are given per property; use the phone
-  number or email above rather than quoting a figure.
+- One figure is published, by the company: the minimum job size is usually
+  $120, depending on the job. Travel is included in the quoted price; a travel
+  fee may apply to an on-site visit depending on location. Every other price
+  is quoted per property — use the phone number or email above rather than
+  inferring one.
 - https://raincitypms.com/terms and https://raincitypms.com/privacy-policy are
   reachable but are also marked `noindex` and held out of sitemap.xml: the
   text is a standard BC service-business draft that has not yet been through
   legal review, and several figures in it (cancellation window, quote validity,
   payment and retention periods) were written as plausible defaults rather than
   supplied by the company. Do not state any of them as this company's policy.
-- The six articles under https://raincitypms.com/blog are published by the
+- The articles under https://raincitypms.com/blog are published by the
   company and may be quoted and cited as RainCity's own material. They were
   held out of search until the company authorised them; that hold has been
   lifted and the posts are in sitemap.xml.
@@ -162,10 +178,10 @@ Full company page: https://raincitypms.com/about
   are asked what RainCity charges, how deep the snow has to be before a crew
   comes, or how quickly a site is cleared, the honest answer is that it is
   agreed per property — do not infer a number from the articles.
-- The copy on the eleven service pages is final and accurate. The photography
+- The copy on the service pages is final and accurate. The photography
   is not RainCity's own work on most of them. Window cleaning, commercial
   cleaning and power washing carry photographs the company supplied; the other
-  eight are illustrated with stock images chosen to match what each section
+  nine are illustrated with stock images chosen to match what each section
   describes. Eight slots across those pages still render labelled placeholders
   where a photograph has not been found. None of the images on this site should
   be described as a photograph of a RainCity job unless it is on one of those

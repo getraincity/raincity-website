@@ -30,21 +30,28 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * Earlier rejected versions (a ruled register, a strip of nameless tiles,
  * rounded sector panels, a bare logo grid) are in git history.
  *
- * Ground stays White: Founders renders nothing today, so this section sits
- * straight under Stats' Fog, and the `SectionEdge` after it runs
- * `from="bg-white"` for that reason. Empty groups contribute no cards.
+ * Ground is Fog — the designed sequence, Stats (Fog) → Founders (White) →
+ * Partnerships (Fog) → the cut. It was White only while Founders rendered
+ * nothing; with the two founders confirmed (2026-09-23) Founders always shows,
+ * so this is Fog again and the `SectionEdge` after it runs `from="bg-fog"`.
+ * The cards carry their own white ground. Empty groups contribute no cards.
  *
  * `id="partners"` is the target of the "See all our partners" link on the
  * community pages; `scroll-mt-20` clears the sticky header, as on QuoteForm.
  */
 export function Partnerships() {
+  // Logo or nothing: the standing rule is that a partner is never shown as a
+  // name-only card (Touseef, 2026-09-23). All nine carry their own current
+  // logo today; a partner added without one waits here until it has one.
   const cards = partnerships.groups.flatMap((group) =>
-    group.items.map((partner) => ({ partner, tag: group.tag })),
+    group.items
+      .filter((partner) => partner.logo)
+      .map((partner) => ({ partner, tag: group.tag })),
   );
   if (cards.length === 0) return null;
 
   return (
-    <section id="partners" className="scroll-mt-20 bg-white py-section" aria-labelledby="partnerships-heading">
+    <section id="partners" className="scroll-mt-20 bg-fog py-section" aria-labelledby="partnerships-heading">
       <div className="mx-auto max-w-site px-edge">
         <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div>

@@ -6,8 +6,20 @@ const barColors = {
 } as const;
 
 /**
+ * Label ink per ground. `blue` is for the RainCity Blue bands: Pacific Blue
+ * measures about 2:1 on that ground, so the label goes white there — the same
+ * call the service pages' trust band makes for its check marks.
+ */
+const toneColors = {
+  light: "text-rc-blue",
+  dark: "text-pacific",
+  blue: "text-white",
+} as const;
+
+/**
  * Section label — a 28x3px bar followed by the eyebrow type row.
- * On navy the label lifts to Pacific Blue for contrast.
+ * On navy the label lifts to Pacific Blue for contrast; on RainCity Blue it
+ * goes white.
  *
  * The bar is amber everywhere except Stats' "By the numbers" eyebrow, which
  * sits on Fog next to the amber-barred stat dividers below it — amber there
@@ -21,7 +33,7 @@ export function SectionLabel({
   className,
 }: {
   children: React.ReactNode;
-  tone?: "light" | "dark";
+  tone?: keyof typeof toneColors;
   bar?: "amber" | "blue";
   className?: string;
 }) {
@@ -31,9 +43,7 @@ export function SectionLabel({
         aria-hidden="true"
         className={cn("block w-label-bar h-hairline shrink-0", barColors[bar])}
       />
-      <span
-        className={cn("eyebrow", tone === "dark" ? "text-pacific" : "text-rc-blue")}
-      >
+      <span className={cn("eyebrow", toneColors[tone])}>
         {children}
       </span>
     </p>

@@ -12,7 +12,7 @@ import { About } from "@/components/home/About";
 import { Services } from "@/components/home/Services";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { Projects } from "@/components/home/Projects";
-import { Pillars } from "@/components/home/Pillars";
+import { LatestWork } from "@/components/home/LatestWork";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Awards } from "@/components/home/Awards";
 import { QuoteForm } from "@/components/home/QuoteForm";
@@ -67,7 +67,7 @@ export default function HomePage() {
         <WhyChooseUs />
         <Projects />
         <SectionEdge from="bg-mist" to="bg-navy" />
-        <Pillars />
+        <LatestWork />
         <Testimonials />
         <Awards />
         <QuoteForm />

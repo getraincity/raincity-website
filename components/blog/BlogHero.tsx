@@ -84,6 +84,11 @@ export function BlogHero() {
             delay={0.06}
           >
             {blogPage.hero.heading}
+            {/* The keyword line, inside the same h1 — as on /services and
+                /locations. */}
+            <span className="display-m mt-3 block text-fog">
+              {blogPage.hero.headingSub}
+            </span>
           </RevealOnLoad>
 
           <RevealOnLoad as="p" className="body-l mt-5 text-fog" delay={0.14}>

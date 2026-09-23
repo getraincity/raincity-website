@@ -155,6 +155,16 @@ export const photos = {
     note: "Home Ground figure on /about, rendered 1:1. GENUINELY NEW WESTMINSTER, which the previous frame (a Victoria street, `about-home-ground.webp`, still in assets/ and public/) was not. Unsplash photo jI-L9NbH_fw by Gennifer Miller, location pinned to Westminster Pier Park, 6th Street — and verified by eye rather than by tag: the SkyBridge towers and the Pattullo arch are unmistakable, which matters because an earlier 'New Westminster' search result turned out to be Edinburgh. Free Unsplash licence, commercial use, no attribution required; the name is recorded because the API supplied it. Chosen at the client's request (2026-09-13) for a picture that reads as New Westminster at first glance. Downloaded at 2400x1800 into `assets/new-westminster-pier-park-skybridge.jpg`, served at 1600x1200 webp. Focal sits a little left of centre so the square crop keeps the boardwalk and both bridge towers. Other verified New Westminster candidates if this ever needs replacing: v1-pWlkHrkA (barge under the SkyBridge, New West towers, warm grade) and GIfAQbvQkGE (SkyBridge at sunset).",
   },
 
+  quoteNewWestminster: {
+    src: "/quote-new-westminster.webp",
+    alt: "Downtown New Westminster from above the Fraser River: a work barge moored under the SkyBridge, log booms on the water, and the city's towers rising behind the rail line and Front Street.",
+    credit: "Syawish Rehman",
+    tone: "#9a8372",
+    ratio: "16:9",
+    focal: "58% 50%",
+    note: "The \"Where we work\" panel beside the sitewide quote form, rendered with `fill`, so the ratio is nominal. It replaced a Maps Embed API iframe that rendered a text fallback on every page because no API key was ever issued (2026-09-23, client: \"not a placeholder at all\"). A photograph needs no key, no third party and no billing account, so it cannot go blank. Unsplash photo v1-pWlkHrkA by Syawish Rehman — one of the two alternates recorded on `aboutHomeGround` — verified by eye as New Westminster: the SkyBridge, the Fraser log booms, the waterfront rail line and the downtown towers top right. Free Unsplash licence. Downloaded at 2400x1350 into `assets/new-westminster-skybridge-downtown.jpg`; served at the same size with saturation eased 15%, because the source's warm grade sat hard against the overcast palette. Served full width because the panel crops it to a tall rectangle and needs the pixels. Focal sits right of centre to hold the barge, the bridge pier and the towers. NOT used on /about: Home Ground sits directly above the form there and already shows the SkyBridge — see the `photo` prop on QuoteForm.",
+  },
+
   servicesHero: {
     src: "/our-services-hero-background.webp",
     alt: "A RainCity technician on a tiled Greater Vancouver roof running a pressure-washing wand across a row of solar panels under a clear blue sky.",
@@ -287,6 +297,16 @@ export const photos = {
     tone: "#cfd4d8",
     ratio: "4:5",
     focal: "62% 50%",
+  },
+
+  balconyCleaning: {
+    src: "/services/balcony-cleaning.webp",
+    alt: "Balcony cleaning: a four-storey condo building with glass-railed balconies stacked one above another under a blue sky.",
+    credit: "Unsplash",
+    tone: "#4c6c7f",
+    ratio: "3:2",
+    focal: "55% 45%",
+    note: "Card and hero for Balcony Cleaning (added 2026-09-23). Unsplash 3JV-5UM5hWE, free licence. A condition-and-subject frame, not a job: it shows the stacked glass balconies the service is written around — the reason it is hand washing on a condo, since every balcony has one below it — and the timber soffit and lap siding read as a West Coast mid-rise. No crew in frame. Served at 2400x1600 because it is the page's LCP banner. Original: `assets/balcony-condo-midrise-glass-railings.jpg`.",
   },
 
   gutterCleaning: {
@@ -1209,6 +1229,86 @@ export const photos = {
     tone: "#718056",
     focal: "50% 55%",
     note: "No crew and no machines, and every line the page has been arguing about is visible at once — the cut, the edge against the wall, the shrubs held to shape. A residential frontage rather than the strata grounds the brief offered as the alternative, which suits the band: it is the scale most readers are picturing.",
+  },
+
+  // --- Balcony Cleaning ----------------------------------------------------
+  //
+  // Added 2026-09-23 with the service. All seven frames are Unsplash (free
+  // licence), downloaded rather than hot-linked, originals in `assets/` under
+  // `balcony-*`. Like the other stock-illustrated services, the notes say what
+  // each frame does and does not show: none of them is a RainCity job, and
+  // three show the surface rather than the work. Replace with job photographs
+  // when the crew has them — hand washing on a condo balcony is exactly the
+  // kind of process shot stock does not carry.
+
+  balconyGlass: {
+    src: "/services/balcony-cleaning/glass-railings.webp",
+    alt: "Balcony cleaning: frosted glass balcony panels on a white apartment building, a leafy tree in front and an overcast sky behind.",
+    credit: "Unsplash",
+    tone: "#859aa0",
+    ratio: "16:10",
+    focal: "60% 55%",
+    note: "Subject, not method: glass balcony panels of the kind the tile describes, with no hands or squeegee in frame. Overcast light and street trees keep it on this coast. Unsplash YcoBpYHdqCg, portrait source cropped to 16:10.",
+  },
+
+  balconyFloors: {
+    src: "/services/balcony-cleaning/hand-scrubbed-floors.webp",
+    alt: "Balcony cleaning: a stiff hand scrubbing brush resting on concrete pavers against a white wall with a timber skirting board.",
+    credit: "Unsplash",
+    tone: "#a08d81",
+    ratio: "16:10",
+    focal: "55% 60%",
+    note: "The tool rather than the task — a hand brush on pavers, which is the tile's argument (brush and bucket, not a hose) stated as an object. Unsplash mHdaRVIBq0g.",
+  },
+
+  balconyBelow: {
+    src: "/services/balcony-cleaning/nothing-drips-below.webp",
+    alt: "Balcony cleaning: glass-railed balconies stacked one above another up the corner of an apartment tower against a clear sky.",
+    credit: "Unsplash",
+    tone: "#547992",
+    ratio: "16:10",
+    focal: "70% 50%",
+    note: "Chosen for the stack: each balcony directly over the next, which is the whole reason the tile exists. Unsplash 754KuG9YY7o, portrait source cropped to 16:10. Nothing is being cleaned in it.",
+  },
+
+  balconyDoors: {
+    src: "/services/balcony-cleaning/doors-frames-tracks.webp",
+    alt: "Balcony cleaning: full-height glass doors and a grey panelled wall opening onto a paved rooftop terrace, a floor drain set into the pavers.",
+    credit: "Unsplash",
+    tone: "#9b9992",
+    ratio: "16:10",
+    focal: "30% 55%",
+    note: "Glass doors and frames onto a paved balcony, with the floor drain visible — the drainage the copy checks before anything gets wet. A clean finished surface rather than work in progress. Unsplash iHhXWwv-V_8.",
+  },
+
+  balconyDecks: {
+    src: "/services/balcony-cleaning/house-decks.webp",
+    alt: "Balcony cleaning: a cedar deck and built-in bench off a green-sided house, sliding doors behind and tall conifers all around.",
+    credit: "Unsplash",
+    tone: "#72694e",
+    ratio: "16:10",
+    focal: "45% 60%",
+    note: "The house half of the service: a timber deck under conifers, the setting that greys a deck over a Greater Vancouver winter. Shows the surface after, not the pressure wash. Unsplash HlJuQDBh3w4.",
+  },
+
+  balconyBuilding: {
+    src: "/services/balcony-cleaning/whole-building.webp",
+    alt: "Balcony cleaning: two brick mid-rise apartment blocks with a column of glass-railed balconies on each, against a deep blue sky.",
+    credit: "Unsplash",
+    tone: "#253141",
+    ratio: "16:10",
+    focal: "50% 50%",
+    note: "A building-wide programme's scale: two blocks, every floor a balcony. The low-rise brick reads closer to New Westminster than a glass tower would. Unsplash Y5PYLVAAp9w.",
+  },
+
+  balconyClosing: {
+    src: "/services/balcony-cleaning/the-finished-balcony.webp",
+    alt: "A clean paved balcony beside a brick wall, a frosted privacy screen and a black-framed glass railing, with deciduous trees beyond.",
+    credit: "Unsplash",
+    tone: "#7a7a64",
+    ratio: "16:9",
+    focal: "55% 60%",
+    note: "Closing band, at the shared 1920x774. The finished state — swept pavers, clear glass, a privacy screen — which is what the closing question asks about. Replaced a first choice (L6qeLZGySzM) that turned out on inspection to be an architectural render, which the photography rules exclude. Unsplash fN3dRwzOux0.",
   },
 
   // --- Community (location pages) -----------------------------------------

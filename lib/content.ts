@@ -31,8 +31,9 @@ export const business = {
   email: "info@raincitypms.com",
   emailHref: "mailto:info@raincitypms.com",
   hours: {
-    weekdays: "Mon – Sat: 7 am – 10 pm",
-    sunday: "Sunday: Closed",
+    // Seven days since 2026-09-23 (client-confirmed); was Mon–Sat with
+    // Sunday closed. `openingHoursSpecification` in lib/seo.tsx must match.
+    days: "Mon – Sun: 7 am – 10 pm",
   },
   base: "New Westminster",
   region: "Greater Vancouver",
@@ -707,6 +708,116 @@ export const services: Service[] = [
           question: "Are you insured, and how does a quote work?",
           answer:
             "We are fully licensed and insured, and we will send the certificate straight to a strata council or property manager on request. Quotes are free and priced on the property: we count the openings, look at the access and give you a written figure. No rate card and no per-pane guess over the phone, and the figure does not move afterwards unless the scope does.",
+        },
+      ],
+    },
+  },
+  /*
+   * Balcony Cleaning — the twelfth service, added 2026-09-23 at the client's
+   * request: "detailed hand washing, no spills, for condos and apartments, and
+   * the standard pressure washing for homes". Those two sentences are the
+   * whole of the brief and the spine of every block below; everything else
+   * restates method this site already publishes (the soak-and-rinse around
+   * planting, the pressure-to-surface rule, the free written quote, the
+   * return visit under the workmanship guarantee).
+   *
+   * Nothing here names a price, a duration, a crew size or a notice period.
+   * The one operational claim — that no water goes over the edge onto the
+   * unit below — is the client's own "no spills", and it is the claim the
+   * office has to hold to on the phone.
+   */
+  {
+    slug: "balcony-cleaning",
+    title: "Balcony Cleaning",
+    blurb:
+      "Condo balconies hand-washed with nothing dripping below; house decks pressure washed.",
+    photo: "balconyCleaning",
+    detail: {
+      heading: "Balconies Washed by Hand, Not Hosed Off",
+      intro:
+        "Condo and apartment balconies hand-washed with the water kept on the slab, so nothing runs over the edge onto the balcony below. House decks and patios get a standard pressure wash.",
+      overviewHeading: "Every Balcony Has a Neighbour Below",
+      overview:
+        "A hose on a fourth-floor balcony is a complaint on the third. So on a condo or apartment balcony the work is done by hand: glass and railings washed with a cloth and squeegee, the floor scrubbed with a brush and a bucket rather than flooded, and the dirty water collected before it can reach the edge. Drains are checked clear before anything gets wet. On a house, where a deck sits over a lawn rather than someone's patio chairs, a pressure wash set for timber or concrete is the better tool.",
+      included: [
+        {
+          title: "Glass railings and privacy panels",
+          photo: "balconyGlass",
+          description:
+            "Both faces of every panel, washed by hand and squeegeed dry, with the top cap and the channel the glass stands in wiped out rather than left holding grit. Frosted privacy screens get the same care, and so do the handrails and brackets, which are where the weather lays its film down first.",
+        },
+        {
+          title: "Floors scrubbed by hand",
+          photo: "balconyFloors",
+          description:
+            "Concrete, pavers, tile and membrane worked with a stiff brush and a measured amount of water instead of a hose. Moss in the joints and the grey film a wet winter leaves are loosened by hand, and the dirty water is gathered up rather than swept to the edge. Membranes are handled gently: they are the building's waterproofing.",
+        },
+        {
+          title: "Nothing over the edge",
+          photo: "balconyBelow",
+          description:
+            "On a stacked building this is the job. The water stays on the balcony being cleaned — no hose, no pressure washer, no run-off down the face of the building or across the unit beneath. Drains and scuppers are cleared first, so the little water there is leaves the way the building was designed to send it.",
+        },
+        {
+          title: "Sliding doors, frames and tracks",
+          photo: "balconyDoors",
+          description:
+            "The outside of the sliding door, its frame, and the track it runs in — the part that fills with grit and needles until the door drags. Tracks are brushed out and wiped, weep holes are checked open so the next storm drains away from the sill, and the glass is finished streak-free.",
+        },
+        {
+          title: "House decks and patios, pressure washed",
+          photo: "balconyDecks",
+          description:
+            "On a house the deck sits over a garden, not a neighbour, so a standard pressure wash is the right tool: timber, composite and concrete cleaned at a pressure the surface can take, working with the grain on wood. Beds beside the deck are watered down before we start and again when we finish.",
+        },
+        {
+          title: "Whole buildings, on the strata's schedule",
+          photo: "balconyBuilding",
+          description:
+            "For strata councils and property managers, every balcony in a building on one programme instead of one door at a time. The order and the dates are agreed with the council or manager, timed to the notice the building gives its residents, and balconies we could not reach on the day are listed rather than quietly skipped.",
+        },
+      ],
+      cta: "Book Your Balcony Clean",
+      trust: {
+        blurb:
+          "On a stacked building the risk in balcony cleaning is not the balcony — it is the one below it, and the resident who comes home to a wet chair and a streaked window. That is why condos and apartments are washed by hand rather than with a hose, and why a building-wide clean is planned with the strata council or property manager instead of arranged one suite at a time. Houses, where the only thing under a deck is the lawn, get the standard pressure wash.",
+        points: [
+          "Licensed and insured, certificates on request",
+          "Based in New Westminster, on balconies region-wide",
+          "Condos, apartment buildings, stratas and houses",
+          "Free quotes, in writing, before any work starts",
+          "Anything missed is put right on a return visit",
+        ],
+      },
+      closing: "Ready for a Balcony You Actually Use?",
+      closingPhoto: "balconyClosing",
+      metaDescription:
+        "Balcony cleaning in Greater Vancouver: condo and apartment balconies hand-washed with no spills onto the units below, and house decks pressure washed.",
+      faqs: [
+        {
+          question: "Will water drip onto the balcony below?",
+          answer:
+            "No — that is exactly why condo and apartment balconies are hand-washed rather than hosed. The water used is a bucket's worth, not a hose's; it stays on the slab being cleaned and is collected before it reaches the edge. Drains are checked clear first, so what little runs goes into the building's own drainage rather than down its face.",
+        },
+        {
+          question: "Why not just pressure wash a condo balcony?",
+          answer:
+            "Because the water has to go somewhere, and on a stacked building somewhere is the balcony below, the window beside it and whatever the neighbour left outside. Pressure also drives water under door sills and into membrane seams that were never built to take it. A house deck over a lawn has neither problem, which is why houses get a pressure wash and condos get hand washing.",
+        },
+        {
+          question: "Do I need to be home?",
+          answer:
+            "Usually, or someone needs to let us through: on most buildings the only way onto a balcony is through the suite. On a building-wide clean, access is arranged through the strata council or property manager, and any balcony that cannot be reached on the day is noted so it can be picked up rather than missed.",
+        },
+        {
+          question: "What should I take off the balcony first?",
+          answer:
+            "Anything you would not want wet, and anything fragile. Light furniture and planters can stay and be moved around as we go; heavy planters are cleaned around rather than dragged across a membrane. If something on the balcony belongs to the building — a planter box, a privacy screen — mention it when you book.",
+        },
+        {
+          question: "Can you do every balcony in our building?",
+          answer:
+            "Yes. For a strata or rental building the work is planned with the council or property manager as one programme rather than booked suite by suite, and it is quoted in writing before anything starts. Pairing it with the building's window cleaning is often worth asking about, since the glass on both sides of the balcony door ends up clean on the same visit.",
         },
       ],
     },
@@ -1540,7 +1651,7 @@ export const locations: Location[] = [
         {
           question: "Will you come out to Anmore for a single job?",
           answer:
-            "Yes, and there is no minimum job size or travel surcharge on the quote — an Anmore property is priced the same way a New Westminster one is. What we will often suggest is combining work into one visit rather than two: if the gutters are being cleared the roof is already being walked, and doing both while the crew is set up costs less than coming back for the second one.",
+            "Yes. Travel is already included in the price we quote, so an Anmore property is priced the same way a New Westminster one is; the usual minimum job size of $120 applies, though it depends on the job, and a travel fee may apply to an on-site visit this far out. What we will often suggest is combining work into one visit rather than two: if the gutters are being cleared the roof is already being walked, and doing both while the crew is set up costs less than coming back for the second one.",
         },
         {
           question: "Our driveway is long and steep. Does that make it harder?",
@@ -1618,7 +1729,7 @@ export const locations: Location[] = [
         {
           question: "Is there a travel charge for Burnaby?",
           answer:
-            "No. There is no travel charge anywhere in our service area, Burnaby included — a job is priced on the property in front of us, exactly as one on our own street in New Westminster would be. Being next door does not make it cheaper either; the rate is the rate.",
+            "Not on the job. Travel is already included in the price we quote, Burnaby included — a job is priced on the property in front of us, exactly as one on our own street in New Westminster would be. A travel fee may apply to an on-site visit depending on location, and being next door does not make the work cheaper either; the rate is the rate.",
         },
       ],
       nearby: ["new-westminster", "vancouver", "tri-cities"],
@@ -1656,7 +1767,7 @@ export const locations: Location[] = [
         {
           question: "Do you cover all of Delta, or only North Delta?",
           answer:
-            "All of it. North Delta, Ladner and Tsawwassen are one service area for us and priced the same way, which is on the property rather than on the postal code. Tsawwassen is the furthest point south we work and there is no surcharge attached to it.",
+            "All of it. North Delta, Ladner and Tsawwassen are one service area for us and priced the same way, which is on the property rather than on the postal code. Tsawwassen is the furthest point south we work, and travel there is already built into the price of the job.",
         },
         {
           question: "Does being near the water change how often things need doing?",
@@ -1676,7 +1787,7 @@ export const locations: Location[] = [
         {
           question: "Is Delta far enough out to cost more?",
           answer:
-            "No. There is no travel charge anywhere in our service area. Being flexible about the day can make a booking easier to place, particularly at the far ends of the area, but it does not change the figure — the price is set by the property and the work, and the figure on the quote is the figure on the invoice.",
+            "Not the job itself: travel is already included in the price we quote, which is set by the property and the work. A travel fee may apply to an on-site visit depending on where in Delta the property is. Being flexible about the day can make a booking easier to place at the far ends of the area, but it does not change the figure on the quote.",
         },
       ],
       nearby: ["surrey", "vancouver", "new-westminster"],
@@ -1777,7 +1888,7 @@ export const locations: Location[] = [
         {
           question: "Is it cheaper because you are based here?",
           answer:
-            "No, and that is deliberate. There is no travel charge anywhere in the service area and no local discount either — a property in New Westminster is quoted on exactly the same basis as one in Langley or Tsawwassen, which is what the work in front of us takes. What being local actually buys you is scheduling: this is usually the easiest city in the area for us to fit a job into.",
+            "No, and that is deliberate. Travel is already included in every price we quote and there is no local discount — a property in New Westminster is quoted on exactly the same basis as one in Langley or Tsawwassen, which is what the work in front of us takes. What being local actually buys you is scheduling: this is usually the easiest city in the area for us to fit a job into.",
         },
         {
           question: "There is nowhere to park on our street. Is that a problem?",
@@ -1856,7 +1967,7 @@ export const locations: Location[] = [
         {
           question: "Do you go out to the acreages and the eastern edge?",
           answer:
-            "Yes, across the built-up parts of both municipalities and out to the acreages around them. There is no travel charge and no minimum job size. If your property sits well beyond the edge of the map above, ask anyway — the answer takes one phone call, and we cross the odd boundary for the right job.",
+            "Yes, across the built-up parts of both municipalities and out to the acreages around them. Travel is included in the price of the job; out on the acreages a travel fee may apply to an on-site visit, and the usual $120 minimum job size applies. If your property sits well beyond the edge of the map above, ask anyway — the answer takes one phone call, and we cross the odd boundary for the right job.",
         },
       ],
       nearby: ["tri-cities", "langley"],
@@ -1899,7 +2010,7 @@ export const locations: Location[] = [
         {
           question: "Which parts of Surrey do you cover?",
           answer:
-            "All of it — Whalley and City Centre, Guildford, Fleetwood, Newton, Cloverdale and South Surrey, out to the Langley and Delta lines and down to the border. Surrey is the largest area we work in and it is not split into a near half and a far half; there is no travel charge attached to any of it.",
+            "All of it — Whalley and City Centre, Guildford, Fleetwood, Newton, Cloverdale and South Surrey, out to the Langley and Delta lines and down to the border. Surrey is the largest area we work in and it is not split into a near half and a far half; travel is already built into the price of a job anywhere in it.",
         },
         {
           question: "Do you seal commercial parking lots, and how often is that needed?",
@@ -1919,7 +2030,7 @@ export const locations: Location[] = [
         {
           question: "Is South Surrey too far out?",
           answer:
-            "No. South Surrey and the ground down towards the border are inside the service area on the same terms as everywhere else, with no surcharge and no minimum job size. Being flexible on the day can make a booking easier to place at that end of the area, but it does not change the price.",
+            "No. South Surrey and the ground down towards the border are inside the service area on the same terms as everywhere else: travel included in the price, the usual $120 minimum job size, and a possible travel fee on an on-site visit at that distance. Being flexible on the day can make a booking easier to place at that end of the area, but it does not change the price.",
         },
       ],
       nearby: ["delta", "langley", "new-westminster"],
@@ -2313,8 +2424,12 @@ export function communityFor(location: Location): readonly CommunityItem[] {
 export function localPartnersFor(
   location: Location,
 ): { partner: Partner; tag: string; where: string }[] {
+  // Logo or nothing, as on /about and the homepage: no name-only partner card
+  // anywhere on the site (standing rule, 2026-09-23).
   const all = partnerships.groups.flatMap((group) =>
-    group.items.map((partner) => ({ partner, group })),
+    group.items
+      .filter((partner) => partner.logo)
+      .map((partner) => ({ partner, group })),
   );
   const local = all.flatMap(({ partner, group }) =>
     partner.local && "slugs" in partner.local && partner.local.slugs.includes(location.slug)
@@ -2370,7 +2485,8 @@ export const nav: NavItem[] = [
 export const about = {
   label: "About Us",
   headline: "Restoring the Beauty of Your Property",
-  body: "We specialize in professional property maintenance and exterior cleaning services designed to protect and enhance your space. Whether it's removing built-up dirt, clearing gutters, or maintaining your property year round, our experienced team ensures top-quality results with every job.",
+  /** The client's own wording, supplied 2026-09-23. */
+  body: "RainCity Property Maintenance provides reliable strata and apartment building maintenance services across Greater Vancouver, including janitorial cleaning, pressure washing, window cleaning, leaf blowing and bagging, balcony hand washing, and seasonal exterior care. We help strata councils and property managers keep their buildings clean, safe, and well-maintained year-round.",
   tags: [
     {
       title: "Skilled Team",
@@ -2379,9 +2495,12 @@ export const about = {
       icon: "team",
     },
     {
-      title: "Fast Service",
-      support: "Quoted quickly, scheduled tightly, and finished when we said.",
-      icon: "clock",
+      // Was "Fast Service", changed at the client's request. The support line
+      // makes no claim about rates — it describes how a price is given, which
+      // is the part of "affordable" the site can stand behind in writing.
+      title: "Affordable Prices",
+      support: "Fair rates, a written quote first, and no surprises on the invoice.",
+      icon: "receipt",
     },
     {
       title: "Trusted Work",
@@ -2415,13 +2534,20 @@ export const whyChooseUs = {
       title: "Flexible Scheduling",
       body: "Daily, weekly, monthly, or one-time cleaning plans customized to fit your business needs.",
     },
+    /*
+     * The last two rows were "Eco-Friendly Cleaning" and "Holiday & Specialty
+     * Cleaning" until 2026-09-23, replaced at the client's request. Both new
+     * bodies restate facts the client has confirmed — insured, more than five
+     * years trading, travel built into the price — and name no rate, because
+     * "affordable" is the client's word and a figure would be ours.
+     */
     {
-      title: "Eco-Friendly Cleaning",
-      body: "We use safe and eco-friendly products that protect your workspace, employees, and environment.",
+      title: "Affordable Pricing",
+      body: "Fair, competitive rates with a free written quote before any work begins, and travel already built into the price of the job.",
     },
     {
-      title: "Holiday & Specialty Cleaning",
-      body: "Keep your property looking clean and professional all year with seasonal cleaning and holiday lighting services.",
+      title: "Insured, Over Five Years in Business",
+      body: "Fully insured, and trusted by homeowners, strata councils and property managers across Greater Vancouver for more than five years.",
     },
   ],
   cta: "Get Free Quote",
@@ -2464,24 +2590,19 @@ export const projects = {
   ],
 } as const;
 
-export const pillars = {
-  label: "Why Choose RainCity",
-  headline: "Built on Quality. Driven by Results",
-  points: [
-    {
-      title: "Precision & Professionalism",
-      body: "Every project is handled with care, accuracy, and a commitment to delivering clean, lasting results you can rely on.",
-    },
-    {
-      title: "Tailored Property Care",
-      body: "We don't believe in one-size-fits-all. Our services are customized to match your property's exact needs and condition.",
-    },
-    {
-      title: "Consistent, Reliable Results",
-      body: "From start to finish, we focus on consistency, safety, and quality to ensure your property always looks its best.",
-    },
-  ],
-  cta: "Get a Free Quote",
+/**
+ * The homepage's navy band. Until 2026-09-23 it was "Why Choose RainCity —
+ * Built on Quality. Driven by Results": three abstract claims that restated
+ * Why Choose Us two sections up. The client turned it into a showcase of the
+ * blog, and the heading and body are their wording (lightly corrected for
+ * number). The posts are the three newest, from `latestPosts` in lib/blog.ts,
+ * so the section updates itself every time an article is published.
+ */
+export const latestWork = {
+  label: "From The Blog",
+  headline: "Explore Our Latest Work",
+  body: "Discover helpful property maintenance tips, local updates and recent projects from RainCity Property Maintenance. Check out the latest blog posts featuring New Westminster properties and the services we provide.",
+  cta: "View All Posts",
 } as const;
 
 export const testimonials = {
@@ -2553,46 +2674,116 @@ export const awards = {
     height: 711,
     alt: "The 2026 Canadian Choice Award trophy — a gold star on a black base.",
   },
-  credentialsLabel: "Credentials & Guarantees",
+  membershipsLabel: "Memberships & Partnerships",
   /**
-   * The four supporting credentials. Each alt describes the mark itself and
-   * adds what the caption beneath it cannot — the scope of the claim — so
-   * it earns its place in an image index instead of echoing the label.
+   * The client's own list, supplied 2026-09-23. It replaced four generic
+   * badges — Licensed & Insured, Satisfaction Guaranteed, Five-Star Rated,
+   * Best Quality — which were stock artwork rather than anything issued to
+   * RainCity. (The Five-Star badge was also a rating with no review count
+   * behind it, which is the claim this site has a standing rule against.)
    *
-   * Source art is stylistically mismatched (3D gold, 3D red, flat blue), so
-   * the component sets every one in an identical Fog plate and captions it
-   * in the same type — the container does the unifying, not the artwork.
+   * The same `Partner` shape and the same `PartnerCard` as /about, so the
+   * two sections cannot drift apart. `tag` is the card's eyebrow.
+   *
+   * EVERY ENTRY SHOWS ITS ORIGINAL LOGO, AND AN ENTRY WITH NO LOGO IS NOT
+   * RENDERED. That is a standing instruction from Touseef (2026-09-23):
+   * people recognise these organisations by their marks, RainCity is their
+   * official partner, and he carries responsibility for their use. So
+   * Awards.tsx filters on `logo`, and an organisation without a file waits in
+   * this list — ready to appear the moment one is added — rather than going
+   * up as a name-only card. Two are waiting today: Zen Insurance and the
+   * Tri-Cities Business Networking Group.
+   *
+   * Blurbs follow the `Partner.blurb` rule: what the ORGANISATION is, from
+   * its own public description, never what RainCity does with it.
    */
-  credentials: [
+  memberships: [
     {
-      src: "/badges/license-insured.webp",
-      width: 612,
-      height: 408,
-      label: "Licensed & Insured",
-      alt: "Red shield badge: RainCity is licensed and insured for residential and commercial property maintenance across Greater Vancouver.",
+      name: "New West Spotlight",
+      tag: "Local news & events",
+      blurb: "New Westminster's community site and podcast for local news, events and what's on around the city.",
+      href: "https://www.newwestspotlight.com/",
+      // The round badge from their own Facebook page's profile picture — the
+      // site itself answers automated requests with a Cloudflare challenge.
+      // Confirmed as the logo to use by Touseef, 2026-09-23.
+      logo: {
+        src: "/partners/new-west-spotlight.jpg",
+        width: 480,
+        height: 480,
+        alt: "New West Spotlight — membership",
+      },
     },
     {
-      src: "/badges/100-satisfaction.webp",
-      width: 225,
-      height: 225,
-      label: "Satisfaction Guaranteed",
-      alt: "Gold shield badge reading 100% Satisfaction Guaranteed.",
+      name: "CFIB",
+      tag: "Business federation",
+      blurb: "The Canadian Federation of Independent Business, the national association of small and medium-sized businesses.",
+      href: "https://www.cfib-fcei.ca/",
+      // The same file /about already uses for CFIB.
+      logo: {
+        src: "/partners/cfib.svg",
+        width: 323,
+        height: 110,
+        alt: "CFIB — Canadian Federation of Independent Business — membership",
+      },
     },
     {
-      src: "/badges/5-star.webp",
-      width: 360,
-      height: 360,
-      label: "Five-Star Rated",
-      alt: "Blue laurel badge marking RainCity as a five-star rated property maintenance service.",
+      name: "WorkSafeBC",
+      tag: "Workplace safety",
+      /**
+       * WORD FOR WORD. WorkSafeBC permits a registered employer exactly this
+       * statement, in exactly this form — do not paraphrase it. Confirmed
+       * true by the client on 2026-09-23.
+       */
+      blurb: "RainCity Property Maintenance is registered and in good standing with WorkSafeBC.",
+      /**
+       * WorkSafeBC's published terms say employers may not use its logo
+       * without its written permission
+       * (https://www.worksafebc.com/en/legal/copyright-and-trademark/). This
+       * was raised with Touseef, who has instructed that the logo be shown
+       * and takes responsibility for its use (2026-09-23). The file is the SVG
+       * from WorkSafeBC's Wikipedia article, checked by eye against the logo
+       * in the worksafebc.com header the same day — identical. No `href`: a
+       * logo that is also a link is the use those terms single out.
+       */
+      logo: {
+        src: "/partners/worksafebc.svg",
+        width: 652,
+        height: 122,
+        alt: "WorkSafeBC logo",
+      },
     },
     {
-      src: "/badges/best-quality.webp",
-      width: 225,
-      height: 225,
-      label: "Best Quality Workmanship",
-      alt: "Black and gold seal reading Best Quality, for workmanship on exterior cleaning and property care.",
+      // Zen Insurance Inc., Calgary — confirmed by Touseef as the partner,
+      // and not Zensurance (2026-09-23). Its domain, zeninsurance.ca, is
+      // parked and no logo is published anywhere, so this waits for the file.
+      name: "Zen Insurance",
+      tag: "Business insurance",
+      blurb: "An insurance agency and brokerage based in Calgary, Alberta.",
     },
-  ],
+    {
+      name: "Hello Gabby",
+      tag: "Business support",
+      blurb: "A virtual assistant service for business owners, handling the admin, scheduling and online work behind a business.",
+      href: "https://hellogabby.com/",
+      // Their site sets the name as live text, so there is no logo file; this
+      // is the "hello gabby" wordmark as it appears on their own social-share
+      // image (hellogabby.com/wp-content/uploads/2018/10/social-share.jpg),
+      // cropped. White ground, dropped by the card's mix-blend-multiply.
+      logo: {
+        src: "/partners/hello-gabby.png",
+        width: 587,
+        height: 115,
+        alt: "Hello Gabby — partner",
+      },
+    },
+    {
+      // Named as the client gave it. No organisation of exactly this name is
+      // findable online; the entry waits for the logo from Touseef.
+      name: "Tri-Cities Business Networking Group",
+      tag: "Business networking",
+      blurb: "Local business networking across Coquitlam, Port Coquitlam and Port Moody.",
+    },
+  ] as readonly (Partner & { tag: string })[],
   points: [
     "Trusted by homeowners and businesses across Canada",
     "Recognized for exceptional customer satisfaction",
@@ -2605,19 +2796,12 @@ export const awards = {
 export const quoteForm = {
   headline: "Request a Free Quote",
   /**
-   * A short list on purpose — six options in a dropdown, not all eleven
-   * services. It does not derive from `services`, so a rename there has to be
-   * mirrored here: "Driveway Sealing" became "Concrete and Asphalt Sealing"
-   * when those two services merged. "Other" catches everything left off.
+   * Every service, then "Other". Derived from `services` since 2026-09-23,
+   * when the client asked for the full list: it used to be a hand-kept list
+   * of six, which is how a renamed or added service went missing from the
+   * one place a customer names what they want. Now it cannot drift.
    */
-  serviceOptions: [
-    "Pressure Washing",
-    "Window Cleaning",
-    "Gutter Cleaning",
-    "Concrete and Asphalt Sealing",
-    "Roof Cleaning",
-    "Other",
-  ],
+  serviceOptions: [...services.map((s) => s.title), "Other"],
   submit: "Get a Quote",
 } as const;
 
@@ -2673,18 +2857,53 @@ export const aboutPage = {
   hero: {
     crumb: "About",
     heading: "About Us",
-    body: "Delivering reliable property maintenance and exterior cleaning services with a focus on quality, consistency, and long-lasting results you can trust.",
+    /** The client's wording, supplied 2026-09-23. */
+    body: "We’re a local, customer-focused property maintenance company helping homeowners, businesses, strata buildings, and property managers keep their properties clean, safe, and well-maintained across Greater Vancouver.",
     cta: "Get a Free Quote",
   },
 
   intro: {
     label: "Who We Are",
     headline: "RainCity Property Maintenance",
+    /**
+     * The client's wording, supplied 2026-09-23, verbatim. Every service it
+     * names is one this site offers: "common-area cleaning", "office
+     * cleaning" and "customized janitorial maintenance" are the scope of
+     * Commercial Cleaning, and balcony cleaning is its own page.
+     */
     body: [
-      "At RainCity Property Maintenance, we provide professional property maintenance and exterior cleaning services designed to enhance and protect your space. Our team is committed to delivering reliable solutions, combining industry experience with a detail-focused approach to achieve consistent, high-quality results.",
-      "We understand the importance of maintaining a property that is both functional and visually appealing. That's why we prioritize efficiency, safety, and precision in every project, ensuring each client receives service they can trust and results they can see.",
+      "At RainCity Property Maintenance, we provide professional exterior cleaning and commercial janitorial cleaning services for homes, businesses, strata buildings, and property managers across New Westminster and Greater Vancouver. Our services include pressure washing, window cleaning, gutter cleaning, balcony cleaning, common-area cleaning, office cleaning, and customized janitorial maintenance.",
+      "Our experienced team is committed to reliable service, detailed workmanship, and consistent results that help keep every property clean, safe, and well-maintained year-round.",
     ],
     cta: "Explore Our Services",
+  },
+
+  /**
+   * Supporting Our Community — the client's special-pricing offer, supplied
+   * word for word on 2026-09-23. The groups are listed in the client's order.
+   *
+   * THIS IS A PUBLISHED OFFER, so the disclaimer is not decoration: it is the
+   * client's own text, and it goes up with the offer or not at all. It names
+   * no discount size on purpose — the client gave none, and "special pricing"
+   * with eligibility confirmed at the quote is what they wrote.
+   */
+  community: {
+    label: "Community Pricing",
+    heading: "Supporting Our Community",
+    body: "We are proud to support our community by offering special pricing to seniors, people with disabilities, single parents, veterans, healthcare workers, first responders and teachers. Contact RainCity Property Maintenance to learn more and receive a personalized quote.",
+    groups: [
+      "Seniors",
+      "People with disabilities",
+      "Single parents",
+      "Veterans",
+      "Healthcare workers",
+      "First responders",
+      "Teachers",
+    ],
+    cta: "Get a Personalized Quote",
+    disclaimerLabel: "Offer details",
+    disclaimer:
+      "Valid on select residential services. Eligibility may be confirmed when requesting a quote. Cannot be combined with other offers. Some restrictions may apply.",
   },
 
   statsLabel: "By the numbers",
@@ -2759,11 +2978,11 @@ export const aboutPage = {
    * take a sealer is the `twenty-eight-days-before-sealing` article. The
    * paintable season is the Painting FAQ. The hill above the Fraser and the
    * Quay are the New Westminster location copy. The one clause that is not a
-   * restatement of settled copy is "nothing added for the distance" — the
-   * no-travel-charge policy. It is published in the "Is it cheaper because
-   * you are based here?" answer on /locations/new-westminster, but NOT
-   * CONFIRMED BY THE CLIENT, and a pricing policy the office does not hold to
-   * on the phone is worse than none. Raise it at launch.
+   * restatement of settled copy is "travel built into the price" — and that
+   * one is now the client's own: on 2026-09-23 they confirmed travel is
+   * included in the price of a job (a fee may apply to an on-site visit, by
+   * location). It replaced "nothing added for the distance", which asserted
+   * an unconfirmed no-travel-charge policy and was a launch item until then.
    *
    * SET TO THE WHO WE ARE TEMPLATE, 2026-09-13, at the client's instruction:
    * same structure, same heading size, and copy held to the same length as
@@ -2785,7 +3004,7 @@ export const aboutPage = {
     heading: "New Westminster Is",
     headingMark: "Our Home",
     body: [
-      "We are based in New Westminster, on the hill above the Fraser, and every job on the schedule starts from there. It is not a mailing address — it is where the truck loads and the equipment lives, so a property at the Quay and one in Langley are quoted on the same basis, with nothing added for the distance.",
+      "We are based in New Westminster, on the hill above the Fraser, and every job on the schedule starts from there. It is not a mailing address — it is where the truck loads and the equipment lives, so a property at the Quay and one in Langley are quoted on the same basis, with travel built into the price.",
       "Almost everything we do is timed by this coast’s weather rather than by a calendar: when moss lets go, when a slab will take a sealer, how much of a summer is dry enough to paint. A company based elsewhere looks those windows up. We schedule inside them.",
     ],
     /** Button under the copy — Who We Are's CTA sits in the same place. */
@@ -2825,44 +3044,57 @@ export type Founder = {
   /** Two or three sentences, in their voice or approved by them. */
   bio: string;
   /**
-   * Optional, and the section is built to read correctly without it — a
-   * founder with no portrait renders as name, role and bio rather than as a
-   * hole where a face should be. Needs a `photos.ts` entry first.
+   * The portrait. Until it is set, the card holds the photograph's place with
+   * a navy 4:5 plate carrying the founder's initial — the same frame, so the
+   * layout does not move when the real picture lands. Add a `photos.ts` entry
+   * (4:5, face in the upper third), then set this key.
    */
   photo?: PhotoKey;
 };
 
 /**
- * STILL EMPTY, AND THE SECTION RENDERS NOTHING WHILE IT IS. Two first names
- * have been given — Glavin and Wilson — and that is not enough to publish.
- * Three things are missing and one is actively uncertain:
+ * TWO FOUNDERS, WILSON AND GLAVIN — confirmed by Touseef on 2026-09-23, and
+ * it SUPERSEDES the earlier record here, which said one person spelled
+ * "Glevin Wilson". Asked directly which was right, he chose "two: Glavin and
+ * Wilson", Glavin with an a — which is also how the LinkedIn handle the
+ * client first supplied reads (linkedin.com/in/andglavin). Order is as he
+ * gave it: Wilson, then Glavin.
  *
- *  1. SPELLING IS SETTLED, AND IT IS NOT WHAT THE LINK SUGGESTS. The client
- *     has confirmed "Glevin". The LinkedIn profile they sent for them reads
- *     linkedin.com/in/andglavin, which looks like Gl-a-vin and is the
- *     obvious thing to "correct" it to — do not. That handle is prefixed
- *     "and", the client was asked directly, and Glevin is the answer.
- *     LinkedIn answers automated requests with HTTP 999, so the profile
- *     cannot be used to check this either way.
- *  2. RESOLVED: this is one person, Glevin Wilson, not two founders. It was
- *     read as two because the client wrote "Glevin and Wilson", and the copy
- *     here was plural until they were asked. The layout takes a single entry
- *     at a constrained width rather than a full-bleed row, because one 4:5
- *     portrait at `max-w-site` would stand over a thousand pixels tall.
- *  3. No roles, and no bio.
- *  4. No portraits. The client offered to send them from LinkedIn.
+ * ================================================================
+ * PLACEHOLDER BIOS AND NO PORTRAITS — REPLACE BOTH BEFORE LAUNCH.
+ * ================================================================
+ * Touseef asked for dummy copy and held photo places until he sends the real
+ * details (2026-09-23). The placeholder bios are written so that, if they
+ * went live by accident, they say nothing false about either person: each
+ * restates what the site already says about the company (the "reliable
+ * service, detailed workmanship" of Who We Are) and the one fact supplied —
+ * that the two co-founded it. No history, no background, no years, no
+ * previous trade. Replace them wholesale with the founders' own words.
+ * `role` is "Co-Founder" because that is all that is known.
  *
- * Fill `people` and the section appears. Nothing else has to change.
- *
- * No `body` paragraph, deliberately. A lead sentence would have to assert
- * something — that there are two of them, that they still run the company,
- * that they answer the phone — and none of that has been supplied. The bios
- * carry the section once they exist.
+ * `body` is placeholder too. Its first clause is the confirmed fact; the
+ * second ("a property is only as well kept as the team that looks after it")
+ * is a line written for the section, not something either founder said —
+ * replace it with theirs, or cut it back to the first clause.
  */
 export const founders = {
-  label: "The Founder",
-  heading: "Who Started RainCity",
-  people: [] as readonly Founder[],
+  label: "Our Founders",
+  heading: "The People Behind RainCity",
+  body: "RainCity Property Maintenance was started by two founders, Wilson and Glavin, on a simple idea: a property is only as well kept as the team that looks after it.",
+  people: [
+    {
+      name: "Wilson",
+      role: "Co-Founder",
+      // PLACEHOLDER — replace with Wilson's own bio.
+      bio: "Wilson co-founded RainCity Property Maintenance alongside Glavin, and keeps every job — from a single balcony to a whole strata building — to the same standard of reliable service and detailed workmanship.",
+    },
+    {
+      name: "Glavin",
+      role: "Co-Founder",
+      // PLACEHOLDER — replace with Glavin's own bio.
+      bio: "Glavin co-founded RainCity Property Maintenance alongside Wilson, to give homeowners, strata councils and property managers across Greater Vancouver one team they can rely on, year-round.",
+    },
+  ] as readonly Founder[],
 };
 
 /**
@@ -2991,14 +3223,10 @@ export type PartnerGroup = {
  */
 export const partnerships = {
   label: "Partnerships",
-  heading: "Who We Work With",
-  /**
-   * Restates what the groups below already say and nothing more: who they
-   * are, and that they are sorted by sector. It does not describe the
-   * relationship beyond "works alongside" — see the note above on why
-   * "partner" is the strongest claim this page is entitled to make.
-   */
-  body: "The trade partners, institutions and business bodies RainCity works alongside, grouped by sector.",
+  /** Was "Who We Work With"; renamed at the client's request, 2026-09-23. */
+  heading: "Our Affiliates & Partnerships",
+  /** The client's wording, supplied 2026-09-23. */
+  body: "We work alongside trusted organizations and institutions that support our business, our team, and the communities we serve.",
   /** The link row on a partner card that has a site — the service card's "View Service". */
   visitLabel: "Visit Site",
   groups: [
@@ -3059,23 +3287,30 @@ export const partnerships = {
             alt: "Crystal Clear Cleans — partner",
           },
         },
-        // No URL supplied yet for SA Cleaning — stays inert until one
-        // arrives, same as every other unconfirmed partner on this page.
-        // Renders as a stylised wordmark rather than a bare tag; see the
-        // note in `Partnerships.tsx` on how a partner with no logo file
-        // still reads as a designed entry rather than a placeholder.
         {
-          name: "SA Cleaning",
-          // Nothing verifiable on file — no site supplied. Replace when it is.
-          blurb: "A cleaning company RainCity partners with. Full details to follow.",
+          // Written as the company writes it — "S&A Cleaning Group" — on its
+          // own site. The client supplied the name as "SA Cleaning" and the
+          // site as sacleaninggroup.ca (2026-09-23).
+          name: "S&A Cleaning Group",
+          blurb: "Home cleaning and car detailing across Vancouver, booked online with a professional team and eco-friendly products.",
+          href: "https://sacleaninggroup.ca/",
+          // Their site says "throughout Vancouver" and names nowhere else.
+          local: { verb: "Serves", slugs: ["vancouver"] },
+          // Their navbar logo, from sacleaninggroup.ca, 2026-09-23.
+          // Transparent PNG, trimmed to the mark.
+          logo: {
+            src: "/partners/sa-cleaning-group.png",
+            width: 624,
+            height: 609,
+            alt: "S&A Cleaning Group — partner",
+          },
         },
       ],
     },
-    // The three universities are named partners; the logos rendered here
-    // are the institutional coats of arms as published on each
-    // university's Wikipedia page, since the modern flat wordmarks are
-    // gated behind brand-portal downloads. Same permission caveat as the
-    // cleaning partners applies: the client confirms before this ships.
+    // The three universities' CURRENT logos, each taken from the university's
+    // own website header on 2026-09-23. They replaced the coats of arms that
+    // were here before — heraldic arms from Wikipedia, which is not the mark
+    // any of the three uses, and which the client flagged as wrong.
     {
       label: "Post-secondary partners",
       tag: "Post-secondary",
@@ -3086,30 +3321,36 @@ export const partnerships = {
           // Public record: Surrey (and Cloverdale, which is in Surrey) and
           // Langley. Richmond is not one of the nine communities.
           local: { verb: "Campus in", slugs: ["surrey", "langley"] },
+          // kpu.ca/themes/custom/kpu/logo.svg — the site header's own file.
           logo: {
-            src: "/partners/kpu.png",
-            width: 250,
-            height: 241,
+            src: "/partners/kpu.svg",
+            width: 110,
+            height: 101,
             alt: "Kwantlen Polytechnic University — partner",
           },
         },
         {
           name: "Capilano University",
           blurb: "A public university based in North Vancouver, serving the North Shore and the Sunshine Coast.",
+          // capilanou.ca's own logo file (CapU-logo-print.svg): the shield
+          // and wordmark in black, which is the version meant for a light
+          // ground.
           logo: {
-            src: "/partners/capilano.jpg",
-            width: 200,
-            height: 154,
+            src: "/partners/capilano.svg",
+            width: 773,
+            height: 182,
             alt: "Capilano University — partner",
           },
         },
         {
           name: "Thompson Rivers University",
           blurb: "A public university in Kamloops, with distance learning across Canada through TRU Open Learning.",
+          // tru.ca's header logo (TRU-LOGO-LEFT-BLUE), transparent PNG,
+          // trimmed. Named -logo so no cache can serve the old arms file.
           logo: {
-            src: "/partners/tru.png",
-            width: 303,
-            height: 329,
+            src: "/partners/tru-logo.png",
+            width: 685,
+            height: 253,
             alt: "Thompson Rivers University — partner",
           },
         },
@@ -3119,18 +3360,24 @@ export const partnerships = {
       label: "Business and member partners",
       tag: "Business & member",
       items: [
-        // CFOne — Canadian Armed Forces community programme, most likely.
-        // A public brand asset was not locatable from cfmws.ca or the
-        // program's own landing pages, so this entry ships as a stylised
-        // wordmark rather than a logo file. If the client is a CFOne
-        // partner with access to the CFMWS brand portal, drop the SVG or
-        // transparent PNG into `public/partners/cfone.svg` and add a
-        // `logo:` entry here to switch it over.
+        // CF One — the Canadian Armed Forces community card, run by Canadian
+        // Forces Morale and Welfare Services. Businesses become CF One Member
+        // Appreciation partners by offering the military community a
+        // discount, which is also why veterans appear in the Supporting Our
+        // Community pricing on this page. Identified 2026-09-23 from
+        // cfmws.ca; the logo is CFMWS's own web-safe CF One lockup from the
+        // CF One registration page.
         {
           name: "CFOne",
-          // Identity still unconfirmed (see the note above) — so the blurb
-          // names no organisation behind the acronym. Replace when confirmed.
-          blurb: "A business and member partner of RainCity. Full details to follow.",
+          blurb: "The Canadian Armed Forces community card, giving serving members, Veterans and their families access to programs and partner discounts.",
+          href: "https://cfmws.ca/about-us/cfone-registration",
+          local: { everywhere: "Across Canada" },
+          logo: {
+            src: "/partners/cfone.png",
+            width: 964,
+            height: 368,
+            alt: "CF One — Canadian Armed Forces community program — partner",
+          },
         },
         {
           name: "Union Savings",
@@ -3201,8 +3448,9 @@ export const partnerships = {
  * "Transparent Practices", "Creative Solutions" — and arrive as bare labels.
  * Each carries a one-line support here, and every one of them restates a fact
  * this site already publishes elsewhere (the award in `awards`, the licence
- * and the quote-per-property policy in the badge set and public/llms.txt, the
- * tailoring claim in `pillars`). Nothing new is asserted about the business.
+ * and the quote-per-property policy in public/llms.txt, the tailoring claim in
+ * the written, per-property scope every service page describes). Nothing new
+ * is asserted about the business.
  */
 export const servicesPage = {
   hero: {
@@ -3271,9 +3519,11 @@ export const servicesPage = {
  *     — see `ServiceTrust` — and what is here is the fallback, which today
  *     is reached only by Window Cleaning. The five claims are the same five
  *     claims wherever they appear, and they restate what this site already
- *     publishes elsewhere: the licence and the per-property quote in the
- *     badge set and public/llms.txt, the satisfaction guarantee in
- *     `awards.credentials`, the base city and service area in `business`.
+ *     publishes elsewhere: the licence and the per-property quote in
+ *     public/llms.txt and Why Choose Us, the satisfaction guarantee in the
+ *     workmanship guarantee (Section 07 of /terms — the homepage badge that
+ *     also carried it was retired on 2026-09-23), the base city and service
+ *     area in `business`.
  *     Nothing new is asserted about the company on eleven pages at once, on
  *     any of the eleven wordings. In particular the source template's
  *     "Serving Greater Vancouver since 2018" is not carried on any of them:
@@ -3478,15 +3728,22 @@ const relatedBySlug: Record<string, readonly string[]> = {
   // A slab has to be washed and dried before it can be sealed. This pair is
   // an order of operations, not a suggestion.
   "concrete-and-asphalt-sealing": ["power-washing", "snow-removal-salting"],
-  // Glass, frames and tracks on the same elevation as the gutters above them.
-  "window-cleaning": ["gutter-cleaning", "power-washing", "commercial-cleaning"],
+  // Glass, frames and tracks on the same elevation as the gutters above them —
+  // and the balcony door, whose glass is cleaned from both sides at once.
+  "window-cleaning": ["gutter-cleaning", "balcony-cleaning", "power-washing"],
+  // The balcony door is glass, a house deck is a pressure wash, and a
+  // building-wide balcony programme sits in the same strata contract as the
+  // common-area cleaning.
+  "balcony-cleaning": ["window-cleaning", "power-washing", "commercial-cleaning"],
   // Prep is a wash. Paint goes on a clean, sound surface or it does not hold.
   painting: ["soft-washing", "power-washing"],
   // The two seasonal ends of a strata or commercial contract.
   "snow-removal-salting": ["landscaping-lawn-care", "concrete-and-asphalt-sealing", "commercial-cleaning"],
   "holiday-light-installation": ["gutter-cleaning", "window-cleaning"],
   "landscaping-lawn-care": ["power-washing", "snow-removal-salting", "gutter-cleaning"],
-  "commercial-cleaning": ["window-cleaning", "power-washing", "snow-removal-salting"],
+  // A strata building's inside, its glass, and its balconies — the three
+  // cleaning lines a property manager buys together.
+  "commercial-cleaning": ["window-cleaning", "balcony-cleaning", "power-washing"],
 };
 
 /** The related services for one service, resolved. Unknown slugs drop out. */
@@ -3696,11 +3953,17 @@ export const locationsPage = {
  * is drawn from somewhere already published — the hours on `business`, the
  * free written quote the CTAs promise site-wide, the licensed-and-insured
  * claim in `servicesPage.intro.principles`, the no-storefront position in
- * `locationsPage.overview`, and the "no travel charge and no minimum job
- * size" line already answered on the Ridge Meadow page.
+ * `locationsPage.overview`.
  *
- * Nothing here commits the office to a response time, a price, a crew size
- * or a booking window. Those are the six kinds of sentence the blog audit
+ * The one price on this site is here, and it is the client's: on 2026-09-23
+ * they supplied the minimum job size (usually $120, depending on the job) and
+ * the travel policy (included in the price; a fee may apply to an on-site
+ * visit, by location), replacing the "no travel charge and no minimum" line
+ * this block used to restate. Both are worded identically wherever they
+ * appear. Change them everywhere or nowhere.
+ *
+ * Nothing else here commits the office to a response time, a price, a crew
+ * size or a booking window. Those are the six kinds of sentence the blog audit
  * had to strip, and a question set is exactly where they creep back in: an
  * answer wants to be reassuring, and "we usually get back to you within the
  * hour" is a promise somebody has to keep on a Tuesday in November.
@@ -3739,12 +4002,16 @@ export const pageFaqs = {
       {
         question: "What are your hours?",
         answer:
-          "Monday to Saturday, 7am to 10pm. Sunday is closed. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
+          "Monday to Sunday, 7am to 10pm. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
       },
       {
+        // Supplied by the client on 2026-09-23, replacing "no to both". The
+        // same two facts are worded the same way everywhere they appear — the
+        // community FAQs, /locations, /contact and the /about Home Ground — so
+        // a reader comparing pages never finds two policies.
         question: "Is there a minimum job size or a travel charge?",
         answer:
-          "No to both, anywhere inside the service area. A single gutter run in Anmore is quoted on the same terms as a strata block in Burnaby.",
+          "There is a minimum job size, usually $120, though it depends on the job. Travel is already included in the price we quote. A travel fee may apply to an on-site visit, depending on where the property is — ask when you arrange one.",
       },
     ],
   },
@@ -3752,7 +4019,7 @@ export const pageFaqs = {
   services: {
     label: "About The Catalogue",
     heading: "How These Services Fit Together",
-    body: "Eleven services is a wide list, and the questions it raises are mostly about how they combine rather than about any one of them.",
+    body: "It is a wide list of services, and the questions it raises are mostly about how they combine rather than about any one of them.",
     faqs: [
       {
         question: "Can several services be booked in one visit?",
@@ -3790,7 +4057,7 @@ export const pageFaqs = {
       {
         question: "Do you charge more for communities further out?",
         answer:
-          "No. There is no travel charge and no minimum job size anywhere inside the service area. A property in Aldergrove is quoted on the same terms as one four blocks from the New Westminster yard.",
+          "Not on the work itself: travel is already included in the price we quote, so a job in Aldergrove is priced the way one four blocks from the New Westminster yard is. A travel fee may apply to an on-site visit depending on location, and the usual minimum job size of $120 applies everywhere.",
       },
       {
         question: "My property is just outside the areas listed. Can you still come?",
@@ -3861,7 +4128,7 @@ export const pageFaqs = {
       {
         question: "Does a quote cost anything or commit me to anything?",
         answer:
-          "No to both. Quotes are free and carry no obligation, and there is no charge for coming out to look at a property inside the service area.",
+          "No to both. Quotes are free and carry no obligation. If a quote needs someone to visit the property, a travel fee may apply depending on the location — ask when you arrange the visit.",
       },
       {
         question: "What should I tell you when I get in touch?",
@@ -3876,7 +4143,7 @@ export const pageFaqs = {
       {
         question: "What are your hours?",
         answer:
-          "Monday to Saturday, 7am to 10pm, and closed Sunday. Email arrives whenever you send it; the phone is the faster route during working hours.",
+          "Monday to Sunday, 7am to 10pm. Email arrives whenever you send it; the phone is the faster route during working hours.",
       },
     ],
   },
@@ -5199,7 +5466,12 @@ export const blogPosts: BlogPost[] = [
     category: "Seasonal",
     date: "2026-09-02",
     readMinutes: 4,
-    photo: "gutterDebris",
+    // Was `gutterDebris`, a slot still waiting for its job photograph — it
+    // rendered as a flat panel, and once the homepage began showing the three
+    // newest posts (2026-09-23) that panel sat in the middle of it. Rain
+    // running a gutter is also the truer frame for an article about how often
+    // the work comes round.
+    photo: "gutterFlowTest",
     body: [
       {
         heading: "The standard answer, and where it fails",
@@ -5818,8 +6090,20 @@ export const blogPosts: BlogPost[] = [
 export const blogPage = {
   hero: {
     crumb: "Blog",
-    heading: "Notes From The Wet Coast",
-    body: "What we learn on the ladder, written down — seasonal timing, the maintenance that pays for itself, and advice that only really applies here in Greater Vancouver.",
+    /**
+     * Was "Notes From The Wet Coast". "Wet Coast" is a local joke on "West
+     * Coast", but in a page heading it reads as a misspelling — which is how
+     * the client read it (2026-09-23). The body opened on a fragment ("What
+     * we learn on the ladder, written down —") that had the same problem.
+     *
+     * Now two lines like every other hero heading on the site (the AEO rule
+     * in CLAUDE.md): the name, then the keyword line in the same `h1`. The
+     * body picks up the homepage's "tips, local updates" wording so the band
+     * that sends people here and the page they land on say the same thing.
+     */
+    heading: "The RainCity Blog",
+    headingSub: "Property Maintenance Tips for Greater Vancouver",
+    body: "Practical advice from our crew on seasonal timing, the maintenance that pays for itself, and what this rainy climate does to homes, stratas and businesses across Greater Vancouver.",
     cta: "Get a Free Quote",
   },
 

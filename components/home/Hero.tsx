@@ -82,7 +82,7 @@ export function Hero() {
               drops to ~2:1 on Fog. Steel holds the same second-rank weight
               and clears AA. */}
           <p className="meta text-steel">
-            {business.hours.weekdays} · {business.hours.sunday}
+            {business.hours.days}
           </p>
         </div>
       </div>

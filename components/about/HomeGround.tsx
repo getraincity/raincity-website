@@ -33,7 +33,9 @@ import { Reveal } from "@/components/ui/Motion";
  * the Pattullo arch — chosen so the section reads as this city at a glance.
  * Its `note` in photos.ts records the source, licence and how it was verified.
  *
- * Still no map (QuoteForm directly below embeds one), no navy band (Mission
+ * Still no map (QuoteForm directly below answers "where do you work", with
+ * a regional photograph on this page so the SkyBridge is not shown twice
+ * running — see app/about/page.tsx), no navy band (Mission
  * holds the page's only one), and no `SectionEdge` (the cut is spent).
  */
 export function HomeGround() {

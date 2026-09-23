@@ -2,7 +2,7 @@ import { about, business } from "@/lib/content";
 import { Photo } from "@/components/ui/Photo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, Clock, ShieldCheck, Users } from "@/components/ui/Icon";
+import { ArrowRight, Receipt, ShieldCheck, Users } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Motion";
 
 /**
@@ -21,7 +21,7 @@ import { Reveal } from "@/components/ui/Motion";
 /** Named in content.ts so the copy owns the pairing, not this component. */
 const pointIcons = {
   team: Users,
-  clock: Clock,
+  receipt: Receipt,
   shield: ShieldCheck,
 } as const;
 

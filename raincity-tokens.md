@@ -50,7 +50,9 @@ A 12° diagonal cut with a 3px Pacific Blue hairline (amber on interactive insta
 1. Hero — cuts the photo away to reveal the headline block.
 2. Before/After — the draggable slider handle.
 3. Section transitions — navy and white bands meet on the same angle.
-4. Logo mark — the same cut at 34px.
+4. ~~Logo mark — the same cut at 34px.~~ Retired 2026-09-23: the logo is now
+   the client's own identity, applied in these tokens (see CLAUDE.md, "The logo
+   is the client's own"). No token value changed.
 
 No other decorative geometry. No gradients as decoration.
 

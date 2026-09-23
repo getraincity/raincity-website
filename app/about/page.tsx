@@ -18,6 +18,7 @@ import { Partnerships } from "@/components/about/Partnerships";
 import { MissionVision } from "@/components/about/MissionVision";
 import { Process } from "@/components/about/Process";
 import { HomeGround } from "@/components/about/HomeGround";
+import { CommunitySupport } from "@/components/about/CommunitySupport";
 import { SectionEdge } from "@/components/ui/SectionEdge";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { PageFaq } from "@/components/ui/PageFaq";
@@ -67,28 +68,32 @@ export default function AboutPage() {
         <AboutHero />
         <WhoWeAre />
         <Stats />
-        {/* Both added at the client request, and both render nothing while
-            their arrays are empty. Founders is empty today, which is exactly
-            why Partnerships is White rather than Fog: with Founders absent it
-            sits straight under Stats, and two Fog bands in a row read as one.
-            Grounds here have to work in both states, not just the filled one. */}
+        {/* Both added at the client's request. Stats (Fog) → Founders (White)
+            → Partnerships (Fog) is the designed alternation, restored on
+            2026-09-23 when the two founders were confirmed and Founders began
+            to render. Both still return null on an empty array, and if
+            Founders ever did, Partnerships would sit Fog-on-Fog under Stats —
+            check the grounds in both states before changing either. */}
         <Founders />
         <Partnerships />
-        {/* Signature use #3 — the 12 degree cut, now carrying White into
-            Navy. It ran out of Fog until Partnerships landed above it; that
-            section is White because Founders between it and Stats renders
-            nothing while it has no people, and the cut has to come out of
-            whichever section actually precedes it in both states. The note on
-            Partnerships carries the full reasoning. */}
-        <SectionEdge from="bg-white" to="bg-navy" />
+        {/* Signature use #3 — the 12 degree cut, carrying Partnerships' Fog
+            into Navy. */}
+        <SectionEdge from="bg-fog" to="bg-navy" />
         <MissionVision />
         <Process />
+        {/* The client's special pricing (2026-09-23). The page's one RainCity
+            Blue band, between Process's White and Home Ground's Fog — see the
+            note on the component for the placement. */}
+        <CommunitySupport />
         {/* Added at the client's request. It sits between two white
             sections on purpose — see the comment block on the component for
-            why Mist, why here, and why no map: QuoteForm directly below
-            already embeds one queried on the base city. */}
+            why Mist, why here, and why no map. */}
         <HomeGround />
-        <QuoteForm />
+        {/* The regional roofline rather than the form's usual New
+            Westminster frame: Home Ground, directly above, already shows the
+            SkyBridge, and the same bridge twice in one screen reads as a
+            mistake. */}
+        <QuoteForm photo="rooftops" />
         {/* After the ask, not in front of it — the same placement and the
             same reasoning as ServiceFaq. */}
         <PageFaq

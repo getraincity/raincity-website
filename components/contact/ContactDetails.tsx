@@ -91,8 +91,7 @@ function CardValue({ icon }: { icon: CardIcon }) {
     case "clock":
       return (
         <div className="body-s font-medium text-steel">
-          <p>{business.hours.weekdays}</p>
-          <p>{business.hours.sunday}</p>
+          <p>{business.hours.days}</p>
         </div>
       );
     case "pin":

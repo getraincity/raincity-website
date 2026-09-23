@@ -275,7 +275,7 @@ export function ServiceOverview({ service }: { service: Service }) {
           The list is the reason the marks are worth their pixels. A checkmark
           is the one piece of iconography that is not decoration here: it says
           "included", which is exactly what a list under "Why Choose RainCity?"
-          is asserting. It sits on the logo's own cut plate rather than running
+          is asserting. It sits on the Squeegee Edge's cut plate rather than running
           bare — see CheckPlate in Icon.tsx. White rather than Pacific, which
           at 2:1 against this blue would not have held a 1.75 stroke. */}
       <div className="on-navy bg-rc-blue">

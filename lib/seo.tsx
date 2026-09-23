@@ -31,8 +31,16 @@ export const GEO = { latitude: 49.2057, longitude: -122.911 } as const;
 
 export const canonical = (path = "/") => new URL(path, SITE_URL).toString();
 
-/** The shared social card. Generated from the brand system; 1200x630. */
-export const OG_IMAGE = "/og-default.png";
+/**
+ * The shared social card. Generated from the brand system; 1200x630.
+ *
+ * Renamed from `og-default.png` when the client's logo replaced the interim
+ * mark, and the rename is the point: Facebook, LinkedIn and X cache a card by
+ * its URL, so a new image at the old path keeps showing the old logo in shares
+ * until each platform happens to re-scrape. Change the filename again the
+ * next time the card changes.
+ */
+export const OG_IMAGE = "/og-card.png";
 
 /**
  * Which route groups are published to search — and the only place that
@@ -376,9 +384,10 @@ export const localBusinessSchema = {
   currenciesAccepted: "CAD",
   knowsLanguage: "en-CA",
   ...sameAsField,
-  // Mon–Sat 07:00–22:00. Sunday is closed, so it is simply absent: the spec
-  // reads a missing day as closed, and an explicit 00:00–00:00 entry is a
-  // common way to accidentally publish "open all day".
+  // Seven days, 07:00–22:00, as confirmed by the client on 2026-09-23 (it was
+  // Mon–Sat with Sunday closed). Keep this in step with `business.hours` in
+  // content.ts — a Google Business Profile that disagrees with this block is
+  // the inconsistency a local pack punishes.
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -389,6 +398,7 @@ export const localBusinessSchema = {
         "Thursday",
         "Friday",
         "Saturday",
+        "Sunday",
       ],
       opens: "07:00",
       closes: "22:00",

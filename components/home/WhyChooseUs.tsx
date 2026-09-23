@@ -16,9 +16,9 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  *
  * Numerals rather than the icon medallions used in About. Both neighbours are
  * already picture-led — the services grid above, the project pairs below — and
- * Pillars further down argues the same case over a photograph. An index reads
- * as a specification against all three, which is the register this section
- * wants and the one thing none of its neighbours occupy.
+ * the latest-posts band further down is a card grid over a photograph. An
+ * index reads as a specification against all three, which is the register
+ * this section wants and the one thing none of its neighbours occupy.
  *
  * The headline goes back up to `display-l`. It was stepped down to display-m
  * when it had to share a five-column well; across the full width it has the

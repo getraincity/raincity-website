@@ -9,8 +9,8 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * Set as a connected timeline, where it used to be three columns of numerals
  * on navy. The navy version had two problems. It was the site's third dark
  * band in a row on this page, and — more to the point — figure, amber rule,
- * title, body is close enough to /about's Process and to Pillars that the
- * three read as one component used three times. A rule per column reads as
+ * title, body is close enough to /about's Process and to the homepage's old
+ * Pillars band that the three read as one component used three times. A rule per column reads as
  * one line broken into three only if you already know it is meant to; an
  * actual continuous rail running through the gutters does not need the
  * benefit of the doubt.

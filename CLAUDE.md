@@ -18,14 +18,15 @@ site links to now exists, and the two omissions that were held while
 item of the `locationsPageSchema` ItemList — were lifted in the same commit
 as that template.
 
-Concretely, as of the AEO/GEO pass: `next build` prerenders 52 HTML pages
+Concretely, as of the 2026-09-23 content pass (which added
+`/services/balcony-cleaning`): `next build` prerenders 53 HTML pages
 plus `robots.txt` and `sitemap.xml`. Four of those are not public routes — the
 framework's own `_not-found` and `_global-error`, and the `/disclaimer` and
-`/refund-policy` redirect stubs — leaving 48 public pages. Four more are the
+`/refund-policy` redirect stubs — leaving 49 public pages. Four more are the
 `/blog/page/N` archive pages, which resolve, are linked, and are deliberately
-`noindex` (see "The archive pager is noindex" below), leaving 44 indexable.
+`noindex` (see "The archive pager is noindex" below), leaving 45 indexable.
 
-**The sitemap lists 42 of them.** `indexing.blog` (see "One flag decides what
+**The sitemap lists 43 of them.** `indexing.blog` (see "One flag decides what
 is indexed" below) moved from `false` to `true` in the SEO growth pass, so the
 blog index and its posts are in `sitemap.xml` and off `noindex`. The archive
 has since grown from six articles to sixteen, so that is seventeen URLs. The two policy pages are still `noindex` and still absent, awaiting the
@@ -118,6 +119,82 @@ the patterns that mark a page as AI-generated boilerplate:
   Blue, the brand wash over photography, borders that move to blue on hover),
   not through novelty layout
 
+### The logo is the client's own, in the site's colours
+
+Since 2026-09-23 the logo is the client's supplied identity — RAINCITY over
+PROPERTY MAINTENANCE with an open maple-leaf outline growing out of the Y —
+replacing the interim mark (a 12° cut RainCity Blue plate beside "RAINCITY" in
+Chivo). The Squeegee Edge is untouched everywhere else; only the logo stopped
+using it.
+
+- **Rebuilt, not traced.** The client could only supply a 250x160 PNG on
+  white. The type was identified as Montserrat (Medium over SemiBold) and
+  fitted to the PNG; the leaf was redrawn from its pixels. The result is
+  outlines in `components/ui/LogoSprite.tsx` — no Montserrat download, and
+  the site's faces are still Chivo and Plex. Do not hand-edit the path data.
+- **Defined once per page.** `LogoSprite` renders in `app/layout.tsx`; each
+  `<Logo />` draws it through `<use>`. Inlining the ~5 KB of paths per
+  instance would repeat it four times a page and ship it in `HeaderClient`'s
+  bundle.
+- **The drawing is the client's; the colours are the site's.** The supplied
+  file is one indigo (#10176D) that is not a token. On navy (every placement
+  today) the wordmark is white and the leaf Pacific Blue, echoing the
+  squeegee hairline; on light it is Harbour Navy with a RainCity Blue leaf.
+  Do not add the indigo to the palette. It lives in the exports in `assets/`
+  (`raincity-logo.svg`, `-reversed.svg`, `-transparent.png`, `-supplied.png`)
+  for the client's print use.
+- **44px tall, everywhere.** That is the header bar's content height, so the
+  bar stayed 64px. Tightest fit is 1024px, where 26px separates logo and nav.
+- **Favicon, Apple icon, social card followed.** `app/icon.svg`,
+  `app/favicon.ico` (16/32/48) and `app/apple-icon.png` are the wordmark's R,
+  white on navy — the leaf is dropped below 64px, where it reads as noise.
+  The card was renamed `og-default.png` → `og-card.png` so platforms that
+  cache by URL fetch the new logo; rename again whenever it changes.
+
+### The 2026-09-23 content pass — what changed and the rules it left
+
+The client's homepage feedback, tracked item by item in
+`client-updates-2026-09-23.md`. Five things in it outlive the pass:
+
+- **Hours, minimum job size and travel are client-confirmed facts, worded
+  once.** Seven days, 7am–10pm (`business.hours.days`, and
+  `openingHoursSpecification` in `lib/seo.tsx`, which must match). Minimum job
+  usually $120, depending on the job. Travel included in the price; a travel
+  fee may apply to an on-site visit, by location. These replaced "no travel
+  charge and no minimum job size", which was stated on nine pages — six
+  community FAQs, `/locations`, the homepage and `/about` Home Ground — and a
+  "no charge for coming out" line on `/contact`. **Change them everywhere or
+  nowhere**; a reader comparing two pages should never find two policies. The
+  $120 is the only price on the site and it is the client's.
+- **Balcony Cleaning is the twelfth service** — hand washing with no spills on
+  condos and apartments, a standard pressure wash on houses. Its one
+  operational claim (nothing goes over the edge onto the unit below) is the
+  client's "no spills". Photographs are Unsplash, noted per slot in
+  `photos.ts`; none is a RainCity job.
+- **The homepage navy band is the blog now.** `Pillars` ("Built on Quality")
+  became `LatestWork` ("Explore Our Latest Work"), showing `latestPosts(3)`.
+  It updates itself on every new post — so **a new post must not use a
+  placeholder photo**, or the placeholder lands on the homepage. The gutter
+  post was moved off `gutterDebris` for exactly that reason;
+  `twenty-eight-days-before-sealing` still sits on `sealingPrep`, a
+  placeholder, and would surface if it were ever re-dated.
+- **Memberships & Partnerships replaced four stock badges** on the homepage
+  Awards section, as `PartnerCard`s with each organisation's original logo
+  (the logos-always rule under the /about section below). Four show: New West
+  Spotlight, CFIB, WorkSafeBC, Hello Gabby. **Two wait for their logo files and
+  do not render until they arrive**: Zen Insurance (Zen Insurance Inc.,
+  Calgary — confirmed, and *not* Zensurance; its domain is parked) and the
+  Tri-Cities Business Networking Group (not findable online). WorkSafeBC's
+  blurb is the one sentence WorkSafeBC permits, word for word; its terms also
+  restrict employers' use of the logo, which Touseef was told and chose to
+  show anyway, taking responsibility — so the logo carries no link.
+- **The quote form's right column is a photograph, not a map.** No Maps API
+  key was ever issued, so it rendered a grey text line on every page. Downtown
+  New Westminster (`quoteNewWestminster`) everywhere except `/about`, which
+  passes `rooftops`. **`LocationMap` and `CoverageMap` still depend on
+  `NEXT_PUBLIC_GOOGLE_MAPS_KEY`** and still show their text fallbacks — the
+  same fix has not been made there.
+
 ### Motion — the design rules
 
 These are the rules about how motion *looks*. How it is implemented is under
@@ -178,7 +255,7 @@ needed and they are not the same thing:
 
 One constraint on editing this copy. The **workmanship guarantee, now Section
 07 of `/terms`**, must stay consistent with the satisfaction guarantee the rest
-of the site already claims — the badge in `awards`, the "Satisfaction
+of the site already claims — the "Satisfaction
 guaranteed on every job" trust point in `servicePage`, "Every job guaranteed"
 on the painting service. It is written with a redo as the first remedy and a
 refund second. Narrowing it in review means revisiting those claims in the same
@@ -240,7 +317,7 @@ Never invent additional posts, author names or publication dates.
 
 ### Where the service photography actually comes from
 
-Three of the eleven service pages carry the client's own photographs: Window
+Three of the twelve service pages carry the client's own photographs: Window
 Cleaning, Commercial Cleaning and Power Washing. Their source PNGs sit flat
 in `assets/`, named for the shot rather than for the slot they fill — the
 same way the Window Cleaning originals have always been filed there, and the
@@ -253,9 +330,10 @@ Nothing reads `assets/` at build time; it is the archive the served files
 were made from. The mapping from a source name to the slot it became lives
 in the `src` path on that slot's registry entry, not in the filename.
 
-The other eight pages are illustrated with frames that came from Unsplash,
+The other nine pages are illustrated with frames that came from Unsplash,
 one chosen per slot against the shot brief that used to be that slot's
-`placeholder` string. They are downloaded, not hot-linked: the original sits
+`placeholder` string (Balcony Cleaning, added later, had no briefs — its seven
+frames were chosen against its own tile copy, and every one has a full set). They are downloaded, not hot-linked: the original sits
 in `assets/` and the served webp at the path the registry declares, exactly
 like the supplied sets.
 Two things follow, and both matter more than they look:
@@ -316,18 +394,19 @@ and community count live in the caption. It sits between
 `aboutPage.local` in `lib/content.ts` while the reasoning for the layout is on
 `components/about/HomeGround.tsx`. Read both before editing it — four obvious
 treatments are ruled out on that page in particular, and the fourth is the one
-that catches people: `QuoteForm` sits directly below and already embeds a map
-queried on the base city, so a map in this section would be the second New
-Westminster map inside one screen.
+that catches people: `QuoteForm` sits directly below and carries its own "Where
+we work" photograph, so a map or a second SkyBridge frame here would repeat it
+inside one screen. (On `/about` only, the form is passed `photo="rooftops"` for
+exactly that reason — Home Ground already shows the bridge.)
 
-**`travelValue` — "None, anywhere in the service area" — is not confirmed by
-the client, and it is the fifth launch item.** The policy is already published,
-in the "Is it cheaper because you are based here?" answer on
-`/locations/new-westminster`, but that is one answer at the foot of one page.
-This promotes it to a ruled fact directly above the quote form. A published
-pricing policy the office does not hold to on the phone is worse than none,
-which is the standing rule on the legal pages and does not change here. Raise
-it with the testimonials, the policy pages, the blog and `social`.
+**The travel line is now the client's, not ours.** It used to say "nothing
+added for the distance" — an unconfirmed no-travel-charge policy, and the fifth
+launch item. On 2026-09-23 the client supplied the real policy: travel is
+included in the price of a job, a travel fee may apply to an on-site visit
+depending on location, and the minimum job size is usually $120. Home Ground
+now says "travel built into the price", and the same two facts are worded the
+same way in every FAQ that states them — see "Hours, minimum job size and
+travel" below. That launch item is closed.
 
 Everything else in the section restates copy the site already publishes — the
 moss releasing gradually is the Soft Washing FAQ, the sealer window is the
@@ -351,90 +430,69 @@ Two frames were ruled out along the way and the reasons outlive this section.
 `rooftops` is the `/locations` hub hero, doing this same "here is the place"
 job one page over. And **`aboutCrew` shows a crew *re-roofing* a house** —
 laying underlay, stripped shingles bagged below — which is not one of the
-eleven services. It is fine as atmosphere on `/blog`. It used to be the
+twelve services. It is fine as atmosphere on `/blog`. It used to be the
 New Westminster photo on `/locations` and that community's hero; on 2026-09-13
 it was replaced there by `aboutHomeGround` (Pier Park), and Surrey's 550px
 `concreteSealing` hero — stretched 2.6x at desktop — by `powerParkades`.
 Both came out of an image audit of all nine community pages at 1x, 2x and 3x.
 
-### /about also carries Founders and Partnerships, and one of them is empty
+### /about: Founders, Partnerships and Supporting Our Community
 
-Both added at the client's request. `founders` and `partnerships` in
-`lib/content.ts` hold the data; `components/about/Founders.tsx` and
-`components/about/Partnerships.tsx` hold the reasoning.
+All three at the client's request. `founders`, `partnerships` and
+`aboutPage.community` in `lib/content.ts` hold the data; the components in
+`components/about/` hold the reasoning.
 
-**Both render `null` when their arrays are empty, and Founders is empty
-today.** That is the `social` arrangement — an empty array and no section,
-rather than a section full of stand-ins — and it means neither has to be
-commented out of `app/about/page.tsx` and then remembered later.
+**Every partner, affiliate and membership shows its original logo — never a
+name-only card.** A standing instruction from Touseef (2026-09-23): people
+recognise these organisations by their marks, RainCity is their official
+partner, and he carries responsibility for using them. So `Partnerships.tsx`,
+`localPartnersFor` and the homepage memberships in `Awards.tsx` all filter on
+`logo`: an organisation without a file waits in `content.ts` and appears the day
+one is added. Fetch each logo from the organisation's own site and check it by
+eye; if two organisations could match a name, ask which — do not guess.
 
-**The gated section broke the page's colour rhythm in a way that only showed in
-one of its two states, and that is the thing to remember here.** The sequence
-was designed as Stats (Fog) → Founders (White) → Partnerships (Fog) → the cut,
-which is correct — but with Founders rendering nothing, Stats and Partnerships
-became two Fog bands touching. Partnerships is therefore **White**, its logo
-tiles are Fog so they stay visible (marks use `mix-blend-multiply` so
-Capilano's white-ground JPEG doesn't show as a box), and `SectionEdge` now runs
-`from="bg-white"` because that section is what it cuts out of in either state.
-Any future gated section needs its grounds checked in both states, not just the
-filled one.
+**Founders is two people: Wilson and Glavin** — confirmed by Touseef on
+2026-09-23, superseding the earlier record of one founder spelled "Glevin
+Wilson". Glavin with an a. **Their bios and the section's lead line are
+placeholders, and there are no portraits yet** — Touseef asked for dummy copy
+and held photo places until he sends the real details. The placeholder bios say
+nothing personal (only that the two co-founded the company, plus copy the site
+already uses), so nothing false goes live if they are missed; replace them
+wholesale. Each card keeps its 4:5 portrait frame as a navy plate with the
+founder's initial, so a photo drops in by setting `photo` with nothing moving.
+This is a launch item.
 
-**Founders is one person — Glevin Wilson — and is still missing what it needs
-to publish.** The client first wrote "Glevin and Wilson", which reads as two
-names and was built as two until they were asked; it is one founder. Still
-outstanding: role, bio, and a portrait. One spelling trap is recorded at the
-constant and repeated here because it looks like a typo and is not — **the name
-is Glevin**, confirmed by the client, even though the LinkedIn profile they
-supplied is
-`linkedin.com/in/andglavin`. Do not "correct" it to Glavin. LinkedIn answers
-automated requests with HTTP 999, so the profile cannot be read to check.
+**Grounds: Stats (Fog) → Founders (White) → Partnerships (Fog) → the cut**,
+restored now that Founders always renders (Partnerships had been White only
+while Founders was empty). `SectionEdge` runs `from="bg-fog"`. Both sections
+still return `null` on an empty array — if Founders ever did, Partnerships
+would sit Fog-on-Fog under Stats, so check both states before changing either.
 
-**Partnerships was redesigned on 2026-09-13 until the client approved the
-direction.** Current form: **partner cards built on the service card's
-anatomy**, at the client's request — a Fog visual panel holding the logo with
-the blue corner notch, then sector tag (`PartnerGroup.tag`), `display-s` name,
-a two-line `body-s` blurb (`Partner.blurb`) and "Visit Site →" for linked
-partners. 3x3 at `lg` (a row per sector), two across with the ninth centred on
-tablet, one column on phones. **Blurbs describe the organisation from its own
-site or the public record, never the relationship**; SA Cleaning and CFOne
-carry "full details to follow" placeholders until the client supplies
-something verifiable. **4px corners
-(`--radius-card` in `globals.css`) are the site's only card radius** — the
-client asked for a slight softening here; do not spread it without asking.
-Rejected along the way, each recorded in the component: a ruled register with
-96px marks (logos louder than the heading), a strip of small nameless tiles
-("a pencil drawing without colours"), and 16px-rounded sector panels holding
-tiles (messy nesting, too round). The per-group `layout` field, the
-`PartnerCarousel` component and the per-partner `accent` stripes were all
-removed. Do not bring back a carousel for a handful of marks. Seven partners carry logo files (sourced from their own
-sites or Wikimedia, recorded on each `logo` entry, and **needing the client's
-written permission before launch**); CFOne and SA Cleaning have none and render
-their name as the mark. `Partner.logo` is optional so files drop in one at a
-time. Logos go under `public/partners/`, not `photos.ts`: that registry is for
-photography and its tone, ratio and focal fields mean nothing for a wordmark.
+**Partnerships — "Our Affiliates & Partnerships"**, with the client's blurb.
+Partner cards built on the service card's anatomy (logo panel with the blue
+corner notch, sector tag, name, two-line blurb, "Visit Site →"), 3x3 at `lg`.
+All nine carry their current logos, taken from their own sites on 2026-09-23:
+the three universities' **real logos replaced the Wikipedia coats of arms**
+that were there (the client called them wrong); **S&A Cleaning Group**
+(sacleaninggroup.ca — the client's "SA Cleaning") and **CFOne** (the Canadian
+Armed Forces community card, CFMWS) are identified, linked and have logos.
+**Blurbs describe the organisation, never the relationship.** 4px corners
+(`--radius-card`) are the site's only card radius — do not spread it. Do not
+bring back a carousel. Logos live in `public/partners/`, not `photos.ts`.
 
-Two things about that section are **not settled and should not be published
-without the client confirming them**:
+Every group says "partners", on the client's instruction — never "client",
+which would assert a commercial engagement about a named third party. **The
+`Property management` group is empty on purpose**: the client asked for "just
+some property management companies for now", and inventing them would be a
+false endorsement of identifiable businesses. It stays empty until real names
+arrive.
 
-1. **Every group says "partners", on the client's instruction.** Asked what
-   these organisations are, they said the companies are trade partners, that
-   RainCity also works at some of their sites, and that because those are
-   separate businesses the relationship to publish is the partnership rather
-   than the customer one. Keep it that way — "client" asserts a commercial
-   engagement about a named third party and would need each of them to agree
-   to it being published. The three groups split by sector, not relationship;
-   the relationship is the same across all nine.
-2. **"CFOne" and "CFIB" were sent as "cfone" and "cfib".** CFIB is almost
-   certainly the Canadian Federation of Independent Business and CFOne most
-   likely the Canadian Armed Forces community programme, but "almost certainly"
-   is not the standard for printing an organisation's name on a client's site.
-
-**The `Property management` group is empty on purpose.** The client asked to
-"put just some property management companies for now". Inventing those would
-put identifiable third parties on this page as customers of a company they may
-never have engaged, in a market small enough that both sides would recognise
-it. That is a false endorsement, not placeholder copy, and it is the one
-instruction in that message that was not carried out. Same rule governs logos.
+**Supporting Our Community** is a published offer: special pricing for
+seniors, people with disabilities, single parents, veterans, healthcare
+workers, first responders and teachers — the client's words, with their
+disclaimer ("Valid on select residential services…"), which goes up with the
+offer or not at all. No discount size is stated because none was given. It is
+the page's one RainCity Blue band, between Process and Home Ground.
 
 ### Community pages carry Off The Clock and Local Partners, and the first is placeholder
 
@@ -493,11 +551,10 @@ Services nav dropdown, the `/services/[slug]` URLs and the `OfferCatalog`
 JSON-LD all derive from it — edit the array and all four follow. Never
 hardcode a service name in a component.
 
-Two lists do **not** derive and must be updated by hand alongside it:
-
-1. `quoteForm.serviceOptions` in `lib/content.ts` — a deliberately short
-   six-option dropdown, not the full catalogue
-2. `public/llms.txt` — a static file
+One list does **not** derive and must be updated by hand alongside it:
+`public/llms.txt`, a static file. (`quoteForm.serviceOptions` used to be the
+second — a hand-kept six-option dropdown. Since 2026-09-23 it is every service
+title plus "Other", derived, at the client's request.)
 
 Adding or removing a service also needs a matching `PhotoKey` entry in
 `lib/photos.ts`. The homepage grid re-centres its short last row
@@ -550,7 +607,7 @@ it is. In particular:
 - **Every photograph in `public/` is webp.** The five PNGs that were there —
   31 MB between them, two of them the LCP hero on `/about` and `/services` —
   were converted in the SEO pass and `public/` went from 54 MB to 24 MB. The
-  originals are in `assets/` as always. `og-default.png` is the one deliberate
+  originals are in `assets/` as always. `og-card.png` is the one deliberate
   exception: some social scrapers still do not take webp.
 
 "Complete" was true of the areas this heading names and was never true of the
@@ -695,23 +752,23 @@ but its links still pass, so the blog→service links below work today.
 
 ### The link graph runs both ways now, and the nav does not count
 
-`LocationServices` puts all eleven service links on all nine community pages.
+`LocationServices` puts all twelve service links on all nine community pages.
 Nothing pointed back until `components/service/ServiceAreas.tsx` landed: the
 built HTML of a service page contained eight internal hrefs, all top-level, on
-the eleven pages most likely to be a search entry point. `RelatedServices`
+the twelve pages most likely to be a search entry point. `RelatedServices`
 beside it adds the sideways links, from `relatedBySlug` in `content.ts` — a
 written map, because the adjacency that matters is physical (the ladder is
 already at the gutter; a slab is washed before it is sealed) and no ordering of
 the `services` array encodes that.
 
 **The header's dropdowns are not internal links.** `Header` holds its children
-behind `openMenu` state, so the eleven service and nine community links exist
+behind `openMenu` state, so the twelve service and nine community links exist
 in no route's server HTML. Anything a crawler is meant to follow has to be in a
 section. This is the thing that made the gap invisible for so long.
 
 ### Headings on the service template are measured, not eyeballed
 
-`servicePage.areas.heading` is one fixed string across all eleven pages, and it
+`servicePage.areas.heading` is one fixed string across all twelve pages, and it
 is fixed because `{service.title} Across Greater Vancouver` was measured at
 375px in `display-l` and wrapped to three lines on six services and four on
 Concrete and Asphalt Sealing — against the two-line rule `overviewHeading`

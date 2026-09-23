@@ -50,7 +50,7 @@ export type QuoteFormCopy = {
   phone: string;
   email: string;
   emailHref: string;
-  /** A deliberately short six-option list, not the full service catalogue. */
+  /** Every service title, then "Other" — derived from `services`. */
   serviceOptions: readonly string[];
   submit: string;
 };

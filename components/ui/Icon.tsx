@@ -158,9 +158,11 @@ export function Check({ className }: IconProps) {
  * A bare tick is the weakest mark in this file — it is the one glyph that
  * carries no shape of its own, so five of them down a list read as five
  * stray strokes rather than as five marked items. This sets the same check
- * on a plate cut at 12 degrees on its right edge: the logo mark's geometry
- * at icon scale, and the only piece of the squeegee system small enough to
- * be spent on a list item.
+ * on a plate cut at 12 degrees on its right edge: the Squeegee Edge's
+ * geometry at icon scale, and the only piece of the squeegee system small
+ * enough to be spent on a list item. (It was also the logo mark's geometry
+ * until the client's own logo replaced that mark — see Logo.tsx. The plate
+ * stays: it belongs to the system, not to the logo.)
  *
  * A circle was the alternative and is ruled out by the system — nothing with
  * an edge takes a radius on this site, and the single declared exception is

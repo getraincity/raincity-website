@@ -1,8 +1,8 @@
-<svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
-  <!-- The site's one mark, unchanged from components/ui/Logo.tsx: the plate
-       cut at 12 degrees in RainCity Blue, with the Pacific Blue hairline
-       blade at the same angle. Both colours are locked tokens (raincity-
-       tokens.md); nothing new was introduced to make this file. -->
-  <path d="M0 0 H34 L26.77 34 H0 Z" fill="#1A5FA8" />
-  <path d="M28.5 0 L21.27 34" stroke="#3D8FD4" stroke-width="3" />
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- The R of the client's wordmark (Montserrat SemiBold, outlined), white on
+       Harbour Navy: the header's own colours at tab size. The leaf is left
+       off on purpose — below 64px its thin outline reads as noise. Both
+       colours are locked tokens; see components/ui/Logo.tsx. -->
+  <rect width="32" height="32" fill="#0C2740"/>
+  <path d="M11.17 26L7.46 26L7.46 6L15.66 6Q19.66 6 21.93 7.89Q24.2 9.77 24.2 13.11Q24.2 15.31 23.17 16.9Q22.14 18.49 20.26 19.31Q20.11 19.4 19.94 19.46L24.54 26L20.54 26L16.46 20.14Q16.09 20.17 15.69 20.17L11.17 20.17L11.17 26M11.17 9.14L11.17 17.11L15.51 17.11Q17.97 17.11 19.21 16.06Q20.46 15 20.46 13.11Q20.46 11.2 19.21 10.17Q17.97 9.14 15.51 9.14L11.17 9.14" fill="#FFFFFF"/>
 </svg>

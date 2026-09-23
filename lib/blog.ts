@@ -35,6 +35,15 @@ export const POSTS_PER_PAGE = 3;
  */
 const byNewest = (a: BlogPost, b: BlogPost) => b.date.localeCompare(a.date);
 
+/**
+ * The newest posts across the whole blog, featured or not — the homepage's
+ * "Explore Our Latest Work" band. Not `archivePosts`: that list excludes the
+ * featured strip because /blog shows both on one page; the homepage shows
+ * neither, so it wants the plain chronological front of the blog.
+ */
+export const latestPosts = (count = 3) =>
+  [...blogPosts].sort(byNewest).slice(0, count);
+
 /** The featured strip above the archive. */
 export const featuredPosts = blogPosts.filter((p) => p.featured).sort(byNewest);
 

@@ -91,8 +91,7 @@ export function Footer() {
               <Clock className="shrink-0" />
               Open Hours
             </h3>
-            <p className="body-s font-medium mt-2 text-fog">{business.hours.weekdays}</p>
-            <p className="body-s font-medium text-fog">{business.hours.sunday}</p>
+            <p className="body-s font-medium mt-2 text-fog">{business.hours.days}</p>
           </div>
 
           <FooterLinks
