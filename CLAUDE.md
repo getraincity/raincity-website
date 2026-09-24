@@ -154,11 +154,16 @@ using it.
 ### The 2026-09-23 content pass — what changed and the rules it left
 
 The client's homepage feedback, tracked item by item in
-`client-updates-2026-09-23.md`. Five things in it outlive the pass:
+`client-updates-2026-09-23.md` (and the follow-up round in
+`client-updates-2026-09-25.md`, whose corrections are folded in below). Five
+things in it outlive the pass:
 
 - **Hours, minimum job size and travel are client-confirmed facts, worded
-  once.** Seven days, 7am–10pm (`business.hours.days`, and
-  `openingHoursSpecification` in `lib/seo.tsx`, which must match). Minimum job
+  once.** Monday to Saturday, 9am–5pm, closed Sunday (`business.hours.days`,
+  `openingHoursSpecification` in `lib/seo.tsx`, the two "What are your
+  hours?" answers in `pageFaqs`, and `llms.txt` — all four must match). This
+  is the 2026-09-25 correction: the client marked the 7am–10pm of 2026-09-23
+  as wrong in the footer and Touseef confirmed Mon–Sat 9–5. Minimum job
   usually $120, depending on the job. Travel included in the price; a travel
   fee may apply to an on-site visit, by location. These replaced "no travel
   charge and no minimum job size", which was stated on nine pages — six
@@ -180,21 +185,57 @@ The client's homepage feedback, tracked item by item in
   placeholder, and would surface if it were ever re-dated.
 - **Memberships & Partnerships replaced four stock badges** on the homepage
   Awards section, as `PartnerCard`s with each organisation's original logo
-  (the logos-always rule under the /about section below). Four show: New West
-  Spotlight, CFIB, WorkSafeBC, Hello Gabby. **Two stay in the data but do not
-  render, and Touseef has said to skip them (2026-09-23)**: Zen Insurance (Zen
-  Insurance Inc., Calgary — *not* Zensurance; its domain is parked) and the
-  Tri-Cities Business Networking Group (not findable online). Adding a `logo`
-  to either is all it would take to show it. WorkSafeBC's
+  (the logos-always rule under the /about section below). **All six show
+  since 2026-09-25**, when the client supplied logos in the feedback doc: New
+  West Spotlight, CFIB, WorkSafeBC, **Zensurance**, **Hello Gubby** and the
+  Tri-Cities Business Networking Group. Two of those corrected guesses made
+  from misspelled names: "Zeninsurance" had been recorded as Zen Insurance
+  Inc. (Calgary), and "Hello Gabby" as the unrelated hellogabby.com — the
+  client's own logo files are Zensurance's wordmark and Hello Gubby's rabbit
+  (hellogubby.ai, a Vancouver AI front desk). **Match the name to the logo the
+  client sends, not the other way round.** The same six render on /about as a
+  "Memberships & Partnerships" row under the partner cards, from the same
+  array (less CFIB, which is already a partner card there). WorkSafeBC's
   blurb is the one sentence WorkSafeBC permits, word for word; its terms also
   restrict employers' use of the logo, which Touseef was told and chose to
   show anyway, taking responsibility — so the logo carries no link.
 - **The quote form's right column is a photograph, not a map.** No Maps API
   key was ever issued, so it rendered a grey text line on every page. Downtown
   New Westminster (`quoteNewWestminster`) everywhere except `/about`, which
-  passes `rooftops`. **`LocationMap` and `CoverageMap` still depend on
-  `NEXT_PUBLIC_GOOGLE_MAPS_KEY`** and still show their text fallbacks — the
-  same fix has not been made there.
+  passes `rooftops`. **`LocationMap` and `CoverageMap` got the same fix on
+  2026-09-25** (the client's "location pages still hv missing picture"):
+  with no key they show `regionPortMann` — the Fraser at the Port Mann Bridge
+  with Burnaby behind — under a scrim caption naming the place, via
+  `RegionPhoto` in `CoverageMap.tsx`. They still render the iframe if a key is
+  ever set, so issuing one brings the maps back with no code change.
+
+### Project photography is real, and one list feeds two places
+
+Since 2026-09-25 (`client-updates-2026-09-25.md`), `projects.items` in
+`content.ts` holds **eight RainCity jobs from the client's own photos**, each a
+before and an after, and it is the single source for both places they show:
+
+- **Homepage "See The RainCity Difference"** — every job as a side-by-side
+  pair (never a wipe slider: the framing differs before and after), four on
+  load and the rest behind "Show More Projects" (`ShowMoreList`, which only
+  toggles `hidden` — all eight are in the HTML). The stock pairs and their
+  "illustrative" disclaimer are gone.
+- **"See the Work Up Close" on every service page** (`ServiceGallery`,
+  requested as "a section to put some pictures for each project… click for
+  more pictures"). A service shows the jobs whose `service` is its slug;
+  clicking one opens a native `<dialog>` viewer with every photo of the job.
+  Placeholder plates top the row up to three and are deliberately not
+  clickable. Real work today on Balcony Cleaning, Power Washing, Window
+  Cleaning and Roof Cleaning; the other eight are placeholders until the
+  client sends photos. **Add a job by adding an entry** — `more` takes extra
+  photos for the viewer.
+
+Rules that come with them: every frame is served square (the originals mix
+orientations); captions describe only what the photo shows — no street,
+customer or date; and two crops are deliberate — the phone-app "Before/After"
+stickers were cut off the glass-canopy pair, and the house number was cut off
+the entry-pillars photo. Keep doing both. `check-layout.mjs` now measures
+`#gallery-heading`.
 
 ### Motion — the design rules
 
@@ -298,9 +339,9 @@ pass, and `/refund-policy` now redirects here, so this section is the only
 thing backing them.
 
 (The before-and-after clause that used to be the Disclaimer's restated
-`projects.disclaimer`. That page is gone; the disclaimer rendered above the
-homepage Projects grid is now the only place that claim lives, and it comes off
-when `projects.illustrative` goes false.)
+`projects.disclaimer`. That page is gone, and since 2026-09-25 the homepage
+pairs are RainCity's own jobs, so `projects.illustrative` is false and the
+disclaimer no longer renders anywhere.)
 
 **Both routes are `noindex` and both are absent from `sitemap.xml`, and that
 is deliberate — do not "fix" it by adding them back.** An earlier version of
@@ -491,18 +532,24 @@ partner, and he carries responsibility for using them. So `Partnerships.tsx`,
 one is added. Fetch each logo from the organisation's own site and check it by
 eye; if two organisations could match a name, ask which — do not guess.
 
-**Founders is two people: Wilson and Glavin** — confirmed by Touseef on
-2026-09-23, superseding the earlier record of one founder spelled "Glevin
-Wilson". Glavin with an a. **Their bios and the section's lead line are
-placeholders, and there are no portraits yet** — Touseef asked for dummy copy
-and held photo places until he sends the real details. The placeholder bios say
-nothing personal (only that the two co-founded the company, plus copy the site
-already uses), so nothing false goes live if they are missed; replace them
-wholesale. Each card keeps its 4:5 portrait frame as a navy plate with the
-founder's initial, so a photo drops in by setting `photo` with nothing moving.
-Touseef chose to publish with the placeholders in place (2026-09-23) and send
-the real bios and photos later — so they are live, and replacing them is still
-outstanding.
+**Founders is two people: Wilson and Glevin.** "Glevin" is the client's own
+spelling in the 2026-09-25 feedback doc, confirmed by Touseef that day; it was
+"Glavin" from 2026-09-23 (an earlier answer, and a LinkedIn handle). The
+founder's spelling wins over any handle. **Roles are the client's, word for
+word**: Wilson — Quality Control Inspector / Site Supervisor; Glevin —
+Operations Coordinator / Office Administrator. The bios describe those jobs
+(asked for as "some description of what they do"), tie them to what the site
+already publishes, and say nothing personal and use no pronouns; replace them
+with the founders' own words when they come. **Wilson's portrait is in** (sent
+on WhatsApp at only 480x550 — ask for the original); **Glevin's is still to
+come**, and that card keeps the 4:5 navy plate with the initial, so the photo
+drops in by setting `photo` with nothing moving.
+
+**By the numbers was rebuilt on 2026-09-25** after the client said it "looks
+funny, something is missing": a heading and a line on the left, four white
+tiles on the right — the three client figures, each with a sentence restating
+a confirmed fact, plus the real Google rating read from `testimonials.google`.
+None of the four is in the structured data (reasons on `Stats.tsx`).
 
 **Grounds: Stats (Fog) → Founders (White) → Partnerships (Fog) → the cut**,
 restored now that Founders always renders (Partnerships had been White only
@@ -518,6 +565,8 @@ the three universities' **real logos replaced the Wikipedia coats of arms**
 that were there (the client called them wrong); **S&A Cleaning Group**
 (sacleaninggroup.ca — the client's "SA Cleaning") and **CFOne** (the Canadian
 Armed Forces community card, CFMWS) are identified, linked and have logos.
+Under them, since 2026-09-25, the homepage's memberships as a second row —
+see the Memberships bullet above.
 **Blurbs describe the organisation, never the relationship.** 4px corners
 (`--radius-card`) are the site's only card radius — do not spread it. Do not
 bring back a carousel. Logos live in `public/partners/`, not `photos.ts`.

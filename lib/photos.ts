@@ -136,13 +136,28 @@ export const photos = {
   },
 
   aboutProcess: {
-    src: "/about-us-our-process-section-background.webp",
-    alt: "A smiling RainCity technician in a navy apron holding a spray bottle and a folded microfiber cloth.",
+    src: "/about-process-parkade-surface-cleaner.webp",
+    alt: "A RainCity technician guiding a yellow surface cleaner across the concrete floor of an underground parkade, the freshly washed strip dark against the dry slab.",
     credit: "RainCity Property Maintenance",
-    tone: "#f0eee8",
+    tone: "#857f76",
     ratio: "7:5",
-    focal: "50% 40%",
-    note: "Our Process figure on /about. Served at 1600x1232 (1.3:1), converted from the 2530x1948 original in `assets/`, against the section's 7:5 (1.4:1) crop, so the top/bottom lose about 7% combined; focal is held slightly high to keep the face clear of the crop.",
+    focal: "50% 52%",
+    note: "Our Process figure on /about. The client's own photograph, supplied in the 2026-09-25 feedback doc with \"change to\" against the previous frame (a stock-looking studio shot of a cleaner in an apron, still at /about-us-our-process-section-background.webp, unreferenced). Source 1496x1496 in `assets/about-process-parkade-surface-cleaner.jpg`, served at full size. The 7:5 crop keeps 71% of the height; the focal holds the technician's head and the surface cleaner, losing ceiling and the bottom of the slab.",
+  },
+
+  /**
+   * Founder portraits. 4:5, face in the upper third, per the `Founder.photo`
+   * note in content.ts. Glevin's has not arrived; that card shows the navy
+   * initial plate until it does.
+   */
+  founderWilson: {
+    src: "/founders/wilson.webp",
+    alt: "Wilson, co-founder of RainCity Property Maintenance, smiling in a dark suit and bow tie against a plain blue-grey backdrop.",
+    credit: "RainCity Property Maintenance",
+    tone: "#8089a2",
+    ratio: "4:5",
+    focal: "50% 30%",
+    note: "Sent by the client on WhatsApp, 2026-09-25, at 480x550 — the only size received. Cropped to 440x550 (4:5) from `assets/founder-wilson-supplied.jpg`. Adequate at 1x and soft on a 2x screen at desktop; ask for the original file.",
   },
 
   aboutHomeGround: {
@@ -163,6 +178,35 @@ export const photos = {
     ratio: "16:9",
     focal: "58% 50%",
     note: "The \"Where we work\" panel beside the sitewide quote form, rendered with `fill`, so the ratio is nominal. It replaced a Maps Embed API iframe that rendered a text fallback on every page because no API key was ever issued (2026-09-23, client: \"not a placeholder at all\"). A photograph needs no key, no third party and no billing account, so it cannot go blank. Unsplash photo v1-pWlkHrkA by Syawish Rehman — one of the two alternates recorded on `aboutHomeGround` — verified by eye as New Westminster: the SkyBridge, the Fraser log booms, the waterfront rail line and the downtown towers top right. Free Unsplash licence. Downloaded at 2400x1350 into `assets/new-westminster-skybridge-downtown.jpg`; served at the same size with saturation eased 15%, because the source's warm grade sat hard against the overcast palette. Served full width because the panel crops it to a tall rectangle and needs the pixels. Focal sits right of centre to hold the barge, the bridge pier and the towers. NOT used on /about: Home Ground sits directly above the form there and already shows the SkyBridge — see the `photo` prop on QuoteForm.",
+  },
+
+  /**
+   * The region, in the plates that were waiting for a Google map.
+   *
+   * `CoverageMap` on /locations and `LocationMap` on the nine community pages
+   * each held a 2px navy plate for a Maps Embed API iframe. No API key was
+   * ever issued, so every one of them rendered a grey box with one line of
+   * text in it — the client's "location pages still hv missing picture"
+   * (2026-09-25). Touseef asked for the same fix the quote form got on
+   * 2026-09-23: a photograph, which needs no key and cannot go blank.
+   *
+   * One frame for all ten plates, because it answers the question those
+   * sections ask — where this is and what is around it — at the scale of the
+   * whole region: the Fraser with the Port Mann Bridge crossing it between
+   * Coquitlam and Surrey, and Burnaby's Metrotown towers on the skyline
+   * behind. Both banks of the river, which is how the Coverage copy organises
+   * the nine communities. It never appears twice on one page: /locations
+   * uses `rooftops` for its hero and `quoteNewWestminster` for the quote
+   * form, and a community page uses its own photo for the hero.
+   */
+  regionPortMann: {
+    src: "/region-port-mann-fraser.webp",
+    alt: "The Fraser River at golden hour, the Port Mann Bridge spanning it between Coquitlam and Surrey, with Burnaby's towers on the skyline beyond.",
+    credit: "Chad Montgomery",
+    tone: "#5e4b37",
+    ratio: "16:9",
+    focal: "55% 50%",
+    note: "Unsplash photo B2AjZDm6NCs by Chad Montgomery, free Unsplash licence; the photographer's description reads \"Telephoto landscape view of the Port Mann Bridge and distant Metro Vancouver skyline\", and it was checked by eye: the bridge's two towers and cable fans, the Fraser's islands and the Metrotown cluster are all right. Downloaded at 2400x1600 into `assets/port-mann-bridge-fraser-metro-vancouver.jpg`; served at that size with saturation eased 20%, because the golden-hour orange sat hard against the site's cool palette. Rendered with `fill` in a plate that is wide on desktop and tall on a phone, so the focal holds the bridge and river just right of centre.",
   },
 
   servicesHero: {
@@ -219,6 +263,137 @@ export const photos = {
     tone: "#595959",
     ratio: "3:2",
     focal: "50% 50%",
+  },
+
+  // --- Project photographs: RainCity's own before and after ----------------
+  //
+  // Sixteen frames, eight jobs, supplied by the client in the 2026-09-25
+  // feedback doc ("use the before and after work picture"). They replaced the
+  // stock pairs the homepage Projects section carried with an "illustrative"
+  // disclaimer, and they fill the project galleries on the service pages.
+  // Each pair is one job, before and after — but the camera rarely stands in
+  // the same place twice, which is why pairs are shown side by side and never
+  // on a wipe slider (the design system's slider needs identical framing).
+  //
+  // All served SQUARE: the originals mix portrait and landscape, and a square
+  // is the one crop that holds every pair without letterboxing. Crops were
+  // placed by eye (the `extract` boxes are in the session scratchpad's
+  // projects.js; originals are `assets/project-*.jpg`). Two crops do work
+  // beyond framing: the glass canopy pair drops the "Before……" and "After ✅"
+  // stickers baked into the client's phone photos, and the entry-pillars
+  // "after" is cut left of the house number on the gate post — a customer's
+  // address has no business on a contractor's website.
+  projectBalconyDeckBefore: {
+    src: "/projects/balcony-deck-before.webp",
+    alt: "A condo balcony's concrete deck before cleaning, dark with grime, footprints and scattered debris along the railing.",
+    credit: "RainCity Property Maintenance",
+    tone: "#9b9c9a",
+    ratio: "1:1",
+  },
+  projectBalconyDeckAfter: {
+    src: "/projects/balcony-deck-after.webp",
+    alt: "The same condo balcony deck after cleaning, the concrete an even pale grey from the door to the railing.",
+    credit: "RainCity Property Maintenance",
+    tone: "#9c9d9c",
+    ratio: "1:1",
+  },
+  projectBalconyEnclosedBefore: {
+    src: "/projects/balcony-enclosed-before.webp",
+    alt: "An enclosed glass balcony before cleaning, its grey floor dull and stained, with a dirty tidemark along the base of the walls.",
+    credit: "RainCity Property Maintenance",
+    tone: "#959693",
+    ratio: "1:1",
+  },
+  projectBalconyEnclosedAfter: {
+    src: "/projects/balcony-enclosed-after.webp",
+    alt: "The same enclosed balcony after cleaning, the floor washed to a clean, glossy grey that reflects the windows.",
+    credit: "RainCity Property Maintenance",
+    tone: "#728295",
+    ratio: "1:1",
+  },
+  projectGlassCanopyBefore: {
+    src: "/projects/glass-canopy-before.webp",
+    alt: "Looking up through a glass patio cover before cleaning: the panels spotted and filmed with grime, a squeegee on a pole working across them.",
+    credit: "RainCity Property Maintenance",
+    tone: "#7b94ae",
+    ratio: "1:1",
+  },
+  projectGlassCanopyAfter: {
+    src: "/projects/glass-canopy-after.webp",
+    alt: "The same glass patio cover after cleaning, the house and a clear blue sky sharp through the panels.",
+    credit: "RainCity Property Maintenance",
+    tone: "#4f6372",
+    ratio: "1:1",
+  },
+  projectSidingBefore: {
+    src: "/projects/siding-before.webp",
+    alt: "Pale grey horizontal siding under an eave before washing, streaked with dark algae and dirt along every board.",
+    credit: "RainCity Property Maintenance",
+    tone: "#7b7f82",
+    ratio: "1:1",
+  },
+  projectSidingAfter: {
+    src: "/projects/siding-after.webp",
+    alt: "Horizontal siding and trim under a gable after washing, the boards clean and bright above a shingle roof.",
+    credit: "RainCity Property Maintenance",
+    tone: "#9a9b9f",
+    ratio: "1:1",
+  },
+  projectRoofBefore: {
+    src: "/projects/roof-before.webp",
+    alt: "An asphalt shingle roof before cleaning, streaked dark with growth, debris lying in the gutter along its edge.",
+    credit: "RainCity Property Maintenance",
+    tone: "#87857e",
+    ratio: "1:1",
+  },
+  projectRoofAfter: {
+    src: "/projects/roof-after.webp",
+    alt: "An asphalt shingle roof after cleaning, the shingles an even grey against the cedar trees around the house.",
+    credit: "RainCity Property Maintenance",
+    tone: "#8c907c",
+    ratio: "1:1",
+  },
+  projectBenchesBefore: {
+    src: "/projects/concrete-benches-before.webp",
+    alt: "Concrete benches in a gravel garden before washing, green with algae and stained along their sides.",
+    credit: "RainCity Property Maintenance",
+    tone: "#707365",
+    ratio: "1:1",
+  },
+  projectBenchesAfter: {
+    src: "/projects/concrete-benches-after.webp",
+    alt: "The same concrete garden benches after pressure washing, clean and pale against the dark gravel and hedge.",
+    credit: "RainCity Property Maintenance",
+    tone: "#3e3d34",
+    ratio: "1:1",
+  },
+  projectPaversBefore: {
+    src: "/projects/paver-path-before.webp",
+    alt: "A paver path down the side of a house before washing, moss and green growth in the joints between the stones.",
+    credit: "RainCity Property Maintenance",
+    tone: "#878782",
+    ratio: "1:1",
+  },
+  projectPaversAfter: {
+    src: "/projects/paver-path-after.webp",
+    alt: "The side-yard paver path after pressure washing, the stones clean and the joints clear along the fence.",
+    credit: "RainCity Property Maintenance",
+    tone: "#777872",
+    ratio: "1:1",
+  },
+  projectEntryBefore: {
+    src: "/projects/entry-wall-before.webp",
+    alt: "A cream stone garden wall with a wrought-iron railing before washing, its capstones stained dark with dirt and algae.",
+    credit: "RainCity Property Maintenance",
+    tone: "#79786a",
+    ratio: "1:1",
+  },
+  projectEntryAfter: {
+    src: "/projects/entry-pillars-after.webp",
+    alt: "Cream stone gate pillars and the paver walkway between them after pressure washing, clean in the evening light.",
+    credit: "RainCity Property Maintenance",
+    tone: "#474438",
+    ratio: "1:1",
   },
 
   roofMossy: {

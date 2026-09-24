@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { business, locations, locationsPage } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Photo } from "@/components/ui/Photo";
 import { ArrowRight, MapPin } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 
@@ -92,7 +93,7 @@ export function CoverageMap() {
                 east to west and the height decides it north to south. At 320
                 the map stopped above Surrey and Delta and showed a screen of
                 Mount Seymour instead; 384 brings the south bank back in. */}
-            <div className="h-96 grow border-2 border-navy bg-fog">
+            <div className="relative h-96 grow overflow-hidden border-2 border-navy bg-navy">
               {process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ? (
                 <iframe
                   title={`Map of ${business.region}, the region ${business.name} works across`}
@@ -102,12 +103,18 @@ export function CoverageMap() {
                   className="block size-full border-0"
                 />
               ) : (
-                <div className="flex size-full items-center justify-center">
-                  <p className="meta text-steel">{business.region} service area</p>
-                </div>
+                // No Maps key has ever been issued, so this is what renders:
+                // the region's photograph instead of a grey box (2026-09-25,
+                // the client's "missing picture") — the fix the quote form got
+                // first. See `regionPortMann` in photos.ts.
+                <RegionPhoto />
               )}
             </div>
-            <p className="meta mt-4 text-steel">{locationsPage.map.caption}</p>
+            <p className="meta mt-4 text-steel">
+              {process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
+                ? locationsPage.map.caption
+                : locationsPage.map.photoCaption}
+            </p>
           </Reveal>
 
           {/* The index. One block per band, and each band's members are
@@ -172,5 +179,29 @@ export function CoverageMap() {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * The region, in the plate where the map would be. Shared with `LocationMap`
+ * on the nine community pages. The scrim caption — the quote form's
+ * treatment — names what the photograph shows, so on a community page it is
+ * never read as a picture of that community.
+ */
+export function RegionPhoto() {
+  return (
+    <figure className="absolute inset-0">
+      <Photo name="regionPortMann" fill sizes="(min-width: 1024px) 60vw, 100vw" />
+      <figcaption className="absolute inset-x-0 bottom-0 px-5 pt-16 pb-4">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-t from-navy via-navy/80 to-transparent"
+        />
+        <div className="relative">
+          <p className="meta text-white">{locationsPage.map.photoTitle}</p>
+          <p className="meta mt-1 text-fog">{locationsPage.map.photoPlace}</p>
+        </div>
+      </figcaption>
+    </figure>
   );
 }

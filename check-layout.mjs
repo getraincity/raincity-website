@@ -10,7 +10,8 @@
  * four on Concrete and Asphalt Sealing. The rule caught it, but only because
  * somebody measured by hand; this script did not know those headings existed.
  * All three are checked now, so the next heading added to this template is
- * measured by the thing that is supposed to measure it.
+ * measured by the thing that is supposed to measure it. The project gallery
+ * (2026-09-25) added `#gallery-heading`, a fixed string, measured with them.
  */
 import { chromium } from "playwright";
 import { services } from "./lib/content.ts";
@@ -41,11 +42,12 @@ for (const s of services) {
         overview: lines("overview-heading"),
         areas: lines("areas-heading"),
         related: lines("related-heading"),
+        gallery: lines("gallery-heading"),
         overflow: de.scrollWidth - de.clientWidth,
         tiles: document.querySelectorAll("#overview-heading ~ * li, section li").length,
       };
     });
-    const worst = Math.max(r.overview, r.areas, r.related);
+    const worst = Math.max(r.overview, r.areas, r.related, r.gallery);
     row[`h2@${width}`] = worst;
     row[`ovf@${width}`] = r.overflow;
     if (worst > 2 || r.overflow > 0) bad++;

@@ -4,7 +4,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 
 /**
- * The founders — Wilson and Glavin.
+ * The founders — Wilson and Glevin (the client's spelling; see `founders`).
  *
  * Added at the client's request. `/about` otherwise names no person anywhere,
  * so this is the page's only human anchor, which is worth remembering if it
@@ -34,8 +34,9 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * rendered nothing, and Partnerships had been moved to White to avoid two Fog
  * bands touching; it is back to the designed Fog now that this always shows.
  *
- * The bios and the lead line are placeholders — see the banner on `founders`
- * in content.ts.
+ * Wilson's portrait is in (2026-09-25); Glevin's still shows the plate. The
+ * roles are the client's and the bios describe those roles — see the banner
+ * on `founders` in content.ts.
  */
 export function Founders() {
   const { people } = founders;
@@ -85,9 +86,13 @@ export function Founders() {
                 )}
               </div>
 
+              {/* "Co-Founder" is shared by both cards, so it is the quiet
+                  line; the job title is what tells the two apart, so it takes
+                  the blue eyebrow the role used to have. */}
               <div className="mt-6 border-t border-t-line pt-5">
-                <h3 className="display-s text-navy">{person.name}</h3>
-                <p className="eyebrow mt-2 text-rc-blue">{person.role}</p>
+                <p className="meta text-steel">{person.role}</p>
+                <h3 className="display-s mt-1.5 text-navy">{person.name}</h3>
+                <p className="eyebrow mt-2 text-rc-blue">{person.title}</p>
                 <p className="body-s mt-4 text-steel">{person.bio}</p>
               </div>
             </StaggerItem>

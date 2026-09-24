@@ -13,6 +13,7 @@ import { QuoteForm } from "@/components/home/QuoteForm";
 import { ServiceHero } from "@/components/service/ServiceHero";
 import { ServiceOverview } from "@/components/service/ServiceOverview";
 import { ServiceProcess } from "@/components/service/ServiceProcess";
+import { ServiceGallery } from "@/components/service/ServiceGallery";
 import { ServiceAreas } from "@/components/service/ServiceAreas";
 import { RelatedServices } from "@/components/service/RelatedServices";
 import { ServiceClosing } from "@/components/service/ServiceClosing";
@@ -154,6 +155,11 @@ export default async function ServiceDetailPage({
       <main id="main">
         <ServiceHero service={service} />
         <ServiceOverview service={service} />
+        {/* The client's project photos (2026-09-25) — real jobs where there
+            are some, placeholders topping the row up where there are not. Navy,
+            between the White scope tiles and the Fog process strip; see the
+            note on the component. */}
+        <ServiceGallery service={service} />
         <ServiceProcess />
         {/* The two cross-link bands, in the slot the community template
             already uses for `NearbyAreas`: after the process band, before the

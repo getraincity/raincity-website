@@ -5,6 +5,7 @@ import {
   type Location,
 } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { RegionPhoto } from "@/components/locations/CoverageMap";
 import { Reveal } from "@/components/ui/Motion";
 
 /**
@@ -93,7 +94,7 @@ export function LocationMap({ location }: { location: Location }) {
                 heading beside it. Same 2px navy plate both of those sit in;
                 the system carries no radius and no shadow, so a bordered
                 plate is what a framed thing looks like here. */}
-            <div className="h-96 grow border-2 border-navy bg-fog">
+            <div className="relative h-96 grow overflow-hidden border-2 border-navy bg-navy">
               {process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ? (
                 <iframe
                   title={`Map of ${location.name}, ${business.region} — one of the communities ${business.name} works in`}
@@ -103,9 +104,12 @@ export function LocationMap({ location }: { location: Location }) {
                   className="block size-full border-0"
                 />
               ) : (
-                <div className="flex size-full items-center justify-center">
-                  <p className="meta text-steel">{location.name}</p>
-                </div>
+                // No Maps key, so the region's photograph rather than a grey
+                // box with the city's name in it — the client's "location
+                // pages still hv missing picture" (2026-09-25). Same frame
+                // and scrim caption as /locations; `detail.mapCaption` below
+                // still says what this community's coverage takes in.
+                <RegionPhoto />
               )}
             </div>
             <p className="meta mt-4 text-steel">{detail.mapCaption}</p>

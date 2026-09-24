@@ -31,9 +31,11 @@ export const business = {
   email: "info@raincitypms.com",
   emailHref: "mailto:info@raincitypms.com",
   hours: {
-    // Seven days since 2026-09-23 (client-confirmed); was Mon–Sat with
-    // Sunday closed. `openingHoursSpecification` in lib/seo.tsx must match.
-    days: "Mon – Sun: 7 am – 10 pm",
+    // Mon–Sat 9–5, Sunday closed, since 2026-09-25: the client marked the
+    // "Mon – Sun: 7 am – 10 pm" of 2026-09-23 as wrong in the footer, and
+    // Touseef confirmed these. `openingHoursSpecification` in lib/seo.tsx and
+    // the two "What are your hours?" answers in `pageFaqs` must match.
+    days: "Mon – Sat: 9 am – 5 pm",
   },
   base: "New Westminster",
   region: "Greater Vancouver",
@@ -2568,41 +2570,147 @@ export const whyChooseUs = {
   cta: "Get Free Quote",
 } as const;
 
+/**
+ * One RainCity job, photographed before and after.
+ *
+ * THE SINGLE SOURCE FOR PROJECT PHOTOGRAPHY. The homepage shows every entry
+ * as a before/after pair; each service page's gallery shows the entries whose
+ * `service` is that page's slug, and opens `before`, `after` and then `more`
+ * in its viewer. Add a job here and both places pick it up.
+ *
+ * `job` and `detail` describe what the photographs show and nothing else —
+ * no street, no customer, no date, no claim about method the photos do not
+ * support. `service` is a slug from `services`; it builds the homepage
+ * card link and picks the gallery, so a typo shows up as a broken link in the
+ * build check and as a job missing from its page.
+ */
+export type Project = {
+  id: string;
+  job: string;
+  detail: string;
+  service: string;
+  before: PhotoKey;
+  after: PhotoKey;
+  /** Further photographs of the same job, shown in the service gallery. */
+  more?: readonly PhotoKey[];
+};
+
 export const projects = {
   label: "Our Recent Projects",
   headline: "See The RainCity Difference",
   body: "Explore real before and after transformations from our residential and commercial property maintenance projects across Canada.",
   /**
-   * Illustrative pairs, not the same property photographed twice — stock
-   * cannot supply an identical camera position before and after, and a
-   * fabricated transformation on a real business's site would be dishonest.
-   * Materials are matched within each pair so the comparison is fair, and the
-   * section states plainly that these are illustrative. Swap in genuine
-   * RainCity job pairs here and the disclaimer can come out.
+   * FALSE SINCE 2026-09-25: every pair below is a RainCity job, from the
+   * client's own photographs. The two stock pairs these replaced were
+   * labelled illustrative, with the disclaimer shown above them; with real
+   * work in place the label would now be untrue, so it is off. It is kept as
+   * a switch in case a stock frame is ever needed here again — set it true
+   * and the disclaimer returns with it.
    */
-  illustrative: true,
+  illustrative: false,
   disclaimer:
     "Illustrative of the conditions we work in and the standard we finish to. Photographs of RainCity jobs replace these as each project is documented.",
+  /** The homepage shows this many pairs, and the rest behind a button. */
+  initialCount: 4,
+  moreLabel: "Show More Projects",
+  lessLabel: "Show Fewer Projects",
+  /**
+   * The client's order in the feedback doc, except that the strongest
+   * like-for-like pairs lead, because only the first four show before the
+   * button: the two balconies and the garden benches are shot from nearly
+   * the same spot before and after, which is the comparison a reader wants
+   * first. Every entry is one job; nothing is paired across two properties.
+   */
   items: [
     {
-      id: "roof",
-      job: "Roof & Gutter Clean",
-      place: "Moss removal, asphalt shingle",
-      before: "roofMossy",
-      after: "roofClean",
-      beforeCaption: "The condition we get called for",
-      afterCaption: "The standard we leave",
+      id: "balcony-deck",
+      job: "Balcony Cleaning",
+      detail: "Condo balcony, concrete deck",
+      service: "balcony-cleaning",
+      before: "projectBalconyDeckBefore",
+      after: "projectBalconyDeckAfter",
     },
     {
-      id: "hard-surfaces",
-      job: "Exterior Hard Surfaces",
-      place: "Steps, walkways and drives",
-      before: "mossyConcrete",
-      after: "concreteSealing",
-      beforeCaption: "The condition we get called for",
-      afterCaption: "The standard we leave",
+      id: "concrete-benches",
+      job: "Concrete Benches",
+      detail: "Garden benches, pressure washed",
+      service: "power-washing",
+      before: "projectBenchesBefore",
+      after: "projectBenchesAfter",
     },
-  ],
+    {
+      id: "balcony-enclosed",
+      job: "Balcony Cleaning",
+      detail: "Enclosed balcony, coated floor",
+      service: "balcony-cleaning",
+      before: "projectBalconyEnclosedBefore",
+      after: "projectBalconyEnclosedAfter",
+    },
+    {
+      id: "glass-canopy",
+      job: "Glass Patio Cover",
+      detail: "Overhead glass panels",
+      service: "window-cleaning",
+      before: "projectGlassCanopyBefore",
+      after: "projectGlassCanopyAfter",
+    },
+    {
+      id: "roof",
+      job: "Roof Cleaning",
+      detail: "Asphalt shingle roof",
+      service: "roof-cleaning",
+      before: "projectRoofBefore",
+      after: "projectRoofAfter",
+    },
+    {
+      id: "siding",
+      job: "Siding Wash",
+      detail: "Horizontal siding and trim",
+      service: "power-washing",
+      before: "projectSidingBefore",
+      after: "projectSidingAfter",
+    },
+    {
+      id: "paver-path",
+      job: "Paver Path",
+      detail: "Side-yard walkway, pressure washed",
+      service: "power-washing",
+      before: "projectPaversBefore",
+      after: "projectPaversAfter",
+    },
+    {
+      id: "entry",
+      job: "Stone Wall & Entry",
+      detail: "Capstones, pillars and walkway",
+      service: "power-washing",
+      before: "projectEntryBefore",
+      after: "projectEntryAfter",
+    },
+  ] as readonly Project[],
+};
+
+/**
+ * The project gallery on each service page — requested by the client on
+ * 2026-09-25: "each service page add a section to put some pictures for each
+ * of the project we did. I can send but put some placeholders first just to
+ * show me. And then can click for more pictures."
+ *
+ * The gallery holds `slots` cards. A service's real projects (from
+ * `projects.items`) fill them first; the rest are placeholders, drawn as
+ * plates that say photos are on the way. Clicking a real card opens every
+ * photograph of that job. Four pages have real work today — Balcony
+ * Cleaning, Power Washing, Window Cleaning and Roof Cleaning — and the other
+ * eight are placeholder-only until the client sends their photos.
+ */
+export const serviceGallery = {
+  label: "Recent Projects",
+  heading: "See the Work Up Close",
+  body: "Photographs from our own jobs, before and after. Select a project to see every photo from it.",
+  /** Real projects beyond this still all show; placeholders only top up to it. */
+  slots: 3,
+  placeholderTitle: "Project Photos Coming Soon",
+  placeholderDetail: "Photographs from this service are being added",
+  viewLabel: "View photos",
 } as const;
 
 /**
@@ -2828,8 +2936,12 @@ export const awards = {
    * official partner, and he carries responsibility for their use. So
    * Awards.tsx filters on `logo`, and an organisation without a file waits in
    * this list — ready to appear the moment one is added — rather than going
-   * up as a name-only card. Two are waiting today: Zen Insurance and the
-   * Tri-Cities Business Networking Group.
+   * up as a name-only card. Since 2026-09-25 all six have their logo, the
+   * client having supplied the last ones in the feedback doc.
+   *
+   * Also rendered on /about, as the "Memberships" row under the partner
+   * cards (Touseef, 2026-09-25) — from this same array, so the two pages
+   * cannot list different memberships.
    *
    * Blurbs follow the `Partner.blurb` rule: what the ORGANISATION is, from
    * its own public description, never what RainCity does with it.
@@ -2840,13 +2952,15 @@ export const awards = {
       tag: "Local news & events",
       blurb: "New Westminster's community site and podcast for local news, events and what's on around the city.",
       href: "https://www.newwestspotlight.com/",
-      // The round badge from their own Facebook page's profile picture — the
-      // site itself answers automated requests with a Cloudflare challenge.
-      // Confirmed as the logo to use by Touseef, 2026-09-23.
+      // The client's own file, supplied in the feedback doc on 2026-09-25 and
+      // replacing the Facebook profile badge used until then. The supplied
+      // square was more than half white margin, which drew the mark at a
+      // third of its neighbours' size; trimmed to the artwork plus 8px.
+      // Original in `assets/partner-new-west-spotlight-supplied.png`.
       logo: {
-        src: "/partners/new-west-spotlight.jpg",
-        width: 480,
-        height: 480,
+        src: "/partners/new-west-spotlight.png",
+        width: 459,
+        height: 213,
         alt: "New West Spotlight — membership",
       },
     },
@@ -2890,35 +3004,69 @@ export const awards = {
       },
     },
     {
-      // Zen Insurance Inc., Calgary — confirmed by Touseef as the partner,
-      // and not Zensurance (2026-09-23). Its domain, zeninsurance.ca, is
-      // parked and no logo is published anywhere, so this waits for the file.
-      name: "Zen Insurance",
+      /**
+       * ZENSURANCE — the client's logo settled it (2026-09-25). This entry
+       * was "Zen Insurance" (Zen Insurance Inc., Calgary) from 2026-09-23,
+       * a guess at the client's "Zeninsurance" that was confirmed at the
+       * time but had no logo anywhere. The file the client then supplied is
+       * Zensurance's wordmark, pixel for pixel the 244x37 logo in the
+       * zensurance.com header — so it is Zensurance, the Canadian online
+       * commercial insurance brokerage. The SVG is that same header logo,
+       * taken from their own site the same day.
+       */
+      name: "Zensurance",
       tag: "Business insurance",
-      blurb: "An insurance agency and brokerage based in Calgary, Alberta.",
-    },
-    {
-      name: "Hello Gabby",
-      tag: "Business support",
-      blurb: "A virtual assistant service for business owners, handling the admin, scheduling and online work behind a business.",
-      href: "https://hellogabby.com/",
-      // Their site sets the name as live text, so there is no logo file; this
-      // is the "hello gabby" wordmark as it appears on their own social-share
-      // image (hellogabby.com/wp-content/uploads/2018/10/social-share.jpg),
-      // cropped. White ground, dropped by the card's mix-blend-multiply.
+      blurb: "A Canadian commercial insurance brokerage for small businesses, contractors and the self-employed.",
+      href: "https://www.zensurance.com/",
       logo: {
-        src: "/partners/hello-gabby.png",
-        width: 587,
-        height: 115,
-        alt: "Hello Gabby — partner",
+        src: "/partners/zensurance.svg",
+        width: 244,
+        height: 37,
+        alt: "Zensurance — partner",
       },
     },
     {
-      // Named as the client gave it. No organisation of exactly this name is
-      // findable online; the entry waits for the logo from Touseef.
+      /**
+       * HELLO GUBBY, with a U — not Hello Gabby (2026-09-25). The client's
+       * doc and the logo it supplied both read "Hello Gubby": the Vancouver
+       * AI front-desk company at hellogubby.ai (phone answering, website
+       * chat and booking for service businesses). From 2026-09-23 this entry
+       * was Hello Gabby, an unrelated virtual-assistant business, because
+       * the name reached us misspelled; its logo file has been deleted.
+       *
+       * The supplied file is 187x49, too small for a 2x screen, so the logo
+       * is the rabbit tile and wordmark cropped from Hello Gubby's own
+       * share image (the og:image on hellogubby.ai) at 470x140 — the same
+       * lockup, checked by eye against the client's file. Near-white ground
+       * flattened to white so the card's multiply blend drops it.
+       */
+      name: "Hello Gubby",
+      tag: "Business support",
+      blurb: "A Vancouver AI front desk for service businesses, answering calls and website chats and booking appointments.",
+      href: "https://www.hellogubby.ai/",
+      logo: {
+        src: "/partners/hello-gubby.png",
+        width: 470,
+        height: 140,
+        alt: "Hello Gubby — partner",
+      },
+    },
+    {
+      /**
+       * The client's own file, supplied 2026-09-25, with the 1-3px black
+       * frame it carried trimmed off. Still no website for the group, so
+       * the card has no link. 184x159 is small: it renders at up to 80px
+       * tall, so it holds at 2x, but ask for a larger file if one exists.
+       */
       name: "Tri-Cities Business Networking Group",
       tag: "Business networking",
       blurb: "Local business networking across Coquitlam, Port Coquitlam and Port Moody.",
+      logo: {
+        src: "/partners/tri-cities-business-networking-group.png",
+        width: 184,
+        height: 159,
+        alt: "Tri-Cities Business Networking Group — membership",
+      },
     },
   ] as readonly (Partner & { tag: string })[],
   points: [
@@ -3043,11 +3191,41 @@ export const aboutPage = {
       "Valid on select residential services. Eligibility may be confirmed when requesting a quote. Cannot be combined with other offers. Some restrictions may apply.",
   },
 
+  /**
+   * By the numbers — rebuilt 2026-09-25 after the client said the band
+   * "just looks funny, i think something is missing". It was three bare
+   * figures floating in a wide Fog band with no heading and nothing to say
+   * what they meant. Now: a heading and a line of context on the left, and
+   * each figure with one sentence under it.
+   *
+   * THE THREE FIGURES are the client's own published claims, unchanged and
+   * still unverified (they stay out of the structured data). Every `note`
+   * restates something the client has already confirmed elsewhere: insured
+   * and over five years in business (Why Choose Us), who the customers are
+   * (Who We Are), the satisfaction guarantee (the service pages and /terms).
+   *
+   * THE FOURTH is the real Google rating, read from `testimonials.google`
+   * at render so it moves with the count; see Stats.tsx.
+   */
   statsLabel: "By the numbers",
+  statsHeading: "Five Years of Work You Can Check",
+  statsBody: "One local team, looking after homes, strata buildings and commercial properties across Greater Vancouver.",
   stats: [
-    { value: "5+", label: "Years of experience" },
-    { value: "1K+", label: "Properties serviced" },
-    { value: "100%", label: "Customer satisfaction" },
+    {
+      value: "5+",
+      label: "Years of experience",
+      note: "More than five years in business, fully insured on every job.",
+    },
+    {
+      value: "1K+",
+      label: "Properties serviced",
+      note: "Homes, strata buildings and commercial properties.",
+    },
+    {
+      value: "100%",
+      label: "Customer satisfaction",
+      note: "Every job is backed by our satisfaction guarantee.",
+    },
   ],
 
   /**
@@ -3177,7 +3355,10 @@ export const aboutPage = {
 export type Founder = {
   /** As they want it printed, and spelled as they spell it. */
   name: string;
+  /** "Co-Founder" — the relationship to the company, printed over the name. */
   role: string;
+  /** The job they do, as the client wrote it — the card's blue eyebrow. */
+  title: string;
   /** Two or three sentences, in their voice or approved by them. */
   bio: string;
   /**
@@ -3190,46 +3371,47 @@ export type Founder = {
 };
 
 /**
- * TWO FOUNDERS, WILSON AND GLAVIN — confirmed by Touseef on 2026-09-23, and
- * it SUPERSEDES the earlier record here, which said one person spelled
- * "Glevin Wilson". Asked directly which was right, he chose "two: Glavin and
- * Wilson", Glavin with an a — which is also how the LinkedIn handle the
- * client first supplied reads (linkedin.com/in/andglavin). Order is as he
- * gave it: Wilson, then Glavin.
+ * TWO FOUNDERS, WILSON AND GLEVIN.
  *
- * ================================================================
- * PLACEHOLDER BIOS AND NO PORTRAITS — REPLACE BOTH BEFORE LAUNCH.
- * ================================================================
- * Touseef asked for dummy copy and held photo places until he sends the real
- * details (2026-09-23). The placeholder bios are written so that, if they
- * went live by accident, they say nothing false about either person: each
- * restates what the site already says about the company (the "reliable
- * service, detailed workmanship" of Who We Are) and the one fact supplied —
- * that the two co-founded it. No history, no background, no years, no
- * previous trade. Replace them wholesale with the founders' own words.
- * `role` is "Co-Founder" because that is all that is known.
+ * THE SPELLING IS "GLEVIN", as the client writes it in the 2026-09-25
+ * feedback doc, confirmed by Touseef the same day. It had been "Glavin"
+ * since 2026-09-23 (Touseef's answer then, and the LinkedIn handle
+ * linkedin.com/in/andglavin); the client's own spelling of a founder's name
+ * wins. If a question ever comes up again, ask the founder, not the handle.
+ * Order: Wilson, then Glevin.
  *
- * `body` is placeholder too. Its first clause is the confirmed fact; the
- * second ("a property is only as well kept as the team that looks after it")
- * is a line written for the section, not something either founder said —
- * replace it with theirs, or cut it back to the first clause.
+ * ROLES are the client's, word for word (2026-09-25): Wilson is Quality
+ * Control Inspector / Site Supervisor, Glevin is Operations Coordinator /
+ * Office Administrator. The client asked for "some description of what they
+ * do", so the bios describe THE JOB, not the person: what a site supervisor
+ * and an operations coordinator do at this company, tied to what the site
+ * already publishes (the Inspection / Service / Review steps of Our Process,
+ * the written quote). Nothing about background, years or previous trades,
+ * and no pronouns — nobody has told us theirs. Replace with the founders'
+ * own words whenever they send them.
+ *
+ * PORTRAITS: Wilson's arrived on WhatsApp (2026-09-25) at only 480x550 — ask
+ * for the original, which would sharpen the card on high-density screens.
+ * Glevin's is still to come; the card keeps the navy initial plate until
+ * then. Set `photo` and nothing else moves.
  */
 export const founders = {
   label: "Our Founders",
   heading: "The People Behind RainCity",
-  body: "RainCity Property Maintenance was started by two founders, Wilson and Glavin, on a simple idea: a property is only as well kept as the team that looks after it.",
+  body: "RainCity Property Maintenance was started by two founders, Wilson and Glevin: one on site making sure every job is done right, one in the office making sure every job runs on time.",
   people: [
     {
       name: "Wilson",
       role: "Co-Founder",
-      // PLACEHOLDER — replace with Wilson's own bio.
-      bio: "Wilson co-founded RainCity Property Maintenance alongside Glavin, and keeps every job — from a single balcony to a whole strata building — to the same standard of reliable service and detailed workmanship.",
+      title: "Quality Control Inspector / Site Supervisor",
+      bio: "Wilson runs the work on site: supervising the crew on every job, inspecting the finished work against the scope agreed with the customer, and making sure nothing is signed off until it meets the RainCity standard.",
+      photo: "founderWilson",
     },
     {
-      name: "Glavin",
+      name: "Glevin",
       role: "Co-Founder",
-      // PLACEHOLDER — replace with Glavin's own bio.
-      bio: "Glavin co-founded RainCity Property Maintenance alongside Wilson, to give homeowners, strata councils and property managers across Greater Vancouver one team they can rely on, year-round.",
+      title: "Operations Coordinator / Office Administrator",
+      bio: "Glevin keeps RainCity running from the office: coordinating schedules, crews and equipment, preparing quotes and bookings, and staying the first point of contact for homeowners, strata councils and property managers.",
     },
   ] as readonly Founder[],
 };
@@ -4020,7 +4202,17 @@ export const locationsPage = {
     label: "Coverage",
     headline: "The Area, And Everything In It",
     body: "Greater Vancouver is organised by one river, and so is this list. New Westminster sits on the Fraser; everywhere else we go is a matter of which bank it is on and which way it lies from us.",
+    /** Under the map, when a Maps key exists and the outline is drawn. */
     caption: "The Metro Vancouver boundary, outlined. We work in nine of the communities inside it — the nine listed here.",
+    /**
+     * With no key, the plate shows `regionPortMann` instead (2026-09-25), so
+     * the caption stops describing an outline that is not there. The title
+     * and place are the scrim caption inside the photo, shared with the
+     * community pages.
+     */
+    photoCaption: "Greater Vancouver, on both banks of the Fraser. We work in nine communities across it — the nine listed here.",
+    photoTitle: "The Fraser at the Port Mann Bridge",
+    photoPlace: "Between Coquitlam and Surrey, Burnaby beyond",
     groups: [
       { bearing: "base", title: "Our base" },
       { bearing: "north-west", title: "North of the Fraser — west" },
@@ -4139,7 +4331,7 @@ export const pageFaqs = {
       {
         question: "What are your hours?",
         answer:
-          "Monday to Sunday, 7am to 10pm. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
+          "Monday to Saturday, 9am to 5pm; closed on Sunday. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
       },
       {
         // Supplied by the client on 2026-09-23, replacing "no to both". The
@@ -4280,7 +4472,7 @@ export const pageFaqs = {
       {
         question: "What are your hours?",
         answer:
-          "Monday to Sunday, 7am to 10pm. Email arrives whenever you send it; the phone is the faster route during working hours.",
+          "Monday to Saturday, 9am to 5pm; closed on Sunday. Email arrives whenever you send it; the phone is the faster route during working hours.",
       },
     ],
   },
