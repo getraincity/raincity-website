@@ -12,17 +12,16 @@ const TO_EMAIL = "raincitypms@gmail.com";
  *
  * Required environment variables — set in .env.local (never committed):
  *   RESEND_API_KEY     — API key from resend.com/api-keys
- *   RESEND_FROM_EMAIL  — Optional. Leave it unset until raincitypms.com is
- *                        verified in Resend; then set it to an address on
- *                        that domain (e.g. "RainCity Website
- *                        <quotes@raincitypms.com>").
+ *   RESEND_FROM_EMAIL  — Optional override of the sender below. Whatever it
+ *                        is set to must be on a domain verified in Resend.
  *
- * Why the default sender is onboarding@resend.dev (2026-09-25): the Resend
- * account is registered to raincitypms@gmail.com, and Resend's shared test
- * sender may deliver to the account owner's own address with no DNS set up.
- * TO_EMAIL is that address, so quotes arrive today. Setting RESEND_FROM_EMAIL
- * to an unverified domain makes every send fail with a 403, which the form
- * shows the visitor as "please call us" — verify first, then set it.
+ * The sender is quotes@raincitypms.com (2026-09-25). raincitypms.com is
+ * verified for sending in Resend (DKIM and the return-path records are in
+ * Hostinger DNS). It must be our own domain: Resend's shared
+ * onboarding@resend.dev only delivers to the Resend account's own address,
+ * and that account is getraincitypms@gmail.com, not TO_EMAIL — the first
+ * live test failed with a 403 for exactly that. The address needs no
+ * mailbox; replies go to the customer through reply_to.
  *
  * The form posts here unconditionally; NEXT_PUBLIC_FORM_ENDPOINT is gone.
  */
@@ -98,7 +97,7 @@ export async function POST(request: NextRequest) {
     ...(info ? [`\nAdditional info:\n${info}`] : []),
   ];
 
-  const from = process.env.RESEND_FROM_EMAIL || "RainCity Website <onboarding@resend.dev>";
+  const from = process.env.RESEND_FROM_EMAIL || "RainCity Website <quotes@raincitypms.com>";
 
   let resendRes: Response;
   try {
