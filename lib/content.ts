@@ -3390,10 +3390,11 @@ export type Founder = {
  * and no pronouns — nobody has told us theirs. Replace with the founders'
  * own words whenever they send them.
  *
- * PORTRAITS: Wilson's arrived on WhatsApp (2026-09-25) at only 480x550 — ask
- * for the original, which would sharpen the card on high-density screens.
- * Glevin's is still to come; the card keeps the navy initial plate until
- * then. Set `photo` and nothing else moves.
+ * PORTRAITS: both are in (2026-09-25), and both arrived small — Wilson's at
+ * 480x550 on WhatsApp, Glevin's at 340x490 as a circular crop. Ask for the
+ * originals, which would sharpen the cards on high-density screens. The navy
+ * initial plate in `Founders.tsx` still stands for any founder without
+ * `photo`.
  */
 export const founders = {
   label: "Our Founders",
@@ -3412,6 +3413,7 @@ export const founders = {
       role: "Co-Founder",
       title: "Operations Coordinator / Office Administrator",
       bio: "Glevin keeps RainCity running from the office: coordinating schedules, crews and equipment, preparing quotes and bookings, and staying the first point of contact for homeowners, strata councils and property managers.",
+      photo: "founderGlevin",
     },
   ] as readonly Founder[],
 };

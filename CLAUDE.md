@@ -540,10 +540,11 @@ word**: Wilson — Quality Control Inspector / Site Supervisor; Glevin —
 Operations Coordinator / Office Administrator. The bios describe those jobs
 (asked for as "some description of what they do"), tie them to what the site
 already publishes, and say nothing personal and use no pronouns; replace them
-with the founders' own words when they come. **Wilson's portrait is in** (sent
-on WhatsApp at only 480x550 — ask for the original); **Glevin's is still to
-come**, and that card keeps the 4:5 navy plate with the initial, so the photo
-drops in by setting `photo` with nothing moving.
+with the founders' own words when they come. **Both portraits are in** and
+both are small — Wilson's 480x550 from WhatsApp, Glevin's 340x490 supplied as
+a circle on black, feathered into a square low-key frame (method on
+`founderGlevin` in `photos.ts`). Ask for the originals. The 4:5 navy plate with
+the initial still covers any founder without `photo`.
 
 **By the numbers was rebuilt on 2026-09-25** after the client said it "looks
 funny, something is missing": a heading and a line on the left, four white

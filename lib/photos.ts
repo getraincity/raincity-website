@@ -160,6 +160,16 @@ export const photos = {
     note: "Sent by the client on WhatsApp, 2026-09-25, at 480x550 — the only size received. Cropped to 440x550 (4:5) from `assets/founder-wilson-supplied.jpg`. Adequate at 1x and soft on a 2x screen at desktop; ask for the original file.",
   },
 
+  founderGlevin: {
+    src: "/founders/glevin.webp",
+    alt: "Glevin, co-founder of RainCity Property Maintenance, smiling in a black polo shirt against a dark studio backdrop.",
+    credit: "RainCity Property Maintenance",
+    tone: "#101010",
+    ratio: "4:5",
+    focal: "50% 30%",
+    note: "Supplied by the client via Touseef, 2026-09-25, at 340x490 as a circular crop on black (`assets/founder-glevin-supplied.png`). The frame is square-cornered, so the disc's hard rim was feathered into the black and the sides faded clear of the head, making it read as a low-key studio portrait rather than a circle pasted on a plate; the face and shirt are untouched. Cropped 288x360 (4:5) from (19, 46) — the top set so the eye line sits where Wilson's does, about 38% down — and served at 440x550 to match his card. Soft on a 2x screen; ask for the original, uncropped file. The shirt carries another company's logo (cellcentric) — the client's photo, left as supplied.",
+  },
+
   aboutHomeGround: {
     src: "/about-home-ground-pier-park.webp",
     alt: "The boardwalk at Westminster Pier Park running along the Fraser River in New Westminster, with the two cable-stayed towers of the SkyBridge and the orange arch of the Pattullo Bridge behind it under a clear blue sky.",

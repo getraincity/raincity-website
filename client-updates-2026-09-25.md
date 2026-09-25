@@ -36,8 +36,9 @@ The previous round is `client-updates-2026-09-23.md`.
   - Glevin is spelled as the client writes it, with the role *Operations
     Coordinator / Office Administrator*.
   - Both bios describe what each person does.
-  - Glevin's photo is still to come; the card keeps its navy "G" plate until
-    it arrives.
+  - Glevin's photo added (sent later the same day). It came as a circle on
+    black, so its edge was softened into a square dark studio-style frame to
+    sit in the same card shape as Wilson's.
 - [x] **Our Process photo** → the client's photo of the surface cleaner in
   the parkade.
 - [x] **Memberships row** added under Our Affiliates & Partnerships (Touseef's
@@ -61,14 +62,14 @@ The previous round is `client-updates-2026-09-23.md`.
   no broken links.
 
 ## Still needed from the client
-1. **Glevin's photo** (portrait, face visible; any size, larger is better).
-2. **Wilson's original photo file**: the WhatsApp copy is 480x550 and looks
-   soft on high-resolution screens.
-3. **Project photos for the other eight services**: before and after of the
+1. **The founders' original photo files**: Wilson's WhatsApp copy is 480x550
+   and Glevin's is 340x490 (already cut to a circle), and both look soft on
+   high-resolution screens. The uncropped originals would fix both.
+2. **Project photos for the other eight services**: before and after of the
    same job, ideally from the same spot. More photos of the eight jobs
    already up can go in their viewers too.
-4. A larger Tri-Cities Business Networking Group logo, if one exists.
-5. From earlier rounds and still open: the policy pages' legal review, the
+3. A larger Tri-Cities Business Networking Group logo, if one exists.
+4. From earlier rounds and still open: the policy pages' legal review, the
    placeholder blog posts, and the "Off The Clock" community content.
 
 ## Verified (production build)

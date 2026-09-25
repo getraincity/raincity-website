@@ -34,7 +34,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * rendered nothing, and Partnerships had been moved to White to avoid two Fog
  * bands touching; it is back to the designed Fog now that this always shows.
  *
- * Wilson's portrait is in (2026-09-25); Glevin's still shows the plate. The
+ * Both portraits are in (2026-09-25), so neither card shows the plate. The
  * roles are the client's and the bios describe those roles — see the banner
  * on `founders` in content.ts.
  */
