@@ -61,8 +61,10 @@ The previous round is `client-updates-2026-09-23.md`.
   don't print the number) still make a phone call, so calling is one tap
   away too.
 - [x] **Memberships & Partnerships removed from /about** (see above).
-- [ ] **Crystal Clear Cleans' clean logo**: the picture didn't come through;
-  waiting for it to be resent.
+- [x] **Crystal Clear Cleans' logo** is now the client's file (found in the
+  feedback doc): the full logo with the house, diamond and "Crystal Clear
+  Cleans". Its pink background and dotted corners were removed so it sits
+  cleanly on the card like the other partners' logos.
 
 ### Services
 - [x] **"See the Work Up Close" gallery on every service page.**
@@ -90,7 +92,32 @@ The previous round is `client-updates-2026-09-23.md`.
   community pages carry no old hours, no old travel or minimum wording, and
   no broken links.
 
+### Audit and fixes (later on 2026-09-25)
+A full check of every page at desktop and phone width, looking for missing or
+broken pictures, empty boxes, blurry photos, sideways scrolling and errors.
+- [x] **Every "What's Included" box on the service pages now has a picture.**
+  Nine boxes were showing text only:
+  - Concrete & Asphalt Sealing: 2 (degreasing and preparation, sealers)
+  - Gutter Cleaning: 1 (debris bagged)
+  - Painting: 1 (caulking and wood repair)
+  - Snow Removal: 1 (seasonal contracts)
+  - Holiday Lights: 3 (layout and power, in-season repairs, January
+    takedown)
+
+  They are free-licence stock photos (not RainCity jobs), cropped so no other
+  company's name or logo shows.
+- [x] **The "Twenty-Eight Days Before a Slab Is Sealed" blog post** had no
+  picture at the top, on its blog card or under "More From The Ladder".
+  Fixed with the same photo.
+- [x] Roof Cleaning checked: all six boxes already had pictures on the live
+  site.
+- [ ] Commercial Cleaning's top banner is the client's own photo, supplied at
+  only 540 px wide, so it looks soft on large screens. The original file is
+  needed (see below).
+
 ## Still needed from the client
+0. **The original of the Commercial Cleaning banner photo** (the kitchen
+   floor clean), ideally 2560x1600 or larger. The copy on the site is 540 px wide.
 1. **The founders' original photo files**: Wilson's WhatsApp copy is 480x550
    and Glevin's is 340x490 (already cut to a circle), and both look soft on
    high-resolution screens. The uncropped originals would fix both.

@@ -450,13 +450,19 @@ Two things follow, and both matter more than they look:
   it under the preview image — though only ever for a service's own card
   photo, never for these tile frames.
 
-**Eight slots are still `placeholder`,** and they are all the same kind of
-thing: process documentation that stock does not contain. A timestamped
-service log on a tailgate, two sealer test squares on one slab, a layout
-sketch held against a frontage, labelled light coils going into a bin, a
-caulk bead being tooled, an oil spot being degreased, tied debris bags on a
-drive, a mid-season light repair in the rain. No search finds these. They get
-taken on a job or they get made.
+**No service tile is text-only any more (2026-09-25).** Eight slots used to
+be `placeholder` — process shots stock does not contain (a service log on a
+tailgate, sealer test squares, a layout sketch, labelled coils going into a
+bin, a caulk bead, an oil spot being degreased, bagged debris, a mid-season
+repair). `ServiceOverview` rendered them as text-only tiles, and the client
+read those, beside photographed neighbours, as **missing pictures** on five
+service pages (and on the `twenty-eight-days-before-sealing` post, which
+shares `sealingPrep`). They were filled that day with the nearest free-licence
+Unsplash frame; each note records the Unsplash ID and which half of the brief
+the frame carries. **Rule: never leave a tile, gallery card or post without a
+photograph** — a stand-in with an honest note beats a gap. When the crew shoots
+the real thing, give it a new filename (the image cache keys on path). The
+only `placeholder` left in `photos.ts` is `fleet`, which nothing renders.
 
 The registry's own header comment carries the same account at the point of
 use. Keep the two in step.
@@ -598,7 +604,10 @@ the three universities' **real logos replaced the Wikipedia coats of arms**
 that were there (the client called them wrong); **S&A Cleaning Group**
 (sacleaninggroup.ca — the client's "SA Cleaning") and **CFOne** (the Canadian
 Armed Forces community card, CFMWS) are identified, linked and have logos.
-The homepage's memberships do not repeat here (removed 2026-09-25, at the
+**Crystal Clear Cleans** carries the client's own lockup since 2026-09-25
+(house, diamond and script, from the feedback doc), cleaned off its salmon
+square and halftone dots onto transparent — not the site-icon diamond it
+used before. The homepage's memberships do not repeat here (removed 2026-09-25, at the
 client's request) — see the Memberships bullet above.
 **Blurbs describe the organisation, never the relationship.** 4px corners
 (`--radius-card`) are the site's only card radius — do not spread it. Do not

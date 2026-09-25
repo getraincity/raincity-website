@@ -3703,12 +3703,17 @@ export const partnerships = {
             verb: "Serves",
             slugs: ["anmore", "burnaby", "delta", "langley", "new-westminster", "ridge-meadow", "surrey", "tri-cities", "vancouver"],
           },
-          // Their site-icon file — a transparent PNG at 273×257. Same
-          // permission caveat as Bright Nest applies.
+          // The client's own file (feedback doc, 2026-09-25): the full lockup
+          // — house, diamond, "Crystal Clear Cleans" — as pink line art on a
+          // salmon square with halftone dots in two corners. Cleaned here:
+          // the ink is separated from the ground by blue-minus-green (the
+          // ink's hue differs, the ground and dots share one), laid on
+          // transparent, trimmed to 725x927. Original and the old site-icon
+          // diamond are in assets/. Same permission caveat as Bright Nest.
           logo: {
-            src: "/partners/crystal-clear-cleans.png",
-            width: 273,
-            height: 257,
+            src: "/partners/crystal-clear-cleans-logo.png",
+            width: 725,
+            height: 927,
             alt: "Crystal Clear Cleans — partner",
           },
         },

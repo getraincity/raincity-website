@@ -973,40 +973,31 @@ export const photos = {
   // one 16:9 closing band per service. Window Cleaning, Commercial Cleaning
   // and Power Washing carry the client's own photography and sit above.
   //
-  // Forty-eight of the fifty-six below now carry an Unsplash frame, chosen per
-  // slot against the shot brief that used to be its `placeholder` string. That
-  // brief is preserved in each `note`, along with what the chosen frame does
-  // and does not show — several are close, several argue only half of what the
-  // tile beside them claims, and two or three are stand-ins. Read the note
-  // before assuming a slot is finished.
+  // All fifty-six now carry a photograph. Forty-eight were chosen from
+  // Unsplash per slot against the shot brief that used to be its
+  // `placeholder` string; that brief is preserved in each `note`, along
+  // with what the chosen frame does and does not show — several are close,
+  // several argue only half of what the tile beside them claims, and two or
+  // three are stand-ins. Read the note before assuming a slot is finished.
+  //
+  // The last eight — a service log on a tailgate, two sealer test squares, a
+  // layout sketch against a frontage, labelled coils going into a bin and the
+  // like — were process shots no stock search turns up, so they rendered as
+  // text-only tiles. On 2026-09-25 the client called those gaps out on five
+  // service pages as missing pictures, and they were filled the same day with
+  // the nearest free-licence frame for each; every one of their notes says
+  // which half of the brief it carries. When the crew photographs the real
+  // thing, save it at the same `src` under a NEW filename (the image cache
+  // keys on path; see `minimumCacheTTL`) and rewrite the note.
   //
   // These are stock. `credit` says "Unsplash" rather than naming a
-  // photographer: the licence does not require attribution and the names were
-  // not verifiable from the search pages, so a name was not invented. If the
-  // client wants photographer credits, they have to be looked up per photo.
+  // photographer: the licence does not require attribution. The eight added
+  // on 2026-09-25 record their Unsplash ID in the note, so a credit can be
+  // looked up if the client wants one.
   //
-  // Eight slots are still `placeholder`, and they are the same kind of thing
-  // in every case — process documentation that stock photography does not
-  // contain. A timestamped service log on a tailgate, two sealer test squares
-  // on one slab, a layout sketch held against a frontage, labelled coils going
-  // into a bin. These are photographs a crew takes on a job, or they are made,
-  // and no search will turn them up. Everything else about each entry is already written:
-  // `src` is the path the file will be saved to, and `alt`, `tone`, `ratio`
-  // and `focal` describe the frame the layout is asking for. Take the shot,
-  // save it at that path, delete the one `placeholder` line, and the slot
-  // becomes a photograph with nothing downstream to change.
-  //
-  // The `placeholder` string is the shot list, drawn across the hatch on the
-  // page, so it is written for whoever is going out with the camera: subject
-  // first, then the thing that has to be visible in the frame for the tile's
-  // copy to be true. `alt` is written for the photograph that will exist, not
-  // for the hatch — the placeholder is hidden from assistive technology
-  // entirely, so nothing announces alt text for a frame that is not there yet.
-  //
-  // Tones are the dominant colour each frame is expected to land on, so the
-  // blur-up is already right when the file drops in. They are a first
-  // estimate; correct them against the real photograph if it comes back
-  // materially warmer or colder than the brief.
+  // `ServiceOverview` still drops a tile to text-only if its entry is ever
+  // marked `placeholder` again — but no service tile should be: the client
+  // reads a text-only tile beside photographed ones as a missing picture.
 
   // --- Commercial Cleaning -------------------------------------------------
 
@@ -1271,22 +1262,22 @@ export const photos = {
 
   sealingPrep: {
     src: "/services/concrete-and-asphalt-sealing/surface-prep.webp",
-    alt: "Sealing prep: an oil-stained bay being degreased and scrubbed back before sealer is applied, the stain visibly lifting under the brush.",
-    credit: "RainCity Property Maintenance",
-    tone: "#8b8882",
+    alt: "Sealing prep: a worker in waterproof bib trousers pressure washing a concrete driveway, the wet slab darkening where the spray has passed.",
+    credit: "Unsplash",
+    tone: "#7d8a8a",
     ratio: "16:10",
-    focal: "50% 58%",
-    placeholder: "Oil spot being degreased and scrubbed — stain lifting, prep stage not sealing",
+    focal: "50% 60%",
+    note: "Unsplash DyYMrJYXE84 (free licence), filled 2026-09-25 after the client flagged the empty tile. The brief was an oil spot being degreased; this is the wash that comes before sealing — the half of the tile's copy about moss and loose material being washed off. Portrait source cropped to a band at knee height, which also keeps the worker's face and the logo on his shirt out of frame. Original in assets/sealing-prep-washing-driveway.jpg.",
   },
 
   sealingProduct: {
     src: "/services/concrete-and-asphalt-sealing/sealer-selection.webp",
-    alt: "Sealing: two test squares side by side on one slab, the left finished matte by a penetrating sealer and the right carrying the wet sheen of a topical.",
-    credit: "RainCity Property Maintenance",
-    tone: "#a5a099",
+    alt: "Sealing: two workers in hi-vis vests squeegeeing a pale coating across a bare concrete warehouse floor, the coated half glossy against the grey slab.",
+    credit: "Unsplash",
+    tone: "#a9a6a0",
     ratio: "16:10",
-    focal: "50% 55%",
-    placeholder: "Two sealer test squares on one slab — matte penetrating vs sheen topical",
+    focal: "55% 60%",
+    note: "Unsplash lXJp_XFNJ9U (free licence), filled 2026-09-25 after the client flagged the empty tile. The brief was two test squares side by side; this is a topical coating going down on a commercial slab, with the boundary between coated and bare running through the frame — the tile's point that a topical sits on top and changes the surface. Centre crop to 16:10. Original in assets/sealing-coating-warehouse-floor.jpg.",
   },
 
   sealingClosing: {
@@ -1324,12 +1315,12 @@ export const photos = {
 
   gutterDebris: {
     src: "/services/gutter-cleaning/debris-bagged.webp",
-    alt: "Gutter cleaning: bagged gutter debris standing on a driveway beside a ladder, the beds and lawn under the eaves untouched.",
-    credit: "RainCity Property Maintenance",
-    tone: "#8e8b7e",
+    alt: "Gutter cleaning: black bags packed full of fallen leaves, tied off and stacked together on a concrete ledge with loose leaves caught around them.",
+    credit: "Unsplash",
+    tone: "#2b2b2d",
     ratio: "16:10",
-    focal: "50% 55%",
-    placeholder: "Tied bags on the drive with clean beds behind — proof nothing was dropped",
+    focal: "50% 45%",
+    note: "Unsplash WlIaSfQaoPo (free licence), filled 2026-09-25 after the client flagged the empty tile. Tied bags of leaf debris, which is the tile's point — it goes into bags and away. No driveway, beds or ladder, which the brief also wanted. Portrait source cropped to a band. Original in assets/gutter-debris-leaf-bags.jpg.",
   },
 
   gutterFlowTest: {
@@ -1480,12 +1471,12 @@ export const photos = {
 
   paintCaulking: {
     src: "/services/painting/caulking-and-repair.webp",
-    alt: "Painting prep: a bead of caulk run into the joint between siding and trim, tooled smooth along the length of the seam.",
-    credit: "RainCity Property Maintenance",
-    tone: "#c4bcae",
+    alt: "Painting prep: a gloved hand working a brush along the joint where a board meets the trim above it, on a house wrapped in scaffolding.",
+    credit: "Unsplash",
+    tone: "#c9c3b6",
     ratio: "16:10",
-    focal: "50% 52%",
-    placeholder: "Caulk bead tooled into a siding-to-trim joint — close enough to see the seam",
+    focal: "40% 50%",
+    note: "Unsplash GQU4ilqjHH0 (free licence), filled 2026-09-25 after the client flagged the empty tile. The brief was a caulk bead being tooled; this is brush work along a trim joint — the same seam the copy is about, at the stage after it has been made good. Cropped to the left of the source so the painter's company name on his shirt and the workwear brand on his sleeve are out of frame. Original in assets/painting-trim-scaffold.jpg.",
   },
 
   paintPriming: {
@@ -1573,12 +1564,12 @@ export const photos = {
 
   snowContracts: {
     src: "/services/snow-removal-salting/seasonal-contracts.webp",
-    alt: "Snow removal: a timestamped site log filled in on the tailgate of a truck at a cleared entrance, salt bags stacked in the bed behind.",
-    credit: "RainCity Property Maintenance",
-    tone: "#6f7c88",
+    alt: "Snow removal: a pickup truck with a V-plough clearing fresh snow from a paved lane beside a bench, the cleared track wet behind it.",
+    credit: "Unsplash",
+    tone: "#b9bcc4",
     ratio: "16:10",
-    focal: "48% 52%",
-    placeholder: "Timestamped service log on a tailgate, salt in the bed — the liability record",
+    focal: "55% 55%",
+    note: "Unsplash _ylZOYiInbk (free licence), filled 2026-09-25 after the client flagged the empty tile. The brief was a site log on a tailgate; this is the call-out itself — a plough truck working a lot during the event. The number plate is unreadable at any size the tile shows. Centre crop to 16:10. Original in assets/snow-pickup-plow-lot.jpg.",
   },
 
   snowClosing: {
@@ -1626,32 +1617,32 @@ export const photos = {
 
   lightsDesign: {
     src: "/services/holiday-light-installation/layout-and-power.webp",
-    alt: "Holiday lights: a marked-up layout sketch of a house frontage held against the real elevation in daylight, run lengths and the outlet noted on it.",
-    credit: "RainCity Property Maintenance",
-    tone: "#8c9299",
+    alt: "Holiday lights: an outdoor power stake pushed into the snow beside a house, orange and yellow extension cords plugged into its weatherproof outlets.",
+    credit: "Unsplash",
+    tone: "#5a3a32",
     ratio: "16:10",
-    focal: "48% 50%",
-    placeholder: "Layout sketch held against the real frontage in daylight — the planning stage",
+    focal: "45% 55%",
+    note: "Unsplash UTuXOP6TOBw (free licence), filled 2026-09-25 after the client flagged the empty tile. The power-routing half of the tile exactly: a weatherproof stake at the foundation, runs plugged in and led away across the snow. The layout sketch the brief wanted is not in it. Centre crop to 16:10. Original in assets/lights-outdoor-power-stake.jpg.",
   },
 
   lightsService: {
     src: "/services/holiday-light-installation/in-season-repairs.webp",
-    alt: "Holiday lights: a technician on a ladder in the rain replacing a dropped section of roofline lighting, spare bulbs and clips on the belt.",
-    credit: "RainCity Property Maintenance",
-    tone: "#3d4650",
+    alt: "Holiday lights: an aerial work platform raised into a tree whose trunk and branches are wrapped in strings of warm white lights at night.",
+    credit: "Unsplash",
+    tone: "#3b3a2c",
     ratio: "16:10",
-    focal: "52% 50%",
-    placeholder: "Mid-season fix in the rain — ladder, spare bulbs, a section being replaced",
+    focal: "60% 50%",
+    note: "Unsplash WntQV4FmfzA (free licence), filled 2026-09-25 after the client flagged the empty tile. A lift up in a lit tree — installed lighting being worked on at height, which is what an in-season repair is. Not in the rain and not a roofline, which the brief wanted. The small capacity plate on the basket is unreadable at tile size. Portrait source cropped to a band through the basket. Original in assets/lights-lift-in-lit-tree.jpg.",
   },
 
   lightsTakedown: {
     src: "/services/holiday-light-installation/january-takedown.webp",
-    alt: "Holiday lights: runs coiled and labelled into a lidded storage bin in January, clips bagged separately alongside them.",
-    credit: "RainCity Property Maintenance",
-    tone: "#7f8489",
+    alt: "Holiday lights: clear lidded storage bins on a wire shelf, labelled CHEER, EXT CORDS and TOOLS.",
+    credit: "Unsplash",
+    tone: "#bcbcb0",
     ratio: "16:10",
-    focal: "50% 52%",
-    placeholder: "Labelled coils going into a bin, clips bagged — the takedown, in daylight",
+    focal: "50% 50%",
+    note: "Unsplash yRLAF1UKiXU (free licence), filled 2026-09-25 after the client flagged the empty tile. Labelled bins with the season's cords in one of them — the labelled-storage half of the tile. Cropped to the middle shelf so the other labels (fireworks, a car seat) and the product brands on the bottom shelf are out of frame. Original in assets/lights-labelled-storage-bins.jpg.",
   },
 
   lightsClosing: {
