@@ -86,8 +86,6 @@ export function QuoteForm({
           <QuoteFormClient
             copy={{
               phone: business.phone,
-              email: business.email,
-              emailHref: business.emailHref,
               serviceOptions: quoteForm.serviceOptions,
               submit: quoteForm.submit,
             }}

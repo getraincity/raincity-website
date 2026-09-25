@@ -12,13 +12,19 @@ const TO_EMAIL = "raincitypms@gmail.com";
  *
  * Required environment variables — set in .env.local (never committed):
  *   RESEND_API_KEY     — API key from resend.com/api-keys
- *   RESEND_FROM_EMAIL  — Verified sender address. Must be a domain you
- *                        have verified in Resend. Defaults to
- *                        noreply@raincitypms.com — verify raincitypms.com
- *                        in the Resend dashboard before launch.
+ *   RESEND_FROM_EMAIL  — Optional. Leave it unset until raincitypms.com is
+ *                        verified in Resend; then set it to an address on
+ *                        that domain (e.g. "RainCity Website
+ *                        <quotes@raincitypms.com>").
  *
- * Wire the form up by setting in .env.local:
- *   NEXT_PUBLIC_FORM_ENDPOINT=/api/contact
+ * Why the default sender is onboarding@resend.dev (2026-09-25): the Resend
+ * account is registered to raincitypms@gmail.com, and Resend's shared test
+ * sender may deliver to the account owner's own address with no DNS set up.
+ * TO_EMAIL is that address, so quotes arrive today. Setting RESEND_FROM_EMAIL
+ * to an unverified domain makes every send fail with a 403, which the form
+ * shows the visitor as "please call us" — verify first, then set it.
+ *
+ * The form posts here unconditionally; NEXT_PUBLIC_FORM_ENDPOINT is gone.
  */
 export async function POST(request: NextRequest) {
   let data: FormData;
@@ -92,7 +98,7 @@ export async function POST(request: NextRequest) {
     ...(info ? [`\nAdditional info:\n${info}`] : []),
   ];
 
-  const from = process.env.RESEND_FROM_EMAIL ?? "noreply@raincitypms.com";
+  const from = process.env.RESEND_FROM_EMAIL || "RainCity Website <onboarding@resend.dev>";
 
   let resendRes: Response;
   try {

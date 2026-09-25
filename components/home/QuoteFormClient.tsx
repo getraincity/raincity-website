@@ -48,8 +48,6 @@ type Errors = Partial<Record<"name" | "phone" | "email" | "service", string>>;
  */
 export type QuoteFormCopy = {
   phone: string;
-  email: string;
-  emailHref: string;
   /** Every service title, then "Other" — derived from `services`. */
   serviceOptions: readonly string[];
   submit: string;
@@ -60,17 +58,19 @@ export type QuoteFormCopy = {
  * that replaces it. Everything static around it — the heading, the map, the
  * section furniture — stays a server component in `QuoteForm.tsx`.
  *
- * Without NEXT_PUBLIC_FORM_ENDPOINT the form falls back to a pre-filled
- * mailto: link — functional, but set the endpoint before launch (see
- * .env.local.example for Web3Forms, Formspree, and server-action options).
+ * Submissions go to the site's own `/api/contact` route, which emails them
+ * to the office through Resend (see that route for the one variable it needs).
+ * There used to be a mailto: fallback for when no endpoint was configured. It
+ * was removed on 2026-09-25: it depended on the visitor having a mail app set
+ * up, and showed "Request received" whether or not anything was sent — so a
+ * quote could be lost with the visitor told it had arrived. If the route
+ * fails, the visitor now sees the error and the phone number instead.
  */
 export function QuoteFormClient({ copy }: { copy: QuoteFormCopy }) {
   const id = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  // True when the form fell back to mailto: — adjusts the success message.
-  const [mailtoFallback, setMailtoFallback] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -97,33 +97,9 @@ export function QuoteFormClient({ copy }: { copy: QuoteFormCopy }) {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
-    if (!endpoint) {
-      // No backend configured yet — fall back to a pre-filled mailto: link so
-      // the request still reaches the inbox. The email client opens in the
-      // background; the page shows the success state so the visitor knows the
-      // action completed. Set NEXT_PUBLIC_FORM_ENDPOINT (see .env.local.example)
-      // before launch to replace this with a proper submission.
-      const subject = encodeURIComponent(`Quote Request — ${service}`);
-      const preferredDate = String(data.get("date") ?? "").trim();
-      const additionalInfo = String(data.get("info") ?? "").trim();
-      const bodyLines = [
-        `Name: ${name}`,
-        `Phone: ${phone}`,
-        `Email: ${email}`,
-        `Service: ${service}`,
-        ...(preferredDate ? [`Preferred date: ${preferredDate}`] : []),
-        ...(additionalInfo ? [`Additional info:\n${additionalInfo}`] : []),
-      ];
-      window.location.href = `mailto:${copy.email}?subject=${subject}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-      setMailtoFallback(true);
-      setSent(true);
-      return;
-    }
-
     setSubmitting(true);
     try {
-      const res = await fetch(endpoint, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
@@ -164,19 +140,6 @@ export function QuoteFormClient({ copy }: { copy: QuoteFormCopy }) {
             Thanks — we&rsquo;ll be in touch within one business day. For
             anything urgent, call {copy.phone}.
           </p>
-          {mailtoFallback && (
-            <p className="body-s mt-2 text-steel">
-              Your email client should have opened with your request. If
-              it did not, email us directly at{" "}
-              <a
-                href={copy.emailHref}
-                className="text-rc-blue underline underline-offset-4"
-              >
-                {copy.email}
-              </a>
-              .
-            </p>
-          )}
         </div>
       </div>
     );
