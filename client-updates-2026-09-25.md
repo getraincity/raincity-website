@@ -22,9 +22,11 @@ The previous round is `client-updates-2026-09-23.md`.
     company's logo file deleted, and the logo taken at 2x from their site.
   - Tri-Cities Business Networking Group: the client's file (border
     trimmed). There's still no website, so there's no link.
-- [x] **Footer hours → Mon – Sat: 9 am – 5 pm, closed Sunday.** Changed
-  everywhere the hours appear: the footer, the hero, the contact page, both
-  "What are your hours?" FAQs, the Google structured data and llms.txt.
+- [x] **Office hours → Mon – Sat, 8 am – 4 pm, closed Sunday** (final
+  correction, later the same day; 9–5 before that). Changed everywhere the
+  hours appear: the footer, the hero, the contact page, both FAQs, the Google
+  structured data and llms.txt. They are always called **Office Hours**,
+  never "work" or "working" hours, on the client's request.
 
 ### About
 - [x] **By the numbers rebuilt** ("looks funny, something missing"): it now
@@ -41,16 +43,43 @@ The previous round is `client-updates-2026-09-23.md`.
     sit in the same card shape as Wilson's.
 - [x] **Our Process photo** → the client's photo of the surface cleaner in
   the parkade.
-- [x] **Memberships row** added under Our Affiliates & Partnerships (Touseef's
-  choice). CFIB appears only once on the page.
+- [x] ~~Memberships row added under Our Affiliates & Partnerships~~ —
+  removed again later the same day at the client's request: the homepage
+  already shows the memberships, so /about carries only its nine partners.
+
+### Follow-up round (later on 2026-09-25)
+- [x] **Logos bigger in their boxes**, on the homepage and /about: each logo
+  is now sized to cover about the same area, so the less-wide ones (New
+  West Spotlight, Hello Gubby, Tri-Cities, the square crests) grow instead
+  of sitting small in the middle. New West Spotlight went from about 108x48
+  to 176x82 on desktop. The Hello Gubby and Tri-Cities files had their
+  white margins trimmed.
+- [x] **The phone number opens WhatsApp**, with the WhatsApp logo beside it,
+  everywhere the number is shown: the top bar, the mobile menu, the footer,
+  the contact page, the quote form, and the buttons at the end of each
+  service, location and about section. The "Call Us Now" buttons (which
+  don't print the number) still make a phone call, so calling is one tap
+  away too.
+- [x] **Memberships & Partnerships removed from /about** (see above).
+- [ ] **Crystal Clear Cleans' clean logo**: the picture didn't come through;
+  waiting for it to be resent.
 
 ### Services
 - [x] **"See the Work Up Close" gallery on every service page.**
   - Clicking a project opens a photo viewer: arrow keys or the previous/next buttons,
     thumbnails, Esc or a click outside to close.
-  - Real projects already on Balcony Cleaning (2), Power Washing (4), Window
-    Cleaning (1) and Roof Cleaning (1). Every other service shows three "Project
-    Photos Coming Soon" placeholders.
+  - **Three columns on every service page.** Real projects on Balcony
+    Cleaning (2), Power Washing (4), Window Cleaning (1) and Roof Cleaning (1)
+    come first. Labelled example photos then fill each row to three
+    (Balcony +1, Window +2, Roof +2, Power Washing +2, which gives two full
+    rows). As real job photos arrive, they replace the examples one by one.
+  - **No placeholders anywhere** (later the same day). The other eight
+    services show three example photos each under "What This Work Looks
+    Like", labelled as example photos and not RainCity jobs. They are
+    free-licence stock photos. Photos from other companies' websites were not
+    used: they belong to those companies, and showing them as RainCity's work
+    would mislead customers. Each service's examples disappear automatically
+    once its first real job photos are added.
 
 ### Locations
 - [x] **Missing picture fixed** on /locations (Coverage) and on all nine

@@ -66,7 +66,7 @@ export function PartnerCard({
           through a translucent colour. */}
       <div className="bg-rc-blue">
         <div className="card-corner-cut bg-white">
-          <div className={cn("flex h-28 items-center justify-center px-10 transition-colors duration-300 ease-out sm:h-40", tint)}>
+          <div className={cn("flex h-32 items-center justify-center px-6 transition-colors duration-300 ease-out [--mark:6rem] sm:h-40 sm:[--mark:7.5rem]", tint)}>
             <PartnerMark partner={partner} />
           </div>
         </div>
@@ -111,9 +111,24 @@ export function PartnerCard({
 }
 
 /**
- * The mark, at its own proportions. Wide wordmarks share a width and a height
- * ceiling so a 6.5:1 mark cannot outweigh a 3:1 one; compact crests and glyphs
- * are capped by height.
+ * The mark, at its own proportions, sized so every logo covers ABOUT THE SAME
+ * AREA: width = `--mark` x sqrt(aspect ratio), so height = `--mark` /
+ * sqrt(ratio) and width x height = `--mark` squared for every file. A square
+ * crest is `--mark` on a side; a 6.6:1 wordmark is 2.6 x `--mark` wide and
+ * correspondingly short. `--mark` is set on the panel, one step per
+ * breakpoint.
+ *
+ * It replaced a fixed height ceiling (48px on anything 2:1 or wider, 80px on
+ * the rest) on 2026-09-25, when the client said the logos looked small in
+ * their boxes. They were: the ceiling held New West Spotlight, at 2.25:1, to
+ * 108x48 in a 419x160 panel, and Hello Gubby and Tri-Cities fared little
+ * better, while the long wordmarks beside them filled the width. Equal area is
+ * the usual answer to a mixed logo wall: nothing dwarfs its neighbours, and
+ * nothing is left as a speck.
+ *
+ * The files are trimmed to their ink (a few pixels of margin at most) so the
+ * area is the mark's, not its canvas's, and `logo.width`/`height` must be the
+ * file's true size, since the ratio drives the width.
  *
  * Plain `<img>`, not next/image: two files are SVG and `next.config.ts`
  * deliberately does not enable `dangerouslyAllowSVG`. `mix-blend-multiply`
@@ -128,7 +143,7 @@ function PartnerMark({ partner }: { partner: Partner }) {
     );
   }
 
-  const wide = partner.logo.width / partner.logo.height >= 2;
+  const scale = Math.sqrt(partner.logo.width / partner.logo.height).toFixed(3);
   return (
     // eslint-disable-next-line @next/next/no-img-element -- see note above.
     <img
@@ -138,12 +153,10 @@ function PartnerMark({ partner }: { partner: Partner }) {
       height={partner.logo.height}
       loading="lazy"
       decoding="async"
-      className={cn(
-        "object-contain mix-blend-multiply",
-        wide
-          ? "h-auto max-h-12 w-3/4 sm:w-2/3"
-          : "h-auto max-h-20 w-auto max-w-full",
-      )}
+      // An inline style because the multiplier is per file; `max-w-full`
+      // shrinks a long wordmark on a narrow card instead of overflowing it.
+      style={{ width: `calc(var(--mark) * ${scale})` }}
+      className="h-auto max-w-full object-contain mix-blend-multiply"
     />
   );
 }

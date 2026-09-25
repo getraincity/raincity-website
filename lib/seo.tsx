@@ -384,9 +384,10 @@ export const localBusinessSchema = {
   currenciesAccepted: "CAD",
   knowsLanguage: "en-CA",
   ...sameAsField,
-  // Monday to Saturday, 09:00–17:00, Sunday closed — the client marked the
-  // 7am–10pm of 2026-09-23 as wrong on 2026-09-25, and Touseef confirmed
-  // these hours. Keep this in step with `business.hours` in content.ts — a
+  // Office hours, Monday to Saturday, 08:00–16:00, Sunday closed — the
+  // client's final correction on 2026-09-25 (after 7am–10pm and 9–5). For a
+  // service-area business these are the hours the office answers, which is
+  // what this property means. Keep this in step with `business.hours` in content.ts — a
   // Google Business Profile that disagrees with this block is the
   // inconsistency a local pack punishes.
   openingHoursSpecification: [
@@ -400,8 +401,8 @@ export const localBusinessSchema = {
         "Friday",
         "Saturday",
       ],
-      opens: "09:00",
-      closes: "17:00",
+      opens: "08:00",
+      closes: "16:00",
     },
   ],
   hasOfferCatalog: {

@@ -2,7 +2,7 @@ import { business, servicePage, type Service } from "@/lib/content";
 import { Photo } from "@/components/ui/Photo";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import { Phone } from "@/components/ui/Icon";
+import { WhatsApp } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Motion";
 
 /**
@@ -97,8 +97,8 @@ export function ServiceClosing({ service }: { service: Service }) {
 
           <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
             <Button href="#quote">{servicePage.closing.cta}</Button>
-            <Button href={business.phoneHref} variant="tertiary-invert">
-              <Phone />
+            <Button href={business.whatsappHref} variant="tertiary-invert" aria-label={business.whatsappLabel}>
+              <WhatsApp className="shrink-0" />
               {business.phone}
             </Button>
           </div>

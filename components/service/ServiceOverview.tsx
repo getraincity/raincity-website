@@ -9,7 +9,7 @@ import { photos, type Photo as PhotoRecord, type PhotoKey } from "@/lib/photos";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
 import { Photo } from "@/components/ui/Photo";
-import { CheckPlate, Phone } from "@/components/ui/Icon";
+import { CheckPlate, WhatsApp } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 
 /**
@@ -249,10 +249,13 @@ export function ServiceOverview({ service }: { service: Service }) {
             <div>
               <p className="meta text-steel">{trust.callPrompt}</p>
               <a
-                href={business.phoneHref}
+                href={business.whatsappHref}
+                target="_blank"
+                rel="noopener"
+                aria-label={business.whatsappLabel}
                 className="display-s mt-2 inline-flex items-center gap-3 text-rc-blue transition-colors duration-200 hover:text-navy"
               >
-                <Phone className="shrink-0" />
+                <WhatsApp className="size-6 shrink-0" />
                 {business.phone}
               </a>
             </div>

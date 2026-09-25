@@ -13,19 +13,9 @@ export type GalleryProject = {
   id: string;
   title: string;
   detail: string;
+  /** A labelled stock example topping up the row, not a RainCity job. */
+  example?: boolean;
   photos: GalleryPhoto[];
-};
-
-/**
- * `lg` columns by card count, as whole literal class strings. Three across
- * for three; four across when a service has four real jobs (Power Washing
- * today) rather than stranding the fourth on a row of its own.
- */
-const lgColumns: Record<number, string> = {
-  1: "lg:grid-cols-3",
-  2: "lg:grid-cols-3",
-  3: "lg:grid-cols-3",
-  4: "lg:grid-cols-4",
 };
 
 /**
@@ -47,18 +37,13 @@ const lgColumns: Record<number, string> = {
  */
 export function ServiceGalleryClient({
   projects,
-  placeholders,
-  serviceTitle,
-  placeholderTitle,
-  placeholderDetail,
   viewLabel,
+  exampleViewLabel,
 }: {
+  /** Always a multiple of three — the server tops the row up with examples. */
   projects: GalleryProject[];
-  placeholders: number;
-  serviceTitle: string;
-  placeholderTitle: string;
-  placeholderDetail: string;
   viewLabel: string;
+  exampleViewLabel: string;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<{ project: number; photo: number } | null>(null);
@@ -95,20 +80,18 @@ export function ServiceGalleryClient({
     else if (event.key === "ArrowLeft") step(-1);
   };
 
-  const total = projects.length + placeholders;
-
   return (
     <>
       <Stagger
         as="ul"
-        className={cn(
-          "mt-block grid grid-cols-1 gap-gap-x gap-y-10 sm:grid-cols-4",
-          lgColumns[total] ?? "lg:grid-cols-3",
-        )}
+        // Three across at `lg`, always full rows. On a tablet, two across with
+        // an odd last card centred (four-column track, cards span two).
+        className="mt-block grid grid-cols-1 gap-gap-x gap-y-10 sm:grid-cols-4 lg:grid-cols-3"
         delay={0.06}
       >
         {projects.map((p, i) => {
           const after = p.photos.find((ph) => ph.tag === "After") ?? p.photos[0];
+          const label = p.example ? exampleViewLabel : viewLabel;
           return (
             <StaggerItem
               as="li"
@@ -123,7 +106,11 @@ export function ServiceGalleryClient({
                 type="button"
                 onClick={() => setActive({ project: i, photo: 0 })}
                 aria-haspopup="dialog"
-                aria-label={`${viewLabel}: ${p.title}, ${p.detail} (${p.photos.length} photos)`}
+                aria-label={
+                  p.example
+                    ? `${label}: ${p.title} (${p.photos[0].tag}, ${p.detail.toLowerCase()})`
+                    : `${viewLabel}: ${p.title}, ${p.detail} (${p.photos.length} photos)`
+                }
                 className="absolute inset-0 z-10 cursor-pointer"
               />
               <div aria-hidden="true">
@@ -144,7 +131,9 @@ export function ServiceGalleryClient({
                     />
                     <span className="meta absolute bottom-0 left-0 inline-flex items-center gap-2 bg-navy/90 px-3 py-2 text-white">
                       <Camera className="size-4 text-pacific" />
-                      {p.photos.length} photos
+                      {p.example
+                        ? p.photos[0].tag
+                        : `${p.photos.length} ${p.photos.length === 1 ? "photo" : "photos"}`}
                     </span>
                   </div>
                 </div>
@@ -152,7 +141,7 @@ export function ServiceGalleryClient({
                   <p className="display-s text-white">{p.title}</p>
                   <p className="meta mt-1.5 text-muted">{p.detail}</p>
                   <p className="meta mt-4 inline-flex items-center gap-2 text-pacific transition-colors group-hover:text-white">
-                    {viewLabel}
+                    {label}
                     <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
                   </p>
                 </div>
@@ -160,32 +149,6 @@ export function ServiceGalleryClient({
             </StaggerItem>
           );
         })}
-
-        {Array.from({ length: placeholders }, (_, i) => (
-          <StaggerItem
-            as="li"
-            key={`placeholder-${i}`}
-            className="sm:col-span-2 sm:odd:last:col-start-2 lg:col-span-1 lg:odd:last:col-start-auto"
-          >
-            {/* Same frame as a real card, so a photo landing here moves
-                nothing. A dark plate rather than Fog: on navy a light box
-                would out-shout the real photographs beside it. */}
-            {/* Solid navy under the 5% white: translucent on its own, the
-                plate let the notch's RainCity Blue through the whole frame. */}
-            <div className="bg-rc-blue">
-              <div className="card-corner-cut bg-navy">
-                <div className="flex aspect-square flex-col items-center justify-center gap-4 border border-white/10 bg-white/5 px-8 text-center">
-                  <Camera className="size-9 text-pacific" />
-                  <span className="meta text-muted">{serviceTitle}</span>
-                </div>
-              </div>
-            </div>
-            <div className="mt-5 border-t border-t-white/15 pt-4">
-              <p className="display-s text-white/70">{placeholderTitle}</p>
-              <p className="meta mt-1.5 text-muted">{placeholderDetail}</p>
-            </div>
-          </StaggerItem>
-        ))}
       </Stagger>
 
       <dialog

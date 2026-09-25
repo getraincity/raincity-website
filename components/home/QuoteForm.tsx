@@ -3,6 +3,7 @@ import type { PhotoKey } from "@/lib/photos";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Motion";
 import { QuoteFormClient } from "@/components/home/QuoteFormClient";
+import { WhatsApp } from "@/components/ui/Icon";
 
 /**
  * Quote form — the page's primary conversion point, on every route.
@@ -69,9 +70,13 @@ export function QuoteForm({
             Tell us what needs doing and we&rsquo;ll come back with a price. Prefer
             to talk?{" "}
             <a
-              href={business.phoneHref}
-              className="text-rc-blue underline underline-offset-4 transition-colors duration-200 hover:text-navy"
+              href={business.whatsappHref}
+              target="_blank"
+              rel="noopener"
+              aria-label={business.whatsappLabel}
+              className="inline-flex items-center gap-1.5 text-rc-blue underline underline-offset-4 transition-colors duration-200 hover:text-navy"
             >
+              <WhatsApp className="shrink-0" />
               {business.phone}
             </a>
             .

@@ -219,6 +219,328 @@ export const photos = {
     note: "Unsplash photo B2AjZDm6NCs by Chad Montgomery, free Unsplash licence; the photographer's description reads \"Telephoto landscape view of the Port Mann Bridge and distant Metro Vancouver skyline\", and it was checked by eye: the bridge's two towers and cable fans, the Fraser's islands and the Metrotown cluster are all right. Downloaded at 2400x1600 into `assets/port-mann-bridge-fraser-metro-vancouver.jpg`; served at that size with saturation eased 20%, because the golden-hour orange sat hard against the site's cool palette. Rendered with `fill` in a plate that is wide on desktop and tall on a phone, so the focal holds the bridge and river just right of centre.",
   },
 
+  /* ---- SERVICE GALLERY EXAMPLES (2026-09-25) --------------------------------
+     Two uses: three per service on the eight pages with no RainCity job
+     photos yet, under "What This Work Looks Like"; and one or two to top a
+     row of real jobs up to three (2026-09-25, the client wanted three
+     columns on every page). Either way every card and the viewer tag them
+     "Example photo" / "Not a RainCity job" (`serviceGallery.examples` in
+     content.ts). They must never be used as project photos, on the homepage
+     or anywhere a caption would read as "our work". All free-licence Unsplash
+     (commercial use, no attribution required), checked by eye for brand
+     logos, house numbers and flags; originals in `assets/example-*.jpg`.
+     Top-ups step aside one by one as real jobs are added to `projects.items`. */
+
+  exampleCommercialCleaning1: {
+    src: "/examples/commercial-cleaning-1.webp",
+    alt: "A yellow mop bucket inside the glass entrance doors of an office lobby, the polished stone floor still wet.",
+    credit: "Christian R",
+    tone: "#4b4b46",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash PkFdlMAl85Q by Christian R, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-commercial-cleaning-1.jpg`), served at 1200px.",
+  },
+
+  exampleCommercialCleaning2: {
+    src: "/examples/commercial-cleaning-2.webp",
+    alt: "Gloved hands wiping a dark office desk with a cloth and a spray bottle, beside a laptop and a calculator.",
+    credit: "Towfiqu barbhuiya",
+    tone: "#4f555a",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash -9gPKrsbGmc by Towfiqu barbhuiya, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-commercial-cleaning-2.jpg`), served at 1200px.",
+  },
+
+  exampleCommercialCleaning3: {
+    src: "/examples/commercial-cleaning-3.webp",
+    alt: "Rows of empty cubicles and black office chairs along a clean carpeted aisle, lit by ceiling panels.",
+    credit: "kate.sade",
+    tone: "#838788",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash 2zZp12ChxhU by kate.sade, free Unsplash licence. Cropped square at 1594px from the 2400px download (`assets/example-commercial-cleaning-3.jpg`), served at 1200px.",
+  },
+
+  exampleSoftWashing1: {
+    src: "/examples/soft-washing-1.webp",
+    alt: "Close-up of white lap siding, the boards even in colour with no green or grey streaking.",
+    credit: "Jon Moore",
+    tone: "#bfc8d5",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash Zjq1UTyT2kE by Jon Moore, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-soft-washing-1.jpg`), served at 1200px.",
+  },
+
+  exampleSoftWashing2: {
+    src: "/examples/soft-washing-2.webp",
+    alt: "A clean white rendered wall and roofline under a blue sky, with a row of windows above a trimmed hedge.",
+    credit: "Noelephants Flying",
+    tone: "#b7c7b8",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash RyRlvPU3MV4 by Noelephants Flying, free Unsplash licence. Cropped square at 1699px from the 2400px download (`assets/example-soft-washing-2.jpg`), served at 1200px.",
+  },
+
+  exampleSoftWashing3: {
+    src: "/examples/soft-washing-3.webp",
+    alt: "A white board-and-batten house with two dark glass garage doors and potted olive trees, the siding clean.",
+    credit: "GoodLifeConstruction",
+    tone: "#7d817b",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash 3qRx6B4cT6g by GoodLifeConstruction, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-soft-washing-3.jpg`), served at 1200px.",
+  },
+
+  exampleConcreteAndAsphaltSealing1: {
+    src: "/examples/concrete-and-asphalt-sealing-1.webp",
+    alt: "A worker in boots running a torch-heated applicator along a joint, laying a line of hot asphalt sealant.",
+    credit: "Judy Beth Morris",
+    tone: "#696766",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash DubvqlTGyXE by Judy Beth Morris, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-concrete-and-asphalt-sealing-1.jpg`), served at 1200px.",
+  },
+
+  exampleConcreteAndAsphaltSealing2: {
+    src: "/examples/concrete-and-asphalt-sealing-2.webp",
+    alt: "An evenly coloured concrete driveway with saw-cut control joints leading up to a white garage door.",
+    credit: "web seo",
+    tone: "#c4bdb2",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash hpg1LexD52Q by web seo, free Unsplash licence. Cropped square at 1920px from the 2400px download (`assets/example-concrete-and-asphalt-sealing-2.jpg`), served at 1200px.",
+  },
+
+  exampleConcreteAndAsphaltSealing3: {
+    src: "/examples/concrete-and-asphalt-sealing-3.webp",
+    alt: "A wide, pale concrete driveway in front of a modern white house with two dark garage doors.",
+    credit: "Salvo Media LLC",
+    tone: "#6d8689",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash mledaZ8XtVM by Salvo Media LLC, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-concrete-and-asphalt-sealing-3.jpg`), served at 1200px.",
+  },
+
+  exampleGutterCleaning1: {
+    src: "/examples/gutter-cleaning-1.webp",
+    alt: "A white gutter streaked with green moss and grime below a row of mossy roof tiles, against a blue sky.",
+    credit: "Aleksi Partanen",
+    tone: "#33597a",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash kBc9SXXjezA by Aleksi Partanen, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-gutter-cleaning-1.jpg`), served at 1200px.",
+  },
+
+  exampleGutterCleaning2: {
+    src: "/examples/gutter-cleaning-2.webp",
+    alt: "A young tree growing out of the debris packed into a dark half-round gutter at the corner of a roof.",
+    credit: "Jack Blueberry",
+    tone: "#7e8961",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash ANQda9jhlW0 by Jack Blueberry, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-gutter-cleaning-2.jpg`), served at 1200px.",
+  },
+
+  exampleGutterCleaning3: {
+    src: "/examples/gutter-cleaning-3.webp",
+    alt: "A white gutter and downspout running down pale blue siding beside a brick chimney.",
+    credit: "Zachary Keimig",
+    tone: "#696b5f",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash gvt-wjGk4S4 by Zachary Keimig, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-gutter-cleaning-3.jpg`), served at 1200px.",
+  },
+
+  examplePainting1: {
+    src: "/examples/painting-1.webp",
+    alt: "A painter standing on a porch roof, working on the yellow window trim of a green shingled house.",
+    credit: "Jon Sailer",
+    tone: "#4e595a",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash 5eSNyI7XVfQ by Jon Sailer, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-painting-1.jpg`), served at 1200px.",
+  },
+
+  examplePainting2: {
+    src: "/examples/painting-2.webp",
+    alt: "A worker on the roof edge taping plastic sheeting over a window on grey lap siding.",
+    credit: "Matt Adams",
+    tone: "#578195",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash UkE-FDnOMEk by Matt Adams, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-painting-2.jpg`), served at 1200px.",
+  },
+
+  examplePainting3: {
+    src: "/examples/painting-3.webp",
+    alt: "The upper storey of a house in blue lap siding with crisp white window trim and gable, under a clear sky.",
+    credit: "Roger Starnes Sr",
+    tone: "#5e7a95",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash i3KeF6aFy7Q by Roger Starnes Sr, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-painting-3.jpg`), served at 1200px. Cropped to the upper storey on purpose: the full frame carries a US flag on the porch and a house number by the door.",
+  },
+
+  exampleSnowRemovalSalting1: {
+    src: "/examples/snow-removal-salting-1.webp",
+    alt: "A man pushing an orange snow blower between high snowbanks, a plume of snow thrown into the air.",
+    credit: "Todd Trapani",
+    tone: "#b5b1a0",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash QqB1LtMS9ok by Todd Trapani, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-snow-removal-salting-1.jpg`), served at 1200px.",
+  },
+
+  exampleSnowRemovalSalting2: {
+    src: "/examples/snow-removal-salting-2.webp",
+    alt: "A person running a red snow blower along a snowy front walk in front of a brick house.",
+    credit: "Nellie Adamyan",
+    tone: "#cdcbcc",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash QpuckrL3QmM by Nellie Adamyan, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-snow-removal-salting-2.jpg`), served at 1200px.",
+  },
+
+  exampleSnowRemovalSalting3: {
+    src: "/examples/snow-removal-salting-3.webp",
+    alt: "Chunks of broken ice scattered across a frozen, wet pavement, a low wall in the foreground.",
+    credit: "Samuel Field",
+    tone: "#8097af",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash o9rLhZQ3wlY by Samuel Field, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-snow-removal-salting-3.jpg`), served at 1200px.",
+  },
+
+  exampleHolidayLightInstallation1: {
+    src: "/examples/holiday-light-installation-1.webp",
+    alt: "A house at night outlined in warm white bulbs along every roofline, with lit garlands on the fence.",
+    credit: "Gautam Krishnan",
+    tone: "#543c0d",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash XfmXO8BMrDs by Gautam Krishnan, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-holiday-light-installation-1.jpg`), served at 1200px.",
+  },
+
+  exampleHolidayLightInstallation2: {
+    src: "/examples/holiday-light-installation-2.webp",
+    alt: "Large multicoloured C9 bulbs clipped along the eave of a grey-sided house at dusk.",
+    credit: "Bob Ricca",
+    tone: "#3a414c",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash 8V7ItC2M5JU by Bob Ricca, free Unsplash licence. Cropped square at 1597px from the 2400px download (`assets/example-holiday-light-installation-2.jpg`), served at 1200px.",
+  },
+
+  exampleHolidayLightInstallation3: {
+    src: "/examples/holiday-light-installation-3.webp",
+    alt: "A stucco house on a snowy night, its gables outlined in white lights and a lit tree in the window.",
+    credit: "Brooke Balentine",
+    tone: "#3a3529",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash 5oewRPIKsxM by Brooke Balentine, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-holiday-light-installation-3.jpg`), served at 1200px.",
+  },
+
+  exampleLandscapingLawnCare1: {
+    src: "/examples/landscaping-lawn-care-1.webp",
+    alt: "A two-person crew mowing and string-trimming a striped lawn along a row of evergreens.",
+    credit: "Michael Smith",
+    tone: "#50694e",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash bsld7GjQwjI by Michael Smith, free Unsplash licence. Cropped square at 1121px from the 2400px download (`assets/example-landscaping-lawn-care-1.jpg`), served at 1121px.",
+  },
+
+  exampleLandscapingLawnCare2: {
+    src: "/examples/landscaping-lawn-care-2.webp",
+    alt: "A hedge trimmer's blade cutting across the top of a rounded shrub, clippings flying.",
+    credit: "Peter Beukema",
+    tone: "#486137",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash JB-QHEehcwI by Peter Beukema, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-landscaping-lawn-care-2.jpg`), served at 1200px.",
+  },
+
+  exampleLandscapingLawnCare3: {
+    src: "/examples/landscaping-lawn-care-3.webp",
+    alt: "A grey two-storey house behind a freshly striped lawn and tidy flower beds.",
+    credit: "Roger Starnes Sr",
+    tone: "#a2ada5",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Unsplash 1XRV7Z4lhGo by Roger Starnes Sr, free Unsplash licence. Cropped square at 1589px from the 2400px download (`assets/example-landscaping-lawn-care-3.jpg`), served at 1200px.",
+  },
+
+  exampleBalconyCleaning1: {
+    src: "/examples/balcony-cleaning-1.webp",
+    alt: "An empty condo balcony paved in pale stone, with a glass-and-steel railing and a floor drain, in afternoon light.",
+    credit: "Point3D Commercial Imaging Ltd.",
+    tone: "#908f86",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash mZbhxpOUv6I by Point3D Commercial Imaging Ltd., free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-balcony-cleaning-1.jpg`), served at 1200px.",
+  },
+
+  examplePowerWashing1: {
+    src: "/examples/power-washing-1.webp",
+    alt: "A rotary surface cleaner working across wet stone paving, the worker's boots and hose behind it.",
+    credit: "The Graphic Space",
+    tone: "#6f6f6f",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash gal5jKCgDVo by The Graphic Space, free Unsplash licence. Cropped square at 1500px from the 2400px download (`assets/example-power-washing-1.jpg`), served at 1200px. Cropped to the machine and the paving on purpose: the worker's cap carries a cleaning company's logo.",
+  },
+
+  examplePowerWashing2: {
+    src: "/examples/power-washing-2.webp",
+    alt: "A worker in hi-vis pressure-washing a paved town sidewalk behind barrier tape, spray lifting off the stone.",
+    credit: "Adrian Raudaschl",
+    tone: "#787250",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash e2k842P9a2I by Adrian Raudaschl, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-power-washing-2.jpg`), served at 1200px.",
+  },
+
+  exampleWindowCleaning1: {
+    src: "/examples/window-cleaning-1.webp",
+    alt: "A window cleaner in a harness drawing a squeegee across wet glass, seen from inside through the pane.",
+    credit: "Danielle-Claude Bélanger",
+    tone: "#918f8d",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash JkaHdoxv9T0 by Danielle-Claude Bélanger, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-window-cleaning-1.jpg`), served at 1200px.",
+  },
+
+  exampleWindowCleaning2: {
+    src: "/examples/window-cleaning-2.webp",
+    alt: "Two window cleaners on a lift working poles across a tall glass frontage, seen in silhouette.",
+    credit: "Priscilla Du Preez",
+    tone: "#3e4749",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash BuDD1HGco-4 by Priscilla Du Preez, free Unsplash licence. Cropped square at 1600px from the 2400px download (`assets/example-window-cleaning-2.jpg`), served at 1200px. Cropped to the left of the frame on purpose: a sponsor banner stands at the right.",
+  },
+
+  exampleRoofCleaning1: {
+    src: "/examples/roof-cleaning-1.webp",
+    alt: "Clumps of green moss growing along the ridges of weathered clay roof tiles.",
+    credit: "Alvaro Araoz",
+    tone: "#4b4442",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash ug4M0QlUhiM by Alvaro Araoz, free Unsplash licence. Cropped square at 1643px from the 2400px download (`assets/example-roof-cleaning-1.jpg`), served at 1200px.",
+  },
+
+  exampleRoofCleaning2: {
+    src: "/examples/roof-cleaning-2.webp",
+    alt: "Orange and grey lichen spreading across an old slate roof under a blue sky.",
+    credit: "Rafael Garcin",
+    tone: "#57594d",
+    ratio: "1:1",
+    focal: "50% 50%",
+    note: "EXAMPLE PHOTO, NOT A RAINCITY JOB. Tops up a row of real jobs to three. Unsplash SXj6gb3-Slk by Rafael Garcin, free Unsplash licence. Cropped square at 2400px from the 2400px download (`assets/example-roof-cleaning-2.jpg`), served at 1200px.",
+  },
+
   servicesHero: {
     src: "/our-services-hero-background.webp",
     alt: "A RainCity technician on a tiled Greater Vancouver roof running a pressure-washing wand across a row of solar panels under a clear blue sky.",

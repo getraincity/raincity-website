@@ -81,8 +81,10 @@ export function Hero() {
           {/* Steel, not muted: muted is a support tone for navy grounds and
               drops to ~2:1 on Fog. Steel holds the same second-rank weight
               and clears AA. */}
+          {/* Labelled "Office Hours" (client, 2026-09-25): bare times read as
+              when the crew works. */}
           <p className="meta text-steel">
-            {business.hours.days}
+            {business.hours.label}: {business.hours.days}
           </p>
         </div>
       </div>

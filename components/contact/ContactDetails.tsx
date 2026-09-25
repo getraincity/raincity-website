@@ -1,6 +1,6 @@
 import { business, contactPage } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Clock, Mail, MapPin, Phone } from "@/components/ui/Icon";
+import { Clock, Mail, MapPin, Phone, WhatsApp } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 
 /** Named in content.ts so the copy owns the pairing, not this component. */
@@ -78,7 +78,14 @@ function CardValue({ icon }: { icon: CardIcon }) {
   switch (icon) {
     case "phone":
       return (
-        <a href={business.phoneHref} className={valueClass}>
+        <a
+          href={business.whatsappHref}
+          target="_blank"
+          rel="noopener"
+          aria-label={business.whatsappLabel}
+          className={`${valueClass} inline-flex items-center gap-2`}
+        >
+          <WhatsApp className="shrink-0" />
           {business.phone}
         </a>
       );

@@ -69,6 +69,15 @@ export function Button({
   const classes = cn(base, sizes[size], variants[variant], className);
 
   if (href) {
+    // Off-site (today only WhatsApp's wa.me): a plain anchor in a new tab,
+    // never next/link, which would try to prefetch another company's site.
+    if (href.startsWith("https://")) {
+      return (
+        <a href={href} target="_blank" rel="noopener" className={classes} aria-label={ariaLabel}>
+          {children}
+        </a>
+      );
+    }
     const external = href.startsWith("tel:") || href.startsWith("mailto:");
     if (external || href.startsWith("#")) {
       return (

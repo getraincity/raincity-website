@@ -5,15 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import {
-  ArrowRight,
-  ChevronDown,
-  Close,
-  Mail,
-  Menu,
-  Phone,
-  SocialIcon,
-} from "@/components/ui/Icon";
+import { ArrowRight, ChevronDown, Close, Mail, Menu, SocialIcon, WhatsApp } from "@/components/ui/Icon";
 import { PhotoFrame, type PhotoFrameData } from "@/components/ui/PhotoFrame";
 
 /**
@@ -51,7 +43,8 @@ export type HeaderNavItem = {
 /** The contact details the utility strip and mobile drawer render. */
 export type HeaderContact = {
   phone: string;
-  phoneHref: string;
+  whatsappHref: string;
+  whatsappLabel: string;
   email: string;
   emailHref: string;
 };
@@ -145,10 +138,13 @@ export function HeaderClient({
             so the strip reads as a contact line rather than a second nav. */}
         <div className="mx-auto flex max-w-site items-center gap-6 px-edge py-2">
           <a
-            href={contact.phoneHref}
+            href={contact.whatsappHref}
+            target="_blank"
+            rel="noopener"
+            aria-label={contact.whatsappLabel}
             className="meta flex items-center gap-2 py-1 transition-colors duration-200 hover:text-amber"
           >
-            <Phone className="shrink-0" />
+            <WhatsApp className="shrink-0" />
             {contact.phone}
           </a>
           <a
@@ -483,8 +479,9 @@ function MobileNav({
 
         <div className="mt-8 flex flex-col gap-4">
           <Button href="#quote">Get a Free Quote</Button>
-          <Button href={contact.phoneHref} variant="tertiary-invert">
-            Call {contact.phone}
+          <Button href={contact.whatsappHref} variant="tertiary-invert" aria-label={contact.whatsappLabel}>
+            <WhatsApp className="shrink-0" />
+            {contact.phone}
           </Button>
         </div>
       </nav>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { business, footer, social } from "@/lib/content";
 import { Logo } from "@/components/ui/Logo";
-import { Clock, Mail, Phone, SocialIcon } from "@/components/ui/Icon";
+import { Clock, Mail, SocialIcon, WhatsApp } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Motion";
 
 export function Footer() {
@@ -67,10 +67,13 @@ export function Footer() {
             <ul className="mt-5">
               <li>
                 <a
-                  href={business.phoneHref}
+                  href={business.whatsappHref}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={business.whatsappLabel}
                   className="body-s font-medium inline-flex items-center gap-2.5 py-1.5 text-fog transition-colors duration-200 hover:text-amber"
                 >
-                  <Phone className="shrink-0 text-pacific" />
+                  <WhatsApp className="shrink-0" />
                   {business.phone}
                 </a>
               </li>
@@ -84,12 +87,12 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            {/* The one caps label kept down here. "Open Hours" is a label on the
+            {/* The one caps label kept down here. "Office Hours" is a label on the
                 two lines below it, not a name or a destination — the same small
                 -label role `eyebrow` plays above every section on the site. */}
             <h3 className="meta mt-6 flex items-center gap-2.5 text-pacific">
               <Clock className="shrink-0" />
-              Open Hours
+              {business.hours.label}
             </h3>
             <p className="body-s font-medium mt-2 text-fog">{business.hours.days}</p>
           </div>

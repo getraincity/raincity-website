@@ -28,14 +28,27 @@ export const business = {
   shortName: "RainCity",
   phone: "+1 604 209 3357",
   phoneHref: "tel:+16042093357",
+  // WHERE THE NUMBER IS SHOWN, IT OPENS WHATSAPP (client request, 2026-09-25),
+  // with the WhatsApp mark beside it. The "Call Us Now" buttons print no
+  // number and stay `phoneHref`, so calling is always one tap away too. The
+  // structured data keeps `telephone`. `wa.me` takes the number with no plus.
+  whatsappHref: "https://wa.me/16042093357",
+  // The accessible name for every WhatsApp number link, since the visible text
+  // is only the number and the link does not dial it.
+  whatsappLabel: "Message RainCity on WhatsApp at +1 604 209 3357 (opens WhatsApp)",
   email: "info@raincitypms.com",
   emailHref: "mailto:info@raincitypms.com",
   hours: {
-    // Mon–Sat 9–5, Sunday closed, since 2026-09-25: the client marked the
-    // "Mon – Sun: 7 am – 10 pm" of 2026-09-23 as wrong in the footer, and
-    // Touseef confirmed these. `openingHoursSpecification` in lib/seo.tsx and
-    // the two "What are your hours?" answers in `pageFaqs` must match.
-    days: "Mon – Sat: 9 am – 5 pm",
+    // OFFICE HOURS, Mon–Sat 8am–4pm, Sunday closed (client, 2026-09-25 —
+    // the third correction that day: 7am–10pm, then 9–5, then this). They
+    // are the office's hours, not the crew's, and the client asked that the
+    // site never call them "work" or "working" hours, which read as when jobs
+    // happen and confused people. So every place they show is labelled
+    // "Office Hours" (`label`). `openingHoursSpecification` in lib/seo.tsx,
+    // the two "What are your office hours?" answers in `pageFaqs` and
+    // public/llms.txt must match.
+    label: "Office Hours",
+    days: "Mon – Sat, 8 am – 4 pm",
   },
   base: "New Westminster",
   region: "Greater Vancouver",
@@ -2702,15 +2715,104 @@ export const projects = {
  * Cleaning, Power Washing, Window Cleaning and Roof Cleaning — and the other
  * eight are placeholder-only until the client sends their photos.
  */
+/**
+ * The service page's photo section (2026-09-25). ALWAYS FULL ROWS OF THREE,
+ * on the client's request that no page show one or two columns.
+ *
+ * REAL JOBS FIRST — a service's jobs in `projects.items`, however many, then
+ * examples from `examples.bySlug` top the row up to the next multiple of
+ * three (Power Washing: four jobs and two examples, two full rows). The body
+ * becomes `bodyMixed`, which says example photos are marked.
+ *
+ * NO REAL JOB YET — three examples, under a different label and heading
+ * ("What This Work Looks Like") and a body saying in plain words they are
+ * examples and not RainCity jobs.
+ *
+ * WHY STOCK AND NOT OTHER COMPANIES' PHOTOS. The client first suggested
+ * taking photos from other cleaning companies' websites; that was declined
+ * (another company's copyrighted photo, presented as RainCity's own project,
+ * is both infringement and a false claim), and Touseef chose free-licence
+ * stock instead. THE LABELLING IS THE CONDITION: every example card carries
+ * "Example photo" / "Not a RainCity job", in the viewer too; never caption
+ * one as a job, never show one on the homepage.
+ *
+ * Examples step aside on their own as real jobs are added. List them in the
+ * order they should be dropped last-first. Titles describe only what the
+ * photograph shows.
+ */
 export const serviceGallery = {
   label: "Recent Projects",
   heading: "See the Work Up Close",
   body: "Photographs from our own jobs, before and after. Select a project to see every photo from it.",
-  /** Real projects beyond this still all show; placeholders only top up to it. */
-  slots: 3,
-  placeholderTitle: "Project Photos Coming Soon",
-  placeholderDetail: "Photographs from this service are being added",
+  bodyMixed: "Photographs from our own jobs, before and after, with example photos marked as such. Select a project to see every photo from it.",
   viewLabel: "View photos",
+  /** Cards per row at desktop; the row is always topped up to a multiple. */
+  perRow: 3,
+  examples: {
+    label: "What to Expect",
+    heading: "What This Work Looks Like",
+    body: "Example photographs of this kind of work, not RainCity jobs. Photos from our own projects on this service are being added.",
+    tag: "Example photo",
+    detail: "Not a RainCity job",
+    viewLabel: "View larger",
+    bySlug: {
+      "balcony-cleaning": [
+        { photo: "exampleBalconyCleaning1", title: "Paved balcony, glass railing" },
+      ],
+      "power-washing": [
+        { photo: "examplePowerWashing1", title: "Surface cleaner on paving" },
+        { photo: "examplePowerWashing2", title: "Pressure-washing a sidewalk" },
+      ],
+      "window-cleaning": [
+        { photo: "exampleWindowCleaning1", title: "Squeegee on wet glass" },
+        { photo: "exampleWindowCleaning2", title: "Glass frontage from a lift" },
+      ],
+      "roof-cleaning": [
+        { photo: "exampleRoofCleaning1", title: "Moss on the ridges" },
+        { photo: "exampleRoofCleaning2", title: "Lichen across old slate" },
+      ],
+      "commercial-cleaning": [
+        { photo: "exampleCommercialCleaning1", title: "Lobby floor, mopped" },
+        { photo: "exampleCommercialCleaning2", title: "Desks wiped down" },
+        { photo: "exampleCommercialCleaning3", title: "Open-plan office, after hours" },
+      ],
+      "soft-washing": [
+        { photo: "exampleSoftWashing1", title: "Clean white lap siding" },
+        { photo: "exampleSoftWashing2", title: "White rendered wall" },
+        { photo: "exampleSoftWashing3", title: "Board-and-batten exterior" },
+      ],
+      "concrete-and-asphalt-sealing": [
+        { photo: "exampleConcreteAndAsphaltSealing1", title: "Hot crack sealing" },
+        { photo: "exampleConcreteAndAsphaltSealing2", title: "Concrete at the garage" },
+        { photo: "exampleConcreteAndAsphaltSealing3", title: "Broad concrete apron" },
+      ],
+      "gutter-cleaning": [
+        { photo: "exampleGutterCleaning1", title: "Moss along the gutter" },
+        { photo: "exampleGutterCleaning2", title: "Sapling growing in a gutter" },
+        { photo: "exampleGutterCleaning3", title: "Clear gutter and downspout" },
+      ],
+      painting: [
+        { photo: "examplePainting1", title: "Window trim from the porch roof" },
+        { photo: "examplePainting2", title: "Windows masked for paint" },
+        { photo: "examplePainting3", title: "Blue siding, white trim" },
+      ],
+      "snow-removal-salting": [
+        { photo: "exampleSnowRemovalSalting1", title: "Snow blower between the banks" },
+        { photo: "exampleSnowRemovalSalting2", title: "Clearing a front walk" },
+        { photo: "exampleSnowRemovalSalting3", title: "Ice on hard surfaces" },
+      ],
+      "holiday-light-installation": [
+        { photo: "exampleHolidayLightInstallation1", title: "Warm white along the rooflines" },
+        { photo: "exampleHolidayLightInstallation2", title: "Multicoloured C9s on the eave" },
+        { photo: "exampleHolidayLightInstallation3", title: "Lit gables on a snowy night" },
+      ],
+      "landscaping-lawn-care": [
+        { photo: "exampleLandscapingLawnCare1", title: "Mowing and edging" },
+        { photo: "exampleLandscapingLawnCare2", title: "Hedge trimming" },
+        { photo: "exampleLandscapingLawnCare3", title: "Striped lawn, neat beds" },
+      ],
+    } as Record<string, readonly { photo: PhotoKey; title: string }[]>,
+  },
 } as const;
 
 /**
@@ -3036,9 +3138,10 @@ export const awards = {
        *
        * The supplied file is 187x49, too small for a 2x screen, so the logo
        * is the rabbit tile and wordmark cropped from Hello Gubby's own
-       * share image (the og:image on hellogubby.ai) at 470x140 — the same
+       * share image (the og:image on hellogubby.ai) — the same
        * lockup, checked by eye against the client's file. Near-white ground
-       * flattened to white so the card's multiply blend drops it.
+       * flattened to white so the card's multiply blend drops it, and trimmed
+       * to its ink at 436x131 (2026-09-25, for the equal-area sizing).
        */
       name: "Hello Gubby",
       tag: "Business support",
@@ -3046,8 +3149,8 @@ export const awards = {
       href: "https://www.hellogubby.ai/",
       logo: {
         src: "/partners/hello-gubby.png",
-        width: 470,
-        height: 140,
+        width: 436,
+        height: 131,
         alt: "Hello Gubby — partner",
       },
     },
@@ -3055,16 +3158,17 @@ export const awards = {
       /**
        * The client's own file, supplied 2026-09-25, with the 1-3px black
        * frame it carried trimmed off. Still no website for the group, so
-       * the card has no link. 184x159 is small: it renders at up to 80px
-       * tall, so it holds at 2x, but ask for a larger file if one exists.
+       * the card has no link. Trimmed to its ink at 167x154 (2026-09-25).
+       * It now renders about 125px tall, so it is soft on a 2x screen: ask for
+       * a larger file if one exists.
        */
       name: "Tri-Cities Business Networking Group",
       tag: "Business networking",
       blurb: "Local business networking across Coquitlam, Port Coquitlam and Port Moody.",
       logo: {
         src: "/partners/tri-cities-business-networking-group.png",
-        width: 184,
-        height: 159,
+        width: 167,
+        height: 154,
         alt: "Tri-Cities Business Networking Group — membership",
       },
     },
@@ -3582,7 +3686,7 @@ export const partnerships = {
           //    plain <img>, consistent with SVG partners on this page.
           logo: {
             src: "/partners/bright-nest-cleaning.webp",
-            width: 300,
+            width: 308,
             height: 90,
             alt: "Bright Nest Cleaning — partner",
           },
@@ -3921,7 +4025,7 @@ export const servicePage = {
         "Satisfaction guaranteed on every job",
       ],
       cta: "Get a Free Quote",
-      callPrompt: "Have questions? Call us",
+      callPrompt: "Have questions? Message us on WhatsApp",
     },
   },
 
@@ -4103,8 +4207,8 @@ export const contactPage = {
     cards: [
       {
         icon: "phone",
-        title: "Call Us",
-        note: "Fastest way to reach us — most calls get answered straight away.",
+        title: "WhatsApp Us",
+        note: "Fastest way to reach us — tap the number to message us on WhatsApp.",
       },
       {
         icon: "mail",
@@ -4113,8 +4217,8 @@ export const contactPage = {
       },
       {
         icon: "clock",
-        title: "Service Hours",
-        note: "When we're on the clock and taking calls.",
+        title: "Office Hours",
+        note: "When our office is open to take your call.",
       },
       {
         icon: "pin",
@@ -4331,9 +4435,9 @@ export const pageFaqs = {
           "Yes, and we will confirm it in writing on request. It is worth asking any contractor for on work involving height, and worth asking before anyone arrives rather than after an incident.",
       },
       {
-        question: "What are your hours?",
+        question: "What are your office hours?",
         answer:
-          "Monday to Saturday, 9am to 5pm; closed on Sunday. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
+          "Our office is open Monday to Saturday, 8am to 4pm, and closed on Sunday. Exterior work in this region is weather-dependent by nature, so scheduling is agreed against a forecast as well as a date — which is usually why a contractor moving a date is doing the right thing rather than the inconvenient one.",
       },
       {
         // Supplied by the client on 2026-09-23, replacing "no to both". The
@@ -4472,9 +4576,9 @@ export const pageFaqs = {
           "Yes, and it is usually the cheaper way round. Work that shares access shares setup — gutters and roof, washing and sealing — and it is quoted as one scope rather than as separate visits.",
       },
       {
-        question: "What are your hours?",
+        question: "What are your office hours?",
         answer:
-          "Monday to Saturday, 9am to 5pm; closed on Sunday. Email arrives whenever you send it; the phone is the faster route during working hours.",
+          "Our office is open Monday to Saturday, 8am to 4pm, and closed on Sunday. Email arrives whenever you send it; the phone is the faster route while the office is open.",
       },
     ],
   },

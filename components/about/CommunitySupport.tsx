@@ -1,7 +1,7 @@
 import { aboutPage, business } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
-import { CheckPlate, Phone } from "@/components/ui/Icon";
+import { CheckPlate, WhatsApp } from "@/components/ui/Icon";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 
 /**
@@ -41,8 +41,8 @@ export function CommunitySupport() {
             <p className="body-l mt-6 text-mist">{c.body}</p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <Button href="#quote">{c.cta}</Button>
-              <Button href={business.phoneHref} variant="tertiary-invert">
-                <Phone className="shrink-0" />
+              <Button href={business.whatsappHref} variant="tertiary-invert" aria-label={business.whatsappLabel}>
+                <WhatsApp className="shrink-0" />
                 {business.phone}
               </Button>
             </div>

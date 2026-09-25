@@ -159,11 +159,14 @@ The client's homepage feedback, tracked item by item in
 things in it outlive the pass:
 
 - **Hours, minimum job size and travel are client-confirmed facts, worded
-  once.** Monday to Saturday, 9am–5pm, closed Sunday (`business.hours.days`,
-  `openingHoursSpecification` in `lib/seo.tsx`, the two "What are your
-  hours?" answers in `pageFaqs`, and `llms.txt` — all four must match). This
-  is the 2026-09-25 correction: the client marked the 7am–10pm of 2026-09-23
-  as wrong in the footer and Touseef confirmed Mon–Sat 9–5. Minimum job
+  once.** **Office hours**, Monday to Saturday, 8am–4pm, closed Sunday
+  (`business.hours`, `openingHoursSpecification` in `lib/seo.tsx`, the two
+  "What are your office hours?" answers in `pageFaqs`, and `llms.txt` — all
+  four must match). The client's final word on 2026-09-25, after 7am–10pm and
+  then 9–5 were both corrected. **They are office hours and are always
+  labelled so** (`business.hours.label`): the client asked that the site
+  never say "work" or "working" hours, which read as when jobs happen and
+  confused people. Minimum job
   usually $120, depending on the job. Travel included in the price; a travel
   fee may apply to an on-site visit, by location. These replaced "no travel
   charge and no minimum job size", which was stated on nine pages — six
@@ -193,9 +196,14 @@ things in it outlive the pass:
   Inc. (Calgary), and "Hello Gabby" as the unrelated hellogabby.com — the
   client's own logo files are Zensurance's wordmark and Hello Gubby's rabbit
   (hellogubby.ai, a Vancouver AI front desk). **Match the name to the logo the
-  client sends, not the other way round.** The same six render on /about as a
-  "Memberships & Partnerships" row under the partner cards, from the same
-  array (less CFIB, which is already a partner card there). WorkSafeBC's
+  client sends, not the other way round.** **They are on the homepage only.**
+  For one round they also rendered on /about under the partner cards; the
+  client had that row removed the same day, as a repeat of the homepage.
+  **Logos are sized to equal area** (`PartnerCard.tsx`, since 2026-09-25,
+  when the client said they looked small in their boxes): width is `--mark`
+  x the square root of the file's aspect ratio, so every logo file must be
+  trimmed to its ink and its `logo.width`/`height` must be its true size.
+  WorkSafeBC's
   blurb is the one sentence WorkSafeBC permits, word for word; its terms also
   restrict employers' use of the logo, which Touseef was told and chose to
   show anyway, taking responsibility — so the logo carries no link.
@@ -224,11 +232,26 @@ before and an after, and it is the single source for both places they show:
   requested as "a section to put some pictures for each project… click for
   more pictures"). A service shows the jobs whose `service` is its slug;
   clicking one opens a native `<dialog>` viewer with every photo of the job.
-  Placeholder plates top the row up to three and are deliberately not
-  clickable. Real work today on Balcony Cleaning, Power Washing, Window
-  Cleaning and Roof Cleaning; the other eight are placeholders until the
-  client sends photos. **Add a job by adding an entry** — `more` takes extra
-  photos for the viewer.
+  Real work today on Balcony Cleaning, Power Washing, Window Cleaning and
+  Roof Cleaning. **Every page shows full rows of three** (the client's
+  request): real jobs first, then labelled examples top the row up to the
+  next multiple of `serviceGallery.perRow`, and the body switches to
+  `bodyMixed`. **Add a job by adding an entry** — an example steps aside for
+  it automatically; `more` takes extra photos for the viewer.
+- **Examples are labelled stock, never "projects".** The eight services with
+  no real job show three each under their own heading.
+  The client asked for no empty boxes and first suggested taking photos from
+  other (American) cleaning companies' websites. That was declined: another
+  company's copyrighted photo presented as RainCity's own job is both
+  infringement and a false claim to customers. Touseef chose instead three
+  free-licence Unsplash photos per service (`serviceGallery.examples`, the
+  `example*` block in `photos.ts`), under "What to Expect — What This Work
+  Looks Like", a body saying they are not RainCity jobs, and an "Example
+  photo" / "Not a RainCity job" tag on every card and in the viewer. **The
+  labelling is the condition of using them.** The two modes never mix: a
+  service's examples disappear the day it gets its first real job. Never
+  lift an example into `projects.items` or onto the homepage, and never
+  source gallery photos from another business's website.
 
 Rules that come with them: every frame is served square (the originals mix
 orientations); captions describe only what the photo shows — no street,
@@ -451,6 +474,15 @@ nowhere read as broken, and a guessed handle points visitors at a stranger's
 account under RainCity's name. That rule stands — **add Facebook, Instagram and
 the rest only with their real URLs**; their icons already exist in `Icon.tsx`.
 
+**The printed phone number opens WhatsApp (client request, 2026-09-25).**
+Every place the number itself is shown links to `business.whatsappHref`
+(`wa.me`) with the `WhatsApp` icon beside it and `business.whatsappLabel` as
+its accessible name; the "Call Us Now" buttons, which print no number, stay
+`tel:`, so a visitor can still call. The icon is the site's one mark in a
+non-token colour (WhatsApp green, reasoning on it in `Icon.tsx`) — do not
+spread that colour. `telephone` in the structured data is unchanged.
+`Button` renders any `https://` href as a new-tab anchor for this.
+
 **The street address stays off the site — decided by Touseef, 2026-09-23.**
 The Google listing shows one (828 Agnes St, New Westminster, in Westminster
 Towers); this site shows none and its LocalBusiness data has no
@@ -566,8 +598,8 @@ the three universities' **real logos replaced the Wikipedia coats of arms**
 that were there (the client called them wrong); **S&A Cleaning Group**
 (sacleaninggroup.ca — the client's "SA Cleaning") and **CFOne** (the Canadian
 Armed Forces community card, CFMWS) are identified, linked and have logos.
-Under them, since 2026-09-25, the homepage's memberships as a second row —
-see the Memberships bullet above.
+The homepage's memberships do not repeat here (removed 2026-09-25, at the
+client's request) — see the Memberships bullet above.
 **Blurbs describe the organisation, never the relationship.** 4px corners
 (`--radius-card`) are the site's only card radius — do not spread it. Do not
 bring back a carousel. Logos live in `public/partners/`, not `photos.ts`.

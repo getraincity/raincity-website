@@ -38,7 +38,8 @@ export function Header() {
       nav={menu}
       contact={{
         phone: business.phone,
-        phoneHref: business.phoneHref,
+        whatsappHref: business.whatsappHref,
+        whatsappLabel: business.whatsappLabel,
         email: business.email,
         emailHref: business.emailHref,
       }}

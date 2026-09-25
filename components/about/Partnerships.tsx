@@ -1,4 +1,4 @@
-import { awards, partnerships } from "@/lib/content";
+import { partnerships } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { PartnerCard, panelTint } from "@/components/ui/PartnerCard";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
@@ -36,6 +36,11 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
  * so this is Fog again and the `SectionEdge` after it runs `from="bg-fog"`.
  * The cards carry their own white ground. Empty groups contribute no cards.
  *
+ * THE MEMBERSHIPS ROW WAS REMOVED (2026-09-25). For one round it sat under
+ * these cards, repeating the homepage's Memberships & Partnerships; the
+ * client asked for it off /about because the homepage already carries it.
+ * Memberships live on the homepage only (`Awards.tsx`).
+ *
  * `id="partners"` is the target of the "See all our partners" link on the
  * community pages; `scroll-mt-20` clears the sticky header, as on QuoteForm.
  */
@@ -48,14 +53,7 @@ export function Partnerships() {
       .filter((partner) => partner.logo)
       .map((partner) => ({ partner, tag: group.tag })),
   );
-  // Less any organisation already carded above — CFIB is both one of the
-  // partners and one of the memberships, and one page should not show it
-  // twice.
-  const carded = new Set(cards.map(({ partner }) => partner.name));
-  const memberships = awards.memberships.filter(
-    (m) => m.logo && !carded.has(m.name),
-  );
-  if (cards.length === 0 && memberships.length === 0) return null;
+  if (cards.length === 0) return null;
 
   return (
     <section id="partners" className="scroll-mt-20 bg-fog py-section" aria-labelledby="partnerships-heading">
@@ -89,37 +87,6 @@ export function Partnerships() {
             </StaggerItem>
           ))}
         </Stagger>
-
-        {/* Memberships — added 2026-09-25 at Touseef's instruction, so the
-            organisations the homepage lists under Memberships & Partnerships
-            are on the company's own page too. Read from `awards.memberships`,
-            the homepage's array, never a copy: the two pages cannot list
-            different memberships. Same card, same logo-or-nothing rule, same
-            grid (six fills two rows of three at `lg`), under a hairline and
-            a quiet `meta` heading like the homepage row, so it reads as a
-            second group of this section rather than a new section. */}
-        {memberships.length > 0 && (
-          <>
-            <Reveal className="mt-block flex items-center gap-5 border-t border-t-line pt-block">
-              <h3 className="meta text-steel">{awards.membershipsLabel}</h3>
-            </Reveal>
-            <Stagger
-              as="ul"
-              className="mt-8 grid grid-cols-1 gap-gap-x sm:grid-cols-4 lg:grid-cols-3"
-              delay={0.06}
-            >
-              {memberships.map((m, i) => (
-                <StaggerItem
-                  as="li"
-                  key={m.name}
-                  className="sm:col-span-2 sm:odd:last:col-start-2 lg:col-span-1 lg:odd:last:col-start-auto"
-                >
-                  <PartnerCard partner={m} tag={m.tag} tint={panelTint[i % panelTint.length]} />
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </>
-        )}
       </div>
     </section>
   );
